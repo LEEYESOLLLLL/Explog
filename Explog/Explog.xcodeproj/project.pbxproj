@@ -14,7 +14,7 @@
 		0423A614212B756700DD9747 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A613212B756700DD9747 /* BaseView.swift */; };
 		0423A616212B756D00DD9747 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A615212B756D00DD9747 /* BaseViewController.swift */; };
 		0423A619212B7C0900DD9747 /* SplahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A618212B7C0900DD9747 /* SplahView.swift */; };
-		0423A61C212B873900DD9747 /* nil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A61B212B873900DD9747 /* nil.swift */; };
+		0423A61C212B873900DD9747 /* UIView+SubViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A61B212B873900DD9747 /* UIView+SubViews.swift */; };
 		0423A61F212B896A00DD9747 /* MainFeedTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A61E212B896A00DD9747 /* MainFeedTabBarView.swift */; };
 		0423A621212B899500DD9747 /* MainFeedTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A620212B899500DD9747 /* MainFeedTabBarViewController.swift */; };
 		0423A623212B8D0A00DD9747 /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A622212B8D0A00DD9747 /* BaseTabBarController.swift */; };
@@ -30,6 +30,8 @@
 		0423A639212B97DB00DD9747 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A638212B97DB00DD9747 /* ProfileView.swift */; };
 		0423A63B212B97E000DD9747 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A63A212B97E000DD9747 /* ProfileViewController.swift */; };
 		0423A642212B9C1800DD9747 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A641212B9C1800DD9747 /* AppColor.swift */; };
+		0423A644212BB07300DD9747 /* MainFeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A643212BB07300DD9747 /* MainFeedCollectionViewCell.swift */; };
+		0423A646212BB0D800DD9747 /* UICollectionViewCell+identifer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A645212BB0D800DD9747 /* UICollectionViewCell+identifer.swift */; };
 		290674729A964E0761478A6A /* Pods_Explog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BC030D43DB17540F6AC354E /* Pods_Explog.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,7 +45,7 @@
 		0423A613212B756700DD9747 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		0423A615212B756D00DD9747 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		0423A618212B7C0900DD9747 /* SplahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplahView.swift; sourceTree = "<group>"; };
-		0423A61B212B873900DD9747 /* nil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nil.swift; sourceTree = "<group>"; };
+		0423A61B212B873900DD9747 /* UIView+SubViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+SubViews.swift"; sourceTree = "<group>"; };
 		0423A61E212B896A00DD9747 /* MainFeedTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFeedTabBarView.swift; sourceTree = "<group>"; };
 		0423A620212B899500DD9747 /* MainFeedTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFeedTabBarViewController.swift; sourceTree = "<group>"; };
 		0423A622212B8D0A00DD9747 /* BaseTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
@@ -59,6 +61,8 @@
 		0423A638212B97DB00DD9747 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		0423A63A212B97E000DD9747 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		0423A641212B9C1800DD9747 /* AppColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColor.swift; sourceTree = "<group>"; };
+		0423A643212BB07300DD9747 /* MainFeedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFeedCollectionViewCell.swift; sourceTree = "<group>"; };
+		0423A645212BB0D800DD9747 /* UICollectionViewCell+identifer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+identifer.swift"; sourceTree = "<group>"; };
 		09F7847E9DF534C6F3B50BEC /* Pods-Explog.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Explog.release.xcconfig"; path = "Pods/Target Support Files/Pods-Explog/Pods-Explog.release.xcconfig"; sourceTree = "<group>"; };
 		1BF31B640A0D3E10A4E9492D /* Pods-Explog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Explog.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Explog/Pods-Explog.debug.xcconfig"; sourceTree = "<group>"; };
 		3BC030D43DB17540F6AC354E /* Pods_Explog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Explog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -149,7 +153,8 @@
 		0423A61D212B874400DD9747 /* Utiles */ = {
 			isa = PBXGroup;
 			children = (
-				0423A61B212B873900DD9747 /* nil.swift */,
+				0423A61B212B873900DD9747 /* UIView+SubViews.swift */,
+				0423A645212BB0D800DD9747 /* UICollectionViewCell+identifer.swift */,
 			);
 			path = Utiles;
 			sourceTree = "<group>";
@@ -172,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				0423A627212B8F2100DD9747 /* MainFeedView.swift */,
+				0423A643212BB07300DD9747 /* MainFeedCollectionViewCell.swift */,
 				0423A629212B8F3C00DD9747 /* MainFeedNavigationViewController.swift */,
 			);
 			path = MainFeed;
@@ -363,16 +369,18 @@
 				0423A623212B8D0A00DD9747 /* BaseTabBarController.swift in Sources */,
 				0423A61F212B896A00DD9747 /* MainFeedTabBarView.swift in Sources */,
 				0423A619212B7C0900DD9747 /* SplahView.swift in Sources */,
-				0423A61C212B873900DD9747 /* nil.swift in Sources */,
+				0423A61C212B873900DD9747 /* UIView+SubViews.swift in Sources */,
 				0423A621212B899500DD9747 /* MainFeedTabBarViewController.swift in Sources */,
 				0423A635212B979500DD9747 /* LikeView.swift in Sources */,
 				0423A602212B72F000DD9747 /* SplahViewController.swift in Sources */,
+				0423A646212BB0D800DD9747 /* UICollectionViewCell+identifer.swift in Sources */,
 				0423A633212B978C00DD9747 /* PostViewController.swift in Sources */,
 				0423A62F212B977300DD9747 /* SearchViewController.swift in Sources */,
 				0423A637212B97B000DD9747 /* LikeViewController.swift in Sources */,
 				0423A62D212B976D00DD9747 /* SearchView.swift in Sources */,
 				0423A628212B8F2100DD9747 /* MainFeedView.swift in Sources */,
 				0423A62A212B8F3C00DD9747 /* MainFeedNavigationViewController.swift in Sources */,
+				0423A644212BB07300DD9747 /* MainFeedCollectionViewCell.swift in Sources */,
 				0423A625212B8D1400DD9747 /* BaseNavigationController.swift in Sources */,
 				0423A642212B9C1800DD9747 /* AppColor.swift in Sources */,
 				0423A639212B97DB00DD9747 /* ProfileView.swift in Sources */,
