@@ -27,7 +27,11 @@ extension MainFeedViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
+        
+        let cell = collectionView.dequeue(MainFeedCollectionViewCell.self, indexPath: indexPath)!
+        cell.backgroundColor = .red
+        
+        return cell
     }
     
     

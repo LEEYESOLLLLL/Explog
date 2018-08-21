@@ -17,14 +17,16 @@ final class MainFeedView: BaseView<MainFeedViewController> {
     let collectionView: UICollectionView = UICollectionView(frame: UI.collectionViewFrame, collectionViewLayout: UICollectionViewFlowLayout())
     
     override func setupUI() {
-        collectionView
+        collectionView.register(cell: MainFeedCollectionViewCell.self)
+        
+        addSubviews([collectionView])
         
     }
     
     override func setupBinding() {
         vc.navigationController?.navigationBar.isHidden = true
         collectionView.delegate = vc
-        collectionView.dataSource = vc 
+        collectionView.dataSource = vc
         
         
     }
