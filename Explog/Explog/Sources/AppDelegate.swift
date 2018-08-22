@@ -54,8 +54,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let profileVC = ProfileViewController()
         profileVC.title = "Profile"
         profileVC.tabBarItem.image = #imageLiteral(resourceName: "profileImage")
-        
-        
         return MainFeedTabBarViewController(viewControllers: [mainFeedVC, searchVC, postVC, likeVC, profileVC])
         
     }

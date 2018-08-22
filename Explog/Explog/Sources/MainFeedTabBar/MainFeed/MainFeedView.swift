@@ -14,17 +14,33 @@ final class MainFeedView: BaseView<MainFeedViewController> {
     struct UI {
         static let collectionViewFrame = UIScreen.main.bounds
     }
-    let collectionView: UICollectionView = UICollectionView(frame: UI.collectionViewFrame, collectionViewLayout: UICollectionViewFlowLayout())
+    let collectionView: UICollectionView = UICollectionView(
+        frame: UI.collectionViewFrame,
+        collectionViewLayout: UICollectionViewFlowLayout())
+    
+    
     
     override func setupUI() {
         collectionView.register(cell: MainFeedCollectionViewCell.self)
         
+        
         addSubviews([collectionView])
+        
+        // 제약조건을 추가하기 위해서는 부모가 있어야함..
+        collectionView.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 100).isActive = true
+
+        collectionView.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive = true
+        collectionView.rightAnchor.constraint(equalTo: rightAnchor, constant: 0).isActive = true
+        
+        
         
     }
     
     override func setupBinding() {
         vc.navigationController?.navigationBar.isHidden = true
+        vc.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .done, target: vc, action: #selector(vc.buttonAction(_:)))
         collectionView.delegate = vc
         collectionView.dataSource = vc
         
@@ -32,6 +48,8 @@ final class MainFeedView: BaseView<MainFeedViewController> {
     }
     
 }
+
+
 
 /*
 let flowLayout = UICollectionViewFlowLayout()

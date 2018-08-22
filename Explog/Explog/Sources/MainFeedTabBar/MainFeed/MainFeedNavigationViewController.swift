@@ -19,6 +19,12 @@ final class MainFeedViewController: BaseViewController {
         navigationController?.pushViewController(MainFeedViewController(), animated: true)
         
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        print("프로그래밍 방식으로 UI 구성했을때, frame들 확인해주")
+    }
 }
 
 extension MainFeedViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -33,6 +39,5 @@ extension MainFeedViewController: UICollectionViewDelegate, UICollectionViewData
         
         return cell
     }
-    
-    
 }
+

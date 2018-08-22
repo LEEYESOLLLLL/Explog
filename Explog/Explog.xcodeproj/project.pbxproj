@@ -162,13 +162,13 @@
 		0423A626212B8D9A00DD9747 /* MainFeedTabBar */ = {
 			isa = PBXGroup;
 			children = (
+				0423A61E212B896A00DD9747 /* MainFeedTabBarView.swift */,
+				0423A620212B899500DD9747 /* MainFeedTabBarViewController.swift */,
 				0423A62B212B8F4600DD9747 /* MainFeed */,
 				0423A63C212B97E600DD9747 /* Search */,
 				0423A63D212B97EA00DD9747 /* Post */,
 				0423A63E212B97F100DD9747 /* Like */,
 				0423A63F212B97F500DD9747 /* Profile */,
-				0423A61E212B896A00DD9747 /* MainFeedTabBarView.swift */,
-				0423A620212B899500DD9747 /* MainFeedTabBarViewController.swift */,
 			);
 			path = MainFeedTabBar;
 			sourceTree = "<group>";
