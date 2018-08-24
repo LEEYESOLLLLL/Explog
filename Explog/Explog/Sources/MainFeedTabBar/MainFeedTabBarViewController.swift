@@ -12,6 +12,8 @@ final class MainFeedTabBarViewController: BaseTabBarController {
     
     override func viewDidLoad() {
         delegate = self
+         
+        
     }
     
 }

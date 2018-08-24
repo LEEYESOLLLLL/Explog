@@ -27,18 +27,27 @@ final class MainFeedView: BaseView<MainFeedViewController> {
         addSubviews([collectionView])
         
         // 제약조건을 추가하기 위해서는 부모가 있어야함..
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
         collectionView.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
-        collectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 100).isActive = true
-
+//        collectionView.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
+        
+//        collectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
         collectionView.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive = true
         collectionView.rightAnchor.constraint(equalTo: rightAnchor, constant: 0).isActive = true
+        
+        collectionView.backgroundColor = .white
+        
+
+        
         
         
         
     }
     
     override func setupBinding() {
-        vc.navigationController?.navigationBar.isHidden = true
+//        vc.navigationController?.navigationBar.isHidden = true
         vc.navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .done, target: vc, action: #selector(vc.buttonAction(_:)))
         collectionView.delegate = vc
