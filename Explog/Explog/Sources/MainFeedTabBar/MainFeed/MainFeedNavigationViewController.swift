@@ -1,3 +1,4 @@
+
 //
 //  MainFeedNavigationViewController.swift
 //  Explog
@@ -27,7 +28,7 @@ final class MainFeedViewController: BaseViewController {
     }
 }
 
-extension MainFeedViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension MainFeedViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 100
     }
@@ -35,9 +36,47 @@ extension MainFeedViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeue(MainFeedCollectionViewCell.self, indexPath: indexPath)!
+        cell.lable.text = "\(indexPath)"
+        
         cell.backgroundColor = .red
         
         return cell
     }
 }
 
+extension MainFeedViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        
+        
+        print(cell?.frame)
+        
+        
+    }
+
+}
+
+extension MainFeedViewController: UICollectionViewDelegateFlowLayout {
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//
+//        return CGSize(width: view.bounds.width, height: 100)
+//    }
+//
+//
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+//
+//        return 20
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+//
+//        return 0
+//    }
+
+    
+    
+    
+
+
+}
