@@ -23,18 +23,18 @@ final class MainFeedView: BaseView<MainFeedViewController> {
         
         let cvlayout = UICollectionViewFlowLayout()
 
-        cvlayout.minimumLineSpacing = 0
-        cvlayout.minimumInteritemSpacing = 10
+        cvlayout.minimumLineSpacing = 6
+        cvlayout.minimumInteritemSpacing = 5
         cvlayout.scrollDirection = .vertical
         cvlayout.estimatedItemSize = CGSize(
             width: bounds.width/2 - 10,
-            height: bounds.height-(safeAreaInsets.top+safeAreaInsets.bottom))
-//        cvlayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            height: 200)
+        cvlayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         let cv = UICollectionView(
-            frame: UI.collectionViewFrame,
+            frame: safeAreaLayoutGuide.layoutFrame,
             collectionViewLayout: cvlayout)
         
-        
+//        let cv = UICollectionView.init(collectionViewLayout: cvlayout)
         return cv
     }()
     
@@ -53,9 +53,8 @@ final class MainFeedView: BaseView<MainFeedViewController> {
         
         
         collectionView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
-//        collectionView.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
-        
+//        collectionView.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
 //        collectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
         collectionView.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive = true
         collectionView.rightAnchor.constraint(equalTo: rightAnchor, constant: 0).isActive = true
@@ -75,7 +74,7 @@ final class MainFeedView: BaseView<MainFeedViewController> {
             barButtonSystemItem: .done, target: vc, action: #selector(vc.buttonAction(_:)))
         collectionView.delegate = vc
         collectionView.dataSource = vc
-        
+        backgroundColor = .white 
         
         
     }
@@ -96,3 +95,9 @@ collectionView.backgroundColor = UIColor.cyanColor()
 
 self.view.addSubview(collectionView)
 */
+
+extension UICollectionView {
+    convenience init(collectionViewLayout: UICollectionViewLayout) {
+        self.init(frame: CGRect.zero, collectionViewLayout: collectionViewLayout)
+    }
+}

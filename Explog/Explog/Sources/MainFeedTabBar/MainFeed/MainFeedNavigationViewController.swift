@@ -30,7 +30,7 @@ final class MainFeedViewController: BaseViewController {
 
 extension MainFeedViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 100
+        return 25
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -49,6 +49,13 @@ extension MainFeedViewController: UICollectionViewDelegate {
         let cell = collectionView.cellForItem(at: indexPath)
         
         
+        
+        collectionView.performBatchUpdates({
+            let itemPath = collectionView.indexPathsForSelectedItems
+            
+            collectionView.deleteItems(at: itemPath!)
+            
+        }, completion: nil)
         print(cell?.frame)
         
         
@@ -74,6 +81,10 @@ extension MainFeedViewController: UICollectionViewDelegateFlowLayout {
 //        return 0
 //    }
 
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: 10*indexPath.row, height: 100)
+    }
     
     
     
