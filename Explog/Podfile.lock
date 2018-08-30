@@ -15,7 +15,7 @@ DEPENDENCIES:
   - SnapKit (~> 4.0.0)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - Alamofire
     - AlamofireImage
     - RxCocoa
@@ -29,6 +29,6 @@ SPEC CHECKSUMS:
   RxSwift: 99e10317ddfcc7fbe01356aafd118fde4a0be104
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
 
-PODFILE CHECKSUM: 717d76bf3086731579645fdd91dde967575a3c15
+PODFILE CHECKSUM: 4bcd3b5ee6a4ebcbaf1e7257611d3d6964aca145
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.3

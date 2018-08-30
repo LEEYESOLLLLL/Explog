@@ -9,6 +9,7 @@
 
 import UIKit
 
+
 final class MainFeedViewController: BaseViewController {
     lazy var v = MainFeedView(controlBy: self)
     
@@ -42,34 +43,37 @@ final class MainFeedViewController: BaseViewController {
 
 extension MainFeedViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 25
+        return 6
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeue(MainFeedCollectionViewCell.self, indexPath: indexPath)!
         cell.lable.text = "\(indexPath)"
         cell.backgroundColor = UIColor.brown
         
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: "Kind", withReuseIdentifier: "HeaderView", for: indexPath) as! CollectionViewHeaderView
+        headerView.frame = CGRect(origin: CGPoint.zero, size: CGSize(width: view.bounds.width, height: 300))
+        headerView.backgroundColor = .darkGray
+        
+        
+            
+        
+        return headerView
+    }
 }
 
 extension MainFeedViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
-        
-        
-        
-        collectionView.performBatchUpdates({
-            let itemPath = collectionView.indexPathsForSelectedItems
-            
-            collectionView.deleteItems(at: itemPath!)
-            
-        }, completion: nil)
         print(cell?.frame)
-        
-        
     }
 
 }
@@ -94,11 +98,5 @@ extension MainFeedViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return view.safeAreaLayoutGuide.layoutFrame.size
-//        return CGSize(width: 200, height: 200)
     }
-    
-    
-    
-
-
 }

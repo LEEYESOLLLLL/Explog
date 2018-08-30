@@ -9,32 +9,18 @@
 import UIKit
 import SnapKit
 
+
 final class MainFeedView: BaseView<MainFeedViewController> {
     
-    struct UI {
-        static let collectionViewFrame = UIScreen.main.bounds
-    }
-    
-    let collectionViewFlowLayout: UICollectionViewFlowLayout = {
-        let _cvFlowLayout = UICollectionViewFlowLayout()
-        _cvFlowLayout.scrollDirection = .vertical
-        _cvFlowLayout.minimumLineSpacing = 0
-        _cvFlowLayout.minimumInteritemSpacing = 1
-        _cvFlowLayout.itemSize = UILayoutGuide().layoutFrame.size
-        return _cvFlowLayout
-    }()
-    
     let collectionView: UICollectionView = {
-        let _cvFlowLayout = UICollectionViewFlowLayout()
-        _cvFlowLayout.scrollDirection = .horizontal
-        _cvFlowLayout.minimumLineSpacing = 1
-        let cv = UICollectionView.init(collectionViewLayout: _cvFlowLayout)
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .vertical
+        flowLayout.minimumLineSpacing = 1
+        
+        flowLayout.headerReferenceSize = CGSize(width: UIScreen.main.bounds.width, height: 200)
+        let cv = UICollectionView.init(collectionViewLayout: flowLayout)
         return cv
     }()
-    
-    
-    
-    
     
     override func setupUI() {
         collectionView.register(cell: MainFeedCollectionViewCell.self)
@@ -49,30 +35,23 @@ final class MainFeedView: BaseView<MainFeedViewController> {
     }
     
     override func setupBinding() {
-//        vc.navigationController?.navigationBar.isHidden = true
+        backgroundColor = .white
         vc.navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .done, target: vc, action: #selector(vc.buttonAction(_:)))
+        
         collectionView.delegate = vc
         collectionView.dataSource = vc
-        backgroundColor = .white 
+        
+        collectionView.register(
+            CollectionViewHeaderView.self,
+            forSupplementaryViewOfKind: "Kind",
+            withReuseIdentifier: "HeaderView")
+        
+        
         
         
     }
-    
 }
 
 
-
-/*
-let flowLayout = UICollectionViewFlowLayout()
-let collectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: flowLayout)
-collectionView.registerClass(MyCollectionViewCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
-
-collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "collectionCell")
-collectionView.delegate = self
-collectionView.dataSource = self
-collectionView.backgroundColor = UIColor.cyanColor()
-
-self.view.addSubview(collectionView)
-*/
 
