@@ -45,11 +45,6 @@ extension MainFeedViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 6
     }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeue(MainFeedCollectionViewCell.self, indexPath: indexPath)!
         cell.lable.text = "\(indexPath)"
@@ -58,16 +53,7 @@ extension MainFeedViewController: UICollectionViewDataSource {
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: "Kind", withReuseIdentifier: "HeaderView", for: indexPath) as! CollectionViewHeaderView
-        headerView.frame = CGRect(origin: CGPoint.zero, size: CGSize(width: view.bounds.width, height: 300))
-        headerView.backgroundColor = .darkGray
-        
-        
-            
-        
-        return headerView
-    }
+    
 }
 
 extension MainFeedViewController: UICollectionViewDelegate {

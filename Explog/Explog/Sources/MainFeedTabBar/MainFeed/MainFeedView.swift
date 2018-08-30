@@ -11,22 +11,32 @@ import SnapKit
 
 
 final class MainFeedView: BaseView<MainFeedViewController> {
+    var upperScrollView: UIScrollView = {
+        let _scv = UIScrollView()
+        return _scv
+    }()
     
     let collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .vertical
+        flowLayout.scrollDirection = .horizontal
         flowLayout.minimumLineSpacing = 1
         
-        flowLayout.headerReferenceSize = CGSize(width: UIScreen.main.bounds.width, height: 200)
+        // Header
+//        flowLayout.headerReferenceSize = CGSize(width: UIScreen.main.bounds.width, height: 200)
         let cv = UICollectionView.init(collectionViewLayout: flowLayout)
         return cv
     }()
     
     override func setupUI() {
         collectionView.register(cell: MainFeedCollectionViewCell.self)
-        addSubviews([collectionView])
-        collectionView
+        addSubviews([collectionView, upperScrollView])
+        upperScrollView
             .topAnchor(to: safeAreaLayoutGuide.topAnchor, constant: 0)
+            .leadingAnchor(to: leadingAnchor, constant: 0).trailingAnchor(to: trailingAnchor, constant: 0)
+            .heightAnchor(constant: 200).activateAnchors()
+        
+        collectionView
+            .topAnchor(to: upperScrollView.bottomAnchor, constant: 0)
             .bottomAnchor(to: safeAreaLayoutGuide.bottomAnchor, constant: 0)
             .leadingAnchor(to: leadingAnchor, constant: 0)
             .trailingAnchor(to: trailingAnchor, constant: 0)
@@ -41,15 +51,6 @@ final class MainFeedView: BaseView<MainFeedViewController> {
         
         collectionView.delegate = vc
         collectionView.dataSource = vc
-        
-        collectionView.register(
-            CollectionViewHeaderView.self,
-            forSupplementaryViewOfKind: "Kind",
-            withReuseIdentifier: "HeaderView")
-        
-        
-        
-        
     }
 }
 

@@ -34,7 +34,7 @@
 		0423A646212BB0D800DD9747 /* Cell+identifer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A645212BB0D800DD9747 /* Cell+identifer.swift */; };
 		04721B432134EF3A00143AF6 /* UIView+LayoutAnchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04721B422134EF3A00143AF6 /* UIView+LayoutAnchor.swift */; };
 		04EBBA2F2137A6DB00CA73A0 /* UICollectionView+init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EBBA2E2137A6DB00CA73A0 /* UICollectionView+init.swift */; };
-		04EBBA312137B49A00CA73A0 /* headerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EBBA302137B49A00CA73A0 /* headerView.swift */; };
+		04EBBA372137E8C900CA73A0 /* InSideTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EBBA362137E8C900CA73A0 /* InSideTableViewCell.swift */; };
 		290674729A964E0761478A6A /* Pods_Explog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BC030D43DB17540F6AC354E /* Pods_Explog.framework */; };
 /* End PBXBuildFile section */
 
@@ -68,7 +68,7 @@
 		0423A645212BB0D800DD9747 /* Cell+identifer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cell+identifer.swift"; sourceTree = "<group>"; };
 		04721B422134EF3A00143AF6 /* UIView+LayoutAnchor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+LayoutAnchor.swift"; sourceTree = "<group>"; };
 		04EBBA2E2137A6DB00CA73A0 /* UICollectionView+init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+init.swift"; sourceTree = "<group>"; };
-		04EBBA302137B49A00CA73A0 /* headerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = headerView.swift; sourceTree = "<group>"; };
+		04EBBA362137E8C900CA73A0 /* InSideTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InSideTableViewCell.swift; sourceTree = "<group>"; };
 		09F7847E9DF534C6F3B50BEC /* Pods-Explog.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Explog.release.xcconfig"; path = "Pods/Target Support Files/Pods-Explog/Pods-Explog.release.xcconfig"; sourceTree = "<group>"; };
 		1BF31B640A0D3E10A4E9492D /* Pods-Explog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Explog.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Explog/Pods-Explog.debug.xcconfig"; sourceTree = "<group>"; };
 		3BC030D43DB17540F6AC354E /* Pods_Explog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Explog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -187,7 +187,7 @@
 				0423A627212B8F2100DD9747 /* MainFeedView.swift */,
 				0423A643212BB07300DD9747 /* MainFeedCollectionViewCell.swift */,
 				0423A629212B8F3C00DD9747 /* MainFeedNavigationViewController.swift */,
-				04EBBA302137B49A00CA73A0 /* headerView.swift */,
+				04EBBA362137E8C900CA73A0 /* InSideTableViewCell.swift */,
 			);
 			path = MainFeed;
 			sourceTree = "<group>";
@@ -383,7 +383,6 @@
 				0423A621212B899500DD9747 /* MainFeedTabBarViewController.swift in Sources */,
 				0423A635212B979500DD9747 /* LikeView.swift in Sources */,
 				04721B432134EF3A00143AF6 /* UIView+LayoutAnchor.swift in Sources */,
-				04EBBA312137B49A00CA73A0 /* headerView.swift in Sources */,
 				0423A602212B72F000DD9747 /* SplahViewController.swift in Sources */,
 				0423A646212BB0D800DD9747 /* Cell+identifer.swift in Sources */,
 				0423A633212B978C00DD9747 /* PostViewController.swift in Sources */,
@@ -398,6 +397,7 @@
 				0423A639212B97DB00DD9747 /* ProfileView.swift in Sources */,
 				0423A631212B978000DD9747 /* PostView.swift in Sources */,
 				0423A600212B72F000DD9747 /* AppDelegate.swift in Sources */,
+				04EBBA372137E8C900CA73A0 /* InSideTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -538,7 +538,10 @@
 				DEVELOPMENT_TEAM = E8CS7J8RX4;
 				INFOPLIST_FILE = Explog/Assets/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mjum.developer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -556,7 +559,10 @@
 				DEVELOPMENT_TEAM = E8CS7J8RX4;
 				INFOPLIST_FILE = Explog/Assets/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mjum.developer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

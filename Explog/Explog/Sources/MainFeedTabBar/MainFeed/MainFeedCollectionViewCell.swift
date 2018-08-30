@@ -17,19 +17,58 @@ final class MainFeedCollectionViewCell: UICollectionViewCell {
         lb.translatesAutoresizingMaskIntoConstraints = false
         return lb
     }()
+    
+    var tableView: UITableView = {
+        var _tv = UITableView()
+        return _tv
+    }()
     override init(frame: CGRect) {
         super.init(frame: frame)
+        tableView.register(cell: InsideTableViewCell.self)
+        contentView.addSubviews([tableView])
         
-        contentView.addSubview(lable)
-        
-        lable.centerXAnchor.constraint(equalTo: contentView.centerXAnchor, constant: 0).isActive = true
-        lable.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 0).isActive = true 
+        tableView
+            .topAnchor(to: contentView.topAnchor, constant: 0)
+            .bottomAnchor(to: contentView.bottomAnchor, constant: 0)
+            .leadingAnchor(to: contentView.leadingAnchor, constant: 0)
+            .trailingAnchor(to: contentView.trailingAnchor, constant: 0)
+            .activateAnchors()
+        setupCellBinding()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setupCellBinding() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+    }
+}
+
+extension MainFeedCollectionViewCell: UITableViewDelegate {
     
+}
+
+extension MainFeedCollectionViewCell: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return 20
+    }
+    
+    
+    // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
+    // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeue(InsideTableViewCell.self)!
+        cell.backgroundColor = .blue
+        
+        return cell
+        
+        
+    }
+
     
 }

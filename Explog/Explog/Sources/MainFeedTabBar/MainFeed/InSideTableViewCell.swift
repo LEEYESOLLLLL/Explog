@@ -1,5 +1,5 @@
 //
-//  headerView.swift
+//  InSideTableViewCell.swift
 //  Explog
 //
 //  Created by minjuniMac on 8/30/18.
@@ -8,12 +8,9 @@
 
 import UIKit
 
-
-final class CollectionViewHeaderView: UICollectionReusableView {
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
+final class InsideTableViewCell: UITableViewCell {
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
     
     required init?(coder aDecoder: NSCoder) {
