@@ -9,5 +9,10 @@
 import UIKit
 
 final class SearchViewController: BaseViewController {
-    
+    static func createWith() -> Self {
+        let `self` = self.init()
+        self.title = "Search"
+        self.tabBarItem.image = #imageLiteral(resourceName: "search")
+        return self
+    }
 }

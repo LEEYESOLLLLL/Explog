@@ -14,27 +14,21 @@ final class MainFeedView: BaseView<MainFeedViewController> {
     struct UI {
         static let collectionViewFrame = UIScreen.main.bounds
     }
-//    let collectionView: UICollectionView = UICollectionView(
-//        frame: UI.collectionViewFrame,
-//        collectionViewLayout: UICollectionViewFlowLayout())
     
-    lazy var collectionView: UICollectionView = {
-        
-        
-        let cvlayout = UICollectionViewFlowLayout()
-
-        cvlayout.minimumLineSpacing = 6
-        cvlayout.minimumInteritemSpacing = 5
-        cvlayout.scrollDirection = .vertical
-        cvlayout.estimatedItemSize = CGSize(
-            width: bounds.width/2 - 10,
-            height: 200)
-        cvlayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        let cv = UICollectionView(
-            frame: safeAreaLayoutGuide.layoutFrame,
-            collectionViewLayout: cvlayout)
-        
-//        let cv = UICollectionView.init(collectionViewLayout: cvlayout)
+    let collectionViewFlowLayout: UICollectionViewFlowLayout = {
+        let _cvFlowLayout = UICollectionViewFlowLayout()
+        _cvFlowLayout.scrollDirection = .vertical
+        _cvFlowLayout.minimumLineSpacing = 0
+        _cvFlowLayout.minimumInteritemSpacing = 1
+        _cvFlowLayout.itemSize = UILayoutGuide().layoutFrame.size
+        return _cvFlowLayout
+    }()
+    
+    let collectionView: UICollectionView = {
+        let _cvFlowLayout = UICollectionViewFlowLayout()
+        _cvFlowLayout.scrollDirection = .horizontal
+        _cvFlowLayout.minimumLineSpacing = 1
+        let cv = UICollectionView.init(collectionViewLayout: _cvFlowLayout)
         return cv
     }()
     
@@ -44,28 +38,14 @@ final class MainFeedView: BaseView<MainFeedViewController> {
     
     override func setupUI() {
         collectionView.register(cell: MainFeedCollectionViewCell.self)
-        
-        
         addSubviews([collectionView])
-        
-        // 제약조건을 추가하기 위해서는 부모가 있어야함..
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        
-        
-        collectionView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
-        collectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
-//        collectionView.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
-//        collectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
-        collectionView.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive = true
-        collectionView.rightAnchor.constraint(equalTo: rightAnchor, constant: 0).isActive = true
-        
+        collectionView
+            .topAnchor(to: safeAreaLayoutGuide.topAnchor, constant: 0)
+            .bottomAnchor(to: safeAreaLayoutGuide.bottomAnchor, constant: 0)
+            .leadingAnchor(to: leadingAnchor, constant: 0)
+            .trailingAnchor(to: trailingAnchor, constant: 0)
+            .activateAnchors()
         collectionView.backgroundColor = .white
-        
-
-        
-        
-        
-        
     }
     
     override func setupBinding() {
@@ -96,8 +76,3 @@ collectionView.backgroundColor = UIColor.cyanColor()
 self.view.addSubview(collectionView)
 */
 
-extension UICollectionView {
-    convenience init(collectionViewLayout: UICollectionViewLayout) {
-        self.init(frame: CGRect.zero, collectionViewLayout: collectionViewLayout)
-    }
-}

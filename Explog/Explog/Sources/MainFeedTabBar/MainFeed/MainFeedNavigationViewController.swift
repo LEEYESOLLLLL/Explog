@@ -16,6 +16,15 @@ final class MainFeedViewController: BaseViewController {
         view = v
     }
     
+    static func createWith() -> Self {
+        let `self` = self.init()
+        self.title = "Feed"
+        self.tabBarItem.image = #imageLiteral(resourceName: "mainFeed")
+        return self
+    }
+    
+    
+    
     @objc func buttonAction(_ sender: UIButton) {
         navigationController?.pushViewController(MainFeedViewController(), animated: true)
         
@@ -23,8 +32,11 @@ final class MainFeedViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         print("프로그래밍 방식으로 UI 구성했을때, frame들 확인해주")
+    }
+    
+    deinit {
+        print("\(self) has deinitiialzied")
     }
 }
 
@@ -37,8 +49,7 @@ extension MainFeedViewController: UICollectionViewDataSource {
         
         let cell = collectionView.dequeue(MainFeedCollectionViewCell.self, indexPath: indexPath)!
         cell.lable.text = "\(indexPath)"
-        
-        cell.backgroundColor = .red
+        cell.backgroundColor = UIColor.brown
         
         return cell
     }
@@ -82,8 +93,8 @@ extension MainFeedViewController: UICollectionViewDelegateFlowLayout {
 //    }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        return CGSize(width: 10*indexPath.row, height: 100)
+        return view.safeAreaLayoutGuide.layoutFrame.size
+//        return CGSize(width: 200, height: 200)
     }
     
     

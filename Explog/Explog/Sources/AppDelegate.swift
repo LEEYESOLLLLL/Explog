@@ -17,7 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         
         return true 
-        
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
@@ -36,25 +35,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func setTabBarViewControllers() -> UITabBarController {
         
         // initilize ViewControllers
-        let mainFeedVC = UINavigationController(rootViewController: MainFeedViewController())
-        mainFeedVC.title = "Feed"
-        mainFeedVC.tabBarItem.image = #imageLiteral(resourceName: "mainFeed")
-        
-        let searchVC = SearchViewController()
-        searchVC.title = "Search"
-        searchVC.tabBarItem.image = #imageLiteral(resourceName: "search")
-        
-        let postVC = PostViewController()
-        postVC.title = "Post"
-        
-        postVC.tabBarItem.image = #imageLiteral(resourceName: "create_post")
-        let likeVC = LikeViewController()
-        likeVC.title = "Like"
-        likeVC.tabBarItem.image = #imageLiteral(resourceName: "LikeImageInTab")
-        
-        let profileVC = ProfileViewController()
-        profileVC.title = "Profile"
-        profileVC.tabBarItem.image = #imageLiteral(resourceName: "profileImage")
+        let mainFeedVC = UINavigationController(
+            rootViewController: MainFeedViewController.createWith())
+        let searchVC = SearchViewController.createWith()
+        let postVC = PostViewController.createWith()
+        let likeVC = LikeViewController.createWith()
+        let profileVC = ProfileViewController.createWith()
         return MainFeedTabBarViewController(viewControllers: [mainFeedVC, searchVC, postVC, likeVC, profileVC])
         
     }

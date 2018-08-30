@@ -9,5 +9,10 @@
 import UIKit
 
 final class ProfileViewController: BaseViewController {
-    
+    static func createWith() -> Self {
+        let `self` = self.init()
+        self.title = "Profile"
+        self.tabBarItem.image = #imageLiteral(resourceName: "profileImage")
+        return self
+    }
 }

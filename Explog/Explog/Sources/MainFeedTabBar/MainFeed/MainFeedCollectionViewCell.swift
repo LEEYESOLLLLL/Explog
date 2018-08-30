@@ -16,7 +16,6 @@ final class MainFeedCollectionViewCell: UICollectionViewCell {
         lb.textAlignment = .center
         lb.translatesAutoresizingMaskIntoConstraints = false
         return lb
-        
     }()
     override init(frame: CGRect) {
         super.init(frame: frame)
