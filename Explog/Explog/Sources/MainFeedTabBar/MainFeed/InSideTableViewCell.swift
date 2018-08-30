@@ -9,11 +9,13 @@
 import UIKit
 
 final class InsideTableViewCell: UITableViewCell {
-    public var internalIndex: (parentIndex: Int, section: Int, row: Int)? 
+    /**
+     when TableView is in UITableView or UICollectionView, internalIndex represents parent`s Index(for example row), my section and row 
+     */
+    public var internalIndex: (parentIndex: Int, section: Int, row: Int)?
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        
     }
     
     required init?(coder aDecoder: NSCoder) {

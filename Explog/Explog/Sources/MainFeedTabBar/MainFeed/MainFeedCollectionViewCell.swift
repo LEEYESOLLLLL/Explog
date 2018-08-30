@@ -53,10 +53,7 @@ final class MainFeedCollectionViewCell: UICollectionViewCell {
 
 extension MainFeedCollectionViewCell: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath) 
-        let superViewCell = (superview as? UICollectionViewCell)
-        
-        
+        let _ = (tableView.cellForRow(at: indexPath) as! InsideTableViewCell).internalIndex
     }
     
 }
