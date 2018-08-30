@@ -19,3 +19,10 @@ EXPLOG in Code Version
 	- Parallax 적용 
 	- CollectionView 내부에 TableView 적용 
 
+2. MainFeedView 상/하 스크롤 & 스크롤 싱크 계산 
+
+3. Parallax 적용 
+
+### 2018.8.31 
+
+
