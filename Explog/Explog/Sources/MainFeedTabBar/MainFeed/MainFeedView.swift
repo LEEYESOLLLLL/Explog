@@ -13,6 +13,7 @@ import SnapKit
 final class MainFeedView: BaseView<MainFeedViewController> {
     var upperScrollView: UIScrollView = {
         let _scv = UIScrollView()
+        _scv.backgroundColor = UIColor.cyan
         return _scv
     }()
     
@@ -32,8 +33,11 @@ final class MainFeedView: BaseView<MainFeedViewController> {
         addSubviews([collectionView, upperScrollView])
         upperScrollView
             .topAnchor(to: safeAreaLayoutGuide.topAnchor, constant: 0)
-            .leadingAnchor(to: leadingAnchor, constant: 0).trailingAnchor(to: trailingAnchor, constant: 0)
-            .heightAnchor(constant: 200).activateAnchors()
+            .leadingAnchor(to: leadingAnchor, constant: 0)
+            .trailingAnchor(to: trailingAnchor, constant: 0)
+            .heightAnchor(constant: 200)
+            .activateAnchors()
+    
         
         collectionView
             .topAnchor(to: upperScrollView.bottomAnchor, constant: 0)

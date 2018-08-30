@@ -20,15 +20,18 @@ final class MainFeedCollectionViewCell: UICollectionViewCell {
     
     var tableView: UITableView = {
         var _tv = UITableView()
+        _tv.rowHeight = UITableViewAutomaticDimension
+        _tv.estimatedRowHeight = 150 
         return _tv
     }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         tableView.register(cell: InsideTableViewCell.self)
         contentView.addSubviews([tableView])
-        
+
         tableView
-            .topAnchor(to: contentView.topAnchor, constant: 0)
+            .topAnchor(to: contentView.safeAreaLayoutGuide.topAnchor, constant: 0)
             .bottomAnchor(to: contentView.bottomAnchor, constant: 0)
             .leadingAnchor(to: contentView.leadingAnchor, constant: 0)
             .trailingAnchor(to: contentView.trailingAnchor, constant: 0)
@@ -43,11 +46,17 @@ final class MainFeedCollectionViewCell: UICollectionViewCell {
     func setupCellBinding() {
         tableView.delegate = self
         tableView.dataSource = self
-        
+
     }
 }
 
 extension MainFeedCollectionViewCell: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        let superViewCell = (superview as? UICollectionViewCell)
+        
+        
+    }
     
 }
 
@@ -64,6 +73,7 @@ extension MainFeedCollectionViewCell: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeue(InsideTableViewCell.self)!
         cell.backgroundColor = .blue
+        cell.textLabel?.text = "\(indexPath)"
         
         return cell
         

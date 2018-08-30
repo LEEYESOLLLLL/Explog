@@ -34,6 +34,7 @@ final class MainFeedViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         print("프로그래밍 방식으로 UI 구성했을때, frame들 확인해주")
+        
     }
     
     deinit {
@@ -60,6 +61,7 @@ extension MainFeedViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
         print(cell?.frame)
+        
     }
 
 }
@@ -83,6 +85,6 @@ extension MainFeedViewController: UICollectionViewDelegateFlowLayout {
 //    }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return view.safeAreaLayoutGuide.layoutFrame.size
+        return collectionView.bounds.size
     }
 }
