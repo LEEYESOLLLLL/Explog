@@ -13,9 +13,7 @@ import UIKit
 final class MainFeedViewController: BaseViewController {
     lazy var v = MainFeedView(controlBy: self)
     
-    override func loadView() {
-        view = v
-    }
+    override func loadView() { view = v }
     
     static func createWith() -> Self {
         let `self` = self.init()
@@ -24,11 +22,9 @@ final class MainFeedViewController: BaseViewController {
         return self
     }
     
-    
-    
-    @objc func buttonAction(_ sender: UIButton) {
-        navigationController?.pushViewController(MainFeedViewController(), animated: true)
-        
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationController?.navigationBar.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -40,6 +36,8 @@ final class MainFeedViewController: BaseViewController {
     deinit {
         print("\(self) has deinitiialzied")
     }
+    
+    
 }
 
 extension MainFeedViewController: UICollectionViewDataSource {
@@ -48,6 +46,7 @@ extension MainFeedViewController: UICollectionViewDataSource {
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeue(MainFeedCollectionViewCell.self, indexPath: indexPath)!
+        cell.setupCellBinding(owner: self)
         cell.lable.text = "\(indexPath)"
         cell.backgroundColor = UIColor.brown
         
@@ -57,39 +56,84 @@ extension MainFeedViewController: UICollectionViewDataSource {
         
         return cell
     }
-    
-    
 }
 
 extension MainFeedViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
         print(cell?.frame)
-        
-        
     }
-
 }
 
 extension MainFeedViewController: UICollectionViewDelegateFlowLayout {
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//
-//        return CGSize(width: view.bounds.width, height: 100)
-//    }
-//
-//
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//
-//        return 20
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-//
-//        return 0
-//    }
-
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return collectionView.bounds.size
+    }
+}
+
+extension MainFeedViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        let newOffSet = scrollView === v.upperScrollView ? scrollView.contentOffset.x * 2 : scrollView.contentOffset.x / 2
+        switch scrollView {
+        case v.upperScrollView: v.collectionView.contentOffset.x = newOffSet
+        case v.collectionView: v.upperScrollView.contentOffset.x = newOffSet
+        default : print("알수없는..스크롤뷰")
+            let headerHight = v.scrollViewWidthAndHeight.height
+        
+        if scrollView.contentOffset.y > 0 {
+            let frame = v.upperScrollView.frame
+            
+            v.collectionView.frame.origin.y -= scrollView.contentOffset.y * 0.5
+            v.collectionView.bounds.size.height += scrollView.contentOffset.y
+            v.collectionView.clipsToBounds = true
+        }else {
+            
+            }
+        }
+        
+        print(scrollView.contentOffset)
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        // UpperScrollView & CollectionView
+        let pageWidth = scrollView === v.upperScrollView ? scrollView.bounds.width / 2 : scrollView.bounds.width
+        let index = Int(targetContentOffset.pointee.x / pageWidth + 0.5)
+        let point = scrollView === v.upperScrollView ? scrollView.contentSize.width / 7 * CGFloat(index) : scrollView.contentSize.width / 6 * CGFloat(index)
+        
+        scrollView.setContentOffset(CGPoint(x: point, y: 0), animated: true)
+    }
+    
+    // 드레깅이 끝났을때 호출을 보장하기위함.
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        scrollViewWillEndDragging(scrollView,
+                                  withVelocity: scrollView.contentOffset,
+                                  targetContentOffset: &scrollView.contentOffset)
+    }
+}
+
+// ViewController 코드를 줄이기 위해서 UICollectionViewCell에 delgate, DataSource를 주어도 되지만, Parallax사용하기 위해서는 ViewController에 주어야함ㅠㅠ
+extension MainFeedViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let _ = (tableView.cellForRow(at: indexPath) as! InsideTableViewCell).internalIndex
+    }
+    
+}
+
+extension MainFeedViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return 20
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeue(InsideTableViewCell.self)!
+        cell.internalIndex = (
+            parentIndex: tableView.tag,
+            section: indexPath.section,
+            row: indexPath.row)
+        cell.backgroundColor = .blue
+        cell.textLabel?.text = "\(indexPath)"
+        
+        return cell
     }
 }

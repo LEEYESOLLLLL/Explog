@@ -37,50 +37,18 @@ final class MainFeedCollectionViewCell: UICollectionViewCell {
             .leadingAnchor(to: contentView.leadingAnchor, constant: 0)
             .trailingAnchor(to: contentView.trailingAnchor, constant: 0)
             .activateAnchors()
-        setupCellBinding()
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupCellBinding() {
-        tableView.delegate = self
-        tableView.dataSource = self
+    func setupCellBinding<T: UITableViewDelegate & UITableViewDataSource>(owner: T) {
+        tableView.delegate = owner
+        tableView.dataSource = owner
 
     }
 }
 
-extension MainFeedCollectionViewCell: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let _ = (tableView.cellForRow(at: indexPath) as! InsideTableViewCell).internalIndex
-    }
-    
-}
 
-extension MainFeedCollectionViewCell: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return 20
-    }
-    
-    
-    // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-    // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeue(InsideTableViewCell.self)!
-        cell.internalIndex = (
-            parentIndex: tableView.tag,
-            section: indexPath.section,
-            row: indexPath.row)
-        cell.backgroundColor = .blue
-        cell.textLabel?.text = "\(indexPath)"
-        
-        return cell
-        
-        
-    }
-
-    
-}
