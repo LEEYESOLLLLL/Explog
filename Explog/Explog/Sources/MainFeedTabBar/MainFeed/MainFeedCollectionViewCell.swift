@@ -21,6 +21,7 @@ final class MainFeedCollectionViewCell: UICollectionViewCell {
     var tableView: UITableView = {
         var _tv = UITableView()
         _tv.rowHeight = UITableViewAutomaticDimension
+        // 나중에 수정해주어야함
         _tv.estimatedRowHeight = 150 
         return _tv
     }()
@@ -52,7 +53,7 @@ final class MainFeedCollectionViewCell: UICollectionViewCell {
 
 extension MainFeedCollectionViewCell: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath)
+        let cell = tableView.cellForRow(at: indexPath) 
         let superViewCell = (superview as? UICollectionViewCell)
         
         
@@ -72,6 +73,10 @@ extension MainFeedCollectionViewCell: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeue(InsideTableViewCell.self)!
+        cell.internalIndex = (
+            parentIndex: tableView.tag,
+            section: indexPath.section,
+            row: indexPath.row)
         cell.backgroundColor = .blue
         cell.textLabel?.text = "\(indexPath)"
         

@@ -9,6 +9,7 @@
 import UIKit
 
 final class InsideTableViewCell: UITableViewCell {
+    public var internalIndex: (parentIndex: Int, section: Int, row: Int)? 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         

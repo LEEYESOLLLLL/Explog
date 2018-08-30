@@ -51,6 +51,10 @@ extension MainFeedViewController: UICollectionViewDataSource {
         cell.lable.text = "\(indexPath)"
         cell.backgroundColor = UIColor.brown
         
+        // TableViewCell의 index가 CollectionView의 몇번째 인덱스다 라는것을 알려주기 위해서 적용.
+        cell.tableView.tag = indexPath.row
+        
+        
         return cell
     }
     
@@ -61,6 +65,7 @@ extension MainFeedViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
         print(cell?.frame)
+        
         
     }
 
