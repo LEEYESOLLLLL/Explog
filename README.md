@@ -40,4 +40,30 @@ EXPLOG in Code Version
 	- 내일 검색 키워드 Multiple Parallax, Paginig ViewController, Container ViewController ...
 	- 여러개의 테이블뷰를 다룰때 Parallax시 여러개의 TableView의 ScrollView Offset이 싱크하게 조절하는 방법 찾아야함..
 
+내일 분석해야할것 찾음
 
+- https://github.com/ngominhtrint/ParallaxHeader
+- https://github.com/xxxAIRINxxx/ViewPagerController
+
+- Container ViewController 추상화 방법 한번 참조하면 좋을것 같음: https://github.com/fortmarek/SwipeViewController
+- ViewControlelr Pager: https://github.com/hwj4477/ViewControllerPager
+- TabBarViewController: https://github.com/uias/Tabman
+	- 잘만든것같음
+
+
+
+
+
+
+
+
+----
+
+## Other Article 
+
+- 나중에 도움될듯 Paging ViewController :https://github.com/Stackberry/Parallax-Container-View-Controller/blob/master/Parallax%20Container%20View%20Controller/View%20Controllers/ParallaxContainerViewController.swift
+
+- CollectionView Card layout: https://github.com/qhlonger/DribbbleInvisionParallax
+- CollectionView Parallax 나중에 유용할듯?: https://github.com/KhrystynaShevchuk/StretchHeaderWithCollectionViewFlowLayout
+- 초기화면 만들때 유용함
+	- https://github.com/WenchaoD/FSPagerView
