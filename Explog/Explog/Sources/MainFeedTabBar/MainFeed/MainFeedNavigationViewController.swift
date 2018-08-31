@@ -46,7 +46,7 @@ extension MainFeedViewController: UICollectionViewDataSource {
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeue(MainFeedCollectionViewCell.self, indexPath: indexPath)!
-        cell.setupCellBinding(owner: self)
+        cell.setupCellDelegation(owner: self)
         cell.lable.text = "\(indexPath)"
         cell.backgroundColor = UIColor.brown
         
@@ -78,8 +78,16 @@ extension MainFeedViewController: UIScrollViewDelegate {
         switch scrollView {
         case v.upperScrollView: v.collectionView.contentOffset.x = newOffSet
         case v.collectionView: v.upperScrollView.contentOffset.x = newOffSet
-        default : print("테이블뷰의 y콘텐츠 오프셋 ")
-        v.coordinate(scrollView.contentOffset)
+        default :
+            print("테이블뷰 height:\(scrollView.frame.height)")
+            
+//            if scrollView.superview!.superview!.frame.height < v.safeAreaLayoutGuide.layoutFrame.height {
+//                v.coordinate(scrollView.contentOffset)
+//            }
+            v.coordinate(scrollView.contentOffset, scrollView: scrollView)
+            
+            //scrollView.contentSize = CGSize(width: scrollView.bounds.width, height: v.safeAreaLayoutGuide.layoutFrame.height)
+            
         
         
         }

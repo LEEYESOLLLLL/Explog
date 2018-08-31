@@ -32,7 +32,7 @@ final class MainFeedCollectionViewCell: UICollectionViewCell {
         contentView.addSubviews([tableView])
 
         tableView
-            .topAnchor(to: contentView.safeAreaLayoutGuide.topAnchor, constant: 0)
+            .topAnchor(to: contentView.topAnchor, constant: 0)
             .bottomAnchor(to: contentView.bottomAnchor, constant: 0)
             .leadingAnchor(to: contentView.leadingAnchor, constant: 0)
             .trailingAnchor(to: contentView.trailingAnchor, constant: 0)
@@ -44,7 +44,7 @@ final class MainFeedCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupCellBinding<T: UITableViewDelegate & UITableViewDataSource>(owner: T) {
+    func setupCellDelegation<T: UITableViewDelegate & UITableViewDataSource>(owner: T) {
         tableView.delegate = owner
         tableView.dataSource = owner
 

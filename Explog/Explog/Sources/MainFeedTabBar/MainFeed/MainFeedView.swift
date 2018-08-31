@@ -30,12 +30,13 @@ final class MainFeedView: BaseView<MainFeedViewController> {
     var parallaxNSLayoutConstraints: NSLayoutConstraint?
     override func setupUI() {
         collectionView.register(cell: MainFeedCollectionViewCell.self)
-        addSubviews([collectionView, upperScrollView])
+        addSubviews([upperScrollView, collectionView])
         upperScrollView
             .topAnchor(to: safeAreaLayoutGuide.topAnchor, constant: 0)
             .leadingAnchor(to: leadingAnchor, constant: 0)
             .trailingAnchor(to: trailingAnchor, constant: 0)
             .heightAnchor(constant: scrollViewWidthAndHeight.height)
+            .bottomAnchor(to: collectionView.topAnchor, constant: 0)
             .activateAnchors()
         
         upperScrollView.contentSize = CGSize(
@@ -50,7 +51,6 @@ final class MainFeedView: BaseView<MainFeedViewController> {
             let imagePoint = CGPoint(
                 x: scrollViewWidthAndHeight.width/2*(CGFloat(offset+1)),
                 y: scrollViewWidthAndHeight.height/2)
-            print("point is \(imagePoint)")
             imageview.center = imagePoint
             imageview.bounds.size = imageSize
             return imageview
@@ -81,12 +81,29 @@ final class MainFeedView: BaseView<MainFeedViewController> {
     }
     
     
-    func coordinate(_ contentOffset: CGPoint) {
+    func coordinate(_ contentOffset: CGPoint, scrollView: UIScrollView) {
         let parallaxDeltaFactor: CGFloat = 0.5
-        if contentOffset.y > 0 {
-            parallaxNSLayoutConstraints?.constant = -contentOffset.y*parallaxDeltaFactor
+        var defaultFrame = CGRect(
+            x: 0,
+            y: upperScrollView.frame.origin.y + upperScrollView.frame.height,
+            width: upperScrollView.frame.width,
+            height: safeAreaLayoutGuide.layoutFrame.height-upperScrollView.frame.height)
+        if contentOffset.y >= 0 {
+            parallaxNSLayoutConstraints?.constant = -contentOffset.y * parallaxDeltaFactor
+//            defaultFrame.origin.y -= contentOffset.y * parallaxDeltaFactor
+//            defaultFrame.size.height += contentOffset.y * parallaxDeltaFactor
+//            collectionView.frame = defaultFrame
+
+            collectionView.collectionViewLayout.invalidateLayout()
+            
+            
+            
+            
+            
+            print("CollectionView Frame: \(collectionView.frame)")
+            // 0~1
+            
         }else {
-            // TableView의 Referesh를 여기서 진행
         }
     }
 }
