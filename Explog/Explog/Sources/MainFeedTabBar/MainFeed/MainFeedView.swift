@@ -23,14 +23,11 @@ final class MainFeedView: BaseView<MainFeedViewController> {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
         flowLayout.minimumLineSpacing = 0
-        
-        
-        // Header
         let cv = UICollectionView.init(collectionViewLayout: flowLayout)
-        //cv.isPagingEnabled = true
         return cv
     }()
     
+    var parallaxNSLayoutConstraints: NSLayoutConstraint?
     override func setupUI() {
         collectionView.register(cell: MainFeedCollectionViewCell.self)
         addSubviews([collectionView, upperScrollView])
@@ -61,21 +58,36 @@ final class MainFeedView: BaseView<MainFeedViewController> {
         upperScrollView.addSubviews(images)
         
         collectionView
-            .topAnchor(to: upperScrollView.bottomAnchor, constant: 0)
+            .topAnchor(to: upperScrollView.bottomAnchor, identifer: "ParallaxAnchor")
             .bottomAnchor(to: safeAreaLayoutGuide.bottomAnchor, constant: 0)
             .leadingAnchor(to: leadingAnchor, constant: 0)
             .trailingAnchor(to: trailingAnchor, constant: 0)
             .activateAnchors()
         collectionView.backgroundColor = .white
+        
+        // ParallaxAnChor 할당
+        constraints.forEach {
+            if $0.identifier == "ParallaxAnchor" {
+                parallaxNSLayoutConstraints = $0
+            }
+        }
     }
     
     override func setupBinding() {
         backgroundColor = .white
         upperScrollView.delegate = vc
-        
         collectionView.delegate = vc
         collectionView.dataSource = vc
     }
     
+    
+    func coordinate(_ contentOffset: CGPoint) {
+        let parallaxDeltaFactor: CGFloat = 0.5
+        if contentOffset.y > 0 {
+            parallaxNSLayoutConstraints?.constant = -contentOffset.y*parallaxDeltaFactor
+        }else {
+            // TableView의 Referesh를 여기서 진행
+        }
+    }
 }
 

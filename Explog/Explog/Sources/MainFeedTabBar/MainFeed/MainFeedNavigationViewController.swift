@@ -78,18 +78,10 @@ extension MainFeedViewController: UIScrollViewDelegate {
         switch scrollView {
         case v.upperScrollView: v.collectionView.contentOffset.x = newOffSet
         case v.collectionView: v.upperScrollView.contentOffset.x = newOffSet
-        default : print("알수없는..스크롤뷰")
-            let headerHight = v.scrollViewWidthAndHeight.height
+        default : print("테이블뷰의 y콘텐츠 오프셋 ")
+        v.coordinate(scrollView.contentOffset)
         
-        if scrollView.contentOffset.y > 0 {
-            let frame = v.upperScrollView.frame
-            
-            v.collectionView.frame.origin.y -= scrollView.contentOffset.y * 0.5
-            v.collectionView.bounds.size.height += scrollView.contentOffset.y
-            v.collectionView.clipsToBounds = true
-        }else {
-            
-            }
+        
         }
         
         print(scrollView.contentOffset)
@@ -101,7 +93,12 @@ extension MainFeedViewController: UIScrollViewDelegate {
         let index = Int(targetContentOffset.pointee.x / pageWidth + 0.5)
         let point = scrollView === v.upperScrollView ? scrollView.contentSize.width / 7 * CGFloat(index) : scrollView.contentSize.width / 6 * CGFloat(index)
         
-        scrollView.setContentOffset(CGPoint(x: point, y: 0), animated: true)
+        // 가로 스크롤
+        if scrollView === v.upperScrollView || scrollView === v.collectionView {
+            // Tableivew에 적용되는 Point값이 아니라 y값은 무관..
+            scrollView.setContentOffset(CGPoint(x: point, y: 0), animated: true)
+        }
+        
     }
     
     // 드레깅이 끝났을때 호출을 보장하기위함.
@@ -123,7 +120,7 @@ extension MainFeedViewController: UITableViewDelegate {
 extension MainFeedViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 20
+        return 30
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeue(InsideTableViewCell.self)!

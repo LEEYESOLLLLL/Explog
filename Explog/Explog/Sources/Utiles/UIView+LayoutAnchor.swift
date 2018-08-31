@@ -15,6 +15,13 @@ extension UIView {
         return self
     }
     
+    func topAnchor(to anchor: NSLayoutYAxisAnchor, constant: CGFloat = 0, identifer: String) -> Self {
+        let anchor = topAnchor.constraint(equalTo: anchor, constant: constant)
+            anchor.identifier = "\(identifer)"
+            anchor.isActive = true
+        return self
+    }
+    
     func leadingAnchor(to anchor: NSLayoutXAxisAnchor, constant: CGFloat = 0) -> Self {
         leadingAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
         return self
