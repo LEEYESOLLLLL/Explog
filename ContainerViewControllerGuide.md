@@ -5,7 +5,7 @@
 UIKit app을 위한 뷰계층구조를 관리하는 하나의 객체이다.
 
 ## Overrive 
-v
+
 UIViewController 클레스는 모든 뷰 콘트롤러들에 대한 공유된 행동을 정의합니다. UIViewCOntroller 클레스를 직접적으로 생성하는것은 드뭅니다. 대신 UIViewController를 서브 클레싱 하고, 매소드를 추가하고 ViewController의 뷰 계층에 관리하려고하는 속소들을 추가합니다. 
 
 다음은 뷰컨트롤러의 주요한 행동들입니다. 
