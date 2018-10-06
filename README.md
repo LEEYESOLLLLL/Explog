@@ -26,7 +26,7 @@ EXPLOG in Code Version
 
 ### 다음날 해야하는것 
 
-3. Parallax 적용 
+3. Parallax 적용  
 
 ---
 
