@@ -8,13 +8,8 @@
 
 import UIKit
 
-public enum StyleColor {
-    case defaultColor
-    
-    var adepted: UIColor {
-        switch self {
-        case .defaultColor:
-            return UIColor(red:0.36, green:0.63, blue:0.95, alpha:1.00)
-        }
+extension UIColor {
+    static var thisApp: UIColor {
+        return UIColor(red:0.36, green:0.63, blue:0.95, alpha:1.00)
     }
 }
