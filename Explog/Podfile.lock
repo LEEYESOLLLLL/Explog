@@ -1,34 +1,25 @@
 PODS:
   - Alamofire (4.7.3)
-  - AlamofireImage (3.3.1):
-    - Alamofire (~> 4.5)
-  - RxCocoa (4.2.0):
-    - RxSwift (~> 4.0)
-  - RxSwift (4.2.0)
-  - SnapKit (4.0.0)
+  - AlamofireImage (3.4.1):
+    - Alamofire (~> 4.7)
+  - CaseContainer (0.6.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
   - AlamofireImage (~> 3.3)
-  - RxCocoa
-  - RxSwift
-  - SnapKit (~> 4.0.0)
+  - CaseContainer
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - AlamofireImage
-    - RxCocoa
-    - RxSwift
-    - SnapKit
+    - CaseContainer
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
-  AlamofireImage: 3b35b586853abaf94ca1250f4e94cff3c21a4c0d
-  RxCocoa: 0b54909c902e1e581212a03e690bbd94032d8baa
-  RxSwift: 99e10317ddfcc7fbe01356aafd118fde4a0be104
-  SnapKit: a42d492c16e80209130a3379f73596c3454b7694
+  AlamofireImage: 78d67ccbb763d87ba44b21583d2153500a195630
+  CaseContainer: ea99859a037078ea9536f840377d9a7b2a3985c5
 
-PODFILE CHECKSUM: 4bcd3b5ee6a4ebcbaf1e7257611d3d6964aca145
+PODFILE CHECKSUM: 5b478803dff0b95c0400e2b8c977cdd061fe2f3e
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.0.beta.1
