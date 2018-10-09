@@ -10,7 +10,8 @@ import UIKit
 
 protocol ViewType {
     associatedtype ViewController: ViewControllerType
-    weak var vc: ViewController! { get }
+//    weak var vc: ViewController! { get }
+//    https://github.com/apple/swift-evolution/blob/master/proposals/0186-remove-ownership-keyword-support-in-protocols.md
     init(controlBy viewController: ViewController)
 }
 /**
