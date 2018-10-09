@@ -14,12 +14,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     
-    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
         return true 
     }
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
         setKeyWindow()
         return true
@@ -35,8 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func setTabBarViewControllers() -> UITabBarController {
         
         // initilize ViewControllers
-        let mainFeedVC = UINavigationController(
-            rootViewController: MainFeedViewController.createWith())
+        let mainFeedVC = UINavigationController(rootViewController: FeedContainerViewController.createWith())
         let searchVC = SearchViewController.createWith()
         let postVC = PostViewController.createWith()
         let likeVC = LikeViewController.createWith()
