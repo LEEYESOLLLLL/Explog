@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SnapKit
+
 
 final class MainFeedCollectionViewCell: UICollectionViewCell {
     
@@ -20,7 +20,7 @@ final class MainFeedCollectionViewCell: UICollectionViewCell {
     
     var tableView: UITableView = {
         var _tv = UITableView()
-        _tv.rowHeight = UITableViewAutomaticDimension
+        _tv.rowHeight = UITableView.automaticDimension
         // 나중에 수정해주어야함
         _tv.estimatedRowHeight = 150 
         return _tv

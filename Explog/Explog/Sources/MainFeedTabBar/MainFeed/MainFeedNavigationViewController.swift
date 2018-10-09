@@ -8,137 +8,102 @@
 //
 
 import UIKit
+import CaseContainer
 
-
-final class MainFeedViewController: BaseViewController {
-    lazy var v = MainFeedView(controlBy: self)
-    
-    override func loadView() { view = v }
+final class FeedContainerViewController: CaseContainerViewController {
+    required init() {
+        super.init()
+        let titles: [String] = ["Asia", "Europe", "North America", "South America", "Africa", "Austrailia"]
+        
+        viewContorllers = titles.compactMap {
+            [weak self] (title: String) -> ParallaxTableViewController? in
+            guard let strongSelf = self else {
+                return nil
+            }
+            let childVC = FeedTableViewController()
+            childVC.title = title
+            childVC.delegate = strongSelf
+            return childVC
+        }
+        appearence = Appearance(
+            headerViewHegiht: UIScreen.mainHeight/3,
+            tabScrollViewHeight: 50,
+            indicatorColor: .thisApp,
+            tabButtonColor: (normal: .gray, highLight: .black))
+    }
     
     static func createWith() -> Self {
         let `self` = self.init()
         self.title = "Feed"
-        self.tabBarItem.image = #imageLiteral(resourceName: "mainFeed")
+        self.tabBarItem.image = #imageLiteral(resourceName: "globe")
         return self
+    }
+    
+    let images: [UIImage] = [#imageLiteral(resourceName: "South America"), #imageLiteral(resourceName: "Africa"), #imageLiteral(resourceName: "North America"), #imageLiteral(resourceName: "Europe"), #imageLiteral(resourceName: "Austrailia"), #imageLiteral(resourceName: "Asia")]
+    
+    lazy var headerImageView = UIImageView().then {
+        $0.contentMode = .scaleAspectFit
+        $0.image = images[0]
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.isHidden = true
+        setupUI()
+        setupBinding()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        print("프로그래밍 방식으로 UI 구성했을때, frame들 확인해주")
         
     }
     
-    deinit {
-        print("\(self) has deinitiialzied")
+    func setupUI() {
+        navigationController?.navigationBar.isHidden = true
+        headerView.addSubview(headerImageView)
+        headerImageView
+            .topAnchor(to: headerView.topAnchor)
+            .bottomAnchor(to: headerView.bottomAnchor)
+            .leadingAnchor(to: headerView.leadingAnchor)
+            .trailingAnchor(to: headerView.trailingAnchor)
+            .activateAnchors()
+    }
+    
+    func setupBinding() {
+        delegate = self
     }
     
     
-}
-
-extension MainFeedViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
-    }
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeue(MainFeedCollectionViewCell.self, indexPath: indexPath)!
-        cell.setupCellDelegation(owner: self)
-        cell.lable.text = "\(indexPath)"
-        cell.backgroundColor = UIColor.brown
-        
-        // TableViewCell의 index가 CollectionView의 몇번째 인덱스다 라는것을 알려주기 위해서 적용.
-        cell.tableView.tag = indexPath.row
-        
-        
-        return cell
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }   
+    
+    required init(maintain: [UIViewController], appearence: Appearance) {
+        fatalError("init(maintain:appearence:) has not been implemented")
     }
 }
 
-extension MainFeedViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath)
-        print(cell?.frame)
+extension FeedContainerViewController: CaseContainerDelegate {
+    func caseContainer(caseContainerViewController: CaseContainerViewController, scrollViewWillBeginDragging scrollView: UIScrollView) {}
+    func caseContainer(caseContainerViewController: CaseContainerViewController, index: Int, scrollViewDidEndDragging scrollView: UIScrollView) {}
+    func caseContainer(caseContainerViewController: CaseContainerViewController, didSelectTabButton tabButton: TabButton, prevIndex: Int, index: Int) {}
+    func caseContainer(caseContainerViewController: CaseContainerViewController, progress: CGFloat, index: Int, scrollViewDidScroll scrollView: UIScrollView) {
+        headerImageView.layer.opacity = Float( 1 - progress )
     }
-}
-
-extension MainFeedViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return collectionView.bounds.size
-    }
-}
-
-extension MainFeedViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-        let newOffSet = scrollView === v.upperScrollView ? scrollView.contentOffset.x * 2 : scrollView.contentOffset.x / 2
-        switch scrollView {
-        case v.upperScrollView: v.collectionView.contentOffset.x = newOffSet
-        case v.collectionView: v.upperScrollView.contentOffset.x = newOffSet
-        default :
-            print("테이블뷰 height:\(scrollView.frame.height)")
-            
-//            if scrollView.superview!.superview!.frame.height < v.safeAreaLayoutGuide.layoutFrame.height {
-//                v.coordinate(scrollView.contentOffset)
-//            }
-            v.coordinate(scrollView.contentOffset, scrollView: scrollView)
-            
-            //scrollView.contentSize = CGSize(width: scrollView.bounds.width, height: v.safeAreaLayoutGuide.layoutFrame.height)
-            
-        
-        
+    
+    func caseContainer(caseContainerViewController: CaseContainerViewController, index: Int, scrollViewDidEndDecelerating scrollView: UIScrollView) {
+        guard index < images.count else {
+            return
         }
-        
-        print(scrollView.contentOffset)
-    }
-    
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        // UpperScrollView & CollectionView
-        let pageWidth = scrollView === v.upperScrollView ? scrollView.bounds.width / 2 : scrollView.bounds.width
-        let index = Int(targetContentOffset.pointee.x / pageWidth + 0.5)
-        let point = scrollView === v.upperScrollView ? scrollView.contentSize.width / 7 * CGFloat(index) : scrollView.contentSize.width / 6 * CGFloat(index)
-        
-        // 가로 스크롤
-        if scrollView === v.upperScrollView || scrollView === v.collectionView {
-            // Tableivew에 적용되는 Point값이 아니라 y값은 무관..
-            scrollView.setContentOffset(CGPoint(x: point, y: 0), animated: true)
-        }
+        headerImageView.image = images[index]
+        headerImageView.layer.opacity = 1 
         
     }
     
-    // 드레깅이 끝났을때 호출을 보장하기위함.
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        scrollViewWillEndDragging(scrollView,
-                                  withVelocity: scrollView.contentOffset,
-                                  targetContentOffset: &scrollView.contentOffset)
-    }
-}
-
-// ViewController 코드를 줄이기 위해서 UICollectionViewCell에 delgate, DataSource를 주어도 되지만, Parallax사용하기 위해서는 ViewController에 주어야함ㅠㅠ
-extension MainFeedViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let _ = (tableView.cellForRow(at: indexPath) as! InsideTableViewCell).internalIndex
+    
+    func caseContainer(parallaxHeader progress: CGFloat) {
+        headerImageView.layer.opacity = Float( 1 - progress )
     }
     
-}
-
-extension MainFeedViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return 30
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeue(InsideTableViewCell.self)!
-        cell.internalIndex = (
-            parentIndex: tableView.tag,
-            section: indexPath.section,
-            row: indexPath.row)
-        cell.backgroundColor = .blue
-        cell.textLabel?.text = "\(indexPath)"
-        
-        return cell
-    }
+    
 }
