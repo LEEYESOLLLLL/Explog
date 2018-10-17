@@ -5,9 +5,21 @@ target 'Explog' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
+  ## Networking 
   pod 'Alamofire', '~> 4.7'
   pod 'AlamofireImage', '~> 3.3'
+  pod 'Moya', '~> 11.0'
+ 
+  ## Container Viewcontroller 
   pod 'CaseContainer'
+
+  ## KeyChain
+  pod 'KeychainAccess', '~> 3.1.2'
+
+  ## about chaining task in the asynchronous
+  pod 'Bolts-Swift', '~> 1.4.0'
+
+
  
   # Pods for Explog
 
