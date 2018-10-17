@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 protocol ViewType {
     associatedtype ViewController: ViewControllerType
 //    weak var vc: ViewController! { get }
