@@ -1,6 +1,6 @@
 language: objective-c  #1
 osx_image: xcode10 #2
-xcode_project: Explog/Explog.xcworkspace #3
+xcode_workspace: Explog.xcworkspace #3
 xcode_scheme: Explog #4
 xcode_sdk: iphonesimulator12.0 #5
 
