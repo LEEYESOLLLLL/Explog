@@ -5,9 +5,7 @@ xcode_scheme: Explog #4
 xcode_sdk: iphonesimulator12.0 #5
 
 before_script: 
-  - ls 
   - cd Explog/
-  - ls 
   - pod update
 
 jobs:
