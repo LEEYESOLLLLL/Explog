@@ -7,5 +7,5 @@ xcode_sdk: iphonesimulator12.0 #5
 before_script: cd Explog/
 jobs:
   include:
-    - script: xcodebuild build test -workspace Explog.xcworkspace -scheme Tests -destination "platform=iOS Simulator,name=iPhone 8,OS=12.0" -enableCodeCoverage YES 
+    - script: xcodebuild build test -workspace Explog.xcworkspace -scheme Explog -destination "platform=iOS Simulator,name=iPhone 8,OS=12.0" -enableCodeCoverage YES 
       after_script: bash <(curl -s https://codecov.io/bash) -J 'Explog'
