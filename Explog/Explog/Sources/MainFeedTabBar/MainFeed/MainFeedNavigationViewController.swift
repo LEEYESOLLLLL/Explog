@@ -13,33 +13,35 @@ import CaseContainer
 final class FeedContainerViewController: CaseContainerViewController {
     required init() {
         super.init()
-        let titles: [String] = ["Asia", "Europe", "North America", "South America", "Africa", "Austrailia"]
-        
-        viewContorllers = titles.compactMap {
-            [weak self] (title: String) -> ParallaxTableViewController? in
-            guard let strongSelf = self else {
-                return nil
-            }
-            let childVC = FeedTableViewController()
-            childVC.title = title
-            childVC.delegate = strongSelf
-            return childVC
+        let titles: [String] = ["Asia", "Europe", "North America", "South America", "Africa", "Oceania"]
+        viewContorllers = titles
+            .enumerated()
+            .compactMap { [weak self] (tag: Int, title: String) -> ParallaxTableViewController? in
+                guard let strongSelf = self else {
+                    return nil
+                }
+                return FeedTableViewController.createWith(
+                    title: title,
+                    owner: strongSelf,
+                    tag: tag+Int(1) )
         }
         appearence = Appearance(
-            headerViewHegiht: UIScreen.mainHeight/3,
+            headerViewHegiht: UIScreen.mainHeight/3.5,
             tabScrollViewHeight: 50,
-            indicatorColor: .thisApp,
+            indicatorColor: .appStyle,
             tabButtonColor: (normal: .gray, highLight: .black))
     }
     
-    static func createWith() -> Self {
+    static func create() -> UINavigationController {
         let `self` = self.init()
         self.title = "Feed"
         self.tabBarItem.image = #imageLiteral(resourceName: "globe")
-        return self
+        let naviController = UINavigationController(rootViewController: self)
+        naviController.setNavigationBarHidden(true, animated: false)
+        return naviController
     }
     
-    let images: [UIImage] = [#imageLiteral(resourceName: "South America"), #imageLiteral(resourceName: "Africa"), #imageLiteral(resourceName: "North America"), #imageLiteral(resourceName: "Europe"), #imageLiteral(resourceName: "Austrailia"), #imageLiteral(resourceName: "Asia")]
+    let images: [UIImage] = [#imageLiteral(resourceName: "Asia"), #imageLiteral(resourceName: "Europe"), #imageLiteral(resourceName: "North America"), #imageLiteral(resourceName: "South America"), #imageLiteral(resourceName: "Africa"), #imageLiteral(resourceName: "Austrailia")]
     
     lazy var headerImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFit
@@ -84,20 +86,29 @@ final class FeedContainerViewController: CaseContainerViewController {
 }
 
 extension FeedContainerViewController: CaseContainerDelegate {
-    func caseContainer(caseContainerViewController: CaseContainerViewController, scrollViewWillBeginDragging scrollView: UIScrollView) {}
-    func caseContainer(caseContainerViewController: CaseContainerViewController, index: Int, scrollViewDidEndDragging scrollView: UIScrollView) {}
-    func caseContainer(caseContainerViewController: CaseContainerViewController, didSelectTabButton tabButton: TabButton, prevIndex: Int, index: Int) {}
-    func caseContainer(caseContainerViewController: CaseContainerViewController, progress: CGFloat, index: Int, scrollViewDidScroll scrollView: UIScrollView) {
+    func caseContainer(
+        caseContainerViewController: CaseContainerViewController,
+        didSelectTabButton tabButton: TabButton,
+        prevIndex: Int, index: Int) {
+        headerImageView.image = images[index]
+    }
+    func caseContainer(
+        caseContainerViewController: CaseContainerViewController,
+        progress: CGFloat,
+        index: Int,
+        scrollViewDidScroll scrollView: UIScrollView) {
         headerImageView.layer.opacity = Float( 1 - progress )
     }
     
-    func caseContainer(caseContainerViewController: CaseContainerViewController, index: Int, scrollViewDidEndDecelerating scrollView: UIScrollView) {
+    func caseContainer(
+        caseContainerViewController: CaseContainerViewController,
+        index: Int,
+        scrollViewDidEndDecelerating scrollView: UIScrollView) {
         guard index < images.count else {
             return
         }
         headerImageView.image = images[index]
-        headerImageView.layer.opacity = 1 
-        
+        headerImageView.layer.opacity = 1
     }
     
     

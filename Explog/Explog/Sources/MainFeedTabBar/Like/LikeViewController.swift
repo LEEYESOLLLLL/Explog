@@ -9,7 +9,7 @@
 import UIKit
 
 final class LikeViewController: BaseViewController {
-    static func createWith() -> Self {
+    static func create() -> Self {
         let `self` = self.init()
         self.title = "Like"
         self.tabBarItem.image = #imageLiteral(resourceName: "LikeImageInTab")

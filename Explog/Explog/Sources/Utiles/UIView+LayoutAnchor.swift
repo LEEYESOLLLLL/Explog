@@ -15,10 +15,13 @@ extension UIView {
         return self
     }
     
-    func topAnchor(to anchor: NSLayoutYAxisAnchor, constant: CGFloat = 0, identifer: String) -> Self {
-        let anchor = topAnchor.constraint(equalTo: anchor, constant: constant)
-            anchor.identifier = "\(identifer)"
-            anchor.isActive = true
+    func topAnchor(lessThanOrEqualTo anchor: NSLayoutYAxisAnchor, constant: CGFloat = 0) -> Self {
+        topAnchor.constraint(lessThanOrEqualTo: anchor, constant: constant).isActive = true 
+        return self
+    }
+    
+    func topAnchor(greaterThanOrEqualTo anchor: NSLayoutYAxisAnchor, constant: CGFloat = 0) -> Self {
+        topAnchor.constraint(greaterThanOrEqualTo: anchor, constant: constant).isActive = true
         return self
     }
     
@@ -29,6 +32,16 @@ extension UIView {
     
     func bottomAnchor(to anchor: NSLayoutYAxisAnchor, constant: CGFloat = 0) -> Self {
         bottomAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
+        return self
+    }
+    
+    func bottomAnchor(greaterThanOrEqualTo anchor: NSLayoutYAxisAnchor, constant: CGFloat = 0) -> Self {
+        bottomAnchor.constraint(greaterThanOrEqualTo: anchor, constant: constant).isActive = true
+        return self
+    }
+    
+    func bottomAnchor(lessThanOrEqualTo anchor: NSLayoutYAxisAnchor, constant: CGFloat = 0) -> Self {
+        bottomAnchor.constraint(lessThanOrEqualTo: anchor, constant: constant).isActive = true
         return self
     }
     
@@ -47,6 +60,12 @@ extension UIView {
         return self
     }
     
+    func heightAnchor(to anchor: NSLayoutDimension, constant: CGFloat = 0) -> Self {
+        heightAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
+        return self
+        
+    }
+    
     func dimensionAnchors(width widthConstant: CGFloat, height heightConstant: CGFloat) -> Self {
         widthAnchor.constraint(equalToConstant: widthConstant).isActive = true
         heightAnchor.constraint(equalToConstant: heightConstant).isActive = true
@@ -59,8 +78,8 @@ extension UIView {
         return self
     }
     
-    func centerYAnchor(to anchor: NSLayoutYAxisAnchor) -> Self {
-        centerYAnchor.constraint(equalTo: anchor).isActive = true
+    func centerYAnchor(to anchor: NSLayoutYAxisAnchor, constant: CGFloat = 0) -> Self {
+        centerYAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
         return self
     }
     

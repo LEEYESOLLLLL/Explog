@@ -12,9 +12,7 @@ final class MainFeedTabBarViewController: BaseTabBarController {
     
     override func viewDidLoad() {
         delegate = self
-        UITabBar.appearance().tintColor = .thisApp
-        
-        
+        UITabBar.appearance().tintColor = .appStyle
     }
     
 }

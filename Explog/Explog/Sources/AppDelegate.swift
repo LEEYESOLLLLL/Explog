@@ -35,11 +35,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func setTabBarViewControllers() -> UITabBarController {
         
         // initilize ViewControllers
-        let mainFeedVC = UINavigationController(rootViewController: FeedContainerViewController.createWith())
-        let searchVC = SearchViewController.createWith()
-        let postVC = PostViewController.createWith()
-        let likeVC = LikeViewController.createWith()
-        let profileVC = ProfileViewController.createWith()
+        let mainFeedVC = FeedContainerViewController.create()
+        let searchVC = SearchViewController.create()
+        let postVC = PostViewController.create()
+        let likeVC = LikeViewController.create()
+        let profileVC = ProfileViewController.create()
         return MainFeedTabBarViewController(viewControllers: [mainFeedVC, searchVC, postVC, likeVC, profileVC])
         
     }

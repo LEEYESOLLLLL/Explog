@@ -9,7 +9,7 @@
 import UIKit
 
 /*
- 의미가 있나...??
+ 의미가 있나...?? -> Photo 업로드할때 의미있내
  */
 final class MainFeedTabBarView: BaseView<MainFeedTabBarViewController> {
     

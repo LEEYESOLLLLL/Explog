@@ -9,7 +9,7 @@
 import UIKit
 
 final class PostViewController: BaseViewController {
-    static func createWith() -> Self {
+    static func create() -> Self {
         let `self` = self.init()
         self.title = "Post"
         self.tabBarItem.image = #imageLiteral(resourceName: "create_post")

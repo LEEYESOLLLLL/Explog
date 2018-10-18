@@ -9,9 +9,10 @@ target 'Explog' do
   pod 'Alamofire', '~> 4.7'
   pod 'AlamofireImage', '~> 3.3'
   pod 'Moya', '~> 11.0'
+  pod 'Kingfisher', '~> 4.10.0'
  
   ## Container Viewcontroller 
-  pod 'CaseContainer'
+  pod 'CaseContainer', '~> 0.7.1'
 
   ## KeyChain
   pod 'KeychainAccess', '~> 3.1.2'
