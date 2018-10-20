@@ -51,13 +51,13 @@ extension UIAlertController {
         let showAuthAction = UIAlertAction(
             title: "Ok",
             style: .default) { _ in
-                print("show!")
                 let authController = AuthViewController()
-                viewController.present(authController, animated: true, completion: nil)
+                let navigationController = UINavigationController(rootViewController: authController)
+                navigationController.setNavigationBarHidden(true, animated: false)
+                viewController.present(navigationController, animated: true, completion: nil)
         }
         
         alertController.addActions([cancelAction, showAuthAction])
-        
         alertController.show()
         
     }

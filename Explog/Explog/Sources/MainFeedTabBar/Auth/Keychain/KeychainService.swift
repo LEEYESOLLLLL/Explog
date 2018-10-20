@@ -9,8 +9,6 @@
 import UIKit
 import KeychainAccess
 
-
-
 struct KeychainService {
     static var keychain: Keychain {
         return Keychain(
