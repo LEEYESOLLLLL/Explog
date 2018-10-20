@@ -20,22 +20,34 @@ final class MainFeedTabBarViewController: BaseTabBarController {
 extension MainFeedTabBarViewController: UITabBarControllerDelegate {
     
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        //print(viewController.title)
+        
     }
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        print(viewController.title)
         
-        switch viewController.title {
-        case "Feed": return true
-        case "Search": return true
-        case "Post":
+        guard let vcTitle = viewController.title,
+            let title = Titles(rawValue: vcTitle) else {
+            return false
+        }
+        
+        guard KeychainService.token != nil else {
+            UIAlertController.showAuthController(to: viewController)
+            return false
+        }
+        
+        print(viewController.title)
+        switch title {
+        case .Feed: return true
+        case .Search:
+            
+            return true
+        case .Post:
             //self.present(viewController, animated: true, completion: nil)
             let vc = PostViewController()
             present(vc, animated: true, completion: nil)
             return false
-        case "Like": return true
-        case "Profile": return true
+        case .Like: return true
+        case .Profile: return true
         default: return true 
         }
     }
@@ -44,4 +56,14 @@ extension MainFeedTabBarViewController: UITabBarControllerDelegate {
     
     
     
+}
+
+extension MainFeedTabBarViewController {
+    enum Titles: String {
+        case Feed
+        case Search
+        case Post
+        case Like
+        case Profile
+    }
 }

@@ -22,16 +22,16 @@ extension Feed: TargetType {
     
     var path: String {
         switch self {
-        case .category(let continent):       return "/post/\(continent)/list"
-        case .next(let continent, _): return "/post/\(continent)/list"
+        case .category(let continent): return "/post/\(continent)/list"
+        case .next(let continent, _):  return "/post/\(continent)/list"
         }
         
     }
     
     var method: Moya.Method {
         switch self {
-        case .category:                      return .get
-        case .next:                          return .get
+        case .category:  return .get
+        case .next:      return .get
         }
         
     }
@@ -43,7 +43,7 @@ extension Feed: TargetType {
     var task: Task {
         switch self {
         case .category: return .requestPlain
-        case .next(let _, let query):
+        case .next(_ , let query):
             var splitedQuery = query.split(separator: "=").compactMap { String($0) }
             
             return .requestParameters(

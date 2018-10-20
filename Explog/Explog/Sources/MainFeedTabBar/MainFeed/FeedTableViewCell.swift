@@ -120,14 +120,21 @@ final class FeedTableViewCell: UITableViewCell {
                    imagePath: String,
                    startDate: String,
                    endDate: String,
-                   author: String) {
+                   author: String,
+                   numberOflike: Int) {
         titleLabel.text = title
         if let url = URL(string: imagePath) {
-            coverImage.kf.setImage(with: url)
+            coverImage.kf.indicatorType = .activity
+            coverImage.kf.setImage(with: url,
+                                   placeholder: nil,
+                                   options: [ .transition(ImageTransition.fade(1)) ],
+                                   progressBlock: nil,
+                                   completionHandler: nil)
         }
         
         dateLabel.text = "\(startDate) ~ \(endDate)"
         authorLabel.text = author
+        numberOfLikeLabel.text = String(numberOflike)
         
         
     }

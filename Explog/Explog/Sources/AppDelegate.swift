@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import KeychainAccess
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -28,12 +29,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func setKeyWindow() {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = setTabBarViewControllers()
-        
         window?.makeKeyAndVisible()
     }
     
     func setTabBarViewControllers() -> UITabBarController {
-        
         // initilize ViewControllers
         let mainFeedVC = FeedContainerViewController.create()
         let searchVC = SearchViewController.create()
@@ -41,6 +40,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let likeVC = LikeViewController.create()
         let profileVC = ProfileViewController.create()
         return MainFeedTabBarViewController(viewControllers: [mainFeedVC, searchVC, postVC, likeVC, profileVC])
-        
     }
+    
+    // 가지고 있어야 하는것, deviceToken, UserToken, pk
+    
+    
+    
 }

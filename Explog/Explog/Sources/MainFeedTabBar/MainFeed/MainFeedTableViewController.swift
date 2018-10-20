@@ -10,6 +10,7 @@ import UIKit
 import CaseContainer
 import Moya
 import BoltsSwift
+import Kingfisher
 
 final class FeedTableViewController: ParallaxTableViewController {
     let provider = MoyaProvider<Feed>()//.(plugins: [NetworkLoggerPlugin(])
@@ -45,6 +46,10 @@ final class FeedTableViewController: ParallaxTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         state = .loading
+        
+        KingfisherManager.shared.cache.clearMemoryCache()
+        KingfisherManager.shared.cache.clearDiskCache()
+        
     }
     
     func setupUI() {
@@ -72,9 +77,8 @@ final class FeedTableViewController: ParallaxTableViewController {
     
     func loadNetwork(continent: Int, query nextpageQuery: String) {
         provider.request(.next(continent: continent, query: nextpageQuery)) { [weak self] result in
-            guard let strongSelf = self,
-                case .ready(let item) = strongSelf.state else {
-                    return
+            guard let strongSelf = self, case .ready(let item) = strongSelf.state else {
+                return
             }
             switch result {
             case .success(let response):
@@ -102,7 +106,13 @@ extension FeedTableViewController {
 
 // MARK: TableViewDelegate
 extension FeedTableViewController {
-    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if KeychainService.token != nil {
+            // detailView 호출
+        }else {
+            UIAlertController.showAuthController(to: self)
+        }
+    }
 }
 
 // MARK: TableView DataSource
@@ -116,10 +126,11 @@ extension FeedTableViewController {
         return item.posts.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeue(FeedTableViewCell.self),
+    // MARK: Call sequence - 2
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let cell = cell as? FeedTableViewCell,
             case .ready(let item) = state else {
-                fatalError()
+                return
         }
         
         let post = item.posts[indexPath.row]
@@ -127,17 +138,28 @@ extension FeedTableViewController {
                        imagePath: post.img,
                        startDate: post.startDate,
                        endDate: post.endDate,
-                       author: post.author.username)
+                       author: post.author.username,
+                       numberOflike: post.numLiked)
+        
+    }
+    
+    // MARK: Call sequence - 3
+    override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        (cell as? FeedTableViewCell)?.coverImage.kf.cancelDownloadTask()
+    }
+    
+    // MARK: Call sequence - 1
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeue(FeedTableViewCell.self),
+            case .ready(let item) = state else {
+                fatalError()
+        }
         
         if let next = item.next,
             indexPath.row == item.posts.count - 1,
             let nextURL = try? next.asURL(),
             let queryOfNextPage = nextURL.query {
-            
-            
             loadNetwork(continent: tableView.tag, query: queryOfNextPage)
-            print("마지막 인덱스")
-            
         }
         
         return cell

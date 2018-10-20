@@ -6,4 +6,16 @@
 //  Copyright © 2018 com.dev.minjun. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+final class AuthViewController: BaseViewController {
+    lazy var v = AuthView(controlBy: self)
+    override func loadView() {
+        super.loadView()
+        view = v
+    }
+    
+    @objc func dismissButtonAction(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+}
