@@ -8,21 +8,23 @@
 
 import UIKit
 import KeychainAccess
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
     var window: UIWindow?
     
-    
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        
         return true 
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        // MARK: temporarily
+        KeychainService.allClear()
+        /////////////////////////
         
         setKeyWindow()
+        requesetNotification()
         return true
     }
     
@@ -42,8 +44,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return MainFeedTabBarViewController(viewControllers: [mainFeedVC, searchVC, postVC, likeVC, profileVC])
     }
     
-    // 가지고 있어야 하는것, deviceToken, UserToken, pk
+    private func requesetNotification() {
+        UNUserNotificationCenter
+            .current()
+            .requestAuthorization(options: [.alert, .sound, .badge]) { (grant, error) in // 유저가 허용했느냐 안했느냐는 bool 값, error 값을 error 으로
+                print("grant is \(grant), error is \(error?.localizedDescription))")
+                if grant == true {
+                    DispatchQueue.main.async {
+                        UIApplication.shared.registerForRemoteNotifications()
+                        UNUserNotificationCenter.current().delegate = self
+                    }
+                }
+        }
+    }
     
+    // this method is called if user permit app getting Notification,
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let deviceToken = deviceToken
+            .map { (data) -> String in
+                return String(format: "%02.2hhx", data)
+        }.joined()
+        
+        
+        KeychainService.configure(material: deviceToken, key: .deviceToken)
+    }
     
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Not Getting Token: \(error.localizedDescription)")
+    }
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
     
 }
