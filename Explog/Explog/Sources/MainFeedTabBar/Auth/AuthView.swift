@@ -42,8 +42,8 @@ final class AuthView: BaseView<AuthViewController> {
         
     }
     var emailLoginButton = UIButton().then {
-        $0.setTitle("Login in with Email", for: .normal)
-        $0.setTitleColor(.white, for: .normal)
+        $0.setTitle("Login in with Email", for: [.normal, .highlighted])
+        $0.setTitleColor(.white, highlightedStateColor: .gray)
         $0.titleLabel?.textAlignment = .center
         $0.backgroundColor = .appStyle
         $0.setImage(#imageLiteral(resourceName: "new-email-outline"), for: .normal)
@@ -55,8 +55,8 @@ final class AuthView: BaseView<AuthViewController> {
     }
     
     var signUpButton = UIButton().then {
-        $0.setTitle("Sign Up", for: .normal)
-        $0.setTitleColor(.white, for: .normal)
+        $0.setTitle("Sign Up", for: [.normal, .highlighted])
+        $0.setTitleColor(.white, highlightedStateColor: .gray)
         $0.titleLabel?.textAlignment = .center
         $0.layer.borderColor = UIColor.white.cgColor
         $0.layer.borderWidth = 1

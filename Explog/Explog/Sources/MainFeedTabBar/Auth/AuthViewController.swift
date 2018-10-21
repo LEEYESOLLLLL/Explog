@@ -22,10 +22,14 @@ final class AuthViewController: BaseViewController {
     @objc func emailButtonAction(_ sender: UIButton) {
         let emailLoginViewController = EmailLoginViewController()
         emailLoginViewController.modalPresentationStyle = .overCurrentContext // for Blureffect
-        self.present(emailLoginViewController, animated: true, completion: nil)
+        show(emailLoginViewController, sender: nil)
     }
     
+    
     @objc func signUpButtonAction(_ sender: UIButton) {
+        let signUpViewController = SignUpViewController()
+        signUpViewController.modalPresentationStyle = .overCurrentContext
+        show(signUpViewController, sender: nil)
         
     }
 }
