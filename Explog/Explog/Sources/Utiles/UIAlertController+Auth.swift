@@ -25,7 +25,12 @@ extension UIAlertController {
     //    }
     @discardableResult
     public func show(animated: Bool = true, completion: (() -> Void)? = nil) {
-        UIApplication.shared.keyWindow?.rootViewController?.present(self, animated: animated, completion: completion)
+        if let presentedViewController = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController {
+            presentedViewController.show(self, sender: nil)
+        }else {
+            UIApplication.shared.keyWindow?.rootViewController?.present(self, animated: animated, completion: completion)
+        }
+        
     }
     static func showWithAlertAction(
         alertVCtitle: String = "로그인이 필요합니다.",
