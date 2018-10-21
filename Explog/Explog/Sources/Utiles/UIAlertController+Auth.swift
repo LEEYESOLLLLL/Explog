@@ -27,46 +27,39 @@ extension UIAlertController {
     public func show(animated: Bool = true, completion: (() -> Void)? = nil) {
         UIApplication.shared.keyWindow?.rootViewController?.present(self, animated: animated, completion: completion)
     }
-    
-    func addActions(_ actions: [UIAlertAction]) {
-        for action in actions {
-            addAction(action)
-        }
-    }
-    
-    static func showAuthController(
-        to viewController: UIViewController,
-        title: String = "로그인이 필요합니다.",
-        message: String = "로그인 화면으로 이동 하시겠습니까?",
-        style: UIAlertController.Style = .alert)  {
+    static func showWithAlertAction(
+        alertVCtitle: String = "로그인이 필요합니다.",
+        alertVCmessage: String = "로그인 화면으로 이동 하시겠습니까?",
+        alertVCstyle: UIAlertController.Style = .alert,
+        isCancelAction: Bool = true,
+        actionTitle: String,
+        actionStyle: UIAlertAction.Style,
+        action: ((UIAlertAction) -> Void)?) {
+        // 1
         let alertController = UIAlertController(
-            title: title,
-            message: message,
-            preferredStyle: style)
+            title: alertVCtitle,
+            message: alertVCmessage,
+            preferredStyle: alertVCstyle)
         
+        // 2
         let cancelAction = UIAlertAction(
             title: "Cancel",
             style: .cancel,
             handler: nil)
-        let showAuthAction = UIAlertAction(
-            title: "Ok",
-            style: .default) { _ in
-                let authController = AuthViewController()
-                let navigationController = UINavigationController(rootViewController: authController)
-                navigationController.setNavigationBarHidden(true, animated: false)
-                viewController.present(navigationController, animated: true, completion: nil)
-        }
         
-        alertController.addActions([cancelAction, showAuthAction])
+        // 3
+        let action = UIAlertAction(
+            title: actionTitle,
+            style: actionStyle,
+            handler: action)
+        
+        // 4
+        alertController.addActions(isCancelAction ? [cancelAction, action] : [action])
         alertController.show()
-        
     }
 }
 
 extension UIAlertController {
-    
-    
-    
     // SwifterSwift: Create new alert view controller with default OK action.
     ///
     /// - Parameters:
@@ -89,8 +82,12 @@ extension UIAlertController {
             view.tintColor = color
         }
     }
-    
-    
-    
-    
+}
+
+extension UIAlertController {
+    func addActions(_ actions: [UIAlertAction]) {
+        for action in actions {
+            addAction(action)
+        }
+    }
 }
