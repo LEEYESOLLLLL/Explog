@@ -17,7 +17,6 @@ final class EmailLoginView: BaseView<EmailLoginViewController> {
     
     var contentView = UIView().then {
         $0.backgroundColor = .clear
-        
     }
     
     var darkBlurView = UIVisualEffectView().then {
@@ -48,21 +47,26 @@ final class EmailLoginView: BaseView<EmailLoginViewController> {
         $0.title = "Vaild Password"
         $0.isSecureTextEntry = true
         $0.set(defaultColorStyle: .white)
-        
     }
     
-    var loginButton = UIButton().then {
-        $0.setTitle("Log in", for: .normal)
-        $0.setTitleColor(.gray, for: .normal)
+    var loginButton = ActivityIndicatorButton().then {
+        $0.setTitle("Log in", for: [.normal, .highlighted])
+        $0.setTitleColor(.gray, highlightedStateColor: .blue)
+        $0.isUserInteractionEnabled = false
         $0.layer.borderColor = UIColor.gray.cgColor
         $0.layer.borderWidth = 2
+    }
+    
+    var signUpButton = UIButton().then {
+        $0.setTitle("Sign Up", for: [.normal, .highlighted])
+        $0.setTitleColor(.white, highlightedStateColor: .gray)
     }
     
     struct UI {
         static var dismissButtonMargin: CGFloat = 6
         static var stackViewleadingAndtrailingMargin: CGFloat = 6
         static var stackViewTopMargin: CGFloat = UIScreen.main.bounds.height/7
-        static var stackViewHeight: CGFloat = UIScreen.main.bounds.height/5
+        static var stackViewHeight: CGFloat = UIScreen.main.bounds.height/4
         static var loginBuggonTopMargin: CGFloat = 20
     }
     
@@ -70,7 +74,7 @@ final class EmailLoginView: BaseView<EmailLoginViewController> {
         backgroundColor = .clear
         addSubviews([containerScrollView])
         containerScrollView.addSubview(contentView)
-        contentView.addSubviews([darkBlurView, dismissButton, stackView, loginButton])
+        contentView.addSubviews([darkBlurView, dismissButton, stackView, loginButton, signUpButton])
         stackView.addArrangedSubviews([emailTextField, passwordTextField])
         
         containerScrollView
@@ -113,6 +117,11 @@ final class EmailLoginView: BaseView<EmailLoginViewController> {
             .trailingAnchor(to: stackView.trailingAnchor)
             .heightAnchor(to: passwordTextField.heightAnchor)
             .activateAnchors()
+        
+        signUpButton
+            .bottomAnchor(to: stackView.topAnchor)
+            .trailingAnchor(to: stackView.trailingAnchor)
+            .activateAnchors()
     }
     
     override func setupBinding() {
@@ -120,6 +129,10 @@ final class EmailLoginView: BaseView<EmailLoginViewController> {
         loginButton.addTarget(vc, action: #selector(vc.loginButtonAction(_:)), for: .touchUpInside)
         emailTextField.addTarget(vc, action: #selector(vc.textFieldDidChange(_:)), for: .editingChanged)
         passwordTextField.addTarget(vc, action: #selector(vc.textFieldDidChange(_:)), for: .editingChanged)
+        signUpButton.addTarget(vc, action: #selector(vc.signUpButtonAction(_:)), for: .touchUpInside)
+        
+        emailTextField.delegate = vc
+        passwordTextField.delegate = vc
     }
     
     func verifyLoginButtonState() {

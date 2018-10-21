@@ -22,22 +22,17 @@ final class ActivityIndicatorButton: UIButton {
     func setupUI() {
         addSubview(activityIndicator)
         activityIndicator
-            .leadingAnchor(to: titleLabel!.trailingAnchor, constant: 8)
+            .leadingAnchor(to: titleLabel!.trailingAnchor, constant: 6)
             .centerYAnchor(to: centerYAnchor)
             .activateAnchors()
     }
     
     func startAnimating() {
-        DispatchQueue.main.async {
-            self.activityIndicator.startAnimating()
-        }
-        
+        self.activityIndicator.startAnimating()
     }
     
-    func endAnimating() {
+    func stopAnimating() {
         activityIndicator.stopAnimating()
-        titleLabel?.isHidden = false
-        
     }
     
     
