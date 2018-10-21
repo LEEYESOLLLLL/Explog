@@ -18,17 +18,42 @@ struct KeychainService {
 }
 
 extension KeychainService {
+    enum Keys: String, CaseIterable {
+        case token
+        case pk
+        case deviceToken
+    }
+}
+
+extension KeychainService {
     static var token: String? {
-        return self.keychain["token"]
+        return keychain[Keys.token.rawValue]
     }
     
     static var pk: String? {
-        return self.keychain["pk"]
+        return keychain[Keys.pk.rawValue]
     }
     
     static var deviceToken: String? {
-        return self.keychain["deviceToken"]
+        return keychain[Keys.deviceToken.rawValue]
     }
-    
 }
+
+extension KeychainService {
+    static func configure(material: String, key: KeychainService.Keys) {
+        keychain[key.rawValue] = material
+    }
+    static func allClear() {
+        do {
+            for key in Keys.allCases {
+                try keychain.remove(key.rawValue)
+            }
+        }catch {
+            print("fail removing keychain items..")
+        }
+    }
+}
+
+
+
 
