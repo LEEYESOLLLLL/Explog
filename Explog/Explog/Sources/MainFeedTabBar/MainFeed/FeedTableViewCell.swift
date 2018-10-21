@@ -135,7 +135,5 @@ final class FeedTableViewCell: UITableViewCell {
         dateLabel.text = "\(startDate) ~ \(endDate)"
         authorLabel.text = author
         numberOfLikeLabel.text = String(numberOflike)
-        
-        
     }
 }

@@ -31,7 +31,13 @@ extension MainFeedTabBarViewController: UITabBarControllerDelegate {
         }
         
         guard KeychainService.token != nil else {
-            UIAlertController.showAuthController(to: viewController)
+            UIAlertController.showWithAlertAction(
+                actionTitle: "Ok",
+                actionStyle: .default) { [weak self] _ in
+                    guard let strongSelf = self else { return }
+                    let authController = AuthViewController()
+                    strongSelf.present(authController, animated: true, completion: nil)
+            }
             return false
         }
         

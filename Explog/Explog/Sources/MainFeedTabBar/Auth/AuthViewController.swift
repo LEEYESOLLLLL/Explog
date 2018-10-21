@@ -18,4 +18,18 @@ final class AuthViewController: BaseViewController {
     @objc func dismissButtonAction(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
+    
+    @objc func emailButtonAction(_ sender: UIButton) {
+        let emailLoginViewController = EmailLoginViewController()
+        emailLoginViewController.modalPresentationStyle = .overCurrentContext // for Blureffect
+        show(emailLoginViewController, sender: nil)
+    }
+    
+    
+    @objc func signUpButtonAction(_ sender: UIButton) {
+        let signUpViewController = SignUpViewController()
+        signUpViewController.modalPresentationStyle = .overCurrentContext
+        show(signUpViewController, sender: nil)
+        
+    }
 }
