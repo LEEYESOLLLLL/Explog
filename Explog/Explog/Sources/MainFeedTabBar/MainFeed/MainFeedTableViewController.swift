@@ -46,7 +46,7 @@ final class FeedTableViewController: ParallaxTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         state = .loading
-        
+        // MARK: when development has finished, removing below code 
         KingfisherManager.shared.cache.clearMemoryCache()
         KingfisherManager.shared.cache.clearDiskCache()
         
@@ -110,7 +110,13 @@ extension FeedTableViewController {
         if KeychainService.token != nil {
             // detailView 호출
         }else {
-            UIAlertController.showAuthController(to: self)
+            UIAlertController.showWithAlertAction(
+                actionTitle: "Ok",
+                actionStyle: .default) { [weak self] _ in
+                    guard let strongSelf = self else { return }
+                    let authController = AuthViewController()
+                    strongSelf.present(authController, animated: true, completion: nil)
+            }
         }
     }
 }
