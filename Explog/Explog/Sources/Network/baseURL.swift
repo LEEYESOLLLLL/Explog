@@ -7,3 +7,10 @@
 //
 
 import Foundation
+import Moya
+
+extension TargetType {
+    var baseURL: URL {
+        return URL(string: "http://explog.ap-northeast-2.elasticbeanstalk.com")!
+    }
+}

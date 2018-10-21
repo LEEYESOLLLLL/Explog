@@ -15,11 +15,6 @@ enum Feed {
 }
 
 extension Feed: TargetType {
-    var baseURL: URL{
-        return URL(string: "http://explog.ap-northeast-2.elasticbeanstalk.com")!
-    }
-    
-    
     var path: String {
         switch self {
         case .category(let continent): return "/post/\(continent)/list"
@@ -33,7 +28,6 @@ extension Feed: TargetType {
         case .category:  return .get
         case .next:      return .get
         }
-        
     }
     
     var sampleData: Data {
