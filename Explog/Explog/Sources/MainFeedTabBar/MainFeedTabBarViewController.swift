@@ -40,8 +40,6 @@ extension MainFeedTabBarViewController: UITabBarControllerDelegate {
             }
             return false
         }
-        
-        print(viewController.title)
         switch title {
         case .Feed: return true
         case .Search:
@@ -54,7 +52,6 @@ extension MainFeedTabBarViewController: UITabBarControllerDelegate {
             return false
         case .Like: return true
         case .Profile: return true
-        default: return true 
         }
     }
     

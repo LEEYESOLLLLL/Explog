@@ -90,6 +90,7 @@ final class FeedTableViewController: ParallaxTableViewController {
                     strongSelf.state = .error
                 }
             case .failure(let error):
+                print(error.localizedDescription)
                 strongSelf.state = .error
             }
         }

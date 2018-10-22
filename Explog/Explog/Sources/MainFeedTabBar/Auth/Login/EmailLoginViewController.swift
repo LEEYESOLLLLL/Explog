@@ -16,10 +16,12 @@ final class EmailLoginViewController: BaseViewController {
         didSet {
             switch state {
             case .invalidate(let skyTextField):
-                skyTextField?.titleColor = .gray
-                skyTextField?.errorMessage = "Invaild Email"
-                v.verifyLoginButtonState()
+                if let skyTextField = skyTextField {
+                    v.verifyTextFieldState(skyTextField)
+                    v.verifyLoginButtonState()
+                }
             case .validate(let skyTextField):
+                v.verifyTextFieldState(skyTextField)
                 skyTextField.titleColor = .appStyle
                 skyTextField.errorMessage = ""
                 v.verifyLoginButtonState()
@@ -27,7 +29,7 @@ final class EmailLoginViewController: BaseViewController {
         }
     }
     
-    let provider = MoyaProvider<Login>(plugins: [ NetworkLoggerPlugin() ])
+    let provider = MoyaProvider<Auth>(plugins: [ NetworkLoggerPlugin() ])
     
     override func loadView() {
         super.loadView()
@@ -45,6 +47,7 @@ final class EmailLoginViewController: BaseViewController {
             let textFieldType = TextFieldType(rawValue: identifier) else {
                 return
         }
+        
         state = Validate.main.target(text: text, textFieldType: textFieldType) ? .validate(TextField: skyTextField) : .invalidate(textField: skyTextField)
     }
     
@@ -55,16 +58,13 @@ final class EmailLoginViewController: BaseViewController {
                 sender.stopAnimating()
                 return
         }
-        provider.request(.login(
-            email: email,
-            password: password,
-            deviceToke: nil)) { [weak self] result in
+        provider.request(.login(email: email, password: password)) { [weak self] result in
                 guard let strongSelf = self else { return }
                 switch result {
                 case .success(let response):
                     if 200...299 ~= response.statusCode {
                         do {
-                            let loginModel = try response.map(LoginModel.self)
+                            let loginModel = try response.map(AuthModel.self)
                             KeychainService.configure(material: loginModel.token, key: .token)
                             KeychainService.configure(material: String(loginModel.pk), key: .pk)
                             strongSelf.view.window?.rootViewController?.dismiss(animated: true, completion: nil)

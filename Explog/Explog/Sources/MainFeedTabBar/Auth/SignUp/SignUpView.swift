@@ -53,6 +53,13 @@ final class SignUpView: BaseView<SignUpViewController> {
         $0.title = "Vaild Password"
         $0.isSecureTextEntry = true
         $0.set(defaultColorStyle: .white)
+        $0.rightViewMode = .always
+    }
+    
+    var showSecurityTextButton = UIButton().then {
+        $0.backgroundColor = .clear
+        $0.setBackgroundImage(#imageLiteral(resourceName: "view"), for: .normal)
+        $0.layer.shouldRasterize = true
     }
     
     var signUpButton = ActivityIndicatorButton().then {
@@ -75,7 +82,7 @@ final class SignUpView: BaseView<SignUpViewController> {
         backgroundColor = .clear
         addSubviews([containerScrollView])
         containerScrollView.addSubview(contentView)
-        contentView.addSubviews([darkBlurView, dismissButton, stackView, signUpButton])
+        contentView.addSubviews([darkBlurView, dismissButton, stackView, signUpButton, showSecurityTextButton])
         stackView.addArrangedSubviews([usernameTextField, emailTextField, passwordTextField])
         
         containerScrollView
@@ -112,13 +119,17 @@ final class SignUpView: BaseView<SignUpViewController> {
             .trailingAnchor(to: contentView.layoutMarginsGuide.trailingAnchor, constant: -UI.stackViewleadingAndtrailingMargin)
             .activateAnchors()
         
+        showSecurityTextButton
+            .centerYAnchor(to: passwordTextField.centerYAnchor)
+            .trailingAnchor(to: passwordTextField.layoutMarginsGuide.trailingAnchor)
+            .activateAnchors()
+        
         signUpButton
             .topAnchor(to: stackView.bottomAnchor, constant: UI.loginBuggonTopMargin)
             .leadingAnchor(to: stackView.leadingAnchor)
             .trailingAnchor(to: stackView.trailingAnchor)
             .heightAnchor(to: passwordTextField.heightAnchor)
             .activateAnchors()
-        
     }
     
     override func setupBinding() {
@@ -126,6 +137,45 @@ final class SignUpView: BaseView<SignUpViewController> {
         usernameTextField.addTarget(vc, action: #selector(vc.textFieldDidChange(_:)), for: .editingChanged)
         emailTextField.addTarget(vc, action: #selector(vc.textFieldDidChange(_:)), for: .editingChanged)
         passwordTextField.addTarget(vc, action: #selector(vc.textFieldDidChange(_:)), for: .editingChanged)
+        showSecurityTextButton.addTarget(vc, action: #selector(vc.showSecurityTextButtonAction(_:)), for: .touchUpInside)
         signUpButton.addTarget(vc, action: #selector(vc.signUpButtonAction(_:)), for: .touchUpInside)
+        
     }
+    
+    func showSecurityText() {
+        passwordTextField.isSecureTextEntry = !passwordTextField.isSecureTextEntry
+    }
+    
+    func verifyTextFieldState(_ skyTextField: SkyFloatingLabelTextField) {
+        if skyTextField === usernameTextField {
+            skyTextField.errorMessage = "Invaild Username"
+        }else if skyTextField === emailTextField {
+            skyTextField.errorMessage = "Invaild Email"
+        }else if skyTextField === passwordTextField {
+            skyTextField.errorMessage = "Invaild Password"
+        }
+        
+        skyTextField.titleColor = .gray
+    }
+    
+    func verifySignUpButtonState() {
+        guard let userErrorMessage = usernameTextField.errorMessage,
+            let emailErrorMessage = emailTextField.errorMessage,
+            let passwordErrorMessage = passwordTextField.errorMessage,
+            userErrorMessage.count == 0,
+            emailErrorMessage.count == 0,
+            passwordErrorMessage.count == 0 else {
+                vaildSignUpButton(titleColor: .gray, userInteraction: false)
+                return
+        }
+        vaildSignUpButton(titleColor: .white, userInteraction: true)
+    }
+    
+    private func vaildSignUpButton(titleColor color: UIColor, userInteraction: Bool) {
+        signUpButton.setTitleColor(color, for: .normal)
+        signUpButton.layer.borderColor = color.cgColor
+        signUpButton.isUserInteractionEnabled = userInteraction
+    }
+    
+    
 }
