@@ -9,7 +9,7 @@
 import Foundation
 
 // MARK: LoginDataModel Set
-struct LoginModel: Codable {
+struct AuthModel: Codable {
     var pk: Int
     var username: String
     var email: String
@@ -27,7 +27,7 @@ struct LoginModel: Codable {
     }
 }
 
-extension LoginModel {
+extension AuthModel {
     struct DeviceTokenDataModel: Codable {
         var deviceToken: String?
         enum CodingKeys: String, CodingKey {
@@ -37,7 +37,7 @@ extension LoginModel {
 }
 
 // MARK: Error Message DataModel
-extension LoginModel {
+extension AuthModel {
     struct ErrorMessageDataModel: Codable {
         var username: String?
         var email: String?

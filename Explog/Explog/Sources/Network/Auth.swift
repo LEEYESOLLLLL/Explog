@@ -9,14 +9,13 @@
 import Foundation
 import Moya
 
-enum Login {
+enum Auth {
     case login(email: String, password: String)
     case signUp(username: String, email: String, password: String)
     
 }
 
-
-extension Login: TargetType {
+extension Auth: TargetType {
     var path: String {
         switch self {
         case .login(_, _): return "/member/login/"
@@ -56,8 +55,28 @@ extension Login: TargetType {
                                     "password": multipartFormPassword]
             }
             return .uploadMultipart(multipartDataDic.convertedMutiPartFormData())
+            
         case .signUp(let username, let email, let password):
-            return .requestPlain
+            guard let multipartFormUsername = username.data(using: .utf8),
+            let multipartFormEmail = email.data(using: .utf8),
+                let multipartFormPassword = password.data(using: .utf8) else {
+                    print("Server error..")
+                    return .requestPlain
+            }
+            
+            var multipartDataDic = Dictionary<String, Data>()
+            
+            if let deviceToken = KeychainService.deviceToken?.data(using: .utf8) {
+                multipartDataDic = ["username": multipartFormUsername,
+                                    "email": multipartFormEmail,
+                                    "password": multipartFormPassword,
+                                    "device-token": deviceToken]
+            }else {
+                multipartDataDic = ["username": multipartFormUsername,
+                                    "email": multipartFormEmail,
+                                    "password": multipartFormPassword]
+            }
+            return .uploadMultipart(multipartDataDic.convertedMutiPartFormData())
         }
     }
     
