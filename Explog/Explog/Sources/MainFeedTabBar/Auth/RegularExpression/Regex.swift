@@ -23,9 +23,9 @@ struct Validate {
         - All characters from 8 to 20 can be used as the passwrod
      */
     private var pattern: [String] = [
-        ".",
-        "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
-        "^.{8,20}"]
+        "^[a-zA-Z\\d]{8,20}$",
+        "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",  
+        "^.{8,20}$"]
     private var regexs: [NSRegularExpression]!
     static var main = Validate()
     
@@ -40,10 +40,10 @@ struct Validate {
         }
     }
     func target(text: String, textFieldType: TextFieldType) -> Bool {
+        
         switch textFieldType {
         case .username:
-            // 로직 대기.
-            return true
+            return _validate(text: text, regex: regexs.first!)
         case .email:
             return _validate(text: text, regex: regexs[1])
         case .password:
@@ -52,6 +52,11 @@ struct Validate {
     }
     
     private func _validate(text: String, regex: NSRegularExpression) -> Bool {
+        
+        guard !text.trimmingCharacters(in: .whitespaces).isEmpty else {
+            return false
+        }
+        
         let range = NSRange(text.startIndex..., in: text)
         let matchRange = regex.rangeOfFirstMatch(
             in: text,
@@ -59,7 +64,4 @@ struct Validate {
             range: range)
         return matchRange.location != NSNotFound
     }
-    
-    
-    
 }
