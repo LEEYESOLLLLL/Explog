@@ -38,7 +38,6 @@
 		047FE5CC216CEF2A009B56BB /* Then.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FE5CB216CEF2A009B56BB /* Then.swift */; };
 		047FE5DC216CF063009B56BB /* MainFeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FE5DB216CF063009B56BB /* MainFeedTableViewController.swift */; };
 		047FE5DF216CF69C009B56BB /* UIScreen+sugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FE5DE216CF69C009B56BB /* UIScreen+sugar.swift */; };
-		047FE5E1216CFA28009B56BB /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 047FE5E0216CFA28009B56BB /* Storyboard.storyboard */; };
 		04B38AC821787CAF00E17908 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AC721787CAF00E17908 /* KeychainService.swift */; };
 		04B38AE82178820400E17908 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AE72178820400E17908 /* AuthViewController.swift */; };
 		04B38AEA2178820C00E17908 /* EmailLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AE92178820C00E17908 /* EmailLoginViewController.swift */; };
@@ -55,9 +54,9 @@
 		04F71E9E217AF3910099C7C9 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F71E9D217AF3910099C7C9 /* SignUpView.swift */; };
 		04F71EC3217B2BE00099C7C9 /* SkyTextField+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F71EC2217B2BE00099C7C9 /* SkyTextField+Style.swift */; };
 		04F72A5D217B44E30099C7C9 /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F72A5C217B44E30099C7C9 /* Regex.swift */; };
-		04F72A5F217C36CE0099C7C9 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F72A5E217C36CE0099C7C9 /* Login.swift */; };
+		04F72A5F217C36CE0099C7C9 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F72A5E217C36CE0099C7C9 /* Auth.swift */; };
 		04F72A61217C36FD0099C7C9 /* baseURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F72A60217C36FD0099C7C9 /* baseURL.swift */; };
-		04F72A63217C49A50099C7C9 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F72A62217C49A50099C7C9 /* LoginModel.swift */; };
+		04F72A63217C49A50099C7C9 /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F72A62217C49A50099C7C9 /* AuthModel.swift */; };
 		290674729A964E0761478A6A /* Pods_Explog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BC030D43DB17540F6AC354E /* Pods_Explog.framework */; };
 /* End PBXBuildFile section */
 
@@ -108,7 +107,6 @@
 		047FE5CB216CEF2A009B56BB /* Then.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Then.swift; sourceTree = "<group>"; };
 		047FE5DB216CF063009B56BB /* MainFeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFeedTableViewController.swift; sourceTree = "<group>"; };
 		047FE5DE216CF69C009B56BB /* UIScreen+sugar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+sugar.swift"; sourceTree = "<group>"; };
-		047FE5E0216CFA28009B56BB /* Storyboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		04B38AC721787CAF00E17908 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		04B38AE72178820400E17908 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		04B38AE92178820C00E17908 /* EmailLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLoginViewController.swift; sourceTree = "<group>"; };
@@ -125,9 +123,9 @@
 		04F71E9D217AF3910099C7C9 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		04F71EC2217B2BE00099C7C9 /* SkyTextField+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SkyTextField+Style.swift"; sourceTree = "<group>"; };
 		04F72A5C217B44E30099C7C9 /* Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
-		04F72A5E217C36CE0099C7C9 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		04F72A5E217C36CE0099C7C9 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		04F72A60217C36FD0099C7C9 /* baseURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = baseURL.swift; sourceTree = "<group>"; };
-		04F72A62217C49A50099C7C9 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		04F72A62217C49A50099C7C9 /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
 		09F7847E9DF534C6F3B50BEC /* Pods-Explog.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Explog.release.xcconfig"; path = "Pods/Target Support Files/Pods-Explog/Pods-Explog.release.xcconfig"; sourceTree = "<group>"; };
 		1BF31B640A0D3E10A4E9492D /* Pods-Explog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Explog.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Explog/Pods-Explog.debug.xcconfig"; sourceTree = "<group>"; };
 		3BC030D43DB17540F6AC354E /* Pods_Explog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Explog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -165,7 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				0413DC7B21775D0A0031474A /* FeedModel.swift */,
-				04F72A62217C49A50099C7C9 /* LoginModel.swift */,
+				04F72A62217C49A50099C7C9 /* AuthModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -175,7 +173,7 @@
 			children = (
 				04F72A60217C36FD0099C7C9 /* baseURL.swift */,
 				0413DC7E21775DC30031474A /* Feed.swift */,
-				04F72A5E217C36CE0099C7C9 /* Login.swift */,
+				04F72A5E217C36CE0099C7C9 /* Auth.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -230,7 +228,6 @@
 			children = (
 				0423A606212B72F000DD9747 /* Assets.xcassets */,
 				0423A608212B72F000DD9747 /* LaunchScreen.storyboard */,
-				047FE5E0216CFA28009B56BB /* Storyboard.storyboard */,
 				0423A60B212B72F000DD9747 /* Info.plist */,
 			);
 			path = Assets;
@@ -344,6 +341,14 @@
 			path = Style;
 			sourceTree = "<group>";
 		};
+		0485CEDF217D9B3300484E5C /* RegularExpression */ = {
+			isa = PBXGroup;
+			children = (
+				04F72A5C217B44E30099C7C9 /* Regex.swift */,
+			);
+			path = RegularExpression;
+			sourceTree = "<group>";
+		};
 		04B38AC62178799A00E17908 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
@@ -351,6 +356,7 @@
 				04B38AE72178820400E17908 /* AuthViewController.swift */,
 				04F71EA1217AF3B30099C7C9 /* Login */,
 				04F71EA2217AF3BC0099C7C9 /* SignUp */,
+				0485CEDF217D9B3300484E5C /* RegularExpression */,
 				04F71EA3217AF3C50099C7C9 /* Keychain */,
 			);
 			path = Auth;
@@ -360,7 +366,6 @@
 			isa = PBXGroup;
 			children = (
 				04D59137217C849900EE8696 /* ActivityIndicatorButton.swift */,
-				04F72A5C217B44E30099C7C9 /* Regex.swift */,
 				04F71E9B217AF38A0099C7C9 /* EmailLoginView.swift */,
 				04B38AE92178820C00E17908 /* EmailLoginViewController.swift */,
 			);
@@ -511,7 +516,6 @@
 			files = (
 				0423A60A212B72F000DD9747 /* LaunchScreen.storyboard in Resources */,
 				0423A607212B72F000DD9747 /* Assets.xcassets in Resources */,
-				047FE5E1216CFA28009B56BB /* Storyboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -592,7 +596,7 @@
 				0423A616212B756D00DD9747 /* BaseViewController.swift in Sources */,
 				04F71E98217ADFDC0099C7C9 /* UIFont+bold.swift in Sources */,
 				04B38AE82178820400E17908 /* AuthViewController.swift in Sources */,
-				04F72A5F217C36CE0099C7C9 /* Login.swift in Sources */,
+				04F72A5F217C36CE0099C7C9 /* Auth.swift in Sources */,
 				0423A63B212B97E000DD9747 /* ProfileViewController.swift in Sources */,
 				0423A623212B8D0A00DD9747 /* BaseTabBarController.swift in Sources */,
 				0423A61F212B896A00DD9747 /* MainFeedTabBarView.swift in Sources */,
@@ -627,7 +631,7 @@
 				0413DC7F21775DC30031474A /* Feed.swift in Sources */,
 				0413DC7C21775D0A0031474A /* FeedModel.swift in Sources */,
 				0423A600212B72F000DD9747 /* AppDelegate.swift in Sources */,
-				04F72A63217C49A50099C7C9 /* LoginModel.swift in Sources */,
+				04F72A63217C49A50099C7C9 /* AuthModel.swift in Sources */,
 				04F71E9E217AF3910099C7C9 /* SignUpView.swift in Sources */,
 				04F71E9C217AF38A0099C7C9 /* EmailLoginView.swift in Sources */,
 				04B38AC821787CAF00E17908 /* KeychainService.swift in Sources */,
