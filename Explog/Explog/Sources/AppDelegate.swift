@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UNUserNotificationCenter
             .current()
             .requestAuthorization(options: [.alert, .sound, .badge]) { (grant, error) in // 유저가 허용했느냐 안했느냐는 bool 값, error 값을 error 으로
-                print("grant is \(grant), error is \(error?.localizedDescription))")
+                print("grant is \(grant), error is \(String(describing: error?.localizedDescription)))")
                 if grant == true {
                     DispatchQueue.main.async {
                         UIApplication.shared.registerForRemoteNotifications()
