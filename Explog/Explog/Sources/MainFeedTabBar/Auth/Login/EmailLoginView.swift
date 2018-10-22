@@ -135,18 +135,27 @@ final class EmailLoginView: BaseView<EmailLoginViewController> {
         passwordTextField.delegate = vc
     }
     
+    func verifyTextFieldState(_ skyTextField: SkyFloatingLabelTextField) {
+        if skyTextField === emailTextField {
+            skyTextField.errorMessage = "Invaild Email"
+        }else if skyTextField === passwordTextField {
+            skyTextField.errorMessage = "Invaild Password"
+        }
+        skyTextField.titleColor = .gray
+    }
+    
     func verifyLoginButtonState() {
         guard let emailErrorMessage = emailTextField.errorMessage,
             let passwordErrorMessage = passwordTextField.errorMessage,
             emailErrorMessage.count == 0,
             passwordErrorMessage.count == 0 else {
-                configureLoginButton(titleColor: .gray, userInteraction: false)
+                vaildLoginButton(titleColor: .gray, userInteraction: false)
                 return
         }
-        configureLoginButton(titleColor: .white, userInteraction: true)
+        vaildLoginButton(titleColor: .white, userInteraction: true)
     }
     
-    func configureLoginButton(titleColor color :  UIColor, userInteraction: Bool) {
+    private func vaildLoginButton(titleColor color :  UIColor, userInteraction: Bool) {
         loginButton.setTitleColor(color, for: .normal)
         loginButton.layer.borderColor = color.cgColor
         loginButton.isUserInteractionEnabled = userInteraction
