@@ -20,8 +20,9 @@ target 'Explog' do
   ## about chaining task in the asynchronous
   pod 'Bolts-Swift', '~> 1.4.0'
 
-  ## beautiful textfield for UI
+  ## UI
   pod 'SkyFloatingLabelTextField', '~> 3.6.0'
+  pod 'ParallaxHeader', '~> 2.0.0'
 
   # Pods for Explog
 end
