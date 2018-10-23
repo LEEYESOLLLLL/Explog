@@ -29,10 +29,12 @@ final class ActivityIndicatorButton: UIButton {
     
     func startAnimating() {
         self.activityIndicator.startAnimating()
+        isUserInteractionEnabled = false
     }
     
     func stopAnimating() {
         activityIndicator.stopAnimating()
+        isUserInteractionEnabled = true 
     }
     
     

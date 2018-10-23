@@ -31,6 +31,10 @@ final class SignUpViewController: BaseViewController {
     }
     let provider = MoyaProvider<Auth>(plugins: [ NetworkLoggerPlugin() ])
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func loadView() {
         super.loadView()
         view = v
@@ -38,6 +42,11 @@ final class SignUpViewController: BaseViewController {
     
     @objc func dismissButtonAction(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
     }
     
     @objc func textFieldDidChange(_ textField: Any) {
