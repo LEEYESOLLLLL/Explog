@@ -34,21 +34,23 @@
 		0423A63B212B97E000DD9747 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A63A212B97E000DD9747 /* ProfileViewController.swift */; };
 		0423A642212B9C1800DD9747 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A641212B9C1800DD9747 /* AppColor.swift */; };
 		0423A646212BB0D800DD9747 /* Cell+identifer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A645212BB0D800DD9747 /* Cell+identifer.swift */; };
+		045FF08F217E497F003ECA23 /* UISize+Multiply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045FF08E217E497F003ECA23 /* UISize+Multiply.swift */; };
+		045FF091217E62BC003ECA23 /* PostState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045FF090217E62BC003ECA23 /* PostState.swift */; };
 		04721B432134EF3A00143AF6 /* UIView+LayoutAnchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04721B422134EF3A00143AF6 /* UIView+LayoutAnchor.swift */; };
 		047FE5CC216CEF2A009B56BB /* Then.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FE5CB216CEF2A009B56BB /* Then.swift */; };
 		047FE5DC216CF063009B56BB /* MainFeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FE5DB216CF063009B56BB /* MainFeedTableViewController.swift */; };
-		047FE5DF216CF69C009B56BB /* UIScreen+sugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FE5DE216CF69C009B56BB /* UIScreen+sugar.swift */; };
+		047FE5DF216CF69C009B56BB /* UIScreen+Sugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FE5DE216CF69C009B56BB /* UIScreen+Sugar.swift */; };
 		04B38AC821787CAF00E17908 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AC721787CAF00E17908 /* KeychainService.swift */; };
 		04B38AE82178820400E17908 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AE72178820400E17908 /* AuthViewController.swift */; };
 		04B38AEA2178820C00E17908 /* EmailLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AE92178820C00E17908 /* EmailLoginViewController.swift */; };
 		04B38AEC2178821200E17908 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AEB2178821200E17908 /* SignUpViewController.swift */; };
 		04B38AEE2178826000E17908 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AED2178826000E17908 /* AuthView.swift */; };
 		04B38AF0217886FD00E17908 /* UIAlertController+Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AEF217886FD00E17908 /* UIAlertController+Auth.swift */; };
-		04D59136217C804E00EE8696 /* UIButton+setTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D59135217C804E00EE8696 /* UIButton+setTitle.swift */; };
+		04D59136217C804E00EE8696 /* UIButton+SetTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D59135217C804E00EE8696 /* UIButton+SetTitle.swift */; };
 		04D59138217C849900EE8696 /* ActivityIndicatorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D59137217C849900EE8696 /* ActivityIndicatorButton.swift */; };
 		04EBBA2F2137A6DB00CA73A0 /* UICollectionView+init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EBBA2E2137A6DB00CA73A0 /* UICollectionView+init.swift */; };
 		04EBBA372137E8C900CA73A0 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EBBA362137E8C900CA73A0 /* FeedTableViewCell.swift */; };
-		04F71E98217ADFDC0099C7C9 /* UIFont+bold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F71E97217ADFDC0099C7C9 /* UIFont+bold.swift */; };
+		04F71E98217ADFDC0099C7C9 /* UIFont+Bold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F71E97217ADFDC0099C7C9 /* UIFont+Bold.swift */; };
 		04F71E9A217AE3900099C7C9 /* UIStackVIew+ArrangedSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F71E99217AE3900099C7C9 /* UIStackVIew+ArrangedSubview.swift */; };
 		04F71E9C217AF38A0099C7C9 /* EmailLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F71E9B217AF38A0099C7C9 /* EmailLoginView.swift */; };
 		04F71E9E217AF3910099C7C9 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F71E9D217AF3910099C7C9 /* SignUpView.swift */; };
@@ -103,21 +105,23 @@
 		0423A641212B9C1800DD9747 /* AppColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColor.swift; sourceTree = "<group>"; };
 		0423A645212BB0D800DD9747 /* Cell+identifer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cell+identifer.swift"; sourceTree = "<group>"; };
 		043CBD8E217228CF00CB910A /* Explog.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Explog.entitlements; sourceTree = "<group>"; };
+		045FF08E217E497F003ECA23 /* UISize+Multiply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISize+Multiply.swift"; sourceTree = "<group>"; };
+		045FF090217E62BC003ECA23 /* PostState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostState.swift; sourceTree = "<group>"; };
 		04721B422134EF3A00143AF6 /* UIView+LayoutAnchor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+LayoutAnchor.swift"; sourceTree = "<group>"; };
 		047FE5CB216CEF2A009B56BB /* Then.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Then.swift; sourceTree = "<group>"; };
 		047FE5DB216CF063009B56BB /* MainFeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFeedTableViewController.swift; sourceTree = "<group>"; };
-		047FE5DE216CF69C009B56BB /* UIScreen+sugar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+sugar.swift"; sourceTree = "<group>"; };
+		047FE5DE216CF69C009B56BB /* UIScreen+Sugar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Sugar.swift"; sourceTree = "<group>"; };
 		04B38AC721787CAF00E17908 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		04B38AE72178820400E17908 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		04B38AE92178820C00E17908 /* EmailLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLoginViewController.swift; sourceTree = "<group>"; };
 		04B38AEB2178821200E17908 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		04B38AED2178826000E17908 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		04B38AEF217886FD00E17908 /* UIAlertController+Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Auth.swift"; sourceTree = "<group>"; };
-		04D59135217C804E00EE8696 /* UIButton+setTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+setTitle.swift"; sourceTree = "<group>"; };
+		04D59135217C804E00EE8696 /* UIButton+SetTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+SetTitle.swift"; sourceTree = "<group>"; };
 		04D59137217C849900EE8696 /* ActivityIndicatorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorButton.swift; sourceTree = "<group>"; };
 		04EBBA2E2137A6DB00CA73A0 /* UICollectionView+init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+init.swift"; sourceTree = "<group>"; };
 		04EBBA362137E8C900CA73A0 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
-		04F71E97217ADFDC0099C7C9 /* UIFont+bold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+bold.swift"; sourceTree = "<group>"; };
+		04F71E97217ADFDC0099C7C9 /* UIFont+Bold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Bold.swift"; sourceTree = "<group>"; };
 		04F71E99217AE3900099C7C9 /* UIStackVIew+ArrangedSubview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackVIew+ArrangedSubview.swift"; sourceTree = "<group>"; };
 		04F71E9B217AF38A0099C7C9 /* EmailLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLoginView.swift; sourceTree = "<group>"; };
 		04F71E9D217AF3910099C7C9 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -262,10 +266,11 @@
 				04721B422134EF3A00143AF6 /* UIView+LayoutAnchor.swift */,
 				04EBBA2E2137A6DB00CA73A0 /* UICollectionView+init.swift */,
 				047FE5CB216CEF2A009B56BB /* Then.swift */,
-				047FE5DE216CF69C009B56BB /* UIScreen+sugar.swift */,
+				047FE5DE216CF69C009B56BB /* UIScreen+Sugar.swift */,
 				04B38AEF217886FD00E17908 /* UIAlertController+Auth.swift */,
-				04F71E97217ADFDC0099C7C9 /* UIFont+bold.swift */,
-				04D59135217C804E00EE8696 /* UIButton+setTitle.swift */,
+				04F71E97217ADFDC0099C7C9 /* UIFont+Bold.swift */,
+				04D59135217C804E00EE8696 /* UIButton+SetTitle.swift */,
+				045FF08E217E497F003ECA23 /* UISize+Multiply.swift */,
 			);
 			path = Utiles;
 			sourceTree = "<group>";
@@ -307,6 +312,7 @@
 		0423A63D212B97EA00DD9747 /* Post */ = {
 			isa = PBXGroup;
 			children = (
+				045FF090217E62BC003ECA23 /* PostState.swift */,
 				0423A630212B978000DD9747 /* PostView.swift */,
 				0423A632212B978C00DD9747 /* PostViewController.swift */,
 			);
@@ -536,6 +542,7 @@
 				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
+				"${BUILT_PRODUCTS_DIR}/ParallaxHeader/ParallaxHeader.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework",
 			);
@@ -548,6 +555,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ParallaxHeader.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkyFloatingLabelTextField.framework",
 			);
@@ -592,19 +600,20 @@
 				04B38AF0217886FD00E17908 /* UIAlertController+Auth.swift in Sources */,
 				04EBBA2F2137A6DB00CA73A0 /* UICollectionView+init.swift in Sources */,
 				0423A614212B756700DD9747 /* BaseView.swift in Sources */,
-				047FE5DF216CF69C009B56BB /* UIScreen+sugar.swift in Sources */,
+				047FE5DF216CF69C009B56BB /* UIScreen+Sugar.swift in Sources */,
 				0423A616212B756D00DD9747 /* BaseViewController.swift in Sources */,
-				04F71E98217ADFDC0099C7C9 /* UIFont+bold.swift in Sources */,
+				04F71E98217ADFDC0099C7C9 /* UIFont+Bold.swift in Sources */,
 				04B38AE82178820400E17908 /* AuthViewController.swift in Sources */,
 				04F72A5F217C36CE0099C7C9 /* Auth.swift in Sources */,
 				0423A63B212B97E000DD9747 /* ProfileViewController.swift in Sources */,
 				0423A623212B8D0A00DD9747 /* BaseTabBarController.swift in Sources */,
 				0423A61F212B896A00DD9747 /* MainFeedTabBarView.swift in Sources */,
 				0423A619212B7C0900DD9747 /* SplahView.swift in Sources */,
+				045FF091217E62BC003ECA23 /* PostState.swift in Sources */,
 				0423A61C212B873900DD9747 /* UIView+SubViews.swift in Sources */,
 				0423A621212B899500DD9747 /* MainFeedTabBarViewController.swift in Sources */,
 				0423A635212B979500DD9747 /* LikeView.swift in Sources */,
-				04D59136217C804E00EE8696 /* UIButton+setTitle.swift in Sources */,
+				04D59136217C804E00EE8696 /* UIButton+SetTitle.swift in Sources */,
 				047FE5CC216CEF2A009B56BB /* Then.swift in Sources */,
 				04721B432134EF3A00143AF6 /* UIView+LayoutAnchor.swift in Sources */,
 				0423A602212B72F000DD9747 /* SplahViewController.swift in Sources */,
@@ -625,6 +634,7 @@
 				0423A625212B8D1400DD9747 /* BaseNavigationController.swift in Sources */,
 				0423A642212B9C1800DD9747 /* AppColor.swift in Sources */,
 				0423A639212B97DB00DD9747 /* ProfileView.swift in Sources */,
+				045FF08F217E497F003ECA23 /* UISize+Multiply.swift in Sources */,
 				047FE5DC216CF063009B56BB /* MainFeedTableViewController.swift in Sources */,
 				0423A631212B978000DD9747 /* PostView.swift in Sources */,
 				04D59138217C849900EE8696 /* ActivityIndicatorButton.swift in Sources */,
@@ -666,7 +676,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = E8CS7J8RX4;
 				INFOPLIST_FILE = Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -679,6 +689,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mjun.Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Explog.app/Explog";
@@ -690,7 +701,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = E8CS7J8RX4;
 				INFOPLIST_FILE = Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -702,6 +713,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mjun.Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Explog.app/Explog";
@@ -842,7 +854,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "Renewal-Explog";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -866,7 +878,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "Renewal-Explog";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

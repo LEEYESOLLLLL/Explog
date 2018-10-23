@@ -16,8 +16,7 @@ final class AuthView: BaseView<AuthViewController> {
     
     var dismissButton = UIButton().then {
         $0.backgroundColor = .clear
-        $0.setBackgroundImage(#imageLiteral(resourceName: "cancel"), for: .normal)
-        $0.layer.shouldRasterize = true // for iPhone SE
+        $0.setBackgroundImage(#imageLiteral(resourceName: "cancel-1"), for: .normal)
     }
     
     var darkBlurView = UIVisualEffectView().then {
@@ -34,7 +33,7 @@ final class AuthView: BaseView<AuthViewController> {
         $0.font = UIFont(name: .defaultFontName, size: 50)?.bold()
     }
     
-    var stackView = UIStackView().then {
+    var buttonsStackView = UIStackView().then {
         $0.axis = .vertical
         $0.spacing = 30
         $0.distribution = .fillEqually
@@ -64,14 +63,15 @@ final class AuthView: BaseView<AuthViewController> {
     
     struct UI {
         static var dismissButtonTopMargin: CGFloat = 6
+        static var dismissButtonSize: CGSize = UIScreen.main.bounds.size * 0.024
         static var logoLabelTopMargin: CGFloat = UIScreen.main.bounds.height/5
         static var stackViewBottomMargin: CGFloat = UIScreen.main.bounds.height/6
         static var stackViewleadingAndtrailingMargin: CGFloat = 6
     }
     override func setupUI() {
         backgroundColor = .clear
-        addSubviews([backgroundImage, darkBlurView, dismissButton, logoLabel, stackView])
-        stackView.addArrangedSubviews([emailLoginButton, signUpButton])
+        addSubviews([backgroundImage, darkBlurView, dismissButton, logoLabel, buttonsStackView])
+        buttonsStackView.addArrangedSubviews([emailLoginButton, signUpButton])
         
         backgroundImage
             .topAnchor(to: topAnchor)
@@ -90,6 +90,7 @@ final class AuthView: BaseView<AuthViewController> {
         dismissButton
             .topAnchor(to: layoutMarginsGuide.topAnchor, constant: UI.dismissButtonTopMargin)
             .trailingAnchor(to: layoutMarginsGuide.trailingAnchor, constant: -UI.dismissButtonTopMargin)
+            .dimensionAnchors(size: UI.dismissButtonSize)
             .activateAnchors()
         
         logoLabel
@@ -99,7 +100,7 @@ final class AuthView: BaseView<AuthViewController> {
             .trailingAnchor(to: trailingAnchor)
             .activateAnchors()
         
-        stackView
+        buttonsStackView
             .bottomAnchor(greaterThanOrEqualTo: bottomAnchor, constant: -UI.stackViewBottomMargin)
             .heightAnchor(constant: bounds.height/5)
             .leadingAnchor(to: layoutMarginsGuide.leadingAnchor , constant: UI.stackViewleadingAndtrailingMargin)
@@ -111,5 +112,6 @@ final class AuthView: BaseView<AuthViewController> {
         dismissButton.addTarget(vc, action: #selector(vc.dismissButtonAction(_:)), for: .touchUpInside)
         emailLoginButton.addTarget(vc, action: #selector(vc.emailButtonAction(_:)), for: .touchUpInside)
         signUpButton.addTarget(vc, action: #selector(vc.signUpButtonAction(_:)), for: .touchUpInside)
+        
     }
 }

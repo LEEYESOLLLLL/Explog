@@ -26,11 +26,10 @@ final class EmailLoginView: BaseView<EmailLoginViewController> {
     
     var dismissButton = UIButton().then {
         $0.backgroundColor = .clear
-        $0.setBackgroundImage(#imageLiteral(resourceName: "cancel"), for: .normal)
-        $0.layer.shouldRasterize = true // for iPhone SE
+        $0.setBackgroundImage(#imageLiteral(resourceName: "cancel-1"), for: .normal)
     }
     
-    var stackView = UIStackView().then {
+    var userInputStackView = UIStackView().then {
         $0.axis = .vertical
         $0.distribution = .fillEqually
         $0.spacing = 8 
@@ -64,6 +63,7 @@ final class EmailLoginView: BaseView<EmailLoginViewController> {
     
     struct UI {
         static var dismissButtonMargin: CGFloat = 6
+        static var dismissButtonSize: CGSize = UIScreen.main.bounds.size * 0.024 
         static var stackViewleadingAndtrailingMargin: CGFloat = 6
         static var stackViewTopMargin: CGFloat = UIScreen.main.bounds.height/7
         static var stackViewHeight: CGFloat = UIScreen.main.bounds.height/4
@@ -74,8 +74,8 @@ final class EmailLoginView: BaseView<EmailLoginViewController> {
         backgroundColor = .clear
         addSubviews([containerScrollView])
         containerScrollView.addSubview(contentView)
-        contentView.addSubviews([darkBlurView, dismissButton, stackView, loginButton, signUpButton])
-        stackView.addArrangedSubviews([emailTextField, passwordTextField])
+        contentView.addSubviews([darkBlurView, dismissButton, userInputStackView, loginButton, signUpButton])
+        userInputStackView.addArrangedSubviews([emailTextField, passwordTextField])
         
         containerScrollView
             .topAnchor(to: topAnchor)
@@ -102,9 +102,10 @@ final class EmailLoginView: BaseView<EmailLoginViewController> {
         dismissButton
             .topAnchor(to: contentView.layoutMarginsGuide.topAnchor, constant: UI.dismissButtonMargin)
             .trailingAnchor(to: contentView.layoutMarginsGuide.trailingAnchor, constant: -UI.dismissButtonMargin)
+            .dimensionAnchors(size: UI.dismissButtonSize)
             .activateAnchors()
         
-        stackView
+        userInputStackView
             .topAnchor(to: contentView.layoutMarginsGuide.topAnchor, constant: UI.stackViewTopMargin)
             .heightAnchor(constant: UI.stackViewHeight)
             .leadingAnchor(to: contentView.layoutMarginsGuide.leadingAnchor, constant: UI.stackViewleadingAndtrailingMargin)
@@ -112,15 +113,15 @@ final class EmailLoginView: BaseView<EmailLoginViewController> {
             .activateAnchors()
         
         loginButton
-            .topAnchor(to: stackView.bottomAnchor, constant: UI.loginBuggonTopMargin)
-            .leadingAnchor(to: stackView.leadingAnchor)
-            .trailingAnchor(to: stackView.trailingAnchor)
+            .topAnchor(to: userInputStackView.bottomAnchor, constant: UI.loginBuggonTopMargin)
+            .leadingAnchor(to: userInputStackView.leadingAnchor)
+            .trailingAnchor(to: userInputStackView.trailingAnchor)
             .heightAnchor(to: passwordTextField.heightAnchor)
             .activateAnchors()
         
         signUpButton
-            .bottomAnchor(to: stackView.topAnchor)
-            .trailingAnchor(to: stackView.trailingAnchor)
+            .bottomAnchor(to: userInputStackView.topAnchor)
+            .trailingAnchor(to: userInputStackView.trailingAnchor)
             .activateAnchors()
     }
     

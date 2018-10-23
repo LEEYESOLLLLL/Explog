@@ -6,10 +6,19 @@
 //  Copyright © 2018 com.dev.minjun. All rights reserved.
 //
 
+// iPhone XR = height & width -> 22
+//  - XR Height 896
+// iPhone 6s = 22
+// iPhone SE = 22
+
 import UIKit
 
 final class AuthViewController: BaseViewController {
     lazy var v = AuthView(controlBy: self)
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     override func loadView() {
         super.loadView()
         view = v

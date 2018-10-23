@@ -9,9 +9,6 @@
 import UIKit
 import Kingfisher
 
-
-
-
 final class FeedTableViewCell: UITableViewCell {
     var containerView = UIView().then {
         $0.backgroundColor = .white
@@ -21,8 +18,15 @@ final class FeedTableViewCell: UITableViewCell {
     var coverImage = UIImageView().then {
         $0.contentMode = .scaleToFill
     }
+    
+    var darkBlurView = UIVisualEffectView().then {
+        $0.effect = UIBlurEffect(style: .dark)
+        $0.layer.opacity = 0.1
+        $0.backgroundColor = .darkText
+    }
+    
     var titleLabel = UILabel().then {
-        $0.setup(textColor :.white, fontStyle: .headline, textAlignment: .center, numberOfLines: 1)
+        $0.setup(textColor :.white, fontStyle: .headline, textAlignment: .center, numberOfLines: 0)
     }
     var dateLabel = UILabel().then {
         $0.setup(textColor :.white, fontStyle: .headline, textAlignment: .center, numberOfLines: 1)
@@ -35,6 +39,12 @@ final class FeedTableViewCell: UITableViewCell {
     var numberOfLikeLabel = UILabel().then {
         $0.setup(textColor :.white, fontStyle: .body, textAlignment: .center, numberOfLines: 0)
         $0.text = "100"
+    }
+    
+    var descriptionCoverStackView = UIStackView().then {
+        $0.axis = .vertical
+        $0.distribution = .fillProportionally
+        $0.alignment = .fill
     }
     
     var likeButton = UIButton().then {
@@ -60,7 +70,8 @@ final class FeedTableViewCell: UITableViewCell {
     
     func setupUI() {
         contentView.addSubview(containerView)
-        containerView.addSubviews([coverImage, titleLabel, dateLabel, authorLabel, numberOfLikeLabel, likeButton])
+        containerView.addSubviews([coverImage, darkBlurView, descriptionCoverStackView, numberOfLikeLabel, likeButton])
+        descriptionCoverStackView.addArrangedSubviews([titleLabel, dateLabel, authorLabel])
 
         containerView
             .topAnchor(to: contentView.topAnchor, constant: UI.cellSpacing)
@@ -75,26 +86,19 @@ final class FeedTableViewCell: UITableViewCell {
             .leadingAnchor(to: containerView.leadingAnchor)
             .trailingAnchor(to: containerView.trailingAnchor)
             .activateAnchors()
-
-        titleLabel
-            .topAnchor(to: containerView.layoutMarginsGuide.topAnchor, constant: UI.labelSpacing)
+        
+        darkBlurView
+            .topAnchor(to: containerView.topAnchor)
+            .bottomAnchor(to: containerView.bottomAnchor)
+            .leadingAnchor(to: containerView.leadingAnchor)
+            .trailingAnchor(to: containerView.trailingAnchor)
+            .activateAnchors()
+        
+        descriptionCoverStackView
+            .topAnchor(to: containerView.layoutMarginsGuide.topAnchor)
+            .bottomAnchor(to: containerView.layoutMarginsGuide.bottomAnchor)
             .leadingAnchor(to: containerView.layoutMarginsGuide.leadingAnchor)
             .trailingAnchor(to: containerView.layoutMarginsGuide.trailingAnchor)
-            .activateAnchors()
-        
-        dateLabel
-            .topAnchor(to: titleLabel.lastBaselineAnchor, constant: UI.labelSpacing)
-            .leadingAnchor(to: containerView.leadingAnchor)
-            .trailingAnchor(to: containerView.trailingAnchor)
-            .heightAnchor(to: titleLabel.heightAnchor)
-            .activateAnchors()
-        
-        authorLabel
-            .topAnchor(to: dateLabel.lastBaselineAnchor, constant: UI.labelSpacing)
-            .leadingAnchor(to: containerView.leadingAnchor)
-            .trailingAnchor(to: containerView.trailingAnchor)
-            .heightAnchor(to: dateLabel.heightAnchor)
-            .bottomAnchor(greaterThanOrEqualTo: containerView.layoutMarginsGuide.bottomAnchor)
             .activateAnchors()
         
         numberOfLikeLabel
