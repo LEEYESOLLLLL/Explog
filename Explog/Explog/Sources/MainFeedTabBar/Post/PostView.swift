@@ -79,17 +79,17 @@ final class PostView: BaseView<PostViewController> {
     }
     
     var startDateButton = UIButton().then {
-        $0.setTitle("2018-01-01", for: .normal)
+        $0.setTitle("\(Date().convertedString())", for: .normal)
         $0.setTitleColor(.white, highlightedStateColor: .gray)
-        
+        $0.tag = 0
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.white.cgColor
     }
     
     var endDateButton = UIButton().then {
-        $0.setTitle("2018-01-02", for: .normal)
+        $0.setTitle("\(Date().convertedString())", for: .normal)
         $0.setTitleColor(.white, highlightedStateColor: .gray)
-        
+        $0.tag = 1
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.white.cgColor
     }
@@ -189,8 +189,8 @@ final class PostView: BaseView<PostViewController> {
         dismissButton            .addTarget(vc, action: #selector(vc.dismissButtonAction(_:)), for: .touchUpInside)
         createPostButton         .addTarget(vc, action: #selector(vc.createPostButtonAction(_:)), for: .touchUpInside)
         changeCoverImageButton   .addTarget(vc, action: #selector(vc.changeCoverImageButtonAction(_:)), for: .touchUpInside)
-        startDateButton          .addTarget(vc, action: #selector(vc.startDateButtonAction(_:)), for: .touchUpInside)
-        endDateButton            .addTarget(vc, action: #selector(vc.endDateButtonAction(_:)), for: .touchUpInside)
+        startDateButton          .addTarget(vc, action: #selector(vc.dateButtonAction(_:)), for: .touchUpInside)
+        endDateButton            .addTarget(vc, action: #selector(vc.dateButtonAction(_:)), for: .touchUpInside)
         continentButton          .addTarget(vc, action: #selector(vc.continentButtonAction(_:)), for: .touchUpInside)
         titleTextView.delegate = vc
     }
@@ -200,7 +200,10 @@ final class PostView: BaseView<PostViewController> {
         titleCounterLable.textColor = color
     }
     
-    
+    // 만약 OK Action을 View에서 만든다면
+    // DatePickerController를 여기서 초기화하고
+    // action조건분기처리를 여기서하고..
+    // ViewController에서는 실행하고 데이터 처리만..
     
 }
 

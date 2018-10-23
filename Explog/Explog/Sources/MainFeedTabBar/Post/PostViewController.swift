@@ -8,6 +8,8 @@
 
 import UIKit
 
+import UIKit
+
 final class PostViewController: BaseViewController {
     static func create() -> UINavigationController {
         let `self` = self.init()
@@ -25,7 +27,7 @@ final class PostViewController: BaseViewController {
     }
     override func loadView() {
         super.loadView()
-        view = v 
+        view = v
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -48,19 +50,54 @@ final class PostViewController: BaseViewController {
         
     }
     
-    // startDate는 endDate보다 뒤로갈수 없음
-    @objc func startDateButtonAction(_ sender: UIButton) {
-        
-    }
-    
-    // endDate는 startDate보다 앞 일수없음
-    @objc func endDateButtonAction(_ sender: UIButton) {
-        
+    @objc func dateButtonAction(_ sender: UIButton) {
+        guard let buttonType = TripDateType(rawValue: sender.tag) else {
+            return
+        }
+        let datepickerAlertController = DatePickerAlertController(preferredStyle: .actionSheet)
+        let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+            guard let strongSelf = self,
+                let pickDate = datepickerAlertController.readableDate.convertDate() else {
+                    return
+            }
+            var compairableResult: Bool = false
+            switch buttonType {
+            case .start:
+                // endTitleLabel
+                if let endTitleLable = strongSelf.v.endDateButton.titleLabel,
+                    let endTitleLabelDate = endTitleLable.text?.convertDate() {
+                    compairableResult = pickDate > endTitleLabelDate ? false : true
+                }
+            case .end:
+                // startTitleLabel
+                if let startTitleLabel = strongSelf.v.startDateButton.titleLabel,
+                    let startTitleLabelDate = startTitleLabel.text?.convertDate() {
+                    compairableResult = pickDate < startTitleLabelDate ? false : true
+                }
+            }
+            if compairableResult {
+                sender.setTitle(pickDate.convertedString(), for: [.normal, .highlighted])
+            } else {
+                UIAlertController.showWithAlertAction(
+                    alertVCtitle: "Start Date can't be later than End Date or End Date can't be earlier than Start Date",
+                    alertVCmessage: "",
+                    alertVCstyle: .alert,
+                    isCancelAction: false,
+                    actionTitle: "OK",
+                    actionStyle: .default,
+                    action: nil)
+            }
+        }
+        datepickerAlertController.addAction(okAction)
+        present(datepickerAlertController, animated: true, completion: nil)
     }
     
     // 대륙 상태 관리 요망. 1~6 맵핑 필요
     @objc func continentButtonAction(_ sender: UIButton){
-        
+        let continentPickerAlertController = ContinentPickerAlertViewController(preferredStyle: .actionSheet)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        continentPickerAlertController.addAction(okAction)
+        present(continentPickerAlertController, animated: true, completion: nil)
     }
 }
 
@@ -86,4 +123,5 @@ extension PostViewController: UITextViewDelegate {
         }
     }
 }
+
 

@@ -36,6 +36,9 @@
 		0423A646212BB0D800DD9747 /* Cell+identifer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A645212BB0D800DD9747 /* Cell+identifer.swift */; };
 		045FF08F217E497F003ECA23 /* UISize+Multiply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045FF08E217E497F003ECA23 /* UISize+Multiply.swift */; };
 		045FF091217E62BC003ECA23 /* PostState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045FF090217E62BC003ECA23 /* PostState.swift */; };
+		045FF093217F4353003ECA23 /* Date+DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045FF092217F4353003ECA23 /* Date+DateFormatter.swift */; };
+		045FF095217F4382003ECA23 /* DatePickerAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045FF094217F4382003ECA23 /* DatePickerAlertController.swift */; };
+		045FF097217F4399003ECA23 /* ContinentPickerAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045FF096217F4399003ECA23 /* ContinentPickerAlertViewController.swift */; };
 		04721B432134EF3A00143AF6 /* UIView+LayoutAnchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04721B422134EF3A00143AF6 /* UIView+LayoutAnchor.swift */; };
 		047FE5CC216CEF2A009B56BB /* Then.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FE5CB216CEF2A009B56BB /* Then.swift */; };
 		047FE5DC216CF063009B56BB /* MainFeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FE5DB216CF063009B56BB /* MainFeedTableViewController.swift */; };
@@ -107,6 +110,9 @@
 		043CBD8E217228CF00CB910A /* Explog.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Explog.entitlements; sourceTree = "<group>"; };
 		045FF08E217E497F003ECA23 /* UISize+Multiply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISize+Multiply.swift"; sourceTree = "<group>"; };
 		045FF090217E62BC003ECA23 /* PostState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostState.swift; sourceTree = "<group>"; };
+		045FF092217F4353003ECA23 /* Date+DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+DateFormatter.swift"; sourceTree = "<group>"; };
+		045FF094217F4382003ECA23 /* DatePickerAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerAlertController.swift; sourceTree = "<group>"; };
+		045FF096217F4399003ECA23 /* ContinentPickerAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinentPickerAlertViewController.swift; sourceTree = "<group>"; };
 		04721B422134EF3A00143AF6 /* UIView+LayoutAnchor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+LayoutAnchor.swift"; sourceTree = "<group>"; };
 		047FE5CB216CEF2A009B56BB /* Then.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Then.swift; sourceTree = "<group>"; };
 		047FE5DB216CF063009B56BB /* MainFeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFeedTableViewController.swift; sourceTree = "<group>"; };
@@ -271,6 +277,7 @@
 				04F71E97217ADFDC0099C7C9 /* UIFont+Bold.swift */,
 				04D59135217C804E00EE8696 /* UIButton+SetTitle.swift */,
 				045FF08E217E497F003ECA23 /* UISize+Multiply.swift */,
+				045FF092217F4353003ECA23 /* Date+DateFormatter.swift */,
 			);
 			path = Utiles;
 			sourceTree = "<group>";
@@ -312,6 +319,8 @@
 		0423A63D212B97EA00DD9747 /* Post */ = {
 			isa = PBXGroup;
 			children = (
+				045FF094217F4382003ECA23 /* DatePickerAlertController.swift */,
+				045FF096217F4399003ECA23 /* ContinentPickerAlertViewController.swift */,
 				045FF090217E62BC003ECA23 /* PostState.swift */,
 				0423A630212B978000DD9747 /* PostView.swift */,
 				0423A632212B978C00DD9747 /* PostViewController.swift */,
@@ -607,6 +616,7 @@
 				04F72A5F217C36CE0099C7C9 /* Auth.swift in Sources */,
 				0423A63B212B97E000DD9747 /* ProfileViewController.swift in Sources */,
 				0423A623212B8D0A00DD9747 /* BaseTabBarController.swift in Sources */,
+				045FF097217F4399003ECA23 /* ContinentPickerAlertViewController.swift in Sources */,
 				0423A61F212B896A00DD9747 /* MainFeedTabBarView.swift in Sources */,
 				0423A619212B7C0900DD9747 /* SplahView.swift in Sources */,
 				045FF091217E62BC003ECA23 /* PostState.swift in Sources */,
@@ -617,6 +627,7 @@
 				047FE5CC216CEF2A009B56BB /* Then.swift in Sources */,
 				04721B432134EF3A00143AF6 /* UIView+LayoutAnchor.swift in Sources */,
 				0423A602212B72F000DD9747 /* SplahViewController.swift in Sources */,
+				045FF093217F4353003ECA23 /* Date+DateFormatter.swift in Sources */,
 				04F72A61217C36FD0099C7C9 /* baseURL.swift in Sources */,
 				04F72A5D217B44E30099C7C9 /* Regex.swift in Sources */,
 				0423A646212BB0D800DD9747 /* Cell+identifer.swift in Sources */,
@@ -645,6 +656,7 @@
 				04F71E9E217AF3910099C7C9 /* SignUpView.swift in Sources */,
 				04F71E9C217AF38A0099C7C9 /* EmailLoginView.swift in Sources */,
 				04B38AC821787CAF00E17908 /* KeychainService.swift in Sources */,
+				045FF095217F4382003ECA23 /* DatePickerAlertController.swift in Sources */,
 				04EBBA372137E8C900CA73A0 /* FeedTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
