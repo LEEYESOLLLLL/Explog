@@ -15,4 +15,19 @@ final class ProfileViewController: BaseViewController {
         self.tabBarItem.image = #imageLiteral(resourceName: "profileImage")
         return self
     }
+    
+    lazy var v = ProfileView(controlBy: self)
+    override func loadView() {
+        super.loadView()
+        view = v
+    }
+    
+    @objc func logoutButtonAction(_ sender: UIButton) {
+        // temporary..
+        KeychainService.allClear()
+        (parent as? UITabBarController)?.selectedViewController = (parent as? UITabBarController)?.viewControllers?.first!
+        /////////////////////
+        
+        
+    }
 }
