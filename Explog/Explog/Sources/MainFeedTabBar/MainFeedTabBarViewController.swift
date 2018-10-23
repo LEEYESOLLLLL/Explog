@@ -24,7 +24,6 @@ extension MainFeedTabBarViewController: UITabBarControllerDelegate {
     }
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        
         guard let vcTitle = viewController.title,
             let title = Titles(rawValue: vcTitle) else {
             return false
@@ -42,11 +41,8 @@ extension MainFeedTabBarViewController: UITabBarControllerDelegate {
         }
         switch title {
         case .Feed: return true
-        case .Search:
-            
-            return true
+        case .Search:return true
         case .Post:
-            //self.present(viewController, animated: true, completion: nil)
             let vc = PostViewController()
             present(vc, animated: true, completion: nil)
             return false
