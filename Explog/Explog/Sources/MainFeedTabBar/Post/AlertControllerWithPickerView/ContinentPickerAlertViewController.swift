@@ -34,23 +34,9 @@ final class ContinentPickerAlertViewController: UIAlertController {
         pickerView.delegate = self
         pickerView.dataSource = self
     }
+    
+    var passContinent: ( () -> String )?
 }
-
-//case "Aisa":
-//return "1"
-//case "Europe":
-//return "2"
-//case "North America":
-//return "3"
-//case "South America":
-//return "4"
-//case "Africa":
-//return "5"
-//case "Oceania":
-//return "6"
-//default:
-//return "1"
-//}
 
 extension ContinentPickerAlertViewController {
     enum ContinentType: Int, CaseIterable {
@@ -75,7 +61,10 @@ extension ContinentPickerAlertViewController {
 }
 
 extension ContinentPickerAlertViewController: UIPickerViewDelegate {
-    
+    public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        guard ContinentType.allCases.count > row else { return }
+        passContinent = { return ContinentType.allCases[row].string }
+    }
 }
 
 extension ContinentPickerAlertViewController: UIPickerViewDataSource {
@@ -90,8 +79,5 @@ extension ContinentPickerAlertViewController: UIPickerViewDataSource {
     public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return ContinentType.allCases[row].string
     }
-    
-    
-    
 }
 

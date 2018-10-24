@@ -19,6 +19,7 @@ final class PostView: BaseView<PostViewController> {
     
     var coverImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
+        $0.clipsToBounds = true
         $0.image = #imageLiteral(resourceName: "account-background")
     }
     
@@ -200,10 +201,42 @@ final class PostView: BaseView<PostViewController> {
         titleCounterLable.textColor = color
     }
     
-    // 만약 OK Action을 View에서 만든다면
-    // DatePickerController를 여기서 초기화하고
-    // action조건분기처리를 여기서하고..
-    // ViewController에서는 실행하고 데이터 처리만..
-    
+    func currentPostCoverInformation() -> PostInformation? {
+        guard let startData = startDateButton.titleLabel?.text,
+            let endData = endDateButton.titleLabel?.text,
+            let continentText = continentButton.titleLabel?.text  else {
+                return nil
+        }
+        
+        let continentRawValue = ContinentPickerAlertViewController
+            .ContinentType
+            .allCases
+            .filter { $0.string == continentText }
+            .compactMap { $0.rawValue }
+        
+        guard let continent = continentRawValue.first else {
+            return nil
+        }
+        
+        guard let img = coverImageView.image else {
+            return nil
+        }
+        
+        return PostInformation(
+            title: titleTextView.text,
+            startData: startData,
+            endData: endData,
+            continent: String(continent+1) ,
+            coverImg: img)
+    }
+}
+
+
+struct PostInformation {
+    var title: String
+    var startData: String
+    var endData: String
+    var continent: String
+    var coverImg: UIImage
 }
 

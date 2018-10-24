@@ -45,7 +45,7 @@ final class AuthView: BaseView<AuthViewController> {
         $0.setTitleColor(.white, highlightedStateColor: .gray)
         $0.titleLabel?.textAlignment = .center
         $0.backgroundColor = .appStyle
-        $0.setImage(#imageLiteral(resourceName: "new-email-outline"), for: .normal)
+        $0.setImage(#imageLiteral(resourceName: "email"), for: .normal)
         $0.imageView?
             .centerYAnchor(to: $0.centerYAnchor)
             .leadingAnchor(to: $0.layoutMarginsGuide.leadingAnchor)
