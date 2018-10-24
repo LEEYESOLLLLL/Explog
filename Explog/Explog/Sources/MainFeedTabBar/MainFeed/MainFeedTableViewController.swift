@@ -32,7 +32,7 @@ final class FeedTableViewController: ParallaxTableViewController {
      */
     static func createWith(title: String, owner: ParallaxViewDelegate, tag: Int) -> Self {
         let `self` = self.init()
-        self.tableView.then {
+        _ = self.tableView.then {
             $0.delegate = self
             $0.dataSource = self
             $0.register(cell: FeedTableViewCell.self)
@@ -157,11 +157,8 @@ extension FeedTableViewController {
     
     // MARK: Call sequence - 1
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeue(FeedTableViewCell.self),
-            case .ready(let item) = state else {
-                fatalError()
-        }
-        
+        guard case .ready(let item) = state else { fatalError() }
+        let cell = tableView.dequeue(FeedTableViewCell.self)
         if let next = item.next,
             indexPath.row == item.posts.count - 1,
             let nextURL = try? next.asURL(),

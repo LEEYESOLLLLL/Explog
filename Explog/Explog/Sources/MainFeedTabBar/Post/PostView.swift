@@ -226,7 +226,7 @@ final class PostView: BaseView<PostViewController> {
             title: titleTextView.text,
             startData: startData,
             endData: endData,
-            continent: String(continent+1) ,
+            continent: String(continent+1), // the first continent number is mapped since 1
             coverImg: img)
     }
 }

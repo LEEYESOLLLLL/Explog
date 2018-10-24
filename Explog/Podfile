@@ -12,7 +12,7 @@ target 'Explog' do
   pod 'Kingfisher', '~> 4.10.0'
  
   ## Container Viewcontroller 
-  pod 'CaseContainer', '~> 0.7.1'
+  pod 'CaseContainer', '~> 0.8.0'
 
   ## KeyChain
   pod 'KeychainAccess', '~> 3.1.2'
@@ -24,5 +24,22 @@ target 'Explog' do
   pod 'SkyFloatingLabelTextField', '~> 3.6.0'
   pod 'ParallaxHeader', '~> 2.0.0'
 
+  ## Abstract
+  pod 'Then', '~> 2.4.0'
+  pod 'SimpleCell', '~> 0.4.0'
+
   # Pods for Explog
 end
+
+## ParallaxHeader didn't support to compile on Swift 4.2 in CLI
+## just temporary action  
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+      if ['ParallaxHeader'].include? target.name
+          target.build_configurations.each do |config|
+              config.build_settings['SWIFT_VERSION'] = '4.0'
+          end
+      end
+  end
+end
+

@@ -117,10 +117,7 @@ extension PhotoGridViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeue(PhotoGridCell.self, indexPath: indexPath) else {
-            fatalError("invalide Cell :\(#function)")
-        }
-        return cell
+        return collectionView.dequeue(PhotoGridCell.self, indexPath: indexPath)
     }
 }
 
