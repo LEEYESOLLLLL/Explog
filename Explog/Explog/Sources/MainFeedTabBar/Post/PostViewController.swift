@@ -7,6 +7,12 @@
 //
 
 import UIKit
+import Moya
+
+
+protocol PassableData: class {
+    func pass(data: UIImage)
+}
 
 final class PostViewController: BaseViewController {
     static func create() -> UINavigationController {
@@ -19,58 +25,121 @@ final class PostViewController: BaseViewController {
     }
     
     lazy var v = PostView(controlBy: self)
-    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
+    
+    let provider = MoyaProvider<Post>.init(plugins: [NetworkLoggerPlugin()])
     override func loadView() {
         super.loadView()
-        view = v 
+        view = v
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-    }
     
     @objc func dismissButtonAction(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
     
     @objc func createPostButtonAction(_ sender: UIButton) {
-        // Network request
-        // required, coverImage, title, date(start, end), contienet
-        
+        guard let currentPostCoverInformation = v.currentPostCoverInformation() else { return }
+        provider.request(.post(
+            title: currentPostCoverInformation.title,
+            startDate: currentPostCoverInformation.startData,
+            endDate: currentPostCoverInformation.endData,
+            continent: currentPostCoverInformation.continent,
+            img: currentPostCoverInformation.coverImg)) { result in
+                switch result {
+                case .success(let response):
+                    // 응답받은 전체 데이터 다음 ViewController에 넘겨주고, 해당 화면 그려주자.
+                    // 다음 화면에 넘어갔을때 request 처리로 화면을 뿌려줄건지, cashed 된 값을 그대로 사용해줄건지 고민 해야함 
+                    // pk 가지고 있어야함.
+                    
+                    
+                    break
+                case .failure(let error):
+                    break
+                }
+        }
     }
     
     @objc func changeCoverImageButtonAction(_ sender: UIButton) {
-        // ImagePicker 로할건지 Photo 라이브러리로 할건지..
+        let photoGridViewController = PhotoGridViewController.create()
+        photoGridViewController.delegate = self
         
+        let naviVC = UINavigationController(rootViewController: photoGridViewController)
+        naviVC.setNavigationBarHidden(false, animated: true)
+        present(naviVC, animated: true, completion: nil)
     }
     
-    // startDate는 endDate보다 뒤로갈수 없음
-    @objc func startDateButtonAction(_ sender: UIButton) {
-        
-    }
-    
-    // endDate는 startDate보다 앞 일수없음
-    @objc func endDateButtonAction(_ sender: UIButton) {
-        
-    }
-    
-    // 대륙 상태 관리 요망. 1~6 맵핑 필요
-    @objc func continentButtonAction(_ sender: UIButton){
-        
+    @objc func dateButtonAction(_ sender: UIButton) {
+        guard let buttonType = TripDateType(rawValue: sender.tag) else {
+            return
+        }
+        let datepickerAlertController = DatePickerAlertController(preferredStyle: .actionSheet)
+        let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+            guard let strongSelf = self,
+                let pickDate = datepickerAlertController.readableDate.convertDate() else {
+                    return
+            }
+            var compairableResult: Bool = false
+            switch buttonType {
+            case .start:
+                // endTitleLabel
+                if let endTitleLable = strongSelf.v.endDateButton.titleLabel,
+                    let endTitleLabelDate = endTitleLable.text?.convertDate() {
+                    compairableResult = pickDate > endTitleLabelDate ? false : true
+                }
+            case .end:
+                // startTitleLabel
+                if let startTitleLabel = strongSelf.v.startDateButton.titleLabel,
+                    let startTitleLabelDate = startTitleLabel.text?.convertDate() {
+                    compairableResult = pickDate < startTitleLabelDate ? false : true
+                }
+            }
+            if compairableResult {
+                sender.setTitle(pickDate.convertedString(), for: [.normal, .highlighted])
+            } else {
+                UIAlertController.showWithAlertAction(
+                    alertVCtitle: "Start Date can't be later than End Date or End Date can't be earlier than Start Date",
+                    alertVCmessage: "",
+                    alertVCstyle: .alert,
+                    isCancelAction: false,
+                    actionTitle: "OK",
+                    actionStyle: .default,
+                    action: nil)
+            }
+        }
+        datepickerAlertController.addAction(okAction)
+        present(datepickerAlertController, animated: true, completion: nil)
     }
 }
+extension PostViewController: PassableData {
+    @objc func continentButtonAction(_ sender: UIButton){
+        let continentPickerAlertController = ContinentPickerAlertViewController(preferredStyle: .actionSheet)
+        let okAction = UIAlertAction(title: "OK", style: .default) { [weak continentPickerAlertController] _ in
+            guard let strongContinentPickerAlertController = continentPickerAlertController,
+                let continent = strongContinentPickerAlertController.passContinent else {
+                    return
+            }
+            sender.setTitle(continent(), for: [.normal, .highlighted])
+        }
+        continentPickerAlertController.addAction(okAction)
+        present(continentPickerAlertController, animated: true, completion: nil)
+    }
+    
+    func pass(data: UIImage) {
+        DispatchQueue.main.async {
+            self.v.coverImageView.image = data
+        }
+    }
+}
+
 
 extension PostViewController: UITextViewDelegate {
     public func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         textView.text = ""
         return true
     }
-    
-    
     func textViewDidChange(_ textView: UITextView) {
         let state = EditableTextView(state: (0...50) ~= textView.text.count)
         switch state {
@@ -86,4 +155,5 @@ extension PostViewController: UITextViewDelegate {
         }
     }
 }
+
 

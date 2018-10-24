@@ -19,6 +19,7 @@ final class PostView: BaseView<PostViewController> {
     
     var coverImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
+        $0.clipsToBounds = true
         $0.image = #imageLiteral(resourceName: "account-background")
     }
     
@@ -79,17 +80,17 @@ final class PostView: BaseView<PostViewController> {
     }
     
     var startDateButton = UIButton().then {
-        $0.setTitle("2018-01-01", for: .normal)
+        $0.setTitle("\(Date().convertedString())", for: .normal)
         $0.setTitleColor(.white, highlightedStateColor: .gray)
-        
+        $0.tag = 0
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.white.cgColor
     }
     
     var endDateButton = UIButton().then {
-        $0.setTitle("2018-01-02", for: .normal)
+        $0.setTitle("\(Date().convertedString())", for: .normal)
         $0.setTitleColor(.white, highlightedStateColor: .gray)
-        
+        $0.tag = 1
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.white.cgColor
     }
@@ -189,8 +190,8 @@ final class PostView: BaseView<PostViewController> {
         dismissButton            .addTarget(vc, action: #selector(vc.dismissButtonAction(_:)), for: .touchUpInside)
         createPostButton         .addTarget(vc, action: #selector(vc.createPostButtonAction(_:)), for: .touchUpInside)
         changeCoverImageButton   .addTarget(vc, action: #selector(vc.changeCoverImageButtonAction(_:)), for: .touchUpInside)
-        startDateButton          .addTarget(vc, action: #selector(vc.startDateButtonAction(_:)), for: .touchUpInside)
-        endDateButton            .addTarget(vc, action: #selector(vc.endDateButtonAction(_:)), for: .touchUpInside)
+        startDateButton          .addTarget(vc, action: #selector(vc.dateButtonAction(_:)), for: .touchUpInside)
+        endDateButton            .addTarget(vc, action: #selector(vc.dateButtonAction(_:)), for: .touchUpInside)
         continentButton          .addTarget(vc, action: #selector(vc.continentButtonAction(_:)), for: .touchUpInside)
         titleTextView.delegate = vc
     }
@@ -200,7 +201,42 @@ final class PostView: BaseView<PostViewController> {
         titleCounterLable.textColor = color
     }
     
-    
-    
+    func currentPostCoverInformation() -> PostInformation? {
+        guard let startData = startDateButton.titleLabel?.text,
+            let endData = endDateButton.titleLabel?.text,
+            let continentText = continentButton.titleLabel?.text  else {
+                return nil
+        }
+        
+        let continentRawValue = ContinentPickerAlertViewController
+            .ContinentType
+            .allCases
+            .filter { $0.string == continentText }
+            .compactMap { $0.rawValue }
+        
+        guard let continent = continentRawValue.first else {
+            return nil
+        }
+        
+        guard let img = coverImageView.image else {
+            return nil
+        }
+        
+        return PostInformation(
+            title: titleTextView.text,
+            startData: startData,
+            endData: endData,
+            continent: String(continent+1) ,
+            coverImg: img)
+    }
+}
+
+
+struct PostInformation {
+    var title: String
+    var startData: String
+    var endData: String
+    var continent: String
+    var coverImg: UIImage
 }
 

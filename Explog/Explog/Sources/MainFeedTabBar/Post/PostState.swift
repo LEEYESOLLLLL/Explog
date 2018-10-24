@@ -11,7 +11,7 @@ import UIKit
 
 extension PostViewController {
     /**
-     state for textViewDidChange Delegate method at PostViewController 
+     state for textViewDidChange Delegate method at PostViewController
      */
     enum EditableTextView {
         case enable
@@ -21,4 +21,13 @@ extension PostViewController {
         }
     }
 }
+
+extension PostViewController {
+    enum TripDateType: Int {
+        case start = 0
+        case end
+    }
+}
+
+
 
