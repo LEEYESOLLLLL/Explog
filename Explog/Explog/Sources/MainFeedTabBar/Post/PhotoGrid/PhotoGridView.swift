@@ -23,7 +23,11 @@ final class PhotoGridView: BaseView<PhotoGridViewController> {
     
     var imagePickerViewController = UIImagePickerController().then {
         $0.modalPresentationStyle = .overCurrentContext
-        $0.sourceType = .camera
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
+            $0.sourceType = .camera
+        }else {
+            $0.sourceType = .photoLibrary // for simulrator
+        }
     }
     
     struct UI {
