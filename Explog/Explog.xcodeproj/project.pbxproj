@@ -33,7 +33,7 @@
 		0423A639212B97DB00DD9747 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A638212B97DB00DD9747 /* ProfileView.swift */; };
 		0423A63B212B97E000DD9747 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A63A212B97E000DD9747 /* ProfileViewController.swift */; };
 		0423A642212B9C1800DD9747 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A641212B9C1800DD9747 /* AppColor.swift */; };
-		0423A646212BB0D800DD9747 /* Cell+identifer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A645212BB0D800DD9747 /* Cell+identifer.swift */; };
+		043B46582180F29F00EA8EFC /* GlobalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043B46572180F29F00EA8EFC /* GlobalExtension.swift */; };
 		045FF08F217E497F003ECA23 /* UISize+Multiply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045FF08E217E497F003ECA23 /* UISize+Multiply.swift */; };
 		045FF091217E62BC003ECA23 /* PostState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045FF090217E62BC003ECA23 /* PostState.swift */; };
 		045FF093217F4353003ECA23 /* Date+DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045FF092217F4353003ECA23 /* Date+DateFormatter.swift */; };
@@ -45,7 +45,6 @@
 		045FF0DF21803C5F003ECA23 /* PhotoGridState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045FF0DE21803C5F003ECA23 /* PhotoGridState.swift */; };
 		045FF103218093A9003ECA23 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045FF102218093A9003ECA23 /* Post.swift */; };
 		04721B432134EF3A00143AF6 /* UIView+LayoutAnchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04721B422134EF3A00143AF6 /* UIView+LayoutAnchor.swift */; };
-		047FE5CC216CEF2A009B56BB /* Then.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FE5CB216CEF2A009B56BB /* Then.swift */; };
 		047FE5DC216CF063009B56BB /* MainFeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FE5DB216CF063009B56BB /* MainFeedTableViewController.swift */; };
 		047FE5DF216CF69C009B56BB /* UIScreen+Sugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FE5DE216CF69C009B56BB /* UIScreen+Sugar.swift */; };
 		04B38AC821787CAF00E17908 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AC721787CAF00E17908 /* KeychainService.swift */; };
@@ -111,7 +110,7 @@
 		0423A638212B97DB00DD9747 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		0423A63A212B97E000DD9747 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		0423A641212B9C1800DD9747 /* AppColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColor.swift; sourceTree = "<group>"; };
-		0423A645212BB0D800DD9747 /* Cell+identifer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cell+identifer.swift"; sourceTree = "<group>"; };
+		043B46572180F29F00EA8EFC /* GlobalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalExtension.swift; sourceTree = "<group>"; };
 		043CBD8E217228CF00CB910A /* Explog.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Explog.entitlements; sourceTree = "<group>"; };
 		045FF08E217E497F003ECA23 /* UISize+Multiply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISize+Multiply.swift"; sourceTree = "<group>"; };
 		045FF090217E62BC003ECA23 /* PostState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostState.swift; sourceTree = "<group>"; };
@@ -124,7 +123,6 @@
 		045FF0DE21803C5F003ECA23 /* PhotoGridState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGridState.swift; sourceTree = "<group>"; };
 		045FF102218093A9003ECA23 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		04721B422134EF3A00143AF6 /* UIView+LayoutAnchor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+LayoutAnchor.swift"; sourceTree = "<group>"; };
-		047FE5CB216CEF2A009B56BB /* Then.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Then.swift; sourceTree = "<group>"; };
 		047FE5DB216CF063009B56BB /* MainFeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFeedTableViewController.swift; sourceTree = "<group>"; };
 		047FE5DE216CF69C009B56BB /* UIScreen+Sugar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Sugar.swift"; sourceTree = "<group>"; };
 		04B38AC721787CAF00E17908 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
@@ -233,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				0423A5FF212B72F000DD9747 /* AppDelegate.swift */,
+				043B46572180F29F00EA8EFC /* GlobalExtension.swift */,
 				0423A617212B7BF000DD9747 /* Base */,
 				0423A626212B8D9A00DD9747 /* MainFeedTabBar */,
 				0413DC7D21775D9C0031474A /* Network */,
@@ -279,10 +278,8 @@
 			children = (
 				0423A61B212B873900DD9747 /* UIView+SubViews.swift */,
 				04F71E99217AE3900099C7C9 /* UIStackVIew+ArrangedSubview.swift */,
-				0423A645212BB0D800DD9747 /* Cell+identifer.swift */,
 				04721B422134EF3A00143AF6 /* UIView+LayoutAnchor.swift */,
 				04EBBA2E2137A6DB00CA73A0 /* UICollectionView+init.swift */,
-				047FE5CB216CEF2A009B56BB /* Then.swift */,
 				047FE5DE216CF69C009B56BB /* UIScreen+Sugar.swift */,
 				04B38AEF217886FD00E17908 /* UIAlertController+Auth.swift */,
 				04F71E97217ADFDC0099C7C9 /* UIFont+Bold.swift */,
@@ -584,7 +581,9 @@
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/ParallaxHeader/ParallaxHeader.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
+				"${BUILT_PRODUCTS_DIR}/SimpleCell/SimpleCell.framework",
 				"${BUILT_PRODUCTS_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework",
+				"${BUILT_PRODUCTS_DIR}/Then/Then.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -597,7 +596,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ParallaxHeader.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleCell.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkyFloatingLabelTextField.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Then.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -646,6 +647,7 @@
 				04B38AE82178820400E17908 /* AuthViewController.swift in Sources */,
 				04F72A5F217C36CE0099C7C9 /* Auth.swift in Sources */,
 				0423A63B212B97E000DD9747 /* ProfileViewController.swift in Sources */,
+				043B46582180F29F00EA8EFC /* GlobalExtension.swift in Sources */,
 				0423A623212B8D0A00DD9747 /* BaseTabBarController.swift in Sources */,
 				045FF097217F4399003ECA23 /* ContinentPickerAlertViewController.swift in Sources */,
 				0423A61F212B896A00DD9747 /* MainFeedTabBarView.swift in Sources */,
@@ -656,13 +658,11 @@
 				0423A635212B979500DD9747 /* LikeView.swift in Sources */,
 				045FF0B7217F9377003ECA23 /* PhotoGridController.swift in Sources */,
 				04D59136217C804E00EE8696 /* UIButton+SetTitle.swift in Sources */,
-				047FE5CC216CEF2A009B56BB /* Then.swift in Sources */,
 				04721B432134EF3A00143AF6 /* UIView+LayoutAnchor.swift in Sources */,
 				0423A602212B72F000DD9747 /* SplahViewController.swift in Sources */,
 				045FF093217F4353003ECA23 /* Date+DateFormatter.swift in Sources */,
 				04F72A61217C36FD0099C7C9 /* baseURL.swift in Sources */,
 				04F72A5D217B44E30099C7C9 /* Regex.swift in Sources */,
-				0423A646212BB0D800DD9747 /* Cell+identifer.swift in Sources */,
 				0423A633212B978C00DD9747 /* PostViewController.swift in Sources */,
 				04F71E9A217AE3900099C7C9 /* UIStackVIew+ArrangedSubview.swift in Sources */,
 				0413DCBD21781CD10031474A /* FeedLabel.swift in Sources */,
