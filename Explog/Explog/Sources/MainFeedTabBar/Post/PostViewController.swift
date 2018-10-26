@@ -35,6 +35,12 @@ final class PostViewController: BaseViewController {
         view = v
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.title = nil
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
     
     @objc func dismissButtonAction(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
@@ -47,17 +53,30 @@ final class PostViewController: BaseViewController {
             startDate: currentPostCoverInformation.startData,
             endDate: currentPostCoverInformation.endData,
             continent: currentPostCoverInformation.continent,
-            img: currentPostCoverInformation.coverImg)) { result in
+            img: currentPostCoverInformation.coverImg)) { [weak self] result in
+                guard let strongSelf = self else { return }
                 switch result {
                 case .success(let response):
                     // 응답받은 전체 데이터 다음 ViewController에 넘겨주고, 해당 화면 그려주자.
                     // 다음 화면에 넘어갔을때 request 처리로 화면을 뿌려줄건지, cashed 된 값을 그대로 사용해줄건지 고민 해야함 
                     // pk 가지고 있어야함.
+                    switch (200...299) ~= response.statusCode {
+                    case true :
+                        do {
+                            let coverData = try response.map(PostCoverModel.self)
+                            let detailVC = PostDetailViewController.create(coverData: coverData)
+                            
+                            strongSelf.show(detailVC, sender: nil)
+                        }catch {
+                            print("fail to convert Model: \(#function)")
+                        }
+                    case false:
+                        print("fail to Request: \(#function)")
+                        
+                    }
                     
-                    
-                    break
                 case .failure(let error):
-                    break
+                    print("Serve Error: \(error.localizedDescription)")
                 }
         }
     }

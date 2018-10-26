@@ -43,7 +43,7 @@ extension MainFeedTabBarViewController: UITabBarControllerDelegate {
         case .Feed: return true
         case .Search:return true
         case .Post:
-            let vc = PostViewController()
+            let vc = PostViewController.create()
             present(vc, animated: true, completion: nil)
             return false
         case .Like: return true

@@ -11,6 +11,7 @@ import UIKit
 final class PostView: BaseView<PostViewController> {
     var containerScrollView = UIScrollView().then {
         $0.backgroundColor = . white
+        $0.contentInsetAdjustmentBehavior = .never 
     }
     
     var contentView = UIView().then {
