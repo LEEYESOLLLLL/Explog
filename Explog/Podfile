@@ -6,8 +6,6 @@ target 'Explog' do
   use_frameworks!
 
   ## Networking 
-  pod 'Alamofire', '~> 4.7'
-  pod 'AlamofireImage', '~> 3.3'
   pod 'Moya', '~> 11.0'
   pod 'Kingfisher', '~> 4.10.0'
  

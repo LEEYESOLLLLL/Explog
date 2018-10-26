@@ -34,6 +34,8 @@
 		0423A63B212B97E000DD9747 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A63A212B97E000DD9747 /* ProfileViewController.swift */; };
 		0423A642212B9C1800DD9747 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A641212B9C1800DD9747 /* AppColor.swift */; };
 		043B46582180F29F00EA8EFC /* GlobalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043B46572180F29F00EA8EFC /* GlobalExtension.swift */; };
+		044E663E2182FD930047D5F2 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E663D2182FD930047D5F2 /* PostDetailView.swift */; };
+		044E66412182FE6C0047D5F2 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E66402182FE6C0047D5F2 /* PostDetailViewController.swift */; };
 		045FF08F217E497F003ECA23 /* UISize+Multiply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045FF08E217E497F003ECA23 /* UISize+Multiply.swift */; };
 		045FF091217E62BC003ECA23 /* PostState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045FF090217E62BC003ECA23 /* PostState.swift */; };
 		045FF093217F4353003ECA23 /* Date+DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045FF092217F4353003ECA23 /* Date+DateFormatter.swift */; };
@@ -53,6 +55,10 @@
 		04B38AEC2178821200E17908 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AEB2178821200E17908 /* SignUpViewController.swift */; };
 		04B38AEE2178826000E17908 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AED2178826000E17908 /* AuthView.swift */; };
 		04B38AF0217886FD00E17908 /* UIAlertController+Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AEF217886FD00E17908 /* UIAlertController+Auth.swift */; };
+		04C70AA42183188E00B43683 /* PostDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C70AA32183188E00B43683 /* PostDetailTableViewCell.swift */; };
+		04C70AA621831DCD00B43683 /* PostCoverModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C70AA521831DCD00B43683 /* PostCoverModel.swift */; };
+		04C70AA821831F1C00B43683 /* EditModeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C70AA721831F1C00B43683 /* EditModeState.swift */; };
+		04C70AAA2183296A00B43683 /* UINavigationController+Transpar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C70AA92183296A00B43683 /* UINavigationController+Transpar.swift */; };
 		04D59136217C804E00EE8696 /* UIButton+SetTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D59135217C804E00EE8696 /* UIButton+SetTitle.swift */; };
 		04D59138217C849900EE8696 /* ActivityIndicatorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D59137217C849900EE8696 /* ActivityIndicatorButton.swift */; };
 		04EBBA2F2137A6DB00CA73A0 /* UICollectionView+init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EBBA2E2137A6DB00CA73A0 /* UICollectionView+init.swift */; };
@@ -112,6 +118,8 @@
 		0423A641212B9C1800DD9747 /* AppColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColor.swift; sourceTree = "<group>"; };
 		043B46572180F29F00EA8EFC /* GlobalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalExtension.swift; sourceTree = "<group>"; };
 		043CBD8E217228CF00CB910A /* Explog.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Explog.entitlements; sourceTree = "<group>"; };
+		044E663D2182FD930047D5F2 /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
+		044E66402182FE6C0047D5F2 /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
 		045FF08E217E497F003ECA23 /* UISize+Multiply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISize+Multiply.swift"; sourceTree = "<group>"; };
 		045FF090217E62BC003ECA23 /* PostState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostState.swift; sourceTree = "<group>"; };
 		045FF092217F4353003ECA23 /* Date+DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+DateFormatter.swift"; sourceTree = "<group>"; };
@@ -131,6 +139,10 @@
 		04B38AEB2178821200E17908 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		04B38AED2178826000E17908 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		04B38AEF217886FD00E17908 /* UIAlertController+Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Auth.swift"; sourceTree = "<group>"; };
+		04C70AA32183188E00B43683 /* PostDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailTableViewCell.swift; sourceTree = "<group>"; };
+		04C70AA521831DCD00B43683 /* PostCoverModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCoverModel.swift; sourceTree = "<group>"; };
+		04C70AA721831F1C00B43683 /* EditModeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditModeState.swift; sourceTree = "<group>"; };
+		04C70AA92183296A00B43683 /* UINavigationController+Transpar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Transpar.swift"; sourceTree = "<group>"; };
 		04D59135217C804E00EE8696 /* UIButton+SetTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+SetTitle.swift"; sourceTree = "<group>"; };
 		04D59137217C849900EE8696 /* ActivityIndicatorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorButton.swift; sourceTree = "<group>"; };
 		04EBBA2E2137A6DB00CA73A0 /* UICollectionView+init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+init.swift"; sourceTree = "<group>"; };
@@ -182,6 +194,7 @@
 			children = (
 				0413DC7B21775D0A0031474A /* FeedModel.swift */,
 				04F72A62217C49A50099C7C9 /* AuthModel.swift */,
+				04C70AA521831DCD00B43683 /* PostCoverModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -286,6 +299,7 @@
 				04D59135217C804E00EE8696 /* UIButton+SetTitle.swift */,
 				045FF08E217E497F003ECA23 /* UISize+Multiply.swift */,
 				045FF092217F4353003ECA23 /* Date+DateFormatter.swift */,
+				04C70AA92183296A00B43683 /* UINavigationController+Transpar.swift */,
 			);
 			path = Utiles;
 			sourceTree = "<group>";
@@ -332,6 +346,7 @@
 				045FF090217E62BC003ECA23 /* PostState.swift */,
 				0423A630212B978000DD9747 /* PostView.swift */,
 				0423A632212B978C00DD9747 /* PostViewController.swift */,
+				044E663F2182FD970047D5F2 /* Detail */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -362,6 +377,18 @@
 				04F71EC2217B2BE00099C7C9 /* SkyTextField+Style.swift */,
 			);
 			path = Style;
+			sourceTree = "<group>";
+		};
+		044E663F2182FD970047D5F2 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				04C70AA721831F1C00B43683 /* EditModeState.swift */,
+				044E663D2182FD930047D5F2 /* PostDetailView.swift */,
+				044E66402182FE6C0047D5F2 /* PostDetailViewController.swift */,
+				04C70AA32183188E00B43683 /* PostDetailTableViewCell.swift */,
+			);
+			name = Detail;
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		045FF0BC217F9C93003ECA23 /* PhotoGrid */ = {
@@ -573,7 +600,6 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Explog/Pods-Explog-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts-Swift/BoltsSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/CaseContainer/CaseContainer.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
@@ -588,7 +614,6 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BoltsSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CaseContainer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
@@ -656,6 +681,7 @@
 				0423A61C212B873900DD9747 /* UIView+SubViews.swift in Sources */,
 				0423A621212B899500DD9747 /* MainFeedTabBarViewController.swift in Sources */,
 				0423A635212B979500DD9747 /* LikeView.swift in Sources */,
+				04C70AA821831F1C00B43683 /* EditModeState.swift in Sources */,
 				045FF0B7217F9377003ECA23 /* PhotoGridController.swift in Sources */,
 				04D59136217C804E00EE8696 /* UIButton+SetTitle.swift in Sources */,
 				04721B432134EF3A00143AF6 /* UIView+LayoutAnchor.swift in Sources */,
@@ -672,18 +698,22 @@
 				045FF0DF21803C5F003ECA23 /* PhotoGridState.swift in Sources */,
 				0423A637212B97B000DD9747 /* LikeViewController.swift in Sources */,
 				0423A62D212B976D00DD9747 /* SearchView.swift in Sources */,
+				04C70AA42183188E00B43683 /* PostDetailTableViewCell.swift in Sources */,
 				04B38AEE2178826000E17908 /* AuthView.swift in Sources */,
 				04B38AEA2178820C00E17908 /* EmailLoginViewController.swift in Sources */,
 				04B38AEC2178821200E17908 /* SignUpViewController.swift in Sources */,
 				0423A62A212B8F3C00DD9747 /* MainFeedNavigationViewController.swift in Sources */,
+				044E663E2182FD930047D5F2 /* PostDetailView.swift in Sources */,
 				0423A625212B8D1400DD9747 /* BaseNavigationController.swift in Sources */,
 				0423A642212B9C1800DD9747 /* AppColor.swift in Sources */,
+				044E66412182FE6C0047D5F2 /* PostDetailViewController.swift in Sources */,
 				0423A639212B97DB00DD9747 /* ProfileView.swift in Sources */,
 				045FF08F217E497F003ECA23 /* UISize+Multiply.swift in Sources */,
 				047FE5DC216CF063009B56BB /* MainFeedTableViewController.swift in Sources */,
 				0423A631212B978000DD9747 /* PostView.swift in Sources */,
 				04D59138217C849900EE8696 /* ActivityIndicatorButton.swift in Sources */,
 				0413DC7F21775DC30031474A /* Feed.swift in Sources */,
+				04C70AA621831DCD00B43683 /* PostCoverModel.swift in Sources */,
 				0413DC7C21775D0A0031474A /* FeedModel.swift in Sources */,
 				0423A600212B72F000DD9747 /* AppDelegate.swift in Sources */,
 				04F72A63217C49A50099C7C9 /* AuthModel.swift in Sources */,
@@ -691,6 +721,7 @@
 				045FF0B9217F9395003ECA23 /* PhotoGridView.swift in Sources */,
 				04F71E9C217AF38A0099C7C9 /* EmailLoginView.swift in Sources */,
 				04B38AC821787CAF00E17908 /* KeychainService.swift in Sources */,
+				04C70AAA2183296A00B43683 /* UINavigationController+Transpar.swift in Sources */,
 				045FF103218093A9003ECA23 /* Post.swift in Sources */,
 				045FF095217F4382003ECA23 /* DatePickerAlertController.swift in Sources */,
 				04EBBA372137E8C900CA73A0 /* FeedTableViewCell.swift in Sources */,

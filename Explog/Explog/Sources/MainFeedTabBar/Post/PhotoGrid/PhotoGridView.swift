@@ -15,7 +15,7 @@ final class PhotoGridView: BaseView<PhotoGridViewController> {
     }
     
     lazy var dismissBarButton = UIBarButtonItem(
-        barButtonSystemItem: UIBarButtonItem.SystemItem.cancel,
+        barButtonSystemItem: .stop,
         target: vc, action:
         #selector(vc.dismissBarButtonAction(_:)))
     
