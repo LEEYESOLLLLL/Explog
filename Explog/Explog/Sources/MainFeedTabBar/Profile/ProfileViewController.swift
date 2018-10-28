@@ -12,7 +12,7 @@ final class ProfileViewController: BaseViewController {
     static func create() -> Self {
         let `self` = self.init()
         self.title = "Profile"
-        self.tabBarItem.image = #imageLiteral(resourceName: "profileImage")
+        self.tabBarItem.image = #imageLiteral(resourceName: "profile-32px")
         return self
     }
     

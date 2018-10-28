@@ -12,16 +12,20 @@ import Moya
 
 
 final class PostDetailViewController: BaseViewController {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     init(coverData: PostCoverModel) {
         self.coverData = coverData
         super.init()
     }
-    required public init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     static func create(editMode: EditMode = .off,
                        coverData cover: PostCoverModel) -> PostDetailViewController {
         let `self` = self.init(coverData: cover)
-//        self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.editMode = editMode
         return self
     }
@@ -29,17 +33,22 @@ final class PostDetailViewController: BaseViewController {
     var editMode: EditMode = .off {
         didSet {
             switch editMode {
-            case .on(let postPk): break
-            // Edit Button 켜주고
-            case .off: break
-                // Ed Button 없애주고..
+            case .on: break
+//                v.editmode(true)
+            case .off:
+//                v.editmode(false)
+            case .ready(let detailModel):
+                v.postTableView.reloadData()
             }
         }
     }
     
     var coverData: PostCoverModel
+    private var postPK: Int {
+        return coverData.pk
+    }
     
-    
+    let provider = MoyaProvider<Post>(plugins: [NetworkLoggerPlugin()])
     
     lazy var v = PostDetailView(controlBy: self)
     override func loadView() {
@@ -49,17 +58,62 @@ final class PostDetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // 여기에서 Request후, Model 가지고 있어야함..
-        // CoverData, DetailData를 따로 관리해주어야함.
+        
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // 여기에서 Request후, Model 가지고 있어야함..
+        // CoverData, DetailData를 따로 관리해주어야함.
+        print("postPK: \(postPK)")
+        provider.request(.detail(postPK: postPK)) { result in
+            switch result {
+            case .success(let response):
+                
+                print(response)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        
+    }
+}
+
+// MARK: NavigationBar's Items
+extension PostDetailViewController {
     @objc func dismissButtonAction(_ sender: UIBarButtonItem) {
         self.navigationController?.popViewController(animated: true)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    @objc func likeButtonAction(_ sender: UIBarButtonItem) {
+        sender.tintColor = sender.tintColor == .red ? .white : .red
+    }
+    
+    @objc func replyButtonAction(_ sender: UIBarButtonItem) {
         
+    }
+    
+    @objc func doneButtonAction(_ sender: UIBarButtonItem) {
+        view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+    }
+}
+
+// MARK: Edit Buttons
+extension PostDetailViewController {
+    @objc func highlightTextButtonAction(_ sender: UIButton) {
+        v.toggleView.state = .origin
+    }
+    
+    @objc func normalTextButtonAction(_ sender: UIButton) {
+        
+    }
+    
+    @objc func photoButtonAction(_ sender: UIButton) {
+        
+    }
+    
+    @objc func toggleViewTapGestureAction(_ sender: UITapGestureRecognizer) {
+        v.toggleView.state = v.toggleView.state == .spread ? .origin : .origin
     }
 }
 
@@ -77,11 +131,13 @@ extension PostDetailViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        return tableView.dequeue(PostDetailTableViewCell.self, indexPath: indexPath)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.textLabel?.text = "\(indexPath.row)"
         
     }
 }
+
 

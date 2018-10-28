@@ -9,35 +9,36 @@
 import UIKit
 
 struct FeedModel: Codable {
-    var posts: [Posts]
+    var posts: [Post]
     var previous: String?
     var next: String?
 }
 
 extension FeedModel {
-    struct Posts: Codable {
+    struct Post: Codable {
         var pk: Int
-        var author: Author
-        var title: String
-        var startDate: String
-        var endDate: String
+        var author: FeedModel.Author
+        var title: String?
+        var startDate: String?
+        var endDate: String?
+        var img: String?
         var continent: String
-        var img: String
         var liked: [Int]
         var numLiked: Int
         
         enum CodingKeys: String, CodingKey {
-            case pk 
+            case pk
             case author
             case title
             case startDate = "start_date"
             case endDate = "end_date"
-            case continent
             case img
+            case continent
             case liked
             case numLiked = "num_liked"
         }
     }
+
 }
 
 extension FeedModel {

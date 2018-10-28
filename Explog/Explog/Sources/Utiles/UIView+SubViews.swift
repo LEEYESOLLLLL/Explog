@@ -15,3 +15,12 @@ extension UIView {
         }
     }
 }
+
+extension UIView {
+    func clearSubViewOfSubViews() {
+        subviews.forEach {
+            $0.subviews.forEach { $0.removeFromSuperview() }
+        }
+    }
+}
+

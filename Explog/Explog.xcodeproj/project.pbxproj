@@ -59,6 +59,8 @@
 		04C70AA621831DCD00B43683 /* PostCoverModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C70AA521831DCD00B43683 /* PostCoverModel.swift */; };
 		04C70AA821831F1C00B43683 /* EditModeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C70AA721831F1C00B43683 /* EditModeState.swift */; };
 		04C70AAA2183296A00B43683 /* UINavigationController+Transpar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C70AA92183296A00B43683 /* UINavigationController+Transpar.swift */; };
+		04C70ACA218456C600B43683 /* ToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C70AC9218456C600B43683 /* ToggleView.swift */; };
+		04C70B26218581AC00B43683 /* PostDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C70B25218581AC00B43683 /* PostDetailModel.swift */; };
 		04D59136217C804E00EE8696 /* UIButton+SetTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D59135217C804E00EE8696 /* UIButton+SetTitle.swift */; };
 		04D59138217C849900EE8696 /* ActivityIndicatorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D59137217C849900EE8696 /* ActivityIndicatorButton.swift */; };
 		04EBBA2F2137A6DB00CA73A0 /* UICollectionView+init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EBBA2E2137A6DB00CA73A0 /* UICollectionView+init.swift */; };
@@ -143,6 +145,8 @@
 		04C70AA521831DCD00B43683 /* PostCoverModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCoverModel.swift; sourceTree = "<group>"; };
 		04C70AA721831F1C00B43683 /* EditModeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditModeState.swift; sourceTree = "<group>"; };
 		04C70AA92183296A00B43683 /* UINavigationController+Transpar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Transpar.swift"; sourceTree = "<group>"; };
+		04C70AC9218456C600B43683 /* ToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleView.swift; sourceTree = "<group>"; };
+		04C70B25218581AC00B43683 /* PostDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailModel.swift; sourceTree = "<group>"; };
 		04D59135217C804E00EE8696 /* UIButton+SetTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+SetTitle.swift"; sourceTree = "<group>"; };
 		04D59137217C849900EE8696 /* ActivityIndicatorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorButton.swift; sourceTree = "<group>"; };
 		04EBBA2E2137A6DB00CA73A0 /* UICollectionView+init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+init.swift"; sourceTree = "<group>"; };
@@ -195,6 +199,7 @@
 				0413DC7B21775D0A0031474A /* FeedModel.swift */,
 				04F72A62217C49A50099C7C9 /* AuthModel.swift */,
 				04C70AA521831DCD00B43683 /* PostCoverModel.swift */,
+				04C70B25218581AC00B43683 /* PostDetailModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -383,6 +388,7 @@
 			isa = PBXGroup;
 			children = (
 				04C70AA721831F1C00B43683 /* EditModeState.swift */,
+				04C70AC9218456C600B43683 /* ToggleView.swift */,
 				044E663D2182FD930047D5F2 /* PostDetailView.swift */,
 				044E66402182FE6C0047D5F2 /* PostDetailViewController.swift */,
 				04C70AA32183188E00B43683 /* PostDetailTableViewCell.swift */,
@@ -689,6 +695,7 @@
 				045FF093217F4353003ECA23 /* Date+DateFormatter.swift in Sources */,
 				04F72A61217C36FD0099C7C9 /* baseURL.swift in Sources */,
 				04F72A5D217B44E30099C7C9 /* Regex.swift in Sources */,
+				04C70B26218581AC00B43683 /* PostDetailModel.swift in Sources */,
 				0423A633212B978C00DD9747 /* PostViewController.swift in Sources */,
 				04F71E9A217AE3900099C7C9 /* UIStackVIew+ArrangedSubview.swift in Sources */,
 				0413DCBD21781CD10031474A /* FeedLabel.swift in Sources */,
@@ -697,6 +704,7 @@
 				04F71EC3217B2BE00099C7C9 /* SkyTextField+Style.swift in Sources */,
 				045FF0DF21803C5F003ECA23 /* PhotoGridState.swift in Sources */,
 				0423A637212B97B000DD9747 /* LikeViewController.swift in Sources */,
+				04C70ACA218456C600B43683 /* ToggleView.swift in Sources */,
 				0423A62D212B976D00DD9747 /* SearchView.swift in Sources */,
 				04C70AA42183188E00B43683 /* PostDetailTableViewCell.swift in Sources */,
 				04B38AEE2178826000E17908 /* AuthView.swift in Sources */,

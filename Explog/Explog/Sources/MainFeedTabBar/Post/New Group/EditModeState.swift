@@ -10,9 +10,12 @@ import UIKit
 
 extension PostDetailViewController {
     enum EditMode {
-        case on(postPK: Int)
+        case on
         case off
+        case ready(detailModel: PostDetailModel)
     }
 }
 
-extension PostDetailViewController { }
+extension PostDetailViewController {
+    
+}
