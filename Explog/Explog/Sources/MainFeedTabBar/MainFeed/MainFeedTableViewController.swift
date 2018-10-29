@@ -22,7 +22,7 @@ final class FeedTableViewController: ParallaxTableViewController {
             case .ready:
                 tableView.reloadData()
             case .error :
-                print("\(#function) 에서 에러발생~~~")
+                print("\(#function): cause error~")
             }
         }
     }
@@ -108,8 +108,17 @@ extension FeedTableViewController {
 // MARK: TableViewDelegate
 extension FeedTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard case .ready(let item) = state,
+            item.posts.count > indexPath.row else {
+                return
+        }
         if KeychainService.token != nil {
             // detailView 호출
+            let postCover = item.posts[indexPath.row]
+            let postDetailViewController = PostDetailViewController.create(editMode: .off, coverData: postCover)
+            show(postDetailViewController, sender: nil)
+            
+            
         }else {
             UIAlertController.showWithAlertAction(
                 actionTitle: "Ok",
@@ -139,12 +148,19 @@ extension FeedTableViewController {
             case .ready(let item) = state else {
                 return
         }
-        
         let post = item.posts[indexPath.row]
-        cell.configure(title: post.title,
-                       imagePath: post.img,
-                       startDate: post.startDate,
-                       endDate: post.endDate,
+        
+        guard let title = post.title,
+            let img = post.img,
+            let startDate = post.startDate,
+            let endDate = post.endDate else {
+                return
+        }
+        
+        cell.configure(title: title,
+                       imagePath: img,
+                       startDate: startDate,
+                       endDate: endDate,
                        author: post.author.username,
                        numberOflike: post.numLiked)
         

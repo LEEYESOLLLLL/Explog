@@ -131,7 +131,7 @@ final class FeedTableViewCell: UITableViewCell {
             coverImage.kf.indicatorType = .activity
             coverImage.kf.setImage(with: url,
                                    placeholder: nil,
-                                   options: [ .transition(ImageTransition.fade(1)) ],
+                                   options: [.transition(ImageTransition.fade(1))],
                                    progressBlock: nil,
                                    completionHandler: nil)
         }

@@ -60,7 +60,7 @@ final class PostView: BaseView<PostViewController> {
     var changeCoverImageButton = UIButton().then {
         $0.setTitle("  Cover", for: [.normal, .highlighted])
         $0.setTitleColor(.gray, highlightedStateColor: .darkGray)
-        $0.setImage(#imageLiteral(resourceName: "photo"), for: .normal)
+        $0.setImage(#imageLiteral(resourceName: "Library"), for: .normal)
     }
     
     var titleTextView = UITextView().then {

@@ -50,11 +50,11 @@ final class PhotoGridViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         selectedState = .notSelected
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         
     }
     

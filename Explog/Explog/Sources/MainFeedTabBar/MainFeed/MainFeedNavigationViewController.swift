@@ -55,13 +55,14 @@ final class FeedContainerViewController: CaseContainerViewController {
         setupBinding()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = false
     }
     
     func setupUI() {
         navigationController?.navigationBar.isHidden = true
+        navigationItem.title = nil
         headerView.addSubview(headerImageView)
         headerImageView
             .topAnchor(to: headerView.topAnchor)

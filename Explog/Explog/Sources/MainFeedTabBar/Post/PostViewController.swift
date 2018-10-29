@@ -64,8 +64,7 @@ final class PostViewController: BaseViewController {
                     case true :
                         do {
                             let coverData = try response.map(PostCoverModel.self)
-                            let detailVC = PostDetailViewController.create(coverData: coverData)
-                            
+                            let detailVC = PostDetailViewController.create(editMode: .on, coverData: coverData)
                             strongSelf.show(detailVC, sender: nil)
                         }catch {
                             print("fail to convert Model: \(#function)")
