@@ -11,7 +11,6 @@ import Foundation
 extension Date {
     func convertedString() -> String {
         let dateformatter = DateFormatter()
-//        dateformatter.dateFormat = "dd-MM-yyyy"
         dateformatter.dateFormat = "yyyy-MM-dd"
         return dateformatter.string(from: self)
     }
@@ -20,9 +19,7 @@ extension Date {
 extension String {
     func convertDate() -> Date? {
         let dateformatter = DateFormatter()
-//        dateformatter.dateFormat = "dd-MM-yyyy"
         dateformatter.dateFormat = "yyyy-MM-dd"
-        
         return dateformatter.date(from: self)
     }
 }

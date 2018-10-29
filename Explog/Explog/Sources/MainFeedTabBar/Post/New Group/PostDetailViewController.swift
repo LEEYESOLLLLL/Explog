@@ -13,6 +13,7 @@ import Moya
 
 final class PostDetailViewController: BaseViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
+        
         return .lightContent
     }
     init(coverData: PostCoverModel) {
@@ -37,19 +38,31 @@ final class PostDetailViewController: BaseViewController {
                 // editmode on, editbutton true, navigationItem Button 켜야함..
                 DispatchQueue.main.async {
                     self.v.toggleView.isHidden = false
-                    
                 }
-//                v.editmode(true)
             case .off:
                 DispatchQueue.main.async {
                     self.v.toggleView.isHidden = true
+                    self.tabBarController?.tabBar.isHidden = true
                 }
-                
-                // 보니까 UITabBar도 없애야함..
-//                v.editmode(false)
-            case .ready(let detailModel):
+            }
+        }
+    }
+    
+    private var state: State = .loading {
+        didSet {
+            switch state {
+            case .loading: break
+            case .ready:
                 v.postTableView.reloadData()
             }
+        }
+    }
+    
+    private var toggleState: ToggleView.ToggleType {
+        get {
+            return v.toggleView.state
+        }set {
+            v.toggleView.state = newValue
         }
     }
     
@@ -68,19 +81,28 @@ final class PostDetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // 여기에서 Request후, Model 가지고 있어야함..
         // CoverData, DetailData를 따로 관리해주어야함.
-        print("postPK: \(postPK)")
-        provider.request(.detail(postPK: postPK)) { result in
+        
+        provider.request(.detail(postPK: postPK)) { [weak self] result in
+            guard let strongSelf = self else { return }
             switch result {
             case .success(let response):
-                
-                print(response)
+                switch (200...299) ~= response.statusCode {
+                case true:
+                    do {
+                        let postDetailData = try response.map(PostDetailModel.self)
+                        strongSelf.state = .ready(detailModel: postDetailData)
+                    }catch {
+                        print("fail to convert Model: \(#function)")
+                    }
+                case false:
+                    print("fail to Request: \(#function)")
+                }
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -95,36 +117,44 @@ extension PostDetailViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-        @objc func likeButtonAction(_ sender: UIBarButtonItem) {
-            sender.tintColor = sender.tintColor == .red ? .white : .red
-        }
+    @objc func likeButtonAction(_ sender: UIBarButtonItem) {
+        sender.tintColor = sender.tintColor == .red ? .white : .red
+    }
     
-        @objc func replyButtonAction(_ sender: UIBarButtonItem) {
-            
-        }
+    @objc func replyButtonAction(_ sender: UIBarButtonItem) {
+        
+    }
     
-        @objc func doneButtonAction(_ sender: UIBarButtonItem) {
-            view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-        }
+    @objc func doneButtonAction(_ sender: UIBarButtonItem) {
+        view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+    }
 }
 
 // MARK: Edit Buttons
 extension PostDetailViewController {
-        @objc func highlightTextButtonAction(_ sender: UIButton) {
-            v.toggleView.state = .origin
-        }
+    // 각 뷰 컨트롤러와 뷰 만들어야함..
+    @objc func highlightTextButtonAction(_ sender: UIButton) {
+        
+        toggleState = .origin
+        let vc = UploadTextViewController(textType: .high, postPK: postPK)
+        show(vc, sender: nil)
+    }
     
-        @objc func normalTextButtonAction(_ sender: UIButton) {
-            
-        }
+    @objc func normalTextButtonAction(_ sender: UIButton) {
+        toggleState = .origin
+        let vc = UploadTextViewController(textType: .basic, postPK: postPK)
+        show(vc, sender: nil)
+        
+    }
     
-        @objc func photoButtonAction(_ sender: UIButton) {
-            
-        }
+    @objc func photoButtonAction(_ sender: UIButton) {
+        toggleState = .origin
+        
+    }
     
-        @objc func toggleViewTapGestureAction(_ sender: UITapGestureRecognizer) {
-            v.toggleView.state = v.toggleView.state == .spread ? .origin : .origin
-        }
+    @objc func toggleViewTapGestureAction(_ sender: UITapGestureRecognizer) {
+        toggleState = v.toggleView.state == .spread ? .origin : .origin
+    }
 }
 
 extension PostDetailViewController: UITableViewDelegate {
@@ -132,20 +162,28 @@ extension PostDetailViewController: UITableViewDelegate {
 }
 
 extension PostDetailViewController: UITableViewDataSource {
-        func numberOfSections(in tableView: UITableView) -> Int {
-            return 1
-        }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
     
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return 30
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard case .ready(let item) = state,
+        let contents = item.postContents else {
+            return 0
         }
+        return contents.count
+    }
     
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            return tableView.dequeue(PostDetailTableViewCell.self, indexPath: indexPath)
-        }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return tableView.dequeue(PostDetailTableViewCell.self, indexPath: indexPath)
+    }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.textLabel?.text = "\(indexPath.row)"
+        guard case .ready(let item) = state,
+        let contents = item.postContents else {
+            return
+        }
+        cell.textLabel?.text = contents[indexPath.row].contentType
     }
 }
 

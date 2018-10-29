@@ -12,6 +12,10 @@ extension PostDetailViewController {
     enum EditMode {
         case on
         case off
+    }
+    
+    enum State {
+        case loading
         case ready(detailModel: PostDetailModel)
     }
 }

@@ -52,5 +52,13 @@ extension PostDetailModel {
     }    
 }
 
-
+extension PostDetailModel {
+    static func + (left: PostDetailModel, right: PostDetailModel) -> PostDetailModel {
+        guard let leftContents = left.postContents,
+            let rightContents = right.postContents else {
+                fatalError()
+        }
+        return PostDetailModel(postContents: leftContents + rightContents)
+    }
+}
 

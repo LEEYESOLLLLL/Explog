@@ -16,6 +16,7 @@ import Moya
 enum Post {
     case post(title: String, startDate: String, endDate: String, continent: String, img: UIImage)
     case detail(postPK: Int)
+    case text(postPK: Int, content: String, createdAt: String, type: String)
 }
 
 extension Post: TargetType {
@@ -23,6 +24,8 @@ extension Post: TargetType {
         switch self {
         case .post(_, _, _, _, _): return "/post/create/"
         case .detail(let postPK): return "/post/\(postPK)/"
+        case .text(let postPK,_, _, _): return "/post/\(postPK)/text/"
+            
         }
     }
     
@@ -30,6 +33,7 @@ extension Post: TargetType {
         switch self {
         case .post(_, _, _, _, _):return .post
         case .detail(_): return .get
+        case .text(_, _, _, _): return .post
         }
     }
     
@@ -58,8 +62,21 @@ extension Post: TargetType {
                 mimeType: "image/jpg")
             multipartDataDic.append(multipartImg)
             return .uploadMultipart(multipartDataDic)
+            
         case .detail(_):
             return .requestPlain
+            
+        case .text(_, let content, let createdAt, let type):
+            guard let content = content.data(using: .utf8),
+                let createdAt = createdAt.data(using: .utf8),
+                let type = type.data(using: .utf8) else {
+                    return .requestPlain
+            }
+            
+            let multipartDataDic = ["content": content,
+                                    "created_at": createdAt,
+                                    "type":type].convertedMutiPartFormData()
+            return .uploadMultipart(multipartDataDic)
         }
     }
     

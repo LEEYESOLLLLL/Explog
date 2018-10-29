@@ -226,7 +226,11 @@ final class PostDetailView: BaseView<PostDetailViewController> {
     
     func setupNavigationBar() {
         vc.navigationItem.leftBarButtonItem = dismissButton
-        vc.navigationItem.rightBarButtonItems = [doneButton, likeButton, replyButton]
+        switch vc.editMode {
+        case .on: vc.navigationItem.rightBarButtonItems = [doneButton, likeButton, replyButton]
+        case .off: vc.navigationItem.rightBarButtonItems = [likeButton, replyButton]
+        }
+        
         vc.navigationController?.transparentNaviBar(true)
         
         highlightTextButton.addTarget(vc, action: #selector(vc.highlightTextButtonAction(_:)), for: .touchUpInside)
@@ -260,16 +264,6 @@ final class PostDetailView: BaseView<PostDetailViewController> {
                                             progressBlock: nil,
                                             completionHandler: nil)
         authorNickNameLabel.text = data.author.username
-    }
-    
-    func editmode(_ is: Bool) {
-        if `is` {
-            toggleView.isHidden = false
-//            vc.navigationItem.rightBarButtonItems = [doneButton ,likeButton, replyButton]
-        }else {
-            toggleView.isHidden = true
-            vc.navigationItem.rightBarButtonItems = [likeButton, replyButton]
-        }
     }
 }
 

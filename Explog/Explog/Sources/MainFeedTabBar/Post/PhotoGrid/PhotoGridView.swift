@@ -21,14 +21,18 @@ final class PhotoGridView: BaseView<PhotoGridViewController> {
     
     lazy var doneBarButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: vc, action: #selector(vc.doneBarButtonAction(_:)))
     
+    // AVPhotoCaptureOutput produces a memory leak when initialized
+    // https://forums.developer.apple.com/thread/70449
     var imagePickerViewController = UIImagePickerController().then {
-        $0.modalPresentationStyle = .overCurrentContext
+        $0.modalPresentationStyle = .fullScreen
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
             $0.sourceType = .camera
         }else {
             $0.sourceType = .photoLibrary // for simulrator
         }
     }
+    
+    
     
     struct UI {
         static var cellItemSpacing: CGFloat = 2
@@ -55,7 +59,6 @@ final class PhotoGridView: BaseView<PhotoGridViewController> {
         collectionView.dataSource = vc
         vc.navigationItem.leftBarButtonItem = dismissBarButton
         vc.navigationItem.rightBarButtonItem = doneBarButton
-        
         imagePickerViewController.delegate = vc
     }
     

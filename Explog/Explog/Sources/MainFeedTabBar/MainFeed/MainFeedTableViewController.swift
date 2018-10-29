@@ -22,7 +22,7 @@ final class FeedTableViewController: ParallaxTableViewController {
             case .ready:
                 tableView.reloadData()
             case .error :
-                print("\(#function) 에서 에러발생~~~")
+                print("\(#function): cause error~")
             }
         }
     }
