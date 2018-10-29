@@ -265,7 +265,7 @@ final class PostDetailView: BaseView<PostDetailViewController> {
     func editmode(_ is: Bool) {
         if `is` {
             toggleView.isHidden = false
-            vc.navigationItem.rightBarButtonItems = [doneButton ,likeButton, replyButton]
+//            vc.navigationItem.rightBarButtonItems = [doneButton ,likeButton, replyButton]
         }else {
             toggleView.isHidden = true
             vc.navigationItem.rightBarButtonItems = [likeButton, replyButton]

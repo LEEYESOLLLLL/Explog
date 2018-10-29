@@ -33,9 +33,19 @@ final class PostDetailViewController: BaseViewController {
     var editMode: EditMode = .off {
         didSet {
             switch editMode {
-            case .on: break
+            case .on:
+                // editmode on, editbutton true, navigationItem Button 켜야함..
+                DispatchQueue.main.async {
+                    self.v.toggleView.isHidden = false
+                    
+                }
 //                v.editmode(true)
             case .off:
+                DispatchQueue.main.async {
+                    self.v.toggleView.isHidden = true
+                }
+                
+                // 보니까 UITabBar도 없애야함..
 //                v.editmode(false)
             case .ready(let detailModel):
                 v.postTableView.reloadData()
@@ -85,36 +95,36 @@ extension PostDetailViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @objc func likeButtonAction(_ sender: UIBarButtonItem) {
-        sender.tintColor = sender.tintColor == .red ? .white : .red
-    }
+        @objc func likeButtonAction(_ sender: UIBarButtonItem) {
+            sender.tintColor = sender.tintColor == .red ? .white : .red
+        }
     
-    @objc func replyButtonAction(_ sender: UIBarButtonItem) {
-        
-    }
+        @objc func replyButtonAction(_ sender: UIBarButtonItem) {
+            
+        }
     
-    @objc func doneButtonAction(_ sender: UIBarButtonItem) {
-        view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-    }
+        @objc func doneButtonAction(_ sender: UIBarButtonItem) {
+            view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+        }
 }
 
 // MARK: Edit Buttons
 extension PostDetailViewController {
-    @objc func highlightTextButtonAction(_ sender: UIButton) {
-        v.toggleView.state = .origin
-    }
+        @objc func highlightTextButtonAction(_ sender: UIButton) {
+            v.toggleView.state = .origin
+        }
     
-    @objc func normalTextButtonAction(_ sender: UIButton) {
-        
-    }
+        @objc func normalTextButtonAction(_ sender: UIButton) {
+            
+        }
     
-    @objc func photoButtonAction(_ sender: UIButton) {
-        
-    }
+        @objc func photoButtonAction(_ sender: UIButton) {
+            
+        }
     
-    @objc func toggleViewTapGestureAction(_ sender: UITapGestureRecognizer) {
-        v.toggleView.state = v.toggleView.state == .spread ? .origin : .origin
-    }
+        @objc func toggleViewTapGestureAction(_ sender: UITapGestureRecognizer) {
+            v.toggleView.state = v.toggleView.state == .spread ? .origin : .origin
+        }
 }
 
 extension PostDetailViewController: UITableViewDelegate {
@@ -122,21 +132,20 @@ extension PostDetailViewController: UITableViewDelegate {
 }
 
 extension PostDetailViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
+        func numberOfSections(in tableView: UITableView) -> Int {
+            return 1
+        }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 30
-    }
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            return 30
+        }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return tableView.dequeue(PostDetailTableViewCell.self, indexPath: indexPath)
-    }
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            return tableView.dequeue(PostDetailTableViewCell.self, indexPath: indexPath)
+        }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.textLabel?.text = "\(indexPath.row)"
-        
     }
 }
 
