@@ -27,7 +27,7 @@ final class DetailPhotoCell: UITableViewCell {
     }
     
     struct UI {
-        static var margin: CGFloat = 4
+        static var margin: CGFloat = 32
     }
     
     func setupUI() {

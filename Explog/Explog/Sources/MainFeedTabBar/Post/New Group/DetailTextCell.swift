@@ -27,6 +27,12 @@ final class DetailTextCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    struct UI {
+        static var margin: CGFloat = 4
+        static var basicFontSize: CGFloat = 18
+        static var highlightFontSize: CGFloat = 30
+    }
+    
     func setupUI() {
         contentView.addSubviews([contentText])
         contentText
@@ -37,6 +43,7 @@ final class DetailTextCell: UITableViewCell {
             .activateAnchors()
     }
     
+    
     func setupBinding() {
         
     }
@@ -44,15 +51,14 @@ final class DetailTextCell: UITableViewCell {
     typealias PostDetailContentType = PostDetailViewController.ContentType
     
     func configure(content: PostDetailModel.PostContent) {
-        
         guard let type = content.type,
             let textType = PostDetailViewController.TextType(rawValue: type),
             let text = content.content else {
                 return
         }
         switch textType {
-        case .basic: contentText.font = UIFont.preferredFont(forTextStyle: .body)
-        case .highlight: contentText.font = UIFont.preferredFont(forTextStyle: .headline)
+        case .basic: contentText.font = UIFont(name: .defaultFontName, size: UI.basicFontSize)
+        case .highlight: contentText.font = UIFont(name: .defaultFontName, size: UI.highlightFontSize)?.bold()
         }
         contentText.text = text
         

@@ -17,9 +17,7 @@ final class PostDetailView: BaseView<PostDetailViewController> {
     lazy var postTableView = UITableView().then {
         $0.contentInsetAdjustmentBehavior = .never
         $0.backgroundColor = .white
-        $0.estimatedRowHeight = 100//UITableView.automaticDimension//3000
-        $0.rowHeight = UITableView.automaticDimension
-
+        $0.estimatedRowHeight = 100 // minimum height
         $0.separatorStyle = .none 
         $0.register(cell: DetailTextCell.self)
         $0.register(cell: DetailPhotoCell.self)
