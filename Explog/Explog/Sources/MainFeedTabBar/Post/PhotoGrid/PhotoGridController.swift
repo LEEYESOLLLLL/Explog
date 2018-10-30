@@ -11,12 +11,21 @@ import Photos
 
 
 
-final class PhotoGridViewController: BaseViewController {
+class PhotoGridViewController: BaseViewController {
     static func create() -> PhotoGridViewController {
         let `self` = self.init()
         self.title = "Camera Roll"
         return self
     }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError()
+    }
+    
+    required init() {
+        super.init()
+    }
+    
     lazy var v = PhotoGridView(controlBy: self)
     
     static func loadPhotos() -> PHFetchResult<PHAsset> {
@@ -39,7 +48,8 @@ final class PhotoGridViewController: BaseViewController {
         }
     }
     
-    weak var delegate: PassableData?
+    // MARK: PassableData Delegate
+    weak var delegate: PassableDataDelegate?
     
     
     override func loadView() {
@@ -50,7 +60,6 @@ final class PhotoGridViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         selectedState = .notSelected
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -77,13 +86,14 @@ extension PhotoGridViewController: UICollectionViewDelegate {
         guard let cell = collectionView.cellForItem(at: indexPath) as? PhotoGridCell else {
             return
         }
-        selectedState = .selected
         
         let userSelectType = indexPath.item == 0 ? SelectType.camera : SelectType.photo
         switch userSelectType {
         case .camera:
+            selectedState = .notSelected
             show(v.imagePickerViewController, sender: nil)
         case .photo:
+            selectedState = .selected
             collectionView
                 .visibleCells
                 .compactMap { $0 as? PhotoGridCell }

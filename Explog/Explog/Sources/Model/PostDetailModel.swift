@@ -21,19 +21,19 @@ extension PostDetailModel {
         var post: Int
         var order: Int
         var contentType: String
-        var contents: PostContentsType
+        var content: PostContent
         
         enum CodingKeys: String, CodingKey {
             case post
             case order
             case contentType = "content_type"
-            case contents = "content"
+            case content
         }
     }
 }
 
 extension PostDetailModel {
-    struct PostContentsType:Codable {
+    struct PostContent: Codable {
         var pk: Int
         var content: String?
         var photo: String?

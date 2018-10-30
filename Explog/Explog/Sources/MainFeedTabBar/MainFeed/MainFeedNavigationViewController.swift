@@ -58,6 +58,7 @@ final class FeedContainerViewController: CaseContainerViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     func setupUI() {

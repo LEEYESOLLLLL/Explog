@@ -24,6 +24,10 @@ final class PostDetailViewController: BaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    required init() {
+        fatalError("init() has not been implemented")
+    }
+    
     static func create(editMode: EditMode = .off,
                        coverData cover: PostCoverModel) -> PostDetailViewController {
         let `self` = self.init(coverData: cover)
@@ -53,7 +57,7 @@ final class PostDetailViewController: BaseViewController {
             switch state {
             case .loading: break
             case .ready:
-                v.postTableView.reloadData()
+                DispatchQueue.main.async { self.v.postTableView.reloadData() }
             }
         }
     }
@@ -83,11 +87,11 @@ final class PostDetailViewController: BaseViewController {
         super.viewDidLoad()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         // 여기에서 Request후, Model 가지고 있어야함..
         // CoverData, DetailData를 따로 관리해주어야함.
-        
+        v.activityView.startAnimating()
         provider.request(.detail(postPK: postPK)) { [weak self] result in
             guard let strongSelf = self else { return }
             switch result {
@@ -96,20 +100,28 @@ final class PostDetailViewController: BaseViewController {
                 case true:
                     do {
                         let postDetailData = try response.map(PostDetailModel.self)
-                        strongSelf.state = .ready(detailModel: postDetailData)
+                        DispatchQueue.main.async {
+                            strongSelf.v.activityView.stopAnimating()
+                            strongSelf.state = .ready(detailModel: postDetailData)
+                            strongSelf.v.postTableView.reloadData()
+                        }
+                        
                     }catch {
                         print("fail to convert Model: \(#function)")
+                        DispatchQueue.main.async { strongSelf.v.activityView.stopAnimating() }
                     }
                 case false:
                     print("fail to Request: \(#function)")
+                    DispatchQueue.main.async { strongSelf.v.activityView.stopAnimating() }
                 }
             case .failure(let error):
                 print(error.localizedDescription)
+                DispatchQueue.main.async { strongSelf.v.activityView.stopAnimating() }
             }
         }
-        
     }
 }
+
 
 // MARK: NavigationBar's Items
 extension PostDetailViewController {
@@ -131,12 +143,12 @@ extension PostDetailViewController {
 }
 
 // MARK: Edit Buttons
-extension PostDetailViewController {
+extension PostDetailViewController: PassableDataDelegate {
     // 각 뷰 컨트롤러와 뷰 만들어야함..
     @objc func highlightTextButtonAction(_ sender: UIButton) {
         
         toggleState = .origin
-        let vc = UploadTextViewController(textType: .high, postPK: postPK)
+        let vc = UploadTextViewController(textType: .highlight, postPK: postPK)
         show(vc, sender: nil)
     }
     
@@ -149,7 +161,13 @@ extension PostDetailViewController {
     
     @objc func photoButtonAction(_ sender: UIButton) {
         toggleState = .origin
-        
+        let vc = UploadPhotoViewController.create(postPK: postPK)
+        vc.delegate = self
+        show(vc, sender: nil)
+    }
+    
+    func pass(data: UIImage) {
+        // request전임.. 여기서 요청하고 화면 내려왔을때
     }
     
     @objc func toggleViewTapGestureAction(_ sender: UITapGestureRecognizer) {
@@ -168,8 +186,8 @@ extension PostDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard case .ready(let item) = state,
-        let contents = item.postContents else {
-            return 0
+            let contents = item.postContents else {
+                return 0
         }
         return contents.count
     }
@@ -180,11 +198,21 @@ extension PostDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard case .ready(let item) = state,
-        let contents = item.postContents else {
+            let cell = cell as? PostDetailTableViewCell,
+            let contents = item.postContents, contents.count > indexPath.row else {
+                return
+        }
+        
+        guard let contentType = ContentType(rawValue: contents[indexPath.row].contentType) else {
             return
         }
-        cell.textLabel?.text = contents[indexPath.row].contentType
+        
+        let content = contents[indexPath.row].content
+        print("content: \(content.content), photo: \(content.photo)")
+        DispatchQueue.main.async {
+            cell.configure(contentType: contentType, content: content)
+        }
     }
+    
 }
-
 

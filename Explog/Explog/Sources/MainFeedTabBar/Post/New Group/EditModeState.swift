@@ -21,5 +21,10 @@ extension PostDetailViewController {
 }
 
 extension PostDetailViewController {
+    enum ContentType: String  {
+        case txt
+        case img
+    }
     
+    typealias TextType = UploadTextViewController.TextType
 }

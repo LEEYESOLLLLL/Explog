@@ -20,7 +20,7 @@ public protocol ViewControllerType: class {
  */
 public class BaseViewController: UIViewController, ViewControllerType {
     
-    init() {
+    required init() {
         super.init(nibName: nil, bundle: nil)
     }
     
