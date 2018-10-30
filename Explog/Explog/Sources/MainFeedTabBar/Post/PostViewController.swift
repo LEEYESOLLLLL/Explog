@@ -10,9 +10,7 @@ import UIKit
 import Moya
 
 
-protocol PassableData: class {
-    func pass(data: UIImage)
-}
+
 
 final class PostViewController: BaseViewController {
     static func create() -> UINavigationController {
@@ -57,9 +55,6 @@ final class PostViewController: BaseViewController {
                 guard let strongSelf = self else { return }
                 switch result {
                 case .success(let response):
-                    // 응답받은 전체 데이터 다음 ViewController에 넘겨주고, 해당 화면 그려주자.
-                    // 다음 화면에 넘어갔을때 request 처리로 화면을 뿌려줄건지, cashed 된 값을 그대로 사용해줄건지 고민 해야함 
-                    // pk 가지고 있어야함.
                     switch (200...299) ~= response.statusCode {
                     case true :
                         do {
@@ -131,7 +126,7 @@ final class PostViewController: BaseViewController {
         present(datepickerAlertController, animated: true, completion: nil)
     }
 }
-extension PostViewController: PassableData {
+extension PostViewController: PassableDataDelegate {
     @objc func continentButtonAction(_ sender: UIButton){
         let continentPickerAlertController = ContinentPickerAlertViewController(preferredStyle: .actionSheet)
         let okAction = UIAlertAction(title: "OK", style: .default) { [weak continentPickerAlertController] _ in

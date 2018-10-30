@@ -17,6 +17,7 @@ enum Post {
     case post(title: String, startDate: String, endDate: String, continent: String, img: UIImage)
     case detail(postPK: Int)
     case text(postPK: Int, content: String, createdAt: String, type: String)
+    case photo(postPK: Int, photo: UIImage)
 }
 
 extension Post: TargetType {
@@ -25,6 +26,7 @@ extension Post: TargetType {
         case .post(_, _, _, _, _): return "/post/create/"
         case .detail(let postPK): return "/post/\(postPK)/"
         case .text(let postPK,_, _, _): return "/post/\(postPK)/text/"
+        case .photo(let postPK, _): return "/post/\(postPK)/photo/"
             
         }
     }
@@ -34,6 +36,7 @@ extension Post: TargetType {
         case .post(_, _, _, _, _):return .post
         case .detail(_): return .get
         case .text(_, _, _, _): return .post
+        case .photo(_, _): return .post 
         }
     }
     
@@ -58,7 +61,7 @@ extension Post: TargetType {
             let multipartImg = MultipartFormData(
                 provider: .data(img),
                 name: "img",
-                fileName: "\(UUID().uuidString).jpg",
+                fileName: UUID().uuidString + ".jpg",
                 mimeType: "image/jpg")
             multipartDataDic.append(multipartImg)
             return .uploadMultipart(multipartDataDic)
@@ -77,6 +80,15 @@ extension Post: TargetType {
                                     "created_at": createdAt,
                                     "type":type].convertedMutiPartFormData()
             return .uploadMultipart(multipartDataDic)
+        case .photo(_, let photo):
+                guard let img = photo.jpegData(compressionQuality: 0.3) else {
+                    return .requestPlain
+                }
+            return .uploadMultipart([MultipartFormData(
+                provider: .data(img),
+                name: "photo",
+                fileName: UUID().uuidString + ".jpg",
+                mimeType: "image/jpg")])
         }
     }
     

@@ -8,12 +8,11 @@
 
 import UIKit
 import Moya
-
-
+import BoltsSwift
 
 final class PostDetailViewController: BaseViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        
+        self.navigationController?.navigationBar.barStyle = .black
         return .lightContent
     }
     init(coverData: PostCoverModel) {
@@ -22,6 +21,10 @@ final class PostDetailViewController: BaseViewController {
     }
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    required init() {
+        fatalError("init() has not been implemented")
     }
     
     static func create(editMode: EditMode = .off,
@@ -34,11 +37,7 @@ final class PostDetailViewController: BaseViewController {
     var editMode: EditMode = .off {
         didSet {
             switch editMode {
-            case .on:
-                // editmode on, editbutton true, navigationItem Button 켜야함..
-                DispatchQueue.main.async {
-                    self.v.toggleView.isHidden = false
-                }
+            case .on: DispatchQueue.main.async { self.v.toggleView.isHidden = false }
             case .off:
                 DispatchQueue.main.async {
                     self.v.toggleView.isHidden = true
@@ -52,8 +51,7 @@ final class PostDetailViewController: BaseViewController {
         didSet {
             switch state {
             case .loading: break
-            case .ready:
-                v.postTableView.reloadData()
+            case .ready: DispatchQueue.main.async { self.v.postTableView.reloadData() }
             }
         }
     }
@@ -81,35 +79,55 @@ final class PostDetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        // 여기에서 Request후, Model 가지고 있어야함..
-        // CoverData, DetailData를 따로 관리해주어야함.
-        
-        provider.request(.detail(postPK: postPK)) { [weak self] result in
-            guard let strongSelf = self else { return }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        v.activityView.startAnimating()
+        requestTask().continueWith { [weak self] task in
+            guard let strongSelf = self else {
+                return
+            }
+            
+            if task.cancelled || task.faulted {
+                print(task.error!.localizedDescription)
+            }else {
+                guard let model = task.result else {
+                    return
+                }
+                strongSelf.state = .ready(detailModel: model)  
+                strongSelf.v.postTableView.reloadData()
+                
+            }
+            strongSelf.v.activityView.stopAnimating()
+        }
+    }
+    
+    func requestTask() -> BoltsSwift.Task<PostDetailModel> {
+        let taskSource = TaskCompletionSource<PostDetailModel>()
+        provider.request(.detail(postPK: postPK)) { result in
             switch result {
             case .success(let response):
                 switch (200...299) ~= response.statusCode {
                 case true:
                     do {
                         let postDetailData = try response.map(PostDetailModel.self)
-                        strongSelf.state = .ready(detailModel: postDetailData)
+                        taskSource.set(result: postDetailData)
                     }catch {
-                        print("fail to convert Model: \(#function)")
+                        taskSource.set(error: NSError(domain: "fail to convert Model: \(#function)", code: 0, userInfo: nil))
                     }
                 case false:
-                    print("fail to Request: \(#function)")
+                    taskSource.set(error: NSError(domain: "fail to Request: \(#function)", code: 0, userInfo: nil))
                 }
             case .failure(let error):
-                print(error.localizedDescription)
+                taskSource.set(error: NSError(domain: error.localizedDescription, code: 0, userInfo: nil))
             }
         }
-        
+        return taskSource.task
     }
 }
+
 
 // MARK: NavigationBar's Items
 extension PostDetailViewController {
@@ -131,12 +149,11 @@ extension PostDetailViewController {
 }
 
 // MARK: Edit Buttons
-extension PostDetailViewController {
-    // 각 뷰 컨트롤러와 뷰 만들어야함..
+extension PostDetailViewController: PassableDataDelegate {
+    
     @objc func highlightTextButtonAction(_ sender: UIButton) {
-        
         toggleState = .origin
-        let vc = UploadTextViewController(textType: .high, postPK: postPK)
+        let vc = UploadTextViewController(textType: .highlight, postPK: postPK)
         show(vc, sender: nil)
     }
     
@@ -144,12 +161,17 @@ extension PostDetailViewController {
         toggleState = .origin
         let vc = UploadTextViewController(textType: .basic, postPK: postPK)
         show(vc, sender: nil)
-        
     }
     
     @objc func photoButtonAction(_ sender: UIButton) {
         toggleState = .origin
-        
+        let vc = UploadPhotoViewController.create(postPK: postPK)
+        vc.delegate = self
+        show(vc, sender: nil)
+    }
+    
+    func pass(data: UIImage) {
+        // request전임.. 여기서 요청하고 화면 내려왔을때
     }
     
     @objc func toggleViewTapGestureAction(_ sender: UITapGestureRecognizer) {
@@ -158,7 +180,17 @@ extension PostDetailViewController {
 }
 
 extension PostDetailViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard case .ready(let item) = state,
+            let contents = item.postContents, contents.count > indexPath.row,
+            let contentType = ContentType(rawValue: contents[indexPath.row].contentType) else {
+                return 0
+        }
+        switch contentType {
+        case .txt: return UITableView.automaticDimension
+        case .img: return UIScreen.main.bounds.height / 2.2
+        }
+    }
 }
 
 extension PostDetailViewController: UITableViewDataSource {
@@ -168,23 +200,44 @@ extension PostDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard case .ready(let item) = state,
-        let contents = item.postContents else {
-            return 0
+            let contents = item.postContents else {
+                return 0
         }
         return contents.count
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return tableView.dequeue(PostDetailTableViewCell.self, indexPath: indexPath)
+        guard case .ready(let item) = state,
+            let contents = item.postContents, contents.count > indexPath.row,
+            let contentType = ContentType(rawValue: contents[indexPath.row].contentType) else {
+                return UITableViewCell()
+        }
+        
+        switch contentType {
+        case .txt: return tableView.dequeue(DetailTextCell.self, indexPath: indexPath)
+        case .img: return tableView.dequeue(DetailPhotoCell.self, indexPath: indexPath)
+        }
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard case .ready(let item) = state,
-        let contents = item.postContents else {
-            return
+            let contents = item.postContents, contents.count > indexPath.row,
+            let contentType = ContentType(rawValue: contents[indexPath.row].contentType) else {
+                return
         }
-        cell.textLabel?.text = contents[indexPath.row].contentType
+        
+        let content = contents[indexPath.row].content
+        switch contentType {
+        case .txt:
+            guard let cell = cell as? DetailTextCell else {
+                return
+            }
+            cell.configure(content: content)
+        case .img:
+            guard let cell = cell as? DetailPhotoCell else {
+                return
+            }
+            cell.configure(content: content)
+        }
     }
 }
-
 

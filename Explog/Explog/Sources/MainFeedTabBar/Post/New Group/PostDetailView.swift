@@ -17,7 +17,10 @@ final class PostDetailView: BaseView<PostDetailViewController> {
     lazy var postTableView = UITableView().then {
         $0.contentInsetAdjustmentBehavior = .never
         $0.backgroundColor = .white
-        $0.register(cell: PostDetailTableViewCell.self)
+        $0.estimatedRowHeight = 100 // minimum height
+        $0.separatorStyle = .none 
+        $0.register(cell: DetailTextCell.self)
+        $0.register(cell: DetailPhotoCell.self)
     }
     
     var darkBlurView = UIVisualEffectView().then {
@@ -129,16 +132,19 @@ final class PostDetailView: BaseView<PostDetailViewController> {
     
     lazy var toggleViewTapGesture = UITapGestureRecognizer(target: vc, action: #selector(vc.toggleViewTapGestureAction(_:)))
     
+    var activityView = UIActivityIndicatorView(style: .whiteLarge)
+    
     struct UI {
         static var margin: CGFloat = 8
         static var titleHeaderFontSize: CGFloat = 30
         static var dateAndContinetStackViewHeight: CGFloat = UIScreen.main.bounds.height/10
         static var authorButtonDimension: CGFloat = UIScreen.main.bounds.width * 0.175
         static var toggleViewSqureSide: CGFloat = UIScreen.main.bounds.width * 0.225
+        static var coverImageHeight: CGFloat = UIScreen.main.bounds.height * 0.66
     }
     
     override func setupUI() {
-        addSubviews([postTableView, coverInformationView, toggleView])
+        addSubviews([postTableView, coverInformationView, toggleView, activityView])
         coverInformationView.addSubviews([coverImage, darkBlurView, titleLabel, dateAndContinentStackView, authorButton, authorNickNameLabel])
         dateAndContinentStackView.addArrangedSubviews([dateLabel, continentLabel])
         
@@ -151,7 +157,7 @@ final class PostDetailView: BaseView<PostDetailViewController> {
         
         _ = postTableView.then {
             $0.parallaxHeader.view = coverInformationView // ParallaxHeaderView is able to use its property after determining that parallaxHeader.view is assigned some View
-            $0.parallaxHeader.height = UIScreen.main.bounds.height
+            $0.parallaxHeader.height = UI.coverImageHeight
             $0.parallaxHeader.minimumHeight = 0
             $0.parallaxHeader.mode = .topFill
         }
@@ -202,6 +208,10 @@ final class PostDetailView: BaseView<PostDetailViewController> {
             .activateAnchors()
         NSLayoutConstraint.activate([toggleViewWidth])
         
+        activityView
+            .centerXAnchor(to: centerXAnchor)
+            .centerYAnchor(to: centerYAnchor, constant: -150)
+            .activateAnchors()
     }
     
     
