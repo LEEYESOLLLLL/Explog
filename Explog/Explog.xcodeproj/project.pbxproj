@@ -46,6 +46,7 @@
 		045FF0BB217F98E9003ECA23 /* PhotoGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045FF0BA217F98E9003ECA23 /* PhotoGridCell.swift */; };
 		045FF0DF21803C5F003ECA23 /* PhotoGridState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045FF0DE21803C5F003ECA23 /* PhotoGridState.swift */; };
 		045FF103218093A9003ECA23 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045FF102218093A9003ECA23 /* Post.swift */; };
+		046460AB2188247E00EFE40B /* DetailPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046460AA2188247E00EFE40B /* DetailPhotoCell.swift */; };
 		04721B432134EF3A00143AF6 /* UIView+LayoutAnchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04721B422134EF3A00143AF6 /* UIView+LayoutAnchor.swift */; };
 		047FE5DC216CF063009B56BB /* MainFeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FE5DB216CF063009B56BB /* MainFeedTableViewController.swift */; };
 		047FE5DF216CF69C009B56BB /* UIScreen+Sugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FE5DE216CF69C009B56BB /* UIScreen+Sugar.swift */; };
@@ -55,7 +56,7 @@
 		04B38AEC2178821200E17908 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AEB2178821200E17908 /* SignUpViewController.swift */; };
 		04B38AEE2178826000E17908 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AED2178826000E17908 /* AuthView.swift */; };
 		04B38AF0217886FD00E17908 /* UIAlertController+Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AEF217886FD00E17908 /* UIAlertController+Auth.swift */; };
-		04C70AA42183188E00B43683 /* PostDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C70AA32183188E00B43683 /* PostDetailTableViewCell.swift */; };
+		04C70AA42183188E00B43683 /* DetailTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C70AA32183188E00B43683 /* DetailTextCell.swift */; };
 		04C70AA621831DCD00B43683 /* PostCoverModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C70AA521831DCD00B43683 /* PostCoverModel.swift */; };
 		04C70AA821831F1C00B43683 /* EditModeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C70AA721831F1C00B43683 /* EditModeState.swift */; };
 		04C70AAA2183296A00B43683 /* UINavigationController+Transpar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C70AA92183296A00B43683 /* UINavigationController+Transpar.swift */; };
@@ -136,6 +137,7 @@
 		045FF0BA217F98E9003ECA23 /* PhotoGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGridCell.swift; sourceTree = "<group>"; };
 		045FF0DE21803C5F003ECA23 /* PhotoGridState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGridState.swift; sourceTree = "<group>"; };
 		045FF102218093A9003ECA23 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		046460AA2188247E00EFE40B /* DetailPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPhotoCell.swift; sourceTree = "<group>"; };
 		04721B422134EF3A00143AF6 /* UIView+LayoutAnchor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+LayoutAnchor.swift"; sourceTree = "<group>"; };
 		047FE5DB216CF063009B56BB /* MainFeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFeedTableViewController.swift; sourceTree = "<group>"; };
 		047FE5DE216CF69C009B56BB /* UIScreen+Sugar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Sugar.swift"; sourceTree = "<group>"; };
@@ -145,7 +147,7 @@
 		04B38AEB2178821200E17908 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		04B38AED2178826000E17908 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		04B38AEF217886FD00E17908 /* UIAlertController+Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Auth.swift"; sourceTree = "<group>"; };
-		04C70AA32183188E00B43683 /* PostDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailTableViewCell.swift; sourceTree = "<group>"; };
+		04C70AA32183188E00B43683 /* DetailTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTextCell.swift; sourceTree = "<group>"; };
 		04C70AA521831DCD00B43683 /* PostCoverModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCoverModel.swift; sourceTree = "<group>"; };
 		04C70AA721831F1C00B43683 /* EditModeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditModeState.swift; sourceTree = "<group>"; };
 		04C70AA92183296A00B43683 /* UINavigationController+Transpar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Transpar.swift"; sourceTree = "<group>"; };
@@ -399,7 +401,8 @@
 				04C70AA721831F1C00B43683 /* EditModeState.swift */,
 				044E663D2182FD930047D5F2 /* PostDetailView.swift */,
 				044E66402182FE6C0047D5F2 /* PostDetailViewController.swift */,
-				04C70AA32183188E00B43683 /* PostDetailTableViewCell.swift */,
+				04C70AA32183188E00B43683 /* DetailTextCell.swift */,
+				046460AA2188247E00EFE40B /* DetailPhotoCell.swift */,
 				04C70B282186DA9300B43683 /* ToggleView */,
 			);
 			name = Detail;
@@ -728,6 +731,7 @@
 				045FF0B7217F9377003ECA23 /* PhotoGridController.swift in Sources */,
 				04D59136217C804E00EE8696 /* UIButton+SetTitle.swift in Sources */,
 				04C70B5021871DCE00B43683 /* UploadPhotoViewController.swift in Sources */,
+				046460AB2188247E00EFE40B /* DetailPhotoCell.swift in Sources */,
 				04721B432134EF3A00143AF6 /* UIView+LayoutAnchor.swift in Sources */,
 				0423A602212B72F000DD9747 /* SplahViewController.swift in Sources */,
 				045FF093217F4353003ECA23 /* Date+DateFormatter.swift in Sources */,
@@ -745,7 +749,7 @@
 				0423A637212B97B000DD9747 /* LikeViewController.swift in Sources */,
 				04C70ACA218456C600B43683 /* ToggleView.swift in Sources */,
 				0423A62D212B976D00DD9747 /* SearchView.swift in Sources */,
-				04C70AA42183188E00B43683 /* PostDetailTableViewCell.swift in Sources */,
+				04C70AA42183188E00B43683 /* DetailTextCell.swift in Sources */,
 				04B38AEE2178826000E17908 /* AuthView.swift in Sources */,
 				04B38AEA2178820C00E17908 /* EmailLoginViewController.swift in Sources */,
 				04B38AEC2178821200E17908 /* SignUpViewController.swift in Sources */,

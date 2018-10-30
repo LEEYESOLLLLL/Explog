@@ -176,6 +176,17 @@ extension PostDetailViewController: PassableDataDelegate {
 }
 
 extension PostDetailViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard case .ready(let item) = state,
+            let contents = item.postContents, contents.count > indexPath.row,
+            let contentType = ContentType(rawValue: contents[indexPath.row].contentType) else {
+                return 0
+        }
+        switch contentType {
+        case .txt: return UITableView.automaticDimension
+        case .img: return UIScreen.main.bounds.height / 3
+        }
+    }
     
 }
 
@@ -192,27 +203,42 @@ extension PostDetailViewController: UITableViewDataSource {
         return contents.count
     }
     
+    
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return tableView.dequeue(PostDetailTableViewCell.self, indexPath: indexPath)
+        guard case .ready(let item) = state,
+            let contents = item.postContents, contents.count > indexPath.row,
+            let contentType = ContentType(rawValue: contents[indexPath.row].contentType) else {
+                return UITableViewCell()
+        }
+        
+        switch contentType {
+        case .txt: return tableView.dequeue(DetailTextCell.self, indexPath: indexPath)
+        case .img: return tableView.dequeue(DetailPhotoCell.self, indexPath: indexPath)
+        }
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard case .ready(let item) = state,
-            let cell = cell as? PostDetailTableViewCell,
-            let contents = item.postContents, contents.count > indexPath.row else {
+            let contents = item.postContents, contents.count > indexPath.row,
+            let contentType = ContentType(rawValue: contents[indexPath.row].contentType) else {
                 return
-        }
-        
-        guard let contentType = ContentType(rawValue: contents[indexPath.row].contentType) else {
-            return
         }
         
         let content = contents[indexPath.row].content
         print("content: \(content.content), photo: \(content.photo)")
-        DispatchQueue.main.async {
-            cell.configure(contentType: contentType, content: content)
+        switch contentType {
+        case .txt:
+            guard let cell = cell as? DetailTextCell else {
+                return
+            }
+            cell.configure(content: content)
+        case .img:
+            guard let cell = cell as? DetailPhotoCell else {
+                return
+            }
+            cell.configure(content: content)
         }
     }
-    
 }
 

@@ -21,7 +21,8 @@ final class PostDetailView: BaseView<PostDetailViewController> {
         $0.rowHeight = UITableView.automaticDimension
 
         $0.separatorStyle = .none 
-        $0.register(cell: PostDetailTableViewCell.self)
+        $0.register(cell: DetailTextCell.self)
+        $0.register(cell: DetailPhotoCell.self)
     }
     
     var darkBlurView = UIVisualEffectView().then {
