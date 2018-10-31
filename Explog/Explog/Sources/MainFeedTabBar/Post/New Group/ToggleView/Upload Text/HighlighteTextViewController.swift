@@ -17,6 +17,9 @@ extension UploadTextViewController {
 }
 
 final class UploadTextViewController: BaseViewController {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
     let textType: TextType
     private let postPK: Int
     init(textType: TextType, postPK: Int) {
@@ -42,6 +45,11 @@ final class UploadTextViewController: BaseViewController {
     override func loadView() {
         super.loadView()
         view = v
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.barStyle = .default
     }
     
     @objc func uploadTextButtonAction(_ sender: UIBarButtonItem) {

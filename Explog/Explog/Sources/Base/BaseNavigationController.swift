@@ -14,12 +14,9 @@ import UIKit
  - warning: This class is not used yet
  */
 public class BaseNavigiationController: UINavigationController, ViewControllerType {
-    
-    
     override init(rootViewController: UIViewController) {
         super.init(rootViewController: rootViewController)
     }
-    
     
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

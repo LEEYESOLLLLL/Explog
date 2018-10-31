@@ -117,6 +117,7 @@ extension FeedContainerViewController: CaseContainerDelegate {
     
     func caseContainer(parallaxHeader progress: CGFloat) {
         headerImageView.layer.opacity = Float( 1 - progress )
+        
     }
     
     

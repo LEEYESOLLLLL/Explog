@@ -10,6 +10,9 @@ import UIKit
 import Moya
 
 final class UploadPhotoViewController: PhotoGridViewController {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default 
+    }
     
     var postPK: Int
     required init(postPK: Int) {
@@ -36,6 +39,15 @@ final class UploadPhotoViewController: PhotoGridViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.barStyle = .default
+    }
+    
+    override func dismissBarButtonAction(_ sender: UIBarButtonItem) {
+        navigationController?.popViewController(animated: true)
     }
     
     override func doneBarButtonAction(_ sender: UIBarButtonItem) {

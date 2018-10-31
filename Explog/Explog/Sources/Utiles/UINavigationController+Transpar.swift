@@ -16,3 +16,4 @@ extension UINavigationController {
         navigationBar.isTranslucent = `is`
     }
 }
+

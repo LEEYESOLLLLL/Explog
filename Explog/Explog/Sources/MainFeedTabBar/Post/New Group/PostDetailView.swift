@@ -9,11 +9,7 @@
 import UIKit
 import ParallaxHeader
 
-final class PostDetailView: BaseView<PostDetailViewController> {
-    // TableView, EditButton, Button inside EditButton.., Model..
-    // NavigationItem..
-    // LikeButton, ReplyButton, DismissButton
-    
+class PostDetailView: BaseView<PostDetailViewController> {
     lazy var postTableView = UITableView().then {
         $0.contentInsetAdjustmentBehavior = .never
         $0.backgroundColor = .white
@@ -144,7 +140,7 @@ final class PostDetailView: BaseView<PostDetailViewController> {
     }
     
     override func setupUI() {
-        addSubviews([postTableView, coverInformationView, toggleView, activityView])
+        addSubviews([postTableView, toggleView, activityView])
         coverInformationView.addSubviews([coverImage, darkBlurView, titleLabel, dateAndContinentStackView, authorButton, authorNickNameLabel])
         dateAndContinentStackView.addArrangedSubviews([dateLabel, continentLabel])
         
@@ -221,6 +217,8 @@ final class PostDetailView: BaseView<PostDetailViewController> {
         postTableView.delegate = vc
         postTableView.dataSource = vc
         setupNavigationBar()
+        targetingButtons()
+        
         postTableView.parallaxHeader.parallaxHeaderDidScrollHandler = { [weak self] parallaxHeader in
             guard let strongSelf = self else { return }
             if parallaxHeader.progress <= 0.0 {
@@ -240,12 +238,14 @@ final class PostDetailView: BaseView<PostDetailViewController> {
         case .on: vc.navigationItem.rightBarButtonItems = [doneButton, likeButton, replyButton]
         case .off: vc.navigationItem.rightBarButtonItems = [likeButton, replyButton]
         }
-        
         vc.navigationController?.transparentNaviBar(true)
-        
+    }
+    
+    func targetingButtons() {
         highlightTextButton.addTarget(vc, action: #selector(vc.highlightTextButtonAction(_:)), for: .touchUpInside)
         normalTextButton.addTarget(vc, action: #selector(vc.normalTextButtonAction(_:)), for: .touchUpInside)
         photoButton.addTarget(vc, action: #selector(vc.photoButtonAction(_:)), for: .touchUpInside)
+        authorButton.addTarget(vc, action: #selector(vc.authorButtonAction(_:)), for: .touchUpInside)
     }
     
     func setupCoverImage(_ data: PostCoverModel) {
