@@ -109,7 +109,9 @@ final class ProfileViewController: BaseViewController {
     
     
     @objc func settingBarButtonAction(_ sender: UIBarButtonItem) {
-        
+        let settingViewController = SettingViewController()
+        let naviVC = UINavigationController(rootViewController: settingViewController)
+        present(naviVC, animated: true, completion: nil)
     }
     
     @objc func backButtonAction(_ sender: UIBarButtonItem) {
@@ -168,8 +170,6 @@ extension ProfileViewController: UITableViewDataSource {
                        author: item.username,
                        numberOflike: post.numLiked)
     }
-    
-    
 }
 
 
