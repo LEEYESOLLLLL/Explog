@@ -24,7 +24,7 @@ final class SettingView: BaseView<SettingViewController> {
     }
     
     struct UI {
-        static var sectionHeight = UIScreen.main.bounds.height * 0.05
+        static var sectionHeight = UIScreen.main.bounds.height * 0.08
     }
     override func setupUI() {
         backgroundColor = .white
