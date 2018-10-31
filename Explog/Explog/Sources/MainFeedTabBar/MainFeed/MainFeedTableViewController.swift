@@ -27,6 +27,10 @@ final class FeedTableViewController: ParallaxTableViewController {
         }
     }
     
+    lazy var triggerInitialization = UIRefreshControl().then {
+        $0.addTarget(self, action: #selector(triggerInitializationAction(_:)), for: .valueChanged)
+    }
+    
     /**
      tableview's tag is used to identify requesting number of continent
      */
@@ -43,19 +47,31 @@ final class FeedTableViewController: ParallaxTableViewController {
         self.title = title
         return self
     }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         state = .loading
+        setupBinding()
         // MARK: when development has finished, removing below code 
         KingfisherManager.shared.cache.clearMemoryCache()
         KingfisherManager.shared.cache.clearDiskCache()
-        
     }
     
     func setupUI() {
         self.tableView.separatorStyle = .none
         self.tableView.rowHeight = UITableView.automaticDimension
         DispatchQueue.main.async { self.networkServiceWith(continent: self.tableView.tag) }
+    }
+    
+    func setupBinding() {
+        tableView.refreshControl = triggerInitialization
+    }
+    
+    @objc func triggerInitializationAction(_ sender: UIRefreshControl) {
+        state = .loading
+        tableView.reloadData()
+        sender.endRefreshing()
     }
     
     func networkServiceWith(continent: Int) {
@@ -186,6 +202,6 @@ extension FeedTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.bounds.height/3.6
+        return tableView.bounds.height / 3.6
     }
 }

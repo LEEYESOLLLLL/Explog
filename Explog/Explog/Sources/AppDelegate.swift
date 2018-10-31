@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let searchVC = SearchViewController.create()
         let postVC = PostViewController.create()
         let likeVC = LikeViewController.create()
-        let profileVC = ProfileViewController.create()
+        let profileVC = UINavigationController(rootViewController: ProfileViewController.create(editMode: .on))
         return MainFeedTabBarViewController(viewControllers: [mainFeedVC, searchVC, postVC, likeVC, profileVC])
     }
     

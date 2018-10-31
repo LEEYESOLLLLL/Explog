@@ -7,27 +7,154 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class ProfileView: BaseView<ProfileViewController> {
+    var profileTableView = UITableView().then {
+        $0.contentInsetAdjustmentBehavior = .never
+        $0.backgroundColor = .white
+        $0.separatorStyle = .none
+        $0.register(cell: ProfileCell.self)
+    }
     
-    var logoutButton = UIButton().then {
-        $0.setTitle("Log out", for: [.normal, .highlighted])
-        $0.setTitleColor(.black, highlightedStateColor: .gray)
+    var profileHeader = UIView().then {
+        $0.backgroundColor = .white
+    }
+    
+    var nameLabel = UILabel().then {
+        $0.setup(textColor: .black, fontStyle: .headline, textAlignment: .center, numberOfLines: 1)
+        
+    }
+    
+    var profileImage = UIImageView().then {
+        $0.layer.masksToBounds = true
+        $0.layer.cornerRadius = UI.profileImageSize.width / 2
+        $0.contentMode = .scaleToFill
+    }
+    
+    var emailLabel = UILabel().then {
+        $0.setup(textColor: .black, fontStyle: .headline, textAlignment: .center, numberOfLines: 1)
+    }
+    
+    lazy var settingBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "profile-32px"),
+                                                style: .plain,
+                                                target: vc,
+                                                action: #selector(vc.settingBarButtonAction(_:))).then {
+                                                    $0.tintColor = .black
+    }
+    var activityIndicator = UIActivityIndicatorView(style: .gray)
+    lazy var backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "back-24pk"),
+                                          style: .plain,
+                                          target: vc,
+                                          action: #selector(vc.backButtonAction(_:))).then {
+                                            $0.tintColor = .black
+    }
+     
+    
+    
+    struct UI {
+        static var coverImageHeight: CGFloat = UIScreen.main.bounds.height * 0.3
+        static var margin: CGFloat = 8
+        static var profileImageSize = CGSize(width: UIScreen.main.bounds.height * 0.12,
+                                             height: UIScreen.main.bounds.height * 0.12)
+        static var topLabelMargin = UIApplication.shared.statusBarFrame.height + 8
+        static var statusBarHeight = UIApplication.shared.statusBarFrame.height
+        static var tableViewCellHegiht = UIScreen.main.bounds.height / 4.4
     }
     
     override func setupUI() {
-        backgroundColor = .white
-        addSubview(logoutButton)
+        addSubviews([profileTableView, activityIndicator])
+        profileHeader.addSubviews([nameLabel, profileImage, emailLabel])
         
-        logoutButton
-            .topAnchor(to: layoutMarginsGuide.topAnchor)
-            .leadingAnchor(to: layoutMarginsGuide.leadingAnchor)
+        profileTableView
+            .topAnchor(to: topAnchor)
+            .bottomAnchor(to: bottomAnchor)
+            .leadingAnchor(to: leadingAnchor)
+            .trailingAnchor(to: trailingAnchor)
             .activateAnchors()
         
+        if let tabBar = vc.tabBarController?.tabBar {
+            profileTableView.contentInset.bottom = tabBar.frame.height
+        }
+        
+        _ = profileTableView.then {
+            $0.parallaxHeader.view = profileHeader
+            $0.parallaxHeader.height = UI.coverImageHeight
+            $0.parallaxHeader.minimumHeight = 0
+            $0.parallaxHeader.mode = .topFill
+        }
+        
+        nameLabel
+            .topAnchor(to: profileHeader.topAnchor, constant: UI.topLabelMargin)
+            .leadingAnchor(to: profileHeader.leadingAnchor)
+            .trailingAnchor(to: profileHeader.trailingAnchor)
+            .activateAnchors()
+        
+        profileImage
+            .topAnchor(to: nameLabel.bottomAnchor, constant: UI.margin)
+            .centerXAnchor(to: nameLabel.centerXAnchor)
+            .dimensionAnchors(size: UI.profileImageSize)
+            .activateAnchors()
+        
+        emailLabel
+            .topAnchor(to: profileImage.bottomAnchor, constant: UI.margin)
+            .leadingAnchor(to: nameLabel.leadingAnchor)
+            .trailingAnchor(to: nameLabel.trailingAnchor)
+            .bottomAnchor(lessThanOrEqualTo: profileHeader.bottomAnchor, constant: -UI.margin)
+            .activateAnchors()
+        
+        activityIndicator
+            .centerXAnchor(to: centerXAnchor)
+            .centerYAnchor(to: centerYAnchor)
+            .activateAnchors()
     }
     
     override func setupBinding() {
-        logoutButton.addTarget(vc, action: #selector(vc.logoutButtonAction(_:)), for: .touchUpInside)
+        profileTableView.delegate = vc
+        profileTableView.dataSource = vc
+        setupNavigationBar()
         
+    }
+    
+    func setupNavigationBar() {
+        vc.navigationItem.title = nil
+        vc.navigationController?.transparentNaviBar(true, navigationBarHidden: false)
+        vc.navigationItem.rightBarButtonItem = vc.editMode == .on ? settingBarButton : nil
+        vc.navigationItem.leftBarButtonItem = vc.editMode == .on ? nil : backButton
+        
+        profileTableView
+            .parallaxHeader
+            .parallaxHeaderDidScrollHandler = { [weak vc] parallax in
+                guard let strongVC = vc else {
+                    return
+                }
+                let progress = parallax.progress
+                let statnd = UI.statusBarHeight / parallax.height
+                switch statnd >= progress {
+                case true:
+                    strongVC.navigationController?.navigationBar.barStyle = .black
+                    strongVC.navigationItem.rightBarButtonItem?.tintColor = .white
+                    strongVC.navigationItem.leftBarButtonItem?.tintColor = .white
+                case false:
+                    strongVC.navigationController?.navigationBar.barStyle = .default
+                    strongVC.navigationItem.rightBarButtonItem?.tintColor = .black
+                    strongVC.navigationItem.leftBarButtonItem?.tintColor = .black
+                }
+        }
+    }
+    
+    func initializeProfile(_ model: UserModel) {
+        nameLabel.text = model.username
+        emailLabel.text = model.email
+        guard let profilePath = model.imgProfile,
+            let profileURL = URL(string: profilePath) else {
+                return
+        }
+        profileImage.kf.setImage(
+            with: profileURL,
+            placeholder: nil,
+            options: [.transition(ImageTransition.fade(1))],
+            progressBlock: nil,
+            completionHandler: nil)
     }
 }

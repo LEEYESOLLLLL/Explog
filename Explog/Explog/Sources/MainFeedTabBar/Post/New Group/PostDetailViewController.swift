@@ -10,18 +10,16 @@ import UIKit
 import Moya
 import BoltsSwift
 
-final class PostDetailViewController: BaseViewController {
+class PostDetailViewController: BaseViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        self.navigationController?.navigationBar.barStyle = .black
+        
         return .lightContent
     }
-    init(coverData: PostCoverModel) {
+    required init(coverData: PostCoverModel) {
         self.coverData = coverData
         super.init()
     }
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    required public init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
     required init() {
         fatalError("init() has not been implemented")
@@ -37,10 +35,15 @@ final class PostDetailViewController: BaseViewController {
     var editMode: EditMode = .off {
         didSet {
             switch editMode {
-            case .on: DispatchQueue.main.async { self.v.toggleView.isHidden = false }
+            case .on: DispatchQueue.main.async {
+                self.v.toggleView.isHidden = false
+                self.tabBarController?.tabBar.isHidden = true
+                
+                }
             case .off:
                 DispatchQueue.main.async {
                     self.v.toggleView.isHidden = true
+                    self.v.toggleView.layer.opacity = 1.0
                     self.tabBarController?.tabBar.isHidden = true
                 }
             }
@@ -77,13 +80,14 @@ final class PostDetailViewController: BaseViewController {
         view = v
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.barStyle = .black
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         v.activityView.startAnimating()
         requestTask().continueWith { [weak self] task in
             guard let strongSelf = self else {
@@ -127,6 +131,16 @@ final class PostDetailViewController: BaseViewController {
         return taskSource.task
     }
 }
+extension PostDetailViewController {
+    @objc func authorButtonAction(_ sender: UIButton) {
+        let otherUserPK = coverData.author.pk
+        if let myPK = KeychainService.pk,
+            editMode == .off && otherUserPK != Int(myPK) {
+            let profileVC = ProfileViewController.create(editMode: .off, otherUserPK: coverData.author.pk)
+            navigationController?.pushViewController(profileVC, animated: true)
+        }
+    }
+}
 
 
 // MARK: NavigationBar's Items
@@ -145,6 +159,7 @@ extension PostDetailViewController {
     
     @objc func doneButtonAction(_ sender: UIBarButtonItem) {
         view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
 }
 
@@ -171,7 +186,7 @@ extension PostDetailViewController: PassableDataDelegate {
     }
     
     func pass(data: UIImage) {
-        // request전임.. 여기서 요청하고 화면 내려왔을때
+        // wating..
     }
     
     @objc func toggleViewTapGestureAction(_ sender: UITapGestureRecognizer) {
