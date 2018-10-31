@@ -11,7 +11,7 @@ PODS:
     - Result (~> 3.0)
   - ParallaxHeader (2.0.0)
   - Result (3.2.4)
-  - SimpleCell (0.4.0)
+  - SimpleCell (0.5.0)
   - SkyFloatingLabelTextField (3.6.0)
   - Then (2.4.0)
 
@@ -22,7 +22,7 @@ DEPENDENCIES:
   - Kingfisher (~> 4.10.0)
   - Moya (~> 11.0)
   - ParallaxHeader (~> 2.0.0)
-  - SimpleCell (~> 0.4.0)
+  - SimpleCell (~> 0.5.0)
   - SkyFloatingLabelTextField (~> 3.6.0)
   - Then (~> 2.4.0)
 
@@ -49,10 +49,10 @@ SPEC CHECKSUMS:
   Moya: a725035953bc1c0eb1be505ab903984501d82440
   ParallaxHeader: fb6ee97915626454f3c029a97b424f79a777c642
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
-  SimpleCell: 7a940186dcfb0c3eedcef73895de836560fcb4ca
+  SimpleCell: 7922cdb87cae6ed268377a1d1a83820d22a76b8b
   SkyFloatingLabelTextField: 38164979b79512f9ff9288ad8acfc4bbf5d843e3
   Then: 71866660c7af35a7343831f7668e7cd2b62ee0f2
 
-PODFILE CHECKSUM: b4aa9739c535dfca51c9071dba5ee091bc87cda1
+PODFILE CHECKSUM: 0cfaea0fea9e4a971968578e56e5980e65dc1f12
 
 COCOAPODS: 1.6.0.beta.1
