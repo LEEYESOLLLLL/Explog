@@ -129,8 +129,8 @@ extension ProfileViewController: UITableViewDelegate {
             return
         }
         let postCover = item.posts[indexPath.row].converted(author: item.author())
-        let detailVC = PostDetailViewController
-            .create(editMode: otherUserPK != nil ? .off : .on, coverData: postCover)
+        let detailVC = PostDetailViewController.create(editMode: otherUserPK != nil ? .off : .on,
+                                                       coverData: postCover)
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }
