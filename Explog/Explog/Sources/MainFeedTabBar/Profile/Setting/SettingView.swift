@@ -11,7 +11,8 @@ import UIKit
 final class SettingView: BaseView<SettingViewController> {
     
     var tableView = UITableView().then {
-        $0.backgroundColor = .white 
+        $0.backgroundColor = .white
+        $0.separatorInset = UIEdgeInsets(top: 0, left: UI.margin, bottom: 0, right: -UI.margin)
         $0.register(cell: SettingCell.self)
         $0.register(headerFooter: SettingHeaderView.self)
     }
@@ -25,6 +26,7 @@ final class SettingView: BaseView<SettingViewController> {
     
     struct UI {
         static var sectionHeight = UIScreen.main.bounds.height * 0.08
+        static var margin: CGFloat = 4
     }
     override func setupUI() {
         backgroundColor = .white
@@ -49,7 +51,6 @@ final class SettingView: BaseView<SettingViewController> {
         vc.navigationController?.transparentNaviBar(false, navigationBarHidden: false)
         vc.navigationItem.leftBarButtonItem = backButton
         vc.navigationItem.title = "Setting"
-        
     }
     
     

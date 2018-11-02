@@ -9,6 +9,7 @@
 import UIKit
 import SkyFloatingLabelTextField
 import Moya
+import Square
 
 final class EmailLoginViewController: BaseViewController {
     lazy var v = EmailLoginView(controlBy: self)
@@ -72,26 +73,17 @@ final class EmailLoginViewController: BaseViewController {
                             KeychainService.configure(material: loginModel.token, key: .token)
                             KeychainService.configure(material: String(loginModel.pk), key: .pk)
                             strongSelf.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-                            sender.stopAnimating()
                         }catch {
                             print("invalidate LoginModel")
-                            sender.stopAnimating()
                         }
                     }else {
-                        UIAlertController.showWithAlertAction(
-                            alertVCtitle: "유효하지 않은 아이디와 비밀번호 입니다",
-                            alertVCmessage: "",
-                            alertVCstyle: .alert,
-                            isCancelAction: false,
-                            actionTitle: "OK",
-                            actionStyle: .cancel,
-                            action: nil)
-                        sender.stopAnimating()
+                        Square.display("you did input an invalid ID and Password")
                     }
                 case .failure(let error):
                     print(error.localizedDescription)
-                    sender.stopAnimating()
+                    
                 }
+            sender.stopAnimating()
         }
     }
     

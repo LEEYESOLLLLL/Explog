@@ -11,6 +11,7 @@ import UIKit
 extension SettingViewController {
     enum Section: Int, CaseIterable {
         case account = 0
+        case feature
         case information
         case support
         case logout
@@ -18,6 +19,7 @@ extension SettingViewController {
         var sectionString: String {
             switch self {
             case .account: return "Account"
+            case .feature: return "Feature"
             case .information: return "Information"
             case .support: return "Support"
             case .logout: return "Logout"
@@ -31,6 +33,13 @@ extension SettingViewController {
 extension SettingViewController {
     enum Account: String, CaseIterable {
         case profile_setting = "Profile Settings"
+    }
+}
+
+// Section 2
+extension SettingViewController {
+    enum Feature: String, CaseIterable {
+        case cashed = "Remove Cashed Data"
     }
 }
 

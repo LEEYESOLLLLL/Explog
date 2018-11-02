@@ -8,9 +8,7 @@
 
 import UIKit
 import Moya
-
-
-
+import Square
 
 final class PostViewController: BaseViewController {
     static func create() -> UINavigationController {
@@ -112,14 +110,7 @@ final class PostViewController: BaseViewController {
             if compairableResult {
                 sender.setTitle(pickDate.convertedString(), for: [.normal, .highlighted])
             } else {
-                UIAlertController.showWithAlertAction(
-                    alertVCtitle: "Start Date can't be later than End Date or End Date can't be earlier than Start Date",
-                    alertVCmessage: "",
-                    alertVCstyle: .alert,
-                    isCancelAction: false,
-                    actionTitle: "OK",
-                    actionStyle: .default,
-                    action: nil)
+                Square.display("Start Date can't be later than End Date or End Date can't be earlier than Start Date")
             }
         }
         datepickerAlertController.addAction(okAction)

@@ -25,6 +25,10 @@ target 'Explog' do
   ## Abstract
   pod 'Then', '~> 2.4.0'
   pod 'SimpleCell', '~> 0.5.0'
+  pod 'Square'
+
+  ## generating Open-source information
+  pod 'AcknowList', '~> 1.7.0'
 
   # Pods for Explog
 end
