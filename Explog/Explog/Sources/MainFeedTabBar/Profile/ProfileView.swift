@@ -36,12 +36,18 @@ final class ProfileView: BaseView<ProfileViewController> {
         $0.setup(textColor: .black, fontStyle: .headline, textAlignment: .center, numberOfLines: 1)
     }
     
-    lazy var settingBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "profile-32px"),
-                                                style: .plain,
-                                                target: vc,
-                                                action: #selector(vc.settingBarButtonAction(_:))).then {
-                                                    $0.tintColor = .black
-    }
+//    lazy var settingBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "profile-32px"),
+//                                                style: .done,
+//                                                target: vc,
+//                                                action: #selector(vc.settingBarButtonAction(_:))).then {
+//                                                    $0.tintColor = .black
+//    }
+    var settingBarButton = UIBarButtonItem(customView: UIImageView(image: #imageLiteral(resourceName: "profile-32px")))
+//        .then {
+//        $0.target = vc
+//        $0.action = #selector(vc.settingBarButtonAction(_:))
+//    }
+    
     var activityIndicator = UIActivityIndicatorView(style: .gray)
     lazy var backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "back-24pk"),
                                           style: .plain,
@@ -119,8 +125,18 @@ final class ProfileView: BaseView<ProfileViewController> {
     func setupNavigationBar() {
         vc.navigationItem.title = nil
         vc.navigationController?.transparentNaviBar(true, navigationBarHidden: false)
-        vc.navigationItem.rightBarButtonItem = vc.editMode == .on ? settingBarButton : nil
+        vc.navigationItem.rightBarButtonItem = vc.editMode == .on ? settingBarButton : nil 
         vc.navigationItem.leftBarButtonItem = vc.editMode == .on ? nil : backButton
+        settingBarButton.target = vc
+        settingBarButton.action = #selector(vc.settingBarButtonAction(_:))
+        
+        
+        
+        
+        
+        
+        
+
         
         profileTableView
             .parallaxHeader
