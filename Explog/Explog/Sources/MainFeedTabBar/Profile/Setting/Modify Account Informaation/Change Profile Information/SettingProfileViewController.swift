@@ -105,7 +105,7 @@ extension SettingProfileViewController {
         navigationController?.pushViewController(photoVC, animated: true)
     }
     
-    @objc func didChangeTextField(_ textfield: SkyFloatingLabelTextField) {
+    @objc func textFieldDidChange(_ textfield: SkyFloatingLabelTextField) {
         guard let identifier = textfield.placeholder,
             let textFieldType = TextFieldType(rawValue: identifier),
             let text = textfield.text, text.count > 0 else {

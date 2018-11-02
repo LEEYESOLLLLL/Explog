@@ -12,6 +12,7 @@ import Moya
 enum User {
     case profile(otherUserPK: Int?)
     case updateProfile(username: String, photo: UIImage)
+    case updatePassword(oldPassword: String, newPassword: String)
 }
 
 extension User: TargetType {
@@ -23,14 +24,16 @@ extension User: TargetType {
             }else {
                 return "/member/userprofile/"
             }
-        case .updateProfile(_, _): return "/member/userprofile/update/"
+        case .updateProfile:  return "/member/userprofile/update/"
+        case .updatePassword: return "/member/userpassword/update/"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .profile(_): return .get
-        case .updateProfile(_, _): return .patch
+        case .profile(_):     return .get
+        case .updateProfile:  return .patch
+        case .updatePassword: return .patch
         }
     }
     
@@ -54,6 +57,15 @@ extension User: TargetType {
                                                        fileName: UUID().uuidString + ".jpg",
                                                        mimeType: "image/jpg")
                 ])
+            
+        case .updatePassword(let oldPassword, let newPassword):
+            guard let oldPassword = oldPassword.data(using: .utf8),
+            let newPassword = newPassword.data(using: .utf8) else {
+                return .requestPlain
+            }
+            
+            return .uploadMultipart(["old_password": oldPassword,
+                                     "new_password": newPassword].convertedMutiPartFormData())
         }
     }
     
