@@ -64,7 +64,6 @@
 		04B38AEA2178820C00E17908 /* EmailLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AE92178820C00E17908 /* EmailLoginViewController.swift */; };
 		04B38AEC2178821200E17908 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AEB2178821200E17908 /* SignUpViewController.swift */; };
 		04B38AEE2178826000E17908 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AED2178826000E17908 /* AuthView.swift */; };
-		04B38AF0217886FD00E17908 /* UIAlertController+Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AEF217886FD00E17908 /* UIAlertController+Auth.swift */; };
 		04C70AA42183188E00B43683 /* DetailTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C70AA32183188E00B43683 /* DetailTextCell.swift */; };
 		04C70AA621831DCD00B43683 /* PostCoverModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C70AA521831DCD00B43683 /* PostCoverModel.swift */; };
 		04C70AA821831F1C00B43683 /* EditModeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C70AA721831F1C00B43683 /* EditModeState.swift */; };
@@ -75,10 +74,19 @@
 		04C70B2E2186DAE700B43683 /* HighlighteTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C70B2D2186DAE700B43683 /* HighlighteTextViewController.swift */; };
 		04C70B4E21870E4300B43683 /* PassableDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C70B4D21870E4300B43683 /* PassableDataDelegate.swift */; };
 		04C70B5021871DCE00B43683 /* UploadPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C70B4F21871DCE00B43683 /* UploadPhotoViewController.swift */; };
+		04C8F36C218AFFE100CA296F /* Cache+AllClear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8F36B218AFFE100CA296F /* Cache+AllClear.swift */; };
+		04C8F36E218B016B00CA296F /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8F36D218B016B00CA296F /* AppInfo.swift */; };
+		04C8F370218B0A3B00CA296F /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8F36F218B0A3B00CA296F /* File.swift */; };
+		04C8F705218B29ED00CA296F /* Pods-Explog-acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04C8F704218B29C900CA296F /* Pods-Explog-acknowledgements.plist */; };
+		04C8F707218B2C0100CA296F /* SettingProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8F706218B2C0100CA296F /* SettingProfileView.swift */; };
+		04C8F709218B2C0900CA296F /* SettingProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8F708218B2C0900CA296F /* SettingProfileViewController.swift */; };
 		04D59136217C804E00EE8696 /* UIButton+SetTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D59135217C804E00EE8696 /* UIButton+SetTitle.swift */; };
 		04D59138217C849900EE8696 /* ActivityIndicatorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D59137217C849900EE8696 /* ActivityIndicatorButton.swift */; };
 		04EBBA2F2137A6DB00CA73A0 /* UICollectionView+init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EBBA2E2137A6DB00CA73A0 /* UICollectionView+init.swift */; };
 		04EBBA372137E8C900CA73A0 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EBBA362137E8C900CA73A0 /* FeedTableViewCell.swift */; };
+		04F1A3BF218C491A00CF99A1 /* SettingProfilePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F1A3BE218C491A00CF99A1 /* SettingProfilePhotoViewController.swift */; };
+		04F1A3C2218C5B3800CF99A1 /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F1A3C1218C5B3800CF99A1 /* ChangePasswordView.swift */; };
+		04F1A3C4218C5B3E00CF99A1 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F1A3C3218C5B3E00CF99A1 /* ChangePasswordViewController.swift */; };
 		04F71E98217ADFDC0099C7C9 /* UIFont+Bold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F71E97217ADFDC0099C7C9 /* UIFont+Bold.swift */; };
 		04F71E9A217AE3900099C7C9 /* UIStackVIew+ArrangedSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F71E99217AE3900099C7C9 /* UIStackVIew+ArrangedSubview.swift */; };
 		04F71E9C217AF38A0099C7C9 /* EmailLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F71E9B217AF38A0099C7C9 /* EmailLoginView.swift */; };
@@ -164,7 +172,6 @@
 		04B38AE92178820C00E17908 /* EmailLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLoginViewController.swift; sourceTree = "<group>"; };
 		04B38AEB2178821200E17908 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		04B38AED2178826000E17908 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
-		04B38AEF217886FD00E17908 /* UIAlertController+Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Auth.swift"; sourceTree = "<group>"; };
 		04C70AA32183188E00B43683 /* DetailTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTextCell.swift; sourceTree = "<group>"; };
 		04C70AA521831DCD00B43683 /* PostCoverModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCoverModel.swift; sourceTree = "<group>"; };
 		04C70AA721831F1C00B43683 /* EditModeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditModeState.swift; sourceTree = "<group>"; };
@@ -175,10 +182,19 @@
 		04C70B2D2186DAE700B43683 /* HighlighteTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlighteTextViewController.swift; sourceTree = "<group>"; };
 		04C70B4D21870E4300B43683 /* PassableDataDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassableDataDelegate.swift; sourceTree = "<group>"; };
 		04C70B4F21871DCE00B43683 /* UploadPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPhotoViewController.swift; sourceTree = "<group>"; };
+		04C8F36B218AFFE100CA296F /* Cache+AllClear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cache+AllClear.swift"; sourceTree = "<group>"; };
+		04C8F36D218B016B00CA296F /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
+		04C8F36F218B0A3B00CA296F /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		04C8F704218B29C900CA296F /* Pods-Explog-acknowledgements.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Pods-Explog-acknowledgements.plist"; sourceTree = "<group>"; };
+		04C8F706218B2C0100CA296F /* SettingProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfileView.swift; sourceTree = "<group>"; };
+		04C8F708218B2C0900CA296F /* SettingProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfileViewController.swift; sourceTree = "<group>"; };
 		04D59135217C804E00EE8696 /* UIButton+SetTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+SetTitle.swift"; sourceTree = "<group>"; };
 		04D59137217C849900EE8696 /* ActivityIndicatorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorButton.swift; sourceTree = "<group>"; };
 		04EBBA2E2137A6DB00CA73A0 /* UICollectionView+init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+init.swift"; sourceTree = "<group>"; };
 		04EBBA362137E8C900CA73A0 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
+		04F1A3BE218C491A00CF99A1 /* SettingProfilePhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfilePhotoViewController.swift; sourceTree = "<group>"; };
+		04F1A3C1218C5B3800CF99A1 /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
+		04F1A3C3218C5B3E00CF99A1 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		04F71E97217ADFDC0099C7C9 /* UIFont+Bold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Bold.swift"; sourceTree = "<group>"; };
 		04F71E99217AE3900099C7C9 /* UIStackVIew+ArrangedSubview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackVIew+ArrangedSubview.swift"; sourceTree = "<group>"; };
 		04F71E9B217AF38A0099C7C9 /* EmailLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLoginView.swift; sourceTree = "<group>"; };
@@ -294,6 +310,7 @@
 		0423A612212B733600DD9747 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				04C8F704218B29C900CA296F /* Pods-Explog-acknowledgements.plist */,
 				0423A606212B72F000DD9747 /* Assets.xcassets */,
 				0423A608212B72F000DD9747 /* LaunchScreen.storyboard */,
 				0423A60B212B72F000DD9747 /* Info.plist */,
@@ -329,12 +346,14 @@
 				04721B422134EF3A00143AF6 /* UIView+LayoutAnchor.swift */,
 				04EBBA2E2137A6DB00CA73A0 /* UICollectionView+init.swift */,
 				047FE5DE216CF69C009B56BB /* UIScreen+Sugar.swift */,
-				04B38AEF217886FD00E17908 /* UIAlertController+Auth.swift */,
 				04F71E97217ADFDC0099C7C9 /* UIFont+Bold.swift */,
 				04D59135217C804E00EE8696 /* UIButton+SetTitle.swift */,
 				045FF08E217E497F003ECA23 /* UISize+Multiply.swift */,
 				045FF092217F4353003ECA23 /* Date+DateFormatter.swift */,
 				04C70AA92183296A00B43683 /* UINavigationController+Transpar.swift */,
+				04C8F36B218AFFE100CA296F /* Cache+AllClear.swift */,
+				04C8F36D218B016B00CA296F /* AppInfo.swift */,
+				04C8F36F218B0A3B00CA296F /* File.swift */,
 			);
 			path = Utiles;
 			sourceTree = "<group>";
@@ -460,6 +479,7 @@
 				047E598D2189D92B00BD2810 /* SettingViewController.swift */,
 				047E59932189E69100BD2810 /* SettingHeaderView.swift */,
 				047E598F2189D9EE00BD2810 /* SettingTableViewCell.swift */,
+				04C8F70A218B2DEA00CA296F /* Modify Account Informaation */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -510,6 +530,26 @@
 				04C70B2D2186DAE700B43683 /* HighlighteTextViewController.swift */,
 			);
 			path = "Upload Text";
+			sourceTree = "<group>";
+		};
+		04C8F70A218B2DEA00CA296F /* Modify Account Informaation */ = {
+			isa = PBXGroup;
+			children = (
+				04F1A3C0218C5B2700CF99A1 /* Setting Profile View  */,
+				04F1A3C1218C5B3800CF99A1 /* ChangePasswordView.swift */,
+				04F1A3C3218C5B3E00CF99A1 /* ChangePasswordViewController.swift */,
+			);
+			path = "Modify Account Informaation";
+			sourceTree = "<group>";
+		};
+		04F1A3C0218C5B2700CF99A1 /* Setting Profile View  */ = {
+			isa = PBXGroup;
+			children = (
+				04F1A3BE218C491A00CF99A1 /* SettingProfilePhotoViewController.swift */,
+				04C8F706218B2C0100CA296F /* SettingProfileView.swift */,
+				04C8F708218B2C0900CA296F /* SettingProfileViewController.swift */,
+			);
+			path = "Setting Profile View ";
 			sourceTree = "<group>";
 		};
 		04F71EA1217AF3B30099C7C9 /* Login */ = {
@@ -664,6 +704,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04C8F705218B29ED00CA296F /* Pods-Explog-acknowledgements.plist in Resources */,
 				0423A60A212B72F000DD9747 /* LaunchScreen.storyboard in Resources */,
 				0423A607212B72F000DD9747 /* Assets.xcassets in Resources */,
 			);
@@ -679,6 +720,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Explog/Pods-Explog-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AcknowList/AcknowList.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts-Swift/BoltsSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/CaseContainer/CaseContainer.framework",
@@ -689,10 +731,12 @@
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SimpleCell/SimpleCell.framework",
 				"${BUILT_PRODUCTS_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework",
+				"${BUILT_PRODUCTS_DIR}/Square/Square.framework",
 				"${BUILT_PRODUCTS_DIR}/Then/Then.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AcknowList.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BoltsSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CaseContainer.framework",
@@ -703,6 +747,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleCell.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkyFloatingLabelTextField.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Square.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Then.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -743,12 +788,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04B38AF0217886FD00E17908 /* UIAlertController+Auth.swift in Sources */,
 				04EBBA2F2137A6DB00CA73A0 /* UICollectionView+init.swift in Sources */,
 				04C70B2C2186DAE200B43683 /* HighlighteTextView.swift in Sources */,
 				0423A614212B756700DD9747 /* BaseView.swift in Sources */,
 				047FE5DF216CF69C009B56BB /* UIScreen+Sugar.swift in Sources */,
 				046A8CA72189761700C12390 /* ProfileState.swift in Sources */,
+				04C8F370218B0A3B00CA296F /* File.swift in Sources */,
 				0423A616212B756D00DD9747 /* BaseViewController.swift in Sources */,
 				04F71E98217ADFDC0099C7C9 /* UIFont+Bold.swift in Sources */,
 				04B38AE82178820400E17908 /* AuthViewController.swift in Sources */,
@@ -772,6 +817,7 @@
 				04721B432134EF3A00143AF6 /* UIView+LayoutAnchor.swift in Sources */,
 				0423A602212B72F000DD9747 /* SplahViewController.swift in Sources */,
 				045FF093217F4353003ECA23 /* Date+DateFormatter.swift in Sources */,
+				04C8F36C218AFFE100CA296F /* Cache+AllClear.swift in Sources */,
 				04F72A61217C36FD0099C7C9 /* baseURL.swift in Sources */,
 				04F72A5D217B44E30099C7C9 /* Regex.swift in Sources */,
 				04C70B26218581AC00B43683 /* PostDetailModel.swift in Sources */,
@@ -788,6 +834,7 @@
 				0423A637212B97B000DD9747 /* LikeViewController.swift in Sources */,
 				04C70ACA218456C600B43683 /* ToggleView.swift in Sources */,
 				047E598C2189D92500BD2810 /* SettingView.swift in Sources */,
+				04C8F707218B2C0100CA296F /* SettingProfileView.swift in Sources */,
 				0423A62D212B976D00DD9747 /* SearchView.swift in Sources */,
 				04C70AA42183188E00B43683 /* DetailTextCell.swift in Sources */,
 				04B38AEE2178826000E17908 /* AuthView.swift in Sources */,
@@ -802,6 +849,7 @@
 				04C70B2E2186DAE700B43683 /* HighlighteTextViewController.swift in Sources */,
 				044E66412182FE6C0047D5F2 /* PostDetailViewController.swift in Sources */,
 				0423A639212B97DB00DD9747 /* ProfileView.swift in Sources */,
+				04C8F36E218B016B00CA296F /* AppInfo.swift in Sources */,
 				045FF08F217E497F003ECA23 /* UISize+Multiply.swift in Sources */,
 				047FE5DC216CF063009B56BB /* MainFeedTableViewController.swift in Sources */,
 				0423A631212B978000DD9747 /* PostView.swift in Sources */,
@@ -809,14 +857,18 @@
 				0413DC7F21775DC30031474A /* Feed.swift in Sources */,
 				04C70AA621831DCD00B43683 /* PostCoverModel.swift in Sources */,
 				0413DC7C21775D0A0031474A /* FeedModel.swift in Sources */,
+				04F1A3BF218C491A00CF99A1 /* SettingProfilePhotoViewController.swift in Sources */,
+				04F1A3C4218C5B3E00CF99A1 /* ChangePasswordViewController.swift in Sources */,
 				0423A600212B72F000DD9747 /* AppDelegate.swift in Sources */,
 				04F72A63217C49A50099C7C9 /* AuthModel.swift in Sources */,
 				04F71E9E217AF3910099C7C9 /* SignUpView.swift in Sources */,
 				045FF0B9217F9395003ECA23 /* PhotoGridView.swift in Sources */,
 				04F71E9C217AF38A0099C7C9 /* EmailLoginView.swift in Sources */,
 				04B38AC821787CAF00E17908 /* KeychainService.swift in Sources */,
+				04F1A3C2218C5B3800CF99A1 /* ChangePasswordView.swift in Sources */,
 				04C70AAA2183296A00B43683 /* UINavigationController+Transpar.swift in Sources */,
 				045FF103218093A9003ECA23 /* Post.swift in Sources */,
+				04C8F709218B2C0900CA296F /* SettingProfileViewController.swift in Sources */,
 				046A8CC72189817B00C12390 /* User.swift in Sources */,
 				045FF095217F4382003ECA23 /* DatePickerAlertController.swift in Sources */,
 				04EBBA372137E8C900CA73A0 /* FeedTableViewCell.swift in Sources */,

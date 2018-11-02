@@ -6,12 +6,7 @@
 //  Copyright © 2018 com.dev.minjun. All rights reserved.
 //
 
-//@objc func logoutButtonAction(_ sender: UIButton) {
-//    // temporary..
-//    KeychainService.allClear()
-//    (parent as? UITabBarController)?.selectedViewController = (parent as? UITabBarController)?.viewControllers?.first!
-//    /////////////////////
-//}
+
 
 import UIKit
 import Moya

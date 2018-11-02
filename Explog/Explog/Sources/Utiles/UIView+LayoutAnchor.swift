@@ -55,6 +55,11 @@ extension UIView {
         return self
     }
     
+    func widthAnchor(to anchor: NSLayoutDimension, constant: CGFloat = 0) -> Self {
+        widthAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
+        return self
+    }
+    
     func heightAnchor(constant: CGFloat) -> Self {
         heightAnchor.constraint(equalToConstant: constant).isActive = true
         return self
@@ -63,7 +68,6 @@ extension UIView {
     func heightAnchor(to anchor: NSLayoutDimension, constant: CGFloat = 0) -> Self {
         heightAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
         return self
-        
     }
     
     func dimensionAnchors(width widthConstant: CGFloat, height heightConstant: CGFloat) -> Self {
@@ -85,6 +89,11 @@ extension UIView {
     
     func centerXAnchor(to anchor: NSLayoutXAxisAnchor) -> Self {
         centerXAnchor.constraint(equalTo: anchor).isActive = true
+        return self
+    }
+    
+    func centerXAnchor(to anchor: NSLayoutXAxisAnchor, constant: CGFloat = 0) -> Self {
+        centerXAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
         return self
     }
     

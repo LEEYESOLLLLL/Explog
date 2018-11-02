@@ -9,6 +9,7 @@
 import UIKit
 import SkyFloatingLabelTextField
 import Moya
+import Square
 
 final class SignUpViewController: BaseViewController {
     lazy var v = SignUpView(controlBy: self)
@@ -88,23 +89,15 @@ final class SignUpViewController: BaseViewController {
                             strongSelf.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
                         }catch {
                             print("invalidate LoginModel")
-                            sender.stopAnimating()
                         }
                     }else {
-                        UIAlertController.showWithAlertAction(
-                            alertVCtitle: "이메일, 유저네임이 이미 존재합니다.",
-                            alertVCmessage: "",
-                            alertVCstyle: .alert,
-                            isCancelAction: false,
-                            actionTitle: "OK",
-                            actionStyle: .cancel,
-                            action: nil)
-                        sender.stopAnimating()
+                        Square.display("Email and User Name already exists")
                     }
                 case .failure(let error):
                     print(error.localizedDescription)
-                    sender.stopAnimating()
+                    
                 }
+                sender.stopAnimating()
         }
     }
 }

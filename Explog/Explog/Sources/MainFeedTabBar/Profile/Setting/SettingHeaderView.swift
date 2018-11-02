@@ -12,6 +12,7 @@ final class SettingHeaderView: UITableViewHeaderFooterView {
     
     var sectionTitle = UILabel().then {
         $0.setup(textColor: .gray, fontStyle: .headline, textAlignment: .left, numberOfLines: 1)
+        
     }
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -34,7 +35,6 @@ final class SettingHeaderView: UITableViewHeaderFooterView {
             .leadingAnchor(to: contentView.layoutMarginsGuide.leadingAnchor)
             .trailingAnchor(to: contentView.trailingAnchor)
             .activateAnchors()
-        
     }
     
     func setupBinding() {

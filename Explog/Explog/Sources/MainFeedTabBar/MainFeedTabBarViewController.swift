@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Square
 
 final class MainFeedTabBarViewController: BaseTabBarController {
     
@@ -26,16 +27,17 @@ extension MainFeedTabBarViewController: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         guard let vcTitle = viewController.title,
             let title = Titles(rawValue: vcTitle) else {
-            return false
+                return false
         }
         
         guard KeychainService.token != nil else {
-            UIAlertController.showWithAlertAction(
-                actionTitle: "Ok",
-                actionStyle: .default) { [weak self] _ in
-                    guard let strongSelf = self else { return }
-                    let authController = AuthViewController()
-                    strongSelf.present(authController, animated: true, completion: nil)
+            Square.display("Require Login", message: "Do you want to go to the login screen?",
+                           alertActions: [.cancel(message: "Cancel"), .default(message: "OK")]) { [weak self] (alertAction, index) in
+                            guard let strongSelf = self else { return }
+                            if index == 1 {
+                                let authController = AuthViewController()
+                                strongSelf.present(authController, animated: true, completion: nil)
+                            }
             }
             return false
         }

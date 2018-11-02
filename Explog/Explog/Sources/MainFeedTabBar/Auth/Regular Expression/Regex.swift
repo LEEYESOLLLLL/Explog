@@ -17,13 +17,13 @@ enum TextFieldType: String {
 struct Validate {
     /**
      1. a 0 of index for Username
-        - All characters without the special character from 8 to 20 can be used as the passwrod
+        - All characters without the special character from 4 to 20 can be used as the passwrod
      1. a 1 of index for validating email
      2. a 2 of index for validating password
         - All characters from 8 to 20 can be used as the passwrod
      */
     private var pattern: [String] = [
-        "^[a-zA-Z\\d]{8,20}$",
+        "^[a-zA-Z\\d]{4,20}$",
         "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
         "^.{8,20}$"]
     private var regexs: [NSRegularExpression]!
@@ -52,7 +52,6 @@ struct Validate {
     }
     
     private func _validate(text: String, regex: NSRegularExpression) -> Bool {
-        
         guard !text.trimmingCharacters(in: .whitespaces).isEmpty else {
             return false
         }

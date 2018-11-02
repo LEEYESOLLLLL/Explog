@@ -11,6 +11,7 @@ import Moya
 
 enum User {
     case profile(otherUserPK: Int?)
+    case updateProfile(username: String, photo: UIImage)
 }
 
 extension User: TargetType {
@@ -22,12 +23,14 @@ extension User: TargetType {
             }else {
                 return "/member/userprofile/"
             }
+        case .updateProfile(_, _): return "/member/userprofile/update/"
         }
     }
     
     var method: Moya.Method {
         switch self {
         case .profile(_): return .get
+        case .updateProfile(_, _): return .patch
         }
     }
     
@@ -38,6 +41,19 @@ extension User: TargetType {
     var task: Task {
         switch self {
         case .profile(_ ): return .requestPlain
+        case .updateProfile(let username,let photo):
+            guard let username = username.data(using: .utf8),
+                let image = photo.jpegData(compressionQuality: 0.3) else {
+                return .requestPlain
+            }
+            
+            return .uploadMultipart([MultipartFormData(provider: .data(username),
+                                                       name: "username"),
+                                     MultipartFormData(provider: .data(image),
+                                                       name: "img_profile",
+                                                       fileName: UUID().uuidString + ".jpg",
+                                                       mimeType: "image/jpg")
+                ])
         }
     }
     
