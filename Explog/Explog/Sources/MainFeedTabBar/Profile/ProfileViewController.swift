@@ -19,7 +19,7 @@ final class ProfileViewController: BaseViewController {
     static func create(editMode: EditMode, otherUserPK: Int? = nil) -> Self {
         let `self` = self.init(editMode: editMode)
         self.title = "Profile"
-        self.tabBarItem.image = #imageLiteral(resourceName: "profile-32px")
+        self.tabBarItem.image = #imageLiteral(resourceName: "three-24px-black")
         self.otherUserPK = otherUserPK
         return self
     }

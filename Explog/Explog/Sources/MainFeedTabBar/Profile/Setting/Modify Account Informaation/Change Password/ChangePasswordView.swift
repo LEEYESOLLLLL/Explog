@@ -11,7 +11,7 @@ import SkyFloatingLabelTextField
 
 final class ChangePasswordView: BaseView<ChangePasswordViewController> {
     
-    lazy var backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "back-24pk"),
+    lazy var backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "back-24pk").withRenderingMode(.alwaysOriginal),
                                           style: .plain,
                                           target: vc,
                                           action: #selector(vc.backButtonAction(_:))).then {
@@ -47,13 +47,13 @@ final class ChangePasswordView: BaseView<ChangePasswordViewController> {
         $0.axis = .vertical
         $0.distribution = .fillEqually
         $0.alignment = .fill
-        $0.spacing = UI.margin
+        $0.spacing = UI.margin/2
     }
     
     struct UI {
         static var margin: CGFloat = 8
         static var stackViewMargin: CGFloat = UI.margin * 2
-        static var stackViewHeight = UIScreen.main.bounds.height / 7
+        static var stackViewHeight = UIScreen.main.bounds.height / 5
     }
     
     override func setupUI() {

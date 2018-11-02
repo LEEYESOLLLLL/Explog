@@ -22,7 +22,7 @@ final class SettingProfileView: BaseView<SettingProfileViewController> {
         $0.backgroundColor = .white
     }
     
-    lazy var backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "back-24pk"),
+    lazy var backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "back-24pk").withRenderingMode(.alwaysOriginal),
                                           style: .plain,
                                           target: vc,
                                           action: #selector(vc.backButtonAction(_:))).then {

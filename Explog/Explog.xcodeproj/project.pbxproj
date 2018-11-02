@@ -11,6 +11,9 @@
 		0413DC7C21775D0A0031474A /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0413DC7B21775D0A0031474A /* FeedModel.swift */; };
 		0413DC7F21775DC30031474A /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0413DC7E21775DC30031474A /* Feed.swift */; };
 		0413DCBD21781CD10031474A /* FeedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0413DCBC21781CD10031474A /* FeedLabel.swift */; };
+		041D0032218CAAE3009430FE /* UIBarButton+BackgroundImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041D0031218CAAE3009430FE /* UIBarButton+BackgroundImage.swift */; };
+		041D0034218CAFDD009430FE /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041D0033218CAFDD009430FE /* UIImage+Resize.swift */; };
+		041D0036218CC425009430FE /* CustomAcknowListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041D0035218CC425009430FE /* CustomAcknowListViewController.swift */; };
 		0423A600212B72F000DD9747 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A5FF212B72F000DD9747 /* AppDelegate.swift */; };
 		0423A602212B72F000DD9747 /* SplahViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A601212B72F000DD9747 /* SplahViewController.swift */; };
 		0423A607212B72F000DD9747 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0423A606212B72F000DD9747 /* Assets.xcassets */; };
@@ -116,6 +119,9 @@
 		0413DC7B21775D0A0031474A /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
 		0413DC7E21775DC30031474A /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		0413DCBC21781CD10031474A /* FeedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLabel.swift; sourceTree = "<group>"; };
+		041D0031218CAAE3009430FE /* UIBarButton+BackgroundImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButton+BackgroundImage.swift"; sourceTree = "<group>"; };
+		041D0033218CAFDD009430FE /* UIImage+Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
+		041D0035218CC425009430FE /* CustomAcknowListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAcknowListViewController.swift; sourceTree = "<group>"; };
 		0423A5FC212B72F000DD9747 /* Explog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Explog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0423A5FF212B72F000DD9747 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0423A601212B72F000DD9747 /* SplahViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplahViewController.swift; sourceTree = "<group>"; };
@@ -261,6 +267,23 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		041D0037218CC52B009430FE /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				047E59932189E69100BD2810 /* SettingHeaderView.swift */,
+				047E598F2189D9EE00BD2810 /* SettingTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		041D0038218CC53A009430FE /* Open Source */ = {
+			isa = PBXGroup;
+			children = (
+				041D0035218CC425009430FE /* CustomAcknowListViewController.swift */,
+			);
+			path = "Open Source";
+			sourceTree = "<group>";
+		};
 		0423A5F3212B72F000DD9747 = {
 			isa = PBXGroup;
 			children = (
@@ -354,6 +377,8 @@
 				04C8F36B218AFFE100CA296F /* Cache+AllClear.swift */,
 				04C8F36D218B016B00CA296F /* AppInfo.swift */,
 				04C8F36F218B0A3B00CA296F /* File.swift */,
+				041D0031218CAAE3009430FE /* UIBarButton+BackgroundImage.swift */,
+				041D0033218CAFDD009430FE /* UIImage+Resize.swift */,
 			);
 			path = Utiles;
 			sourceTree = "<group>";
@@ -477,8 +502,8 @@
 				047E59912189DBD200BD2810 /* SectionFeature.swift */,
 				047E598B2189D92500BD2810 /* SettingView.swift */,
 				047E598D2189D92B00BD2810 /* SettingViewController.swift */,
-				047E59932189E69100BD2810 /* SettingHeaderView.swift */,
-				047E598F2189D9EE00BD2810 /* SettingTableViewCell.swift */,
+				041D0038218CC53A009430FE /* Open Source */,
+				041D0037218CC52B009430FE /* Cell */,
 				04C8F70A218B2DEA00CA296F /* Modify Account Informaation */,
 			);
 			path = Setting;
@@ -849,6 +874,7 @@
 				04B38AEA2178820C00E17908 /* EmailLoginViewController.swift in Sources */,
 				04B38AEC2178821200E17908 /* SignUpViewController.swift in Sources */,
 				0423A62A212B8F3C00DD9747 /* MainFeedNavigationViewController.swift in Sources */,
+				041D0034218CAFDD009430FE /* UIImage+Resize.swift in Sources */,
 				046A8CC9218986DA00C12390 /* UserModel.swift in Sources */,
 				047E59902189D9EE00BD2810 /* SettingTableViewCell.swift in Sources */,
 				044E663E2182FD930047D5F2 /* PostDetailView.swift in Sources */,
@@ -859,6 +885,7 @@
 				0423A639212B97DB00DD9747 /* ProfileView.swift in Sources */,
 				04C8F36E218B016B00CA296F /* AppInfo.swift in Sources */,
 				045FF08F217E497F003ECA23 /* UISize+Multiply.swift in Sources */,
+				041D0036218CC425009430FE /* CustomAcknowListViewController.swift in Sources */,
 				047FE5DC216CF063009B56BB /* MainFeedTableViewController.swift in Sources */,
 				0423A631212B978000DD9747 /* PostView.swift in Sources */,
 				04D59138217C849900EE8696 /* ActivityIndicatorButton.swift in Sources */,
@@ -875,6 +902,7 @@
 				04B38AC821787CAF00E17908 /* KeychainService.swift in Sources */,
 				04F1A3C2218C5B3800CF99A1 /* ChangePasswordView.swift in Sources */,
 				04C70AAA2183296A00B43683 /* UINavigationController+Transpar.swift in Sources */,
+				041D0032218CAAE3009430FE /* UIBarButton+BackgroundImage.swift in Sources */,
 				045FF103218093A9003ECA23 /* Post.swift in Sources */,
 				04C8F709218B2C0900CA296F /* SettingProfileViewController.swift in Sources */,
 				046A8CC72189817B00C12390 /* User.swift in Sources */,
