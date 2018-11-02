@@ -137,7 +137,7 @@ final class SettingProfileView: BaseView<SettingProfileViewController> {
         vc.navigationItem.title = "Profile Settings"
         profileImageButton.addTarget(vc, action: #selector(vc.profileButtonAction(_:)), for: .touchUpInside)
         changeProfileButton.addTarget(vc, action: #selector(vc.profileButtonAction(_:)), for: .touchUpInside)
-        userNameTextField.addTarget(vc, action: #selector(vc.didChangeTextField(_:)), for: .editingChanged)
+        userNameTextField.addTarget(vc, action: #selector(vc.textFieldDidChange(_:)), for: .editingChanged)
         userNameTextField.delegate = vc
     }
     

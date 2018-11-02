@@ -535,21 +535,29 @@
 		04C8F70A218B2DEA00CA296F /* Modify Account Informaation */ = {
 			isa = PBXGroup;
 			children = (
-				04F1A3C0218C5B2700CF99A1 /* Setting Profile View  */,
-				04F1A3C1218C5B3800CF99A1 /* ChangePasswordView.swift */,
-				04F1A3C3218C5B3E00CF99A1 /* ChangePasswordViewController.swift */,
+				04F1A3C0218C5B2700CF99A1 /* Change Profile Information */,
+				04F1A3C5218C6C2700CF99A1 /* Change Password */,
 			);
 			path = "Modify Account Informaation";
 			sourceTree = "<group>";
 		};
-		04F1A3C0218C5B2700CF99A1 /* Setting Profile View  */ = {
+		04F1A3C0218C5B2700CF99A1 /* Change Profile Information */ = {
 			isa = PBXGroup;
 			children = (
 				04F1A3BE218C491A00CF99A1 /* SettingProfilePhotoViewController.swift */,
 				04C8F706218B2C0100CA296F /* SettingProfileView.swift */,
 				04C8F708218B2C0900CA296F /* SettingProfileViewController.swift */,
 			);
-			path = "Setting Profile View ";
+			path = "Change Profile Information";
+			sourceTree = "<group>";
+		};
+		04F1A3C5218C6C2700CF99A1 /* Change Password */ = {
+			isa = PBXGroup;
+			children = (
+				04F1A3C1218C5B3800CF99A1 /* ChangePasswordView.swift */,
+				04F1A3C3218C5B3E00CF99A1 /* ChangePasswordViewController.swift */,
+			);
+			path = "Change Password";
 			sourceTree = "<group>";
 		};
 		04F71EA1217AF3B30099C7C9 /* Login */ = {
