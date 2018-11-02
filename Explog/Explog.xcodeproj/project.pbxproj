@@ -84,6 +84,9 @@
 		04D59138217C849900EE8696 /* ActivityIndicatorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D59137217C849900EE8696 /* ActivityIndicatorButton.swift */; };
 		04EBBA2F2137A6DB00CA73A0 /* UICollectionView+init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EBBA2E2137A6DB00CA73A0 /* UICollectionView+init.swift */; };
 		04EBBA372137E8C900CA73A0 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EBBA362137E8C900CA73A0 /* FeedTableViewCell.swift */; };
+		04F1A3BF218C491A00CF99A1 /* SettingProfilePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F1A3BE218C491A00CF99A1 /* SettingProfilePhotoViewController.swift */; };
+		04F1A3C2218C5B3800CF99A1 /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F1A3C1218C5B3800CF99A1 /* ChangePasswordView.swift */; };
+		04F1A3C4218C5B3E00CF99A1 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F1A3C3218C5B3E00CF99A1 /* ChangePasswordViewController.swift */; };
 		04F71E98217ADFDC0099C7C9 /* UIFont+Bold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F71E97217ADFDC0099C7C9 /* UIFont+Bold.swift */; };
 		04F71E9A217AE3900099C7C9 /* UIStackVIew+ArrangedSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F71E99217AE3900099C7C9 /* UIStackVIew+ArrangedSubview.swift */; };
 		04F71E9C217AF38A0099C7C9 /* EmailLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F71E9B217AF38A0099C7C9 /* EmailLoginView.swift */; };
@@ -189,6 +192,9 @@
 		04D59137217C849900EE8696 /* ActivityIndicatorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorButton.swift; sourceTree = "<group>"; };
 		04EBBA2E2137A6DB00CA73A0 /* UICollectionView+init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+init.swift"; sourceTree = "<group>"; };
 		04EBBA362137E8C900CA73A0 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
+		04F1A3BE218C491A00CF99A1 /* SettingProfilePhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfilePhotoViewController.swift; sourceTree = "<group>"; };
+		04F1A3C1218C5B3800CF99A1 /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
+		04F1A3C3218C5B3E00CF99A1 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		04F71E97217ADFDC0099C7C9 /* UIFont+Bold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Bold.swift"; sourceTree = "<group>"; };
 		04F71E99217AE3900099C7C9 /* UIStackVIew+ArrangedSubview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackVIew+ArrangedSubview.swift"; sourceTree = "<group>"; };
 		04F71E9B217AF38A0099C7C9 /* EmailLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLoginView.swift; sourceTree = "<group>"; };
@@ -529,10 +535,21 @@
 		04C8F70A218B2DEA00CA296F /* Modify Account Informaation */ = {
 			isa = PBXGroup;
 			children = (
+				04F1A3C0218C5B2700CF99A1 /* Setting Profile View  */,
+				04F1A3C1218C5B3800CF99A1 /* ChangePasswordView.swift */,
+				04F1A3C3218C5B3E00CF99A1 /* ChangePasswordViewController.swift */,
+			);
+			path = "Modify Account Informaation";
+			sourceTree = "<group>";
+		};
+		04F1A3C0218C5B2700CF99A1 /* Setting Profile View  */ = {
+			isa = PBXGroup;
+			children = (
+				04F1A3BE218C491A00CF99A1 /* SettingProfilePhotoViewController.swift */,
 				04C8F706218B2C0100CA296F /* SettingProfileView.swift */,
 				04C8F708218B2C0900CA296F /* SettingProfileViewController.swift */,
 			);
-			path = "Modify Account Informaation";
+			path = "Setting Profile View ";
 			sourceTree = "<group>";
 		};
 		04F71EA1217AF3B30099C7C9 /* Login */ = {
@@ -840,12 +857,15 @@
 				0413DC7F21775DC30031474A /* Feed.swift in Sources */,
 				04C70AA621831DCD00B43683 /* PostCoverModel.swift in Sources */,
 				0413DC7C21775D0A0031474A /* FeedModel.swift in Sources */,
+				04F1A3BF218C491A00CF99A1 /* SettingProfilePhotoViewController.swift in Sources */,
+				04F1A3C4218C5B3E00CF99A1 /* ChangePasswordViewController.swift in Sources */,
 				0423A600212B72F000DD9747 /* AppDelegate.swift in Sources */,
 				04F72A63217C49A50099C7C9 /* AuthModel.swift in Sources */,
 				04F71E9E217AF3910099C7C9 /* SignUpView.swift in Sources */,
 				045FF0B9217F9395003ECA23 /* PhotoGridView.swift in Sources */,
 				04F71E9C217AF38A0099C7C9 /* EmailLoginView.swift in Sources */,
 				04B38AC821787CAF00E17908 /* KeychainService.swift in Sources */,
+				04F1A3C2218C5B3800CF99A1 /* ChangePasswordView.swift in Sources */,
 				04C70AAA2183296A00B43683 /* UINavigationController+Transpar.swift in Sources */,
 				045FF103218093A9003ECA23 /* Post.swift in Sources */,
 				04C8F709218B2C0900CA296F /* SettingProfileViewController.swift in Sources */,

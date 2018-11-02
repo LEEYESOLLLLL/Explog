@@ -34,12 +34,22 @@ extension SettingViewController {
 extension SettingViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true) // for Flash
-        guard let section = Section(rawValue: indexPath.section) else {
+        guard let section = Section(rawValue: indexPath.section),
+        let cell = tableView.cellForRow(at: indexPath) as? SettingCell,
+        let cellText = cell.textLabel?.text else {
             return
         }
         
         switch section {
-        case .account: navigationController?.pushViewController(SettingProfileViewController.create(), animated: true)
+        case .account:
+            guard let type = Account(rawValue: cellText) else {
+                return
+            }
+            switch type {
+            case .profile_setting: navigationController?.pushViewController(SettingProfileViewController.create(), animated: true)
+            case .change_password: navigationController?.pushViewController(ChangePasswordViewController.create(), animated: true)
+            }
+            
         case .feature:
             Square.display("Delegate Cache", message: "Do you want to delete stored cache?",
                            alertActions: [.cancel(message: "Cancel"), .destructive(message: "Delete")]) { (_, index) in
@@ -50,9 +60,7 @@ extension SettingViewController: UITableViewDelegate {
             }
             
         case .information:
-            guard let cell = tableView.cellForRow(at: indexPath) as? SettingCell,
-                let cellText = cell.textLabel?.text,
-                let type = Information(rawValue: cellText) else {
+            guard let type = Information(rawValue: cellText) else {
                     return
                 }
             
@@ -155,6 +163,6 @@ extension SettingViewController {
 
 extension SettingViewController: MFMailComposeViewControllerDelegate {
     public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        
+        controller.dismiss(animated: true, completion: nil)
     }
 }

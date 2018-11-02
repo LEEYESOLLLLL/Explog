@@ -33,6 +33,7 @@ extension SettingViewController {
 extension SettingViewController {
     enum Account: String, CaseIterable {
         case profile_setting = "Profile Settings"
+        case change_password = "Change Password"
     }
 }
 
