@@ -38,6 +38,10 @@
 		0423A642212B9C1800DD9747 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A641212B9C1800DD9747 /* AppColor.swift */; };
 		04266A63218EC9FB00B18C8E /* ReplyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04266A62218EC9FB00B18C8E /* ReplyView.swift */; };
 		04266A65218ECA0100B18C8E /* ReplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04266A64218ECA0100B18C8E /* ReplyViewController.swift */; };
+		04266A67218ED09900B18C8E /* ReplyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04266A66218ED09900B18C8E /* ReplyCell.swift */; };
+		04266A69218ED68A00B18C8E /* ReplyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04266A68218ED68A00B18C8E /* ReplyModel.swift */; };
+		04266A6B218ED6F700B18C8E /* Reply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04266A6A218ED6F700B18C8E /* Reply.swift */; };
+		04266A6F218EEADB00B18C8E /* UILabel+Height.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04266A6E218EEADB00B18C8E /* UILabel+Height.swift */; };
 		043B46582180F29F00EA8EFC /* GlobalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043B46572180F29F00EA8EFC /* GlobalExtension.swift */; };
 		044E663E2182FD930047D5F2 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E663D2182FD930047D5F2 /* PostDetailView.swift */; };
 		044E66412182FE6C0047D5F2 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E66402182FE6C0047D5F2 /* PostDetailViewController.swift */; };
@@ -152,6 +156,10 @@
 		0423A641212B9C1800DD9747 /* AppColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColor.swift; sourceTree = "<group>"; };
 		04266A62218EC9FB00B18C8E /* ReplyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyView.swift; sourceTree = "<group>"; };
 		04266A64218ECA0100B18C8E /* ReplyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyViewController.swift; sourceTree = "<group>"; };
+		04266A66218ED09900B18C8E /* ReplyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyCell.swift; sourceTree = "<group>"; };
+		04266A68218ED68A00B18C8E /* ReplyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyModel.swift; sourceTree = "<group>"; };
+		04266A6A218ED6F700B18C8E /* Reply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reply.swift; sourceTree = "<group>"; };
+		04266A6E218EEADB00B18C8E /* UILabel+Height.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Height.swift"; sourceTree = "<group>"; };
 		043B46572180F29F00EA8EFC /* GlobalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalExtension.swift; sourceTree = "<group>"; };
 		043CBD8E217228CF00CB910A /* Explog.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Explog.entitlements; sourceTree = "<group>"; };
 		044E663D2182FD930047D5F2 /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
@@ -259,6 +267,7 @@
 				04C70AA521831DCD00B43683 /* PostCoverModel.swift */,
 				04C70B25218581AC00B43683 /* PostDetailModel.swift */,
 				046A8CC8218986DA00C12390 /* UserModel.swift */,
+				04266A68218ED68A00B18C8E /* ReplyModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -271,6 +280,7 @@
 				04F72A5E217C36CE0099C7C9 /* Auth.swift */,
 				045FF102218093A9003ECA23 /* Post.swift */,
 				046A8CC62189817B00C12390 /* User.swift */,
+				04266A6A218ED6F700B18C8E /* Reply.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -387,6 +397,7 @@
 				04C8F36F218B0A3B00CA296F /* File.swift */,
 				041D0031218CAAE3009430FE /* UIBarButton+BackgroundImage.swift */,
 				041D0033218CAFDD009430FE /* UIImage+Resize.swift */,
+				04266A6E218EEADB00B18C8E /* UILabel+Height.swift */,
 			);
 			path = Utiles;
 			sourceTree = "<group>";
@@ -476,6 +487,7 @@
 			children = (
 				04266A62218EC9FB00B18C8E /* ReplyView.swift */,
 				04266A64218ECA0100B18C8E /* ReplyViewController.swift */,
+				04266A66218ED09900B18C8E /* ReplyCell.swift */,
 			);
 			path = Reply;
 			sourceTree = "<group>";
@@ -854,6 +866,7 @@
 				0423A614212B756700DD9747 /* BaseView.swift in Sources */,
 				047FE5DF216CF69C009B56BB /* UIScreen+Sugar.swift in Sources */,
 				046A8CA72189761700C12390 /* ProfileState.swift in Sources */,
+				04266A67218ED09900B18C8E /* ReplyCell.swift in Sources */,
 				04C8F370218B0A3B00CA296F /* File.swift in Sources */,
 				0423A616212B756D00DD9747 /* BaseViewController.swift in Sources */,
 				04F71E98217ADFDC0099C7C9 /* UIFont+Bold.swift in Sources */,
@@ -869,6 +882,7 @@
 				045FF091217E62BC003ECA23 /* PostState.swift in Sources */,
 				0423A61C212B873900DD9747 /* UIView+SubViews.swift in Sources */,
 				0423A621212B899500DD9747 /* MainFeedTabBarViewController.swift in Sources */,
+				04266A6B218ED6F700B18C8E /* Reply.swift in Sources */,
 				0423A635212B979500DD9747 /* LikeView.swift in Sources */,
 				04C70AA821831F1C00B43683 /* EditModeState.swift in Sources */,
 				045FF0B7217F9377003ECA23 /* PhotoGridController.swift in Sources */,
@@ -876,6 +890,7 @@
 				04C70B5021871DCE00B43683 /* UploadPhotoViewController.swift in Sources */,
 				046460AB2188247E00EFE40B /* DetailPhotoCell.swift in Sources */,
 				047E59922189DBD200BD2810 /* SectionFeature.swift in Sources */,
+				04266A69218ED68A00B18C8E /* ReplyModel.swift in Sources */,
 				04721B432134EF3A00143AF6 /* UIView+LayoutAnchor.swift in Sources */,
 				0423A602212B72F000DD9747 /* SplahViewController.swift in Sources */,
 				045FF093217F4353003ECA23 /* Date+DateFormatter.swift in Sources */,
@@ -915,6 +930,7 @@
 				044E66412182FE6C0047D5F2 /* PostDetailViewController.swift in Sources */,
 				0423A639212B97DB00DD9747 /* ProfileView.swift in Sources */,
 				04C8F36E218B016B00CA296F /* AppInfo.swift in Sources */,
+				04266A6F218EEADB00B18C8E /* UILabel+Height.swift in Sources */,
 				045FF08F217E497F003ECA23 /* UISize+Multiply.swift in Sources */,
 				041D0036218CC425009430FE /* CustomAcknowListViewController.swift in Sources */,
 				047FE5DC216CF063009B56BB /* MainFeedTableViewController.swift in Sources */,
