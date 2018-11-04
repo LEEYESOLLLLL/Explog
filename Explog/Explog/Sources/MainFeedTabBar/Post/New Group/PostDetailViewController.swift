@@ -159,7 +159,8 @@ extension PostDetailViewController {
     }
     
     @objc func replyButtonAction(_ sender: UIBarButtonItem) {
-        
+        let replyVC = ReplyViewController.create(postPK: coverData.pk)
+        present(UINavigationController(rootViewController: replyVC), animated: true, completion: nil)
     }
     
     @objc func doneButtonAction(_ sender: UIBarButtonItem) {
