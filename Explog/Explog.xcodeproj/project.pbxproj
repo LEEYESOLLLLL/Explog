@@ -41,7 +41,6 @@
 		04266A67218ED09900B18C8E /* ReplyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04266A66218ED09900B18C8E /* ReplyCell.swift */; };
 		04266A69218ED68A00B18C8E /* ReplyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04266A68218ED68A00B18C8E /* ReplyModel.swift */; };
 		04266A6B218ED6F700B18C8E /* Reply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04266A6A218ED6F700B18C8E /* Reply.swift */; };
-		04266A6F218EEADB00B18C8E /* UILabel+Height.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04266A6E218EEADB00B18C8E /* UILabel+Height.swift */; };
 		043B46582180F29F00EA8EFC /* GlobalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043B46572180F29F00EA8EFC /* GlobalExtension.swift */; };
 		044E663E2182FD930047D5F2 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E663D2182FD930047D5F2 /* PostDetailView.swift */; };
 		044E66412182FE6C0047D5F2 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E66402182FE6C0047D5F2 /* PostDetailViewController.swift */; };
@@ -159,7 +158,6 @@
 		04266A66218ED09900B18C8E /* ReplyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyCell.swift; sourceTree = "<group>"; };
 		04266A68218ED68A00B18C8E /* ReplyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyModel.swift; sourceTree = "<group>"; };
 		04266A6A218ED6F700B18C8E /* Reply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reply.swift; sourceTree = "<group>"; };
-		04266A6E218EEADB00B18C8E /* UILabel+Height.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Height.swift"; sourceTree = "<group>"; };
 		043B46572180F29F00EA8EFC /* GlobalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalExtension.swift; sourceTree = "<group>"; };
 		043CBD8E217228CF00CB910A /* Explog.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Explog.entitlements; sourceTree = "<group>"; };
 		044E663D2182FD930047D5F2 /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
@@ -397,7 +395,6 @@
 				04C8F36F218B0A3B00CA296F /* File.swift */,
 				041D0031218CAAE3009430FE /* UIBarButton+BackgroundImage.swift */,
 				041D0033218CAFDD009430FE /* UIImage+Resize.swift */,
-				04266A6E218EEADB00B18C8E /* UILabel+Height.swift */,
 			);
 			path = Utiles;
 			sourceTree = "<group>";
@@ -930,7 +927,6 @@
 				044E66412182FE6C0047D5F2 /* PostDetailViewController.swift in Sources */,
 				0423A639212B97DB00DD9747 /* ProfileView.swift in Sources */,
 				04C8F36E218B016B00CA296F /* AppInfo.swift in Sources */,
-				04266A6F218EEADB00B18C8E /* UILabel+Height.swift in Sources */,
 				045FF08F217E497F003ECA23 /* UISize+Multiply.swift in Sources */,
 				041D0036218CC425009430FE /* CustomAcknowListViewController.swift in Sources */,
 				047FE5DC216CF063009B56BB /* MainFeedTableViewController.swift in Sources */,
