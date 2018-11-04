@@ -37,8 +37,15 @@ extension FeedModel {
             case liked
             case numLiked = "num_liked"
         }
+        mutating func modifiedLike(model: LikeModel) {
+            guard let liked = model.liked,
+                let numLiked = model.numLiked else {
+                    return
+            }
+            self.liked = liked
+            self.numLiked = numLiked
+        }
     }
-
 }
 
 extension FeedModel {
@@ -68,4 +75,14 @@ extension FeedModel {
     }
 }
 
+// MARK: Like API Model
+struct LikeModel: Codable {
+    var liked: [Int]?
+    var numLiked: Int?
+    
+    enum CodingKeys: String,CodingKey {
+        case liked
+        case numLiked = "num_liked"
+    }
+}
 

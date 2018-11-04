@@ -10,11 +10,12 @@ import UIKit
 import Kingfisher
 
 final class ProfileView: BaseView<ProfileViewController> {
-    var profileTableView = UITableView().then {
+    lazy var profileTableView = UITableView().then {
         $0.contentInsetAdjustmentBehavior = .never
         $0.backgroundColor = .white
         $0.separatorStyle = .none
         $0.register(cell: ProfileCell.self)
+        $0.refreshControl = refreshControl
     }
     
     var profileHeader = UIView().then {
@@ -57,6 +58,9 @@ final class ProfileView: BaseView<ProfileViewController> {
                                                 action: #selector(vc.settingBarButtonAction(_:)))
     
     var activityIndicator = UIActivityIndicatorView(style: .gray)
+    lazy var refreshControl = UIRefreshControl().then {
+        $0.addTarget(vc, action: #selector(vc.refreshControlAction(_:)), for: .valueChanged)
+    }
     
     lazy var backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "back-24pk").withRenderingMode(.alwaysOriginal),
                                           style: .plain,

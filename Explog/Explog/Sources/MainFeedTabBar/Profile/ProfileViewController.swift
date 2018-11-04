@@ -5,12 +5,9 @@
 //  Created by minjuniMac on 8/21/18.
 //  Copyright © 2018 com.dev.minjun. All rights reserved.
 //
-
-
-
 import UIKit
 import Moya
-
+import BoltsSwift
 
 final class ProfileViewController: BaseViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -53,13 +50,15 @@ final class ProfileViewController: BaseViewController {
     }
     
     var provider = MoyaProvider<User>(plugins: [NetworkLoggerPlugin()])
+    var feedProvider = MoyaProvider<Feed>(plugins: [NetworkLoggerPlugin()])
     var otherUserPK: Int?
     lazy var v = ProfileView(controlBy: self)
     override func loadView() {
         super.loadView()
         view = v
     }
-    
+}
+extension ProfileViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         initialComposition()
@@ -89,11 +88,6 @@ final class ProfileViewController: BaseViewController {
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-    }
-    
     private func initialComposition() {
         tabBarController?.tabBar.isHidden = false
         navigationController?.navigationBar.barStyle = .default
@@ -101,8 +95,14 @@ final class ProfileViewController: BaseViewController {
         v.activityIndicator.startAnimating()
     }
     
-    
-    
+    @objc func refreshControlAction(_ sender: UIRefreshControl) {
+        sender.beginRefreshing()
+        viewWillAppear(true)
+        sender.endRefreshing()
+    }
+}
+
+extension ProfileViewController {
     @objc func settingBarButtonAction(_ sender: UIBarButtonItem) {
         let settingViewController = SettingViewController()
         let naviVC = UINavigationController(rootViewController: settingViewController)
@@ -112,8 +112,36 @@ final class ProfileViewController: BaseViewController {
     @objc func backButtonAction(_ sender: UIBarButtonItem) {
         navigationController?.popViewController(animated: true)
     }
-    
-    
+}
+
+extension ProfileViewController {
+    @discardableResult
+    func like(_ postPrivateKey: Int, index: Int) -> BoltsSwift.Task<LikeModel> {
+        let taskCompletionSource = TaskCompletionSource<LikeModel>()
+        feedProvider.request(.like(postPK: postPrivateKey)) { [weak self] (result) in
+            guard let strongSelf = self,
+                case .ready(let item) = strongSelf.state else {
+                    return
+            }
+            switch result {
+            case .success(let response):
+                switch (200...299) ~= response.statusCode{
+                case true :
+                    if let likeModel = try? response.map(LikeModel.self) {
+                        var copy = item
+                        copy.posts[index].modifiedLike(model: likeModel)
+                        strongSelf.state = .ready(item: copy)
+                        taskCompletionSource.set(result: likeModel)
+                    }
+                case false :
+                    taskCompletionSource.set(error: LikeError.failConvertingModel)
+                }
+            case .failure(let error):
+                taskCompletionSource.set(error: error)
+            }
+        }
+        return taskCompletionSource.task
+    }
 }
 
 extension ProfileViewController: UITableViewDelegate {
@@ -153,17 +181,13 @@ extension ProfileViewController: UITableViewDataSource {
             case .ready(let item) = state else {
                 return
         }
-        let post = item.posts[indexPath.row]
-        
-        guard let img = post.img else {
-            return
+        let post = item.posts[indexPath.row].converted(author: item.author())
+        cell.configure(model: post) { [weak self] (postPK: Int) -> BoltsSwift.Task<LikeModel> in
+            guard let strongSelf = self else {
+                fatalError()
+            }
+            return strongSelf.like(postPK, index: indexPath.row)
         }
-        cell.configure(title: post.title,
-                       imagePath: img,
-                       startDate: post.startDate,
-                       endDate: post.endDate,
-                       author: item.username,
-                       numberOflike: post.numLiked)
     }
 }
 

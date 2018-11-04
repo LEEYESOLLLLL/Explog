@@ -43,7 +43,6 @@ class PostDetailView: BaseView<PostDetailViewController> {
                                             $0.tintColor = .red
     }
     
-    
     lazy var doneButton = UIBarButtonItem(image: #imageLiteral(resourceName: "paper-white-512px").resizeImage(UI.likeImageDimenstion, opaque: false).withRenderingMode(.alwaysOriginal),
                                           style: .plain,
                                           target: vc,
@@ -59,9 +58,6 @@ class PostDetailView: BaseView<PostDetailViewController> {
         $0.contentMode = .scaleToFill
         $0.layer.shouldRasterize = true
     }
-    // CoverImage
-    // 타이틀, Date, , continent,
-    // author Button, Authortitle
     
     var titleLabel = UILabel().then {
         $0.setup(textColor: .white, fontStyle: .headline, textAlignment: .center, numberOfLines: 0)
@@ -210,8 +206,6 @@ class PostDetailView: BaseView<PostDetailViewController> {
             .activateAnchors()
     }
     
-    
-    
     override func setupBinding() {
         setupCoverImage(vc.coverData)
         postTableView.delegate = vc
@@ -228,7 +222,6 @@ class PostDetailView: BaseView<PostDetailViewController> {
                 strongSelf.vc.navigationController?.navigationBar.isTranslucent = true
             }
         }
-        
         addGestureRecognizer(toggleViewTapGesture)
     }
     
@@ -236,15 +229,14 @@ class PostDetailView: BaseView<PostDetailViewController> {
         vc.navigationItem.leftBarButtonItem = dismissButton
         switch vc.editMode {
         case .on:
-//            vc.navigationItem.rightBarButtonItems = [doneButton, likeButton, replyButton]
             vc.navigationItem.setRightBarButtonItems([doneButton, likeButton, replyButton], animated: true)
         case .off:
-//            vc.navigationItem.rightBarButtonItems = [likeButton, replyButton]
             vc.navigationItem.setRightBarButtonItems([likeButton, replyButton], animated: true)
         }
-        
-        
-        
+        if let userPK = KeychainService.pk, let convertUserPK = Int(userPK),
+            vc.coverData.liked.contains(convertUserPK) {
+            likeButton.image = #imageLiteral(resourceName: "newLike-red-512px").resizeImage(UI.likeImageDimenstion, opaque: false).withRenderingMode(.alwaysOriginal)
+        }
         vc.navigationController?.transparentNaviBar(true)
     }
     
@@ -281,6 +273,15 @@ class PostDetailView: BaseView<PostDetailViewController> {
                                             progressBlock: nil,
                                             completionHandler: nil)
         authorNickNameLabel.text = data.author.username
+    }
+    
+    func loadLikeButton() {
+        if let _userPK = KeychainService.pk, let userPK = Int(_userPK),
+            vc.coverData.liked.contains(userPK) {
+            likeButton.image = #imageLiteral(resourceName: "newLike-white-512px").resizeImage(UI.likeImageDimenstion, opaque: false).withRenderingMode(.alwaysOriginal)
+        }else {
+            likeButton.image = #imageLiteral(resourceName: "newLike-red-512px").resizeImage(UI.likeImageDimenstion, opaque: false).withRenderingMode(.alwaysOriginal)
+        }
     }
 }
 

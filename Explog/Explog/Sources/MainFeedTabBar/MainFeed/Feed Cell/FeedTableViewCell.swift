@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import BoltsSwift
 
 final class FeedTableViewCell: UITableViewCell {
     var containerView = UIView().then {
@@ -47,16 +48,22 @@ final class FeedTableViewCell: UITableViewCell {
         $0.alignment = .fill
     }
     
-    var likeButton = UIButton().then {
-        $0.setTitle("Like", for: .normal)
-        $0.setTitleColor(.red, for: .normal)
+    var likeButton = UIButton()
+    var likeState: LikeState = .original {
+        didSet {
+            switch likeState {
+            case .like: likeButton.setImage(#imageLiteral(resourceName: "newLike-red-512px").resizeImage(UI.likeButtonSize, opaque: false), for: .normal)
+            case .original: likeButton.setImage(#imageLiteral(resourceName: "newLike-white-512px").resizeImage(UI.likeButtonSize, opaque: false), for: .normal)
+                
+            }
+        }
     }
     
     
     struct UI {
         static var cellSpacing: CGFloat = 1
         static var labelSpacing: CGFloat = 16
-        
+        static var likeButtonSize: CGFloat = 22
     }
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -72,7 +79,7 @@ final class FeedTableViewCell: UITableViewCell {
         contentView.addSubview(containerView)
         containerView.addSubviews([coverImage, darkBlurView, descriptionCoverStackView, numberOfLikeLabel, likeButton])
         descriptionCoverStackView.addArrangedSubviews([titleLabel, dateLabel, authorLabel])
-
+        
         containerView
             .topAnchor(to: contentView.topAnchor, constant: UI.cellSpacing)
             .bottomAnchor(to: contentView.bottomAnchor, constant: -UI.cellSpacing)
@@ -114,30 +121,75 @@ final class FeedTableViewCell: UITableViewCell {
         
     }
     
+    // LikeButton은 Cell에 있고..
+    // LikeButton은 Request, buttonIamge 변경, Cell Reload 해주어야하는데..음..
+    // LikeAPI에 필요한것은 photo PK..
     func setupBinding() {
+        likeButton.addTarget(self, action: #selector(likeButtonAction(_:)), for: .touchUpInside)
         // Like Button Call Back 어떻게 처리할건지 고민해놓자.
         // Like Button 좋아요 눌러졌을때, 그렇지 않을때 상태 관리 어떻게 할건지 고민하자.
-        
     }
     
-    func configure(title: String,
-                   imagePath: String,
-                   startDate: String,
-                   endDate: String,
-                   author: String,
-                   numberOflike: Int) {
-        titleLabel.text = title
-        if let url = URL(string: imagePath) {
-            coverImage.kf.indicatorType = .activity
-            coverImage.kf.setImage(with: url,
-                                   placeholder: nil,
-                                   options:     [.transition(ImageTransition.fade(1))],
-                                   progressBlock: nil,
-                                   completionHandler: nil)
+    
+    var likeClosure: ( (_ postPK: Int) -> BoltsSwift.Task<LikeModel> )?
+    var model: Post?
+    func configure(model: Post,
+                   likeAction: @escaping (_ postPK: Int) -> BoltsSwift.Task<LikeModel>) {
+        guard let title = model.title,
+            let startDate = model.startDate,
+            let endDate = model.endDate,
+            let imgPath = model.img,
+            let url = URL(string: imgPath) else {
+                return
         }
-        
+        self.model = model
+        if let userPK = KeychainService.pk {
+            let liked = model.liked.compactMap{ String($0) }
+            likeState = liked.contains(userPK) ? .like : .original
+        }else {
+            likeState = .original
+        }
+        // 여기에 로직을 추가해주자.
+        coverImage.kf.indicatorType = .activity
+        coverImage.kf.setImage(with: url,
+                               placeholder: nil,
+                               options:     [.transition(ImageTransition.fade(1))],
+                               progressBlock: nil,
+                               completionHandler: nil)
+        titleLabel.text = title
         dateLabel.text = "\(startDate) ~ \(endDate)"
-        authorLabel.text = author
-        numberOfLikeLabel.text = String(numberOflike)
+        authorLabel.text = model.author.username
+        numberOfLikeLabel.text = String(model.numLiked)
+        
+        // Like Closuer
+        likeClosure = likeAction
+    }
+    
+}
+
+extension FeedTableViewCell {
+    // 원하는것은 좋아요 버튼을 누르면, Request를 받아온 결과값을 랜더링 해주는 형식으로 짜고싶은데..
+    // 코드 리펙토링 해야함..
+    @objc func likeButtonAction(_ sender: UIButton) {
+        guard let likeClosure = likeClosure,
+            let postPK = model?.pk else {
+            return
+        }
+        reloadLike()
+        likeClosure(postPK)
+            .continueWith { (task) -> Void in
+            // Error Handlring
+        }
+    }
+    
+    func reloadLike() {
+        if let userPK = KeychainService.pk,
+            let convertUserPK = Int(userPK),
+            let model = self.model {
+            let isLiked = model.liked.contains(convertUserPK)
+            let numLike = isLiked ? max(model.numLiked - 1, 0) : model.numLiked + 1
+            likeState = isLiked ? .original : .like
+            numberOfLikeLabel.text = String(numLike)
+        }
     }
 }
