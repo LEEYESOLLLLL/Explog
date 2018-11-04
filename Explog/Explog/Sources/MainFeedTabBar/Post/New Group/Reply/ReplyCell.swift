@@ -10,8 +10,6 @@ import UIKit
 import Kingfisher
 
 final class ReplyCell: UITableViewCell {
-    // profile image,
-    // nickname, content, date
     var profileImageView = UIImageView().then {
         $0.contentMode = .scaleToFill
         $0.clipsToBounds = true
@@ -39,8 +37,6 @@ final class ReplyCell: UITableViewCell {
         $0.setContentHuggingPriority(UILayoutPriority(rawValue: 800), for: NSLayoutConstraint.Axis.horizontal)
     }
     
-    
-    
     struct UI {
         static var profileImagesize = CGSize(width: UIScreen.main.bounds.width * 0.16,
                                              height: UIScreen.main.bounds.width * 0.16)
@@ -50,15 +46,11 @@ final class ReplyCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
-        setupBinding()
         contentView.sizeToFit()
         
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+    required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     func setupUI() {
         contentView.addSubviews([profileImageView, contentStackView, contentsLabel])
         contentStackView.addArrangedSubviews([usernameLabel, dateLabel])
@@ -82,17 +74,11 @@ final class ReplyCell: UITableViewCell {
             .trailingAnchor(to: contentStackView.trailingAnchor)
             .activateAnchors()
     }
-    
-    func setupBinding() {
-        
-    }
-    
     func configure(_ model: ReplyModel) {
         guard let author = model.author,
             let imgURL = URL(string: author.imgProfile) else {
             return
         }
-        
         profileImageView.kf.setImage(with: imgURL,
                                      placeholder: UIImage().resizeImage(UI.profileImagesize.width, opaque: false),
                                      options: [.transition(.fade(0.5))],
