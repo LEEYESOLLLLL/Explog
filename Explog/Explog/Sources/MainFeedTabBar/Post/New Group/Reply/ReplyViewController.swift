@@ -175,7 +175,33 @@ extension ReplyViewController {
 }
 
 extension ReplyViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        guard case .ready(let item) = state,
+            item.count > indexPath.row,
+            let author = item[indexPath.row].author,
+            let _myPK = KeychainService.pk,
+            let myPK = Int(_myPK) else {
+                return false
+        }
+        return myPK == author.pk
+    }
     
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let removeAction = UITableViewRowAction(style: .destructive, title: "Delete") { [weak self] (rowaction, indexPath) in
+            guard let strongSelf = self,
+                case .ready(let item) = strongSelf.state else {
+                    return
+            }
+            let replyPK = item[indexPath.row].pk
+            strongSelf
+                .delete(reply: replyPK, indexPath: indexPath)
+                .continueWith { _ in
+                    strongSelf.v.replyTableView.reloadData()
+                    Square.display("Removed Comments")
+            }
+        }
+        return [removeAction]
+    }
 }
 
 // MARK: TableViewDataSource - 1
@@ -210,34 +236,6 @@ extension ReplyViewController {
     }
 }
 
-extension ReplyViewController {
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        guard case .ready(let item) = state,
-            item.count > indexPath.row,
-            let author = item[indexPath.row].author,
-            let _myPK = KeychainService.pk,
-            let myPK = Int(_myPK) else {
-                return false
-        }
-        
-        return myPK == author.pk
-    }
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        return [UITableViewRowAction(style: .destructive, title: "Delete") { [weak self] (rowaction, indexPath) in
-            guard let strongSelf = self,
-                case .ready(let item) = strongSelf.state else {
-                    return
-            }
-            let replyPK = item[indexPath.row].pk
-            strongSelf
-                .delete(reply: replyPK, indexPath: indexPath)
-                .continueWith { _ in
-                    strongSelf.v.replyTableView.reloadData()
-                    Square.display("Removed Comments")
-            }
-            }]
-    }
-}
 extension ReplyViewController: UITextViewDelegate {
     public func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         textView.textColor = .black

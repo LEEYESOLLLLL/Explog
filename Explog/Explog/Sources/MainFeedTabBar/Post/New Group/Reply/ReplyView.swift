@@ -28,16 +28,11 @@ final class ReplyView: BaseView<ReplyViewController> {
             }
         }
     }
-    
-    // backButton
-    // replyTableView
-    // inputView
     lazy var backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "cancel-1").resizeImage(UI.backButtonSize, opaque: false).withRenderingMode(.alwaysOriginal),
                                           style: .plain,
                                           target: vc,
                                           action: #selector(vc.backButtonAction(_:)))
     
-    // 필요한 참조는 InputView높이..
     var replyTableView = UITableView().then {
         $0.backgroundColor = .white
         $0.layer.opacity = 0.0
@@ -127,7 +122,6 @@ final class ReplyView: BaseView<ReplyViewController> {
         inputTextView.delegate = vc
         createReplyButton.addTarget(vc, action: #selector(vc.createReplyButtonAction(_:)), for: .touchUpInside)
         setupNavigationBar()
-        
         
     }
     
