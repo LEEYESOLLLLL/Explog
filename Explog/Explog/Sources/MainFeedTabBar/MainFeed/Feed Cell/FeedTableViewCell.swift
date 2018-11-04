@@ -120,14 +120,8 @@ final class FeedTableViewCell: UITableViewCell {
             .activateAnchors()
         
     }
-    
-    // LikeButton은 Cell에 있고..
-    // LikeButton은 Request, buttonIamge 변경, Cell Reload 해주어야하는데..음..
-    // LikeAPI에 필요한것은 photo PK..
     func setupBinding() {
         likeButton.addTarget(self, action: #selector(likeButtonAction(_:)), for: .touchUpInside)
-        // Like Button Call Back 어떻게 처리할건지 고민해놓자.
-        // Like Button 좋아요 눌러졌을때, 그렇지 않을때 상태 관리 어떻게 할건지 고민하자.
     }
     
     
@@ -168,8 +162,6 @@ final class FeedTableViewCell: UITableViewCell {
 }
 
 extension FeedTableViewCell {
-    // 원하는것은 좋아요 버튼을 누르면, Request를 받아온 결과값을 랜더링 해주는 형식으로 짜고싶은데..
-    // 코드 리펙토링 해야함..
     @objc func likeButtonAction(_ sender: UIButton) {
         guard let likeClosure = likeClosure,
             let postPK = model?.pk else {

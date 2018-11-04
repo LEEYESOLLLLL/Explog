@@ -36,6 +36,8 @@
 		0423A639212B97DB00DD9747 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A638212B97DB00DD9747 /* ProfileView.swift */; };
 		0423A63B212B97E000DD9747 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A63A212B97E000DD9747 /* ProfileViewController.swift */; };
 		0423A642212B9C1800DD9747 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A641212B9C1800DD9747 /* AppColor.swift */; };
+		04266A63218EC9FB00B18C8E /* ReplyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04266A62218EC9FB00B18C8E /* ReplyView.swift */; };
+		04266A65218ECA0100B18C8E /* ReplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04266A64218ECA0100B18C8E /* ReplyViewController.swift */; };
 		043B46582180F29F00EA8EFC /* GlobalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043B46572180F29F00EA8EFC /* GlobalExtension.swift */; };
 		044E663E2182FD930047D5F2 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E663D2182FD930047D5F2 /* PostDetailView.swift */; };
 		044E66412182FE6C0047D5F2 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E66402182FE6C0047D5F2 /* PostDetailViewController.swift */; };
@@ -148,6 +150,8 @@
 		0423A638212B97DB00DD9747 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		0423A63A212B97E000DD9747 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		0423A641212B9C1800DD9747 /* AppColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColor.swift; sourceTree = "<group>"; };
+		04266A62218EC9FB00B18C8E /* ReplyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyView.swift; sourceTree = "<group>"; };
+		04266A64218ECA0100B18C8E /* ReplyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyViewController.swift; sourceTree = "<group>"; };
 		043B46572180F29F00EA8EFC /* GlobalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalExtension.swift; sourceTree = "<group>"; };
 		043CBD8E217228CF00CB910A /* Explog.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Explog.entitlements; sourceTree = "<group>"; };
 		044E663D2182FD930047D5F2 /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
@@ -467,6 +471,15 @@
 			path = Style;
 			sourceTree = "<group>";
 		};
+		04266A61218EC9F200B18C8E /* Reply */ = {
+			isa = PBXGroup;
+			children = (
+				04266A62218EC9FB00B18C8E /* ReplyView.swift */,
+				04266A64218ECA0100B18C8E /* ReplyViewController.swift */,
+			);
+			path = Reply;
+			sourceTree = "<group>";
+		};
 		044E663F2182FD970047D5F2 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
@@ -476,6 +489,7 @@
 				044E66402182FE6C0047D5F2 /* PostDetailViewController.swift */,
 				04C70AA32183188E00B43683 /* DetailTextCell.swift */,
 				046460AA2188247E00EFE40B /* DetailPhotoCell.swift */,
+				04266A61218EC9F200B18C8E /* Reply */,
 			);
 			name = Detail;
 			path = "New Group";
@@ -890,9 +904,11 @@
 				04B38AEC2178821200E17908 /* SignUpViewController.swift in Sources */,
 				0423A62A212B8F3C00DD9747 /* MainFeedNavigationViewController.swift in Sources */,
 				041D0034218CAFDD009430FE /* UIImage+Resize.swift in Sources */,
+				04266A65218ECA0100B18C8E /* ReplyViewController.swift in Sources */,
 				046A8CC9218986DA00C12390 /* UserModel.swift in Sources */,
 				047E59902189D9EE00BD2810 /* SettingTableViewCell.swift in Sources */,
 				044E663E2182FD930047D5F2 /* PostDetailView.swift in Sources */,
+				04266A63218EC9FB00B18C8E /* ReplyView.swift in Sources */,
 				0423A625212B8D1400DD9747 /* BaseNavigationController.swift in Sources */,
 				0423A642212B9C1800DD9747 /* AppColor.swift in Sources */,
 				04C70B2E2186DAE700B43683 /* HighlighteTextViewController.swift in Sources */,
