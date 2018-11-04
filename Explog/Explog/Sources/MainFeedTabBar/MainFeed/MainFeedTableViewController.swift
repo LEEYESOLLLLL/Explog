@@ -13,17 +13,15 @@ import BoltsSwift
 import Kingfisher
 import Square
 
+
 final class FeedTableViewController: ParallaxTableViewController {
     let provider = MoyaProvider<Feed>()//.(plugins: [NetworkLoggerPlugin(])
     var state: State = .loading {
         didSet {
             switch state {
-            case .loading:
-                setupUI()
-            case .ready:
-                tableView.reloadData()
-            case .error :
-                print("\(#function): cause error~")
+            case .loading: setupUI()
+            case .ready:   tableView.reloadData()
+            case .error :  print("\(#function): cause error~")
             }
         }
     }
@@ -54,9 +52,6 @@ final class FeedTableViewController: ParallaxTableViewController {
         super.viewDidLoad()
         state = .loading
         setupBinding()
-        // MARK: when development has finished, removing below code 
-        KingfisherManager.shared.cache.clearMemoryCache()
-        KingfisherManager.shared.cache.clearDiskCache()
     }
     
     func setupUI() {
@@ -74,7 +69,10 @@ final class FeedTableViewController: ParallaxTableViewController {
         tableView.reloadData()
         sender.endRefreshing()
     }
-    
+}
+
+// MARK: Networking
+extension FeedTableViewController {
     func networkServiceWith(continent: Int) {
         provider.request(.category(continent: continent)) { [weak self] result in
             guard let strongSelf = self else { return }
@@ -94,7 +92,8 @@ final class FeedTableViewController: ParallaxTableViewController {
     
     func loadNetwork(continent: Int, query nextpageQuery: String) {
         provider.request(.next(continent: continent, query: nextpageQuery)) { [weak self] result in
-            guard let strongSelf = self, case .ready(let item) = strongSelf.state else {
+            guard let strongSelf = self,
+                case .ready(let item) = strongSelf.state else {
                 return
             }
             switch result {
@@ -114,11 +113,34 @@ final class FeedTableViewController: ParallaxTableViewController {
     }
 }
 
+// MARK: Like
 extension FeedTableViewController {
-    enum State {
-        case loading
-        case ready(FeedModel)
-        case error
+    @discardableResult
+    func like(_ postPrivateKey: Int, index: Int) -> BoltsSwift.Task<LikeModel> {
+        let taskCompletionSource = TaskCompletionSource<LikeModel>()
+        provider.request(.like(postPK: postPrivateKey)) { [weak self] (result) in
+            guard let strongSelf = self,
+                case .ready(let item) = strongSelf.state else {
+                    return
+            }
+            switch result {
+            case .success(let response):
+                switch (200...299) ~= response.statusCode{
+                case true :
+                    if let likeModel = try? response.map(LikeModel.self) {
+                        var copy = item
+                        copy.posts[index].modifiedLike(model: likeModel)
+                        strongSelf.state = .ready(copy)
+                        taskCompletionSource.set(result: likeModel)
+                    }
+                case false :
+                    taskCompletionSource.set(error: LikeError.failConvertingModel)
+                }
+            case .failure(let error):
+                taskCompletionSource.set(error: error)
+            }
+        }
+        return taskCompletionSource.task
     }
 }
 
@@ -130,12 +152,10 @@ extension FeedTableViewController {
                 return
         }
         if KeychainService.token != nil {
-            // detailView 호출
+            // Call detailView
             let postCover = item.posts[indexPath.row]
             let postDetailViewController = PostDetailViewController.create(editMode: .off, coverData: postCover)
             show(postDetailViewController, sender: nil)
-            
-            
         }else {
             Square.display("Require Login", message: "Do you want to go to the login screen?",
                            alertActions: [.cancel(message: "Cancel"), .default(message: "OK")]) { [weak self] (alertAction, index) in
@@ -167,21 +187,12 @@ extension FeedTableViewController {
                 return
         }
         let post = item.posts[indexPath.row]
-        
-        guard let title = post.title,
-            let img = post.img,
-            let startDate = post.startDate,
-            let endDate = post.endDate else {
-                return
+        cell.configure(model: post) { [weak self] (postPK: Int) -> BoltsSwift.Task<LikeModel> in
+            guard let strongSelf = self else {
+                fatalError()
+            }
+            return strongSelf.like(postPK, index: indexPath.row)
         }
-        
-        cell.configure(title: title,
-                       imagePath: img,
-                       startDate: startDate,
-                       endDate: endDate,
-                       author: post.author.username,
-                       numberOflike: post.numLiked)
-        
     }
     
     // MARK: Call sequence - 3

@@ -25,31 +25,28 @@ class PostDetailView: BaseView<PostDetailViewController> {
         $0.backgroundColor = UIColor.darkText
     }
     
-    lazy var dismissButton = UIBarButtonItem(
-        barButtonSystemItem: .stop,
-        target: vc,
-        action: #selector(vc.dismissButtonAction(_:))).then {
-            $0.tintColor = .white
-    }
+    lazy var dismissButton = UIBarButtonItem(image: #imageLiteral(resourceName: "cancel-1").resizeImage(UI.disMissimageDimension, opaque: false).withRenderingMode(.alwaysOriginal),
+                                             style: .plain,
+                                             target: vc,
+                                             action: #selector(vc.dismissButtonAction(_:)))
     
-    lazy var likeButton = UIBarButtonItem(image: #imageLiteral(resourceName: "like-24px"),
+    lazy var likeButton = UIBarButtonItem(image:#imageLiteral(resourceName: "like-white").resizeImage(UI.likeImageDimenstion, opaque: false).withRenderingMode(.alwaysOriginal),
                                           style: .plain,
                                           target: vc,
-                                          action: #selector(vc.likeButtonAction(_:))).then {
-                                            $0.tintColor = .white
-    }
-    lazy var replyButton = UIBarButtonItem(image: #imageLiteral(resourceName: "reply"),
+                                          action: #selector(vc.likeButtonAction(_:)))
+    
+    lazy var replyButton = UIBarButtonItem(image: #imageLiteral(resourceName: "comment-white-512px").resizeImage(UI.likeImageDimenstion, opaque: false).withRenderingMode(.alwaysOriginal),
                                            style: .plain,
                                            target: vc,
                                            action: #selector(vc.replyButtonAction(_:))).then {
-                                            $0.tintColor = .white
+                                            $0.image?.withRenderingMode(.alwaysTemplate)
+                                            $0.tintColor = .red
     }
     
-    lazy var doneButton = UIBarButtonItem(barButtonSystemItem: .compose,
+    lazy var doneButton = UIBarButtonItem(image: #imageLiteral(resourceName: "paper-white-512px").resizeImage(UI.likeImageDimenstion, opaque: false).withRenderingMode(.alwaysOriginal),
+                                          style: .plain,
                                           target: vc,
-                                          action: #selector(vc.doneButtonAction(_:))).then {
-                                            $0.tintColor = .white
-    }
+                                          action: #selector(vc.doneButtonAction(_:)))
     
     // For HeaderView for TableView's ParallaxHeader
     var coverInformationView = UIView().then {
@@ -61,9 +58,6 @@ class PostDetailView: BaseView<PostDetailViewController> {
         $0.contentMode = .scaleToFill
         $0.layer.shouldRasterize = true
     }
-    // CoverImage
-    // 타이틀, Date, , continent,
-    // author Button, Authortitle
     
     var titleLabel = UILabel().then {
         $0.setup(textColor: .white, fontStyle: .headline, textAlignment: .center, numberOfLines: 0)
@@ -137,6 +131,8 @@ class PostDetailView: BaseView<PostDetailViewController> {
         static var authorButtonDimension: CGFloat = UIScreen.main.bounds.width * 0.175
         static var toggleViewSqureSide: CGFloat = UIScreen.main.bounds.width * 0.225
         static var coverImageHeight: CGFloat = UIScreen.main.bounds.height * 0.66
+        static var disMissimageDimension: CGFloat = 22
+        static var likeImageDimenstion: CGFloat = 26
     }
     
     override func setupUI() {
@@ -210,8 +206,6 @@ class PostDetailView: BaseView<PostDetailViewController> {
             .activateAnchors()
     }
     
-    
-    
     override func setupBinding() {
         setupCoverImage(vc.coverData)
         postTableView.delegate = vc
@@ -228,15 +222,20 @@ class PostDetailView: BaseView<PostDetailViewController> {
                 strongSelf.vc.navigationController?.navigationBar.isTranslucent = true
             }
         }
-        
         addGestureRecognizer(toggleViewTapGesture)
     }
     
     func setupNavigationBar() {
         vc.navigationItem.leftBarButtonItem = dismissButton
         switch vc.editMode {
-        case .on: vc.navigationItem.rightBarButtonItems = [doneButton, likeButton, replyButton]
-        case .off: vc.navigationItem.rightBarButtonItems = [likeButton, replyButton]
+        case .on:
+            vc.navigationItem.setRightBarButtonItems([doneButton, likeButton, replyButton], animated: true)
+        case .off:
+            vc.navigationItem.setRightBarButtonItems([likeButton, replyButton], animated: true)
+        }
+        if let userPK = KeychainService.pk, let convertUserPK = Int(userPK),
+            vc.coverData.liked.contains(convertUserPK) {
+            likeButton.image = #imageLiteral(resourceName: "newLike-red-512px").resizeImage(UI.likeImageDimenstion, opaque: false).withRenderingMode(.alwaysOriginal)
         }
         vc.navigationController?.transparentNaviBar(true)
     }
@@ -274,6 +273,15 @@ class PostDetailView: BaseView<PostDetailViewController> {
                                             progressBlock: nil,
                                             completionHandler: nil)
         authorNickNameLabel.text = data.author.username
+    }
+    
+    func loadLikeButton() {
+        if let _userPK = KeychainService.pk, let userPK = Int(_userPK),
+            vc.coverData.liked.contains(userPK) {
+            likeButton.image = #imageLiteral(resourceName: "newLike-white-512px").resizeImage(UI.likeImageDimenstion, opaque: false).withRenderingMode(.alwaysOriginal)
+        }else {
+            likeButton.image = #imageLiteral(resourceName: "newLike-red-512px").resizeImage(UI.likeImageDimenstion, opaque: false).withRenderingMode(.alwaysOriginal)
+        }
     }
 }
 

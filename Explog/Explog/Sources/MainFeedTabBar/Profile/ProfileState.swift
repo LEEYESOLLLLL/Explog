@@ -21,3 +21,8 @@ extension ProfileViewController {
         case ready(item: UserModel)
     }
 }
+
+enum LikeError: Error {
+    case failConvertingModel
+    case failRequesting
+}

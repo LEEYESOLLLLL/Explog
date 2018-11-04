@@ -18,25 +18,28 @@ enum Post {
     case detail(postPK: Int)
     case text(postPK: Int, content: String, createdAt: String, type: String)
     case photo(postPK: Int, photo: UIImage)
+    case like(postPK: Int)
 }
 
 extension Post: TargetType {
     var path: String {
         switch self {
-        case .post(_, _, _, _, _): return "/post/create/"
-        case .detail(let postPK): return "/post/\(postPK)/"
+        case .post(_, _, _, _, _):      return "/post/create/"
+        case .detail(let postPK):       return "/post/\(postPK)/"
         case .text(let postPK,_, _, _): return "/post/\(postPK)/text/"
-        case .photo(let postPK, _): return "/post/\(postPK)/photo/"
+        case .photo(let postPK, _):     return "/post/\(postPK)/photo/"
+        case .like(let postPK):         return "/post/\(postPK)/like/"
             
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .post(_, _, _, _, _):return .post
-        case .detail(_): return .get
-        case .text(_, _, _, _): return .post
-        case .photo(_, _): return .post 
+        case .post(_, _, _, _, _): return .post
+        case .detail(_):           return .get
+        case .text(_, _, _, _):    return .post
+        case .photo(_, _):         return .post
+        case .like:                return .post
         }
     }
     
@@ -89,6 +92,8 @@ extension Post: TargetType {
                 name: "photo",
                 fileName: UUID().uuidString + ".jpg",
                 mimeType: "image/jpg")])
+            
+        case .like: return .requestPlain
         }
     }
     

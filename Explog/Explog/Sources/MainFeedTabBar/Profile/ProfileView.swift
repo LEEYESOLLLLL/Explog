@@ -10,11 +10,12 @@ import UIKit
 import Kingfisher
 
 final class ProfileView: BaseView<ProfileViewController> {
-    var profileTableView = UITableView().then {
+    lazy var profileTableView = UITableView().then {
         $0.contentInsetAdjustmentBehavior = .never
         $0.backgroundColor = .white
         $0.separatorStyle = .none
         $0.register(cell: ProfileCell.self)
+        $0.refreshControl = refreshControl
     }
     
     var profileHeader = UIView().then {
@@ -36,28 +37,35 @@ final class ProfileView: BaseView<ProfileViewController> {
         $0.setup(textColor: .black, fontStyle: .headline, textAlignment: .center, numberOfLines: 1)
     }
     
-//    lazy var settingBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "profile-32px"),
-//                                                style: .done,
-//                                                target: vc,
-//                                                action: #selector(vc.settingBarButtonAction(_:))).then {
-//                                                    $0.tintColor = .black
-//    }
-    var settingBarButton = UIBarButtonItem(customView: UIImageView(image: #imageLiteral(resourceName: "profile-32px")))
-//        .then {
-//        $0.target = vc
-//        $0.action = #selector(vc.settingBarButtonAction(_:))
-//    }
+    
+    // MARK: Bug - UIBarButtonItem
+    /**
+     ```
+     lazy var settingBarButton = UIBarButtonItem(image: nil,
+     style: .plain,
+     target: vc,
+     action: #selector(vc.settingBarButtonAction(_:))).then {
+     $0.setBackgroundImage(Some images, for: .normal, style: .plain, barMetrics: .default)
+     }
+     ```
+     * When UIBarButtonItem is to initialize With `UIBarButtonItem(image:style:target:action)` method,
+     * in iPhoneX, XR and XS Real Devices(Not simulator) UIBarButtonItem's TintColor do not working
+     * I think to be in the connection that `lazy keyword` and iPhone X series bug
+     */    
+    lazy var settingBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "three-24px-black").withRenderingMode(.alwaysOriginal),
+                                                style: .plain,
+                                                target: vc,
+                                                action: #selector(vc.settingBarButtonAction(_:)))
     
     var activityIndicator = UIActivityIndicatorView(style: .gray)
-    lazy var backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "back-24pk"),
+    lazy var refreshControl = UIRefreshControl().then {
+        $0.addTarget(vc, action: #selector(vc.refreshControlAction(_:)), for: .valueChanged)
+    }
+    
+    lazy var backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "back-24pk").withRenderingMode(.alwaysOriginal),
                                           style: .plain,
                                           target: vc,
-                                          action: #selector(vc.backButtonAction(_:))).then {
-                                            $0.tintColor = .black
-    }
-     
-    
-    
+                                          action: #selector(vc.backButtonAction(_:)))
     struct UI {
         static var coverImageHeight: CGFloat = UIScreen.main.bounds.height * 0.3
         static var margin: CGFloat = 8
@@ -119,7 +127,6 @@ final class ProfileView: BaseView<ProfileViewController> {
         profileTableView.delegate = vc
         profileTableView.dataSource = vc
         setupNavigationBar()
-        
     }
     
     func setupNavigationBar() {
@@ -127,34 +134,23 @@ final class ProfileView: BaseView<ProfileViewController> {
         vc.navigationController?.transparentNaviBar(true, navigationBarHidden: false)
         vc.navigationItem.rightBarButtonItem = vc.editMode == .on ? settingBarButton : nil 
         vc.navigationItem.leftBarButtonItem = vc.editMode == .on ? nil : backButton
-        settingBarButton.target = vc
-        settingBarButton.action = #selector(vc.settingBarButtonAction(_:))
-        
-        
-        
-        
-        
-        
-        
-
-        
         profileTableView
             .parallaxHeader
-            .parallaxHeaderDidScrollHandler = { [weak vc] parallax in
-                guard let strongVC = vc else {
+            .parallaxHeaderDidScrollHandler = { [weak vc, weak self] parallax in
+                guard let strongVC = vc, let strongSelf = self else {
                     return
                 }
                 let progress = parallax.progress
                 let statnd = UI.statusBarHeight / parallax.height
                 switch statnd >= progress {
-                case true:
+                case true: // white
                     strongVC.navigationController?.navigationBar.barStyle = .black
-                    strongVC.navigationItem.rightBarButtonItem?.tintColor = .white
-                    strongVC.navigationItem.leftBarButtonItem?.tintColor = .white
-                case false:
+                    strongSelf.backButton.image = #imageLiteral(resourceName: "back-24px-white").withRenderingMode(.alwaysOriginal)
+                    strongSelf.settingBarButton.image = #imageLiteral(resourceName: "three-24px-white").withRenderingMode(.alwaysOriginal)
+                case false: // black
                     strongVC.navigationController?.navigationBar.barStyle = .default
-                    strongVC.navigationItem.rightBarButtonItem?.tintColor = .black
-                    strongVC.navigationItem.leftBarButtonItem?.tintColor = .black
+                    strongSelf.backButton.image = #imageLiteral(resourceName: "back-24pk").withRenderingMode(.alwaysOriginal)
+                    strongSelf.settingBarButton.image = #imageLiteral(resourceName: "three-24px-black").withRenderingMode(.alwaysOriginal)
                 }
         }
     }

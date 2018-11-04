@@ -23,6 +23,11 @@ final class SettingViewController: BaseViewController {
         super.loadView()
         view = v 
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+    }
 }
 
 extension SettingViewController {
@@ -67,7 +72,7 @@ extension SettingViewController: UITableViewDelegate {
             switch type {
             case .app_version: break
             case .opensource_license:
-                let viewController = AcknowListViewController(fileNamed: "Pods-Explog-acknowledgements")
+                let viewController = CustomAcknowListViewController(fileNamed: "Pods-Explog-acknowledgements")
                 navigationController?.pushViewController(viewController, animated: true)
             }
         case .support:

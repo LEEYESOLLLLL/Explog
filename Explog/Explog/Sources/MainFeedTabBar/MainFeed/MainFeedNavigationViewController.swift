@@ -42,7 +42,7 @@ final class FeedContainerViewController: CaseContainerViewController {
         return naviController
     }
     
-    let images: [UIImage] = [#imageLiteral(resourceName: "Asia"), #imageLiteral(resourceName: "Europe"), #imageLiteral(resourceName: "North America"), #imageLiteral(resourceName: "South America"), #imageLiteral(resourceName: "Africa"), #imageLiteral(resourceName: "Austrailia")]
+    let images: [UIImage] = [#imageLiteral(resourceName: "torii-gate-512px"), #imageLiteral(resourceName: "eiffel-tower-512px"), #imageLiteral(resourceName: "new-york"), #imageLiteral(resourceName: "andes"), #imageLiteral(resourceName: "giraffe"), #imageLiteral(resourceName: "sydney-opera-house")]
     
     lazy var headerImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFit

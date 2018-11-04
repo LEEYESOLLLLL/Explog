@@ -9,10 +9,10 @@
 import UIKit
 import Moya
 import BoltsSwift
+import Square
 
 class PostDetailViewController: BaseViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        
         return .lightContent
     }
     required init(coverData: PostCoverModel) {
@@ -20,10 +20,7 @@ class PostDetailViewController: BaseViewController {
         super.init()
     }
     required public init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-    
-    required init() {
-        fatalError("init() has not been implemented")
-    }
+    required init() { fatalError("init() has not been implemented") }
     
     static func create(editMode: EditMode = .off,
                        coverData cover: PostCoverModel) -> PostDetailViewController {
@@ -35,10 +32,10 @@ class PostDetailViewController: BaseViewController {
     var editMode: EditMode = .off {
         didSet {
             switch editMode {
-            case .on: DispatchQueue.main.async {
-                self.v.toggleView.isHidden = false
-                self.tabBarController?.tabBar.isHidden = true
-                
+            case .on:
+                DispatchQueue.main.async {
+                    self.v.toggleView.isHidden = false
+                    self.tabBarController?.tabBar.isHidden = true
                 }
             case .off:
                 DispatchQueue.main.async {
@@ -150,7 +147,15 @@ extension PostDetailViewController {
     }
     
     @objc func likeButtonAction(_ sender: UIBarButtonItem) {
-        sender.tintColor = sender.tintColor == .red ? .white : .red
+        // 버튼 상태 변경
+        // Request
+        v.loadLikeButton()
+        provider.request(.like(postPK: coverData.pk)) { (result) in
+            switch result {
+            case .success(let response): print("\(response), \(response.statusCode), \(#function)")
+            case .failure(let error): Square.display("Sever Error: " + error.localizedDescription)
+            }
+        }
     }
     
     @objc func replyButtonAction(_ sender: UIBarButtonItem) {

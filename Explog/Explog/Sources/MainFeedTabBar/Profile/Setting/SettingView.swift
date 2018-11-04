@@ -17,12 +17,10 @@ final class SettingView: BaseView<SettingViewController> {
         $0.register(headerFooter: SettingHeaderView.self)
     }
     
-    lazy var backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "back-24pk"),
+    lazy var backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "back-24pk").withRenderingMode(.alwaysOriginal),
                                           style: .plain,
                                           target: vc,
-                                          action: #selector(vc.backButtonAction(_:))).then {
-                                            $0.tintColor = .black
-    }
+                                          action: #selector(vc.backButtonAction(_:)))
     
     struct UI {
         static var sectionHeight = UIScreen.main.bounds.height * 0.08
