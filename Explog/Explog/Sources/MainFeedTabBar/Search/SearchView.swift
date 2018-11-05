@@ -12,6 +12,7 @@ final class SearchView: BaseView<SearchViewController> {
     var searchTableView = UITableView().then {
         $0.backgroundColor = .white
         $0.register(cell: SearchCell.self)
+        $0.separatorStyle = .none
     }
     
     lazy var searchController = UISearchController(searchResultsController: nil).then {
@@ -25,7 +26,6 @@ final class SearchView: BaseView<SearchViewController> {
     struct UI {
         static var tableViewHeight: CGFloat = UIScreen.main.bounds.height / 5.5
     }
-    
     
     override func setupUI() {
         addSubviews([searchTableView])

@@ -50,7 +50,7 @@ final class SearchViewController: BaseViewController {
 
 extension SearchViewController {
     func retrieve(word: String) {
-        provider.request(.retrieve(word: word)) { [weak self] result in
+        provider.request(.retrieve(word: word.trimmingCharacters(in: .whitespacesAndNewlines))) { [weak self] result in
             guard let strongSelf = self else {
                 return
             }
@@ -63,9 +63,9 @@ extension SearchViewController {
                     }
                 case false:
                     Square.display("Request Error")
+                    print("Request Error: \(#function)")
                 }
-            case .failure(let error):
-                print(error.localizedDescription)
+            case .failure(let error): print(error.localizedDescription)
             }
         }
     }
@@ -88,7 +88,7 @@ extension SearchViewController {
                     if let model = try? response.map(FeedModel.self) {
                         strongSelf.state = .ready(item + model)
                     }
-                case false : Square.display("Request Error")
+                case false : print("Request Error: \(#function)")
                 }
                 
             case .failure(let error):

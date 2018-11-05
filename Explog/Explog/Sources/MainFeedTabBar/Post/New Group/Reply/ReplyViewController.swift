@@ -11,12 +11,7 @@ import Moya
 import Square
 import BoltsSwift
 
-extension ReplyViewController {
-    enum State {
-        case loading
-        case ready(item: [ReplyModel])
-    }
-}
+
 
 final class ReplyViewController: BaseViewController  {
     override var preferredStatusBarStyle: UIStatusBarStyle {

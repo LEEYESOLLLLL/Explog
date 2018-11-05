@@ -10,4 +10,11 @@ import UIKit
 
 final class MainFeedTabBarView: BaseView<MainFeedTabBarViewController> {
     
+    override func setupUI() {
+        backgroundColor = .white
+    }
+    
+    override func setupBinding() {
+        
+    }
 }
