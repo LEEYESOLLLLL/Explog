@@ -8,12 +8,7 @@
 
 import UIKit
 
-extension ReplyView {
-    enum UploadState {
-        case enabled
-        case unable
-    }
-}
+
 
 final class ReplyView: BaseView<ReplyViewController> {
     var uploadState: UploadState = .enabled {

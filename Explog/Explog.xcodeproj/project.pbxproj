@@ -31,8 +31,8 @@
 		0423A62F212B977300DD9747 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A62E212B977300DD9747 /* SearchViewController.swift */; };
 		0423A631212B978000DD9747 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A630212B978000DD9747 /* PostView.swift */; };
 		0423A633212B978C00DD9747 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A632212B978C00DD9747 /* PostViewController.swift */; };
-		0423A635212B979500DD9747 /* LikeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A634212B979500DD9747 /* LikeView.swift */; };
-		0423A637212B97B000DD9747 /* LikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A636212B97B000DD9747 /* LikeViewController.swift */; };
+		0423A635212B979500DD9747 /* NotiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A634212B979500DD9747 /* NotiView.swift */; };
+		0423A637212B97B000DD9747 /* NotiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A636212B97B000DD9747 /* NotiViewController.swift */; };
 		0423A639212B97DB00DD9747 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A638212B97DB00DD9747 /* ProfileView.swift */; };
 		0423A63B212B97E000DD9747 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A63A212B97E000DD9747 /* ProfileViewController.swift */; };
 		0423A642212B9C1800DD9747 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A641212B9C1800DD9747 /* AppColor.swift */; };
@@ -45,6 +45,11 @@
 		04266A7321900D2000B18C8E /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04266A7221900D2000B18C8E /* SearchCell.swift */; };
 		04266A792190245400B18C8E /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04266A782190245400B18C8E /* Search.swift */; };
 		04266A7B2190454A00B18C8E /* SearchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04266A7A2190454A00B18C8E /* SearchState.swift */; };
+		04266A8021904EE000B18C8E /* Pods-Explog-acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04266A7F21904ED100B18C8E /* Pods-Explog-acknowledgements.plist */; };
+		04266A8221906A2700B18C8E /* NotiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04266A8121906A2700B18C8E /* NotiCell.swift */; };
+		04266A8421906B8B00B18C8E /* ReplyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04266A8321906B8B00B18C8E /* ReplyState.swift */; };
+		04266A8621906FCC00B18C8E /* Noti.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04266A8521906FCC00B18C8E /* Noti.swift */; };
+		04266A88219072EC00B18C8E /* NotiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04266A87219072EC00B18C8E /* NotiModel.swift */; };
 		043B46582180F29F00EA8EFC /* GlobalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043B46572180F29F00EA8EFC /* GlobalExtension.swift */; };
 		044E663E2182FD930047D5F2 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E663D2182FD930047D5F2 /* PostDetailView.swift */; };
 		044E66412182FE6C0047D5F2 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E66402182FE6C0047D5F2 /* PostDetailViewController.swift */; };
@@ -91,7 +96,6 @@
 		04C8F36C218AFFE100CA296F /* Cache+AllClear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8F36B218AFFE100CA296F /* Cache+AllClear.swift */; };
 		04C8F36E218B016B00CA296F /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8F36D218B016B00CA296F /* AppInfo.swift */; };
 		04C8F370218B0A3B00CA296F /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8F36F218B0A3B00CA296F /* File.swift */; };
-		04C8F705218B29ED00CA296F /* Pods-Explog-acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04C8F704218B29C900CA296F /* Pods-Explog-acknowledgements.plist */; };
 		04C8F707218B2C0100CA296F /* SettingProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8F706218B2C0100CA296F /* SettingProfileView.swift */; };
 		04C8F709218B2C0900CA296F /* SettingProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8F708218B2C0900CA296F /* SettingProfileViewController.swift */; };
 		04D59136217C804E00EE8696 /* UIButton+SetTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D59135217C804E00EE8696 /* UIButton+SetTitle.swift */; };
@@ -152,8 +156,8 @@
 		0423A62E212B977300DD9747 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		0423A630212B978000DD9747 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
 		0423A632212B978C00DD9747 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
-		0423A634212B979500DD9747 /* LikeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeView.swift; sourceTree = "<group>"; };
-		0423A636212B97B000DD9747 /* LikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeViewController.swift; sourceTree = "<group>"; };
+		0423A634212B979500DD9747 /* NotiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiView.swift; sourceTree = "<group>"; };
+		0423A636212B97B000DD9747 /* NotiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiViewController.swift; sourceTree = "<group>"; };
 		0423A638212B97DB00DD9747 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		0423A63A212B97E000DD9747 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		0423A641212B9C1800DD9747 /* AppColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColor.swift; sourceTree = "<group>"; };
@@ -166,6 +170,11 @@
 		04266A7221900D2000B18C8E /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		04266A782190245400B18C8E /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		04266A7A2190454A00B18C8E /* SearchState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchState.swift; sourceTree = "<group>"; };
+		04266A7F21904ED100B18C8E /* Pods-Explog-acknowledgements.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Pods-Explog-acknowledgements.plist"; path = "../../Pods/Target Support Files/Pods-Explog/Pods-Explog-acknowledgements.plist"; sourceTree = "<group>"; };
+		04266A8121906A2700B18C8E /* NotiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiCell.swift; sourceTree = "<group>"; };
+		04266A8321906B8B00B18C8E /* ReplyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyState.swift; sourceTree = "<group>"; };
+		04266A8521906FCC00B18C8E /* Noti.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Noti.swift; sourceTree = "<group>"; };
+		04266A87219072EC00B18C8E /* NotiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiModel.swift; sourceTree = "<group>"; };
 		043B46572180F29F00EA8EFC /* GlobalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalExtension.swift; sourceTree = "<group>"; };
 		043CBD8E217228CF00CB910A /* Explog.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Explog.entitlements; sourceTree = "<group>"; };
 		044E663D2182FD930047D5F2 /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
@@ -213,7 +222,6 @@
 		04C8F36B218AFFE100CA296F /* Cache+AllClear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cache+AllClear.swift"; sourceTree = "<group>"; };
 		04C8F36D218B016B00CA296F /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
 		04C8F36F218B0A3B00CA296F /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
-		04C8F704218B29C900CA296F /* Pods-Explog-acknowledgements.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Pods-Explog-acknowledgements.plist"; sourceTree = "<group>"; };
 		04C8F706218B2C0100CA296F /* SettingProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfileView.swift; sourceTree = "<group>"; };
 		04C8F708218B2C0900CA296F /* SettingProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfileViewController.swift; sourceTree = "<group>"; };
 		04D59135217C804E00EE8696 /* UIButton+SetTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+SetTitle.swift"; sourceTree = "<group>"; };
@@ -275,6 +283,7 @@
 				04266A70218FF09C00B18C8E /* LikeModel.swift */,
 				046A8CC8218986DA00C12390 /* UserModel.swift */,
 				04266A68218ED68A00B18C8E /* ReplyModel.swift */,
+				04266A87219072EC00B18C8E /* NotiModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -289,6 +298,7 @@
 				046A8CC62189817B00C12390 /* User.swift */,
 				04266A6A218ED6F700B18C8E /* Reply.swift */,
 				04266A782190245400B18C8E /* Search.swift */,
+				04266A8521906FCC00B18C8E /* Noti.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -359,7 +369,7 @@
 		0423A612212B733600DD9747 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				04C8F704218B29C900CA296F /* Pods-Explog-acknowledgements.plist */,
+				04266A7F21904ED100B18C8E /* Pods-Explog-acknowledgements.plist */,
 				0423A606212B72F000DD9747 /* Assets.xcassets */,
 				0423A608212B72F000DD9747 /* LaunchScreen.storyboard */,
 				0423A60B212B72F000DD9747 /* Info.plist */,
@@ -417,7 +427,7 @@
 				0423A62B212B8F4600DD9747 /* MainFeed */,
 				0423A63C212B97E600DD9747 /* Search */,
 				0423A63D212B97EA00DD9747 /* Post */,
-				0423A63E212B97F100DD9747 /* Like */,
+				0423A63E212B97F100DD9747 /* Noti */,
 				0423A63F212B97F500DD9747 /* Profile */,
 				04B38AC62178799A00E17908 /* Auth */,
 			);
@@ -460,13 +470,14 @@
 			path = Post;
 			sourceTree = "<group>";
 		};
-		0423A63E212B97F100DD9747 /* Like */ = {
+		0423A63E212B97F100DD9747 /* Noti */ = {
 			isa = PBXGroup;
 			children = (
-				0423A634212B979500DD9747 /* LikeView.swift */,
-				0423A636212B97B000DD9747 /* LikeViewController.swift */,
+				0423A634212B979500DD9747 /* NotiView.swift */,
+				0423A636212B97B000DD9747 /* NotiViewController.swift */,
+				04266A8121906A2700B18C8E /* NotiCell.swift */,
 			);
-			path = Like;
+			path = Noti;
 			sourceTree = "<group>";
 		};
 		0423A63F212B97F500DD9747 /* Profile */ = {
@@ -494,6 +505,7 @@
 		04266A61218EC9F200B18C8E /* Reply */ = {
 			isa = PBXGroup;
 			children = (
+				04266A8321906B8B00B18C8E /* ReplyState.swift */,
 				04266A62218EC9FB00B18C8E /* ReplyView.swift */,
 				04266A64218ECA0100B18C8E /* ReplyViewController.swift */,
 				04266A66218ED09900B18C8E /* ReplyCell.swift */,
@@ -786,7 +798,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04C8F705218B29ED00CA296F /* Pods-Explog-acknowledgements.plist in Resources */,
+				04266A8021904EE000B18C8E /* Pods-Explog-acknowledgements.plist in Resources */,
 				0423A60A212B72F000DD9747 /* LaunchScreen.storyboard in Resources */,
 				0423A607212B72F000DD9747 /* Assets.xcassets in Resources */,
 			);
@@ -894,7 +906,7 @@
 				0423A61C212B873900DD9747 /* UIView+SubViews.swift in Sources */,
 				0423A621212B899500DD9747 /* MainFeedTabBarViewController.swift in Sources */,
 				04266A6B218ED6F700B18C8E /* Reply.swift in Sources */,
-				0423A635212B979500DD9747 /* LikeView.swift in Sources */,
+				0423A635212B979500DD9747 /* NotiView.swift in Sources */,
 				04C70AA821831F1C00B43683 /* EditModeState.swift in Sources */,
 				045FF0B7217F9377003ECA23 /* PhotoGridController.swift in Sources */,
 				04D59136217C804E00EE8696 /* UIButton+SetTitle.swift in Sources */,
@@ -916,10 +928,12 @@
 				047E598E2189D92B00BD2810 /* SettingViewController.swift in Sources */,
 				045FF0BB217F98E9003ECA23 /* PhotoGridCell.swift in Sources */,
 				047E59942189E69100BD2810 /* SettingHeaderView.swift in Sources */,
+				04266A8421906B8B00B18C8E /* ReplyState.swift in Sources */,
 				0423A62F212B977300DD9747 /* SearchViewController.swift in Sources */,
 				04F71EC3217B2BE00099C7C9 /* SkyTextField+Style.swift in Sources */,
 				045FF0DF21803C5F003ECA23 /* PhotoGridState.swift in Sources */,
-				0423A637212B97B000DD9747 /* LikeViewController.swift in Sources */,
+				04266A88219072EC00B18C8E /* NotiModel.swift in Sources */,
+				0423A637212B97B000DD9747 /* NotiViewController.swift in Sources */,
 				04C70ACA218456C600B43683 /* ToggleView.swift in Sources */,
 				047E598C2189D92500BD2810 /* SettingView.swift in Sources */,
 				04C8F707218B2C0100CA296F /* SettingProfileView.swift in Sources */,
@@ -928,11 +942,13 @@
 				04B38AEE2178826000E17908 /* AuthView.swift in Sources */,
 				04B38AEA2178820C00E17908 /* EmailLoginViewController.swift in Sources */,
 				04266A7B2190454A00B18C8E /* SearchState.swift in Sources */,
+				04266A8221906A2700B18C8E /* NotiCell.swift in Sources */,
 				04B38AEC2178821200E17908 /* SignUpViewController.swift in Sources */,
 				0423A62A212B8F3C00DD9747 /* MainFeedNavigationViewController.swift in Sources */,
 				041D0034218CAFDD009430FE /* UIImage+Resize.swift in Sources */,
 				04266A65218ECA0100B18C8E /* ReplyViewController.swift in Sources */,
 				046A8CC9218986DA00C12390 /* UserModel.swift in Sources */,
+				04266A8621906FCC00B18C8E /* Noti.swift in Sources */,
 				047E59902189D9EE00BD2810 /* SettingTableViewCell.swift in Sources */,
 				044E663E2182FD930047D5F2 /* PostDetailView.swift in Sources */,
 				04266A63218EC9FB00B18C8E /* ReplyView.swift in Sources */,

@@ -10,7 +10,7 @@ target 'Explog' do
   pod 'Kingfisher', '~> 4.10.0'
  
   ## Container Viewcontroller 
-  pod 'CaseContainer', '~> 0.8.0'
+  pod 'CaseContainer', '~> 0.9.0'
 
   ## KeyChain
   pod 'KeychainAccess', '~> 3.1.2'
@@ -24,7 +24,7 @@ target 'Explog' do
 
   ## Abstract
   pod 'Then', '~> 2.4.0'
-  pod 'SimpleCell', '~> 0.5.0'
+  pod 'SimpleCell', '~> 0.6.0'
   pod 'Square'
 
   ## generating Open-source information

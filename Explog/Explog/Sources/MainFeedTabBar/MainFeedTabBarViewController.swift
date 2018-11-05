@@ -10,10 +10,27 @@ import UIKit
 import Square
 
 final class MainFeedTabBarViewController: BaseTabBarController {
-    
     override func viewDidLoad() {
         delegate = self
         UITabBar.appearance().tintColor = .appStyle
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateBadgeNumber()
+    }
+    
+    func updateBadgeNumber() {
+        guard let viewControllers = viewControllers else { return }
+        if UIApplication.shared.applicationIconBadgeNumber > 0 {
+            viewControllers.forEach {
+                guard let title = $0.title, let type = Titles(rawValue: title) else { return }
+                if type == .Noti {
+                    $0.tabBarItem.badgeValue = "\(UIApplication.shared.applicationIconBadgeNumber)"
+                }
+            }
+        }
     }
     
 }
@@ -42,13 +59,12 @@ extension MainFeedTabBarViewController: UITabBarControllerDelegate {
             return false
         }
         switch title {
-        case .Feed: return true
-        case .Search:return true
+        case .Feed:   return true
+        case .Search: return true
         case .Post:
-            
             present(PostViewController.create(), animated: true, completion: nil)
             return false
-        case .Like: return true
+        case .Noti:    return true
         case .Profile: return true
         }
     }
@@ -64,7 +80,7 @@ extension MainFeedTabBarViewController {
         case Feed
         case Search
         case Post
-        case Like
+        case Noti
         case Profile
     }
 }

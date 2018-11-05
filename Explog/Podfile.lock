@@ -2,9 +2,9 @@ PODS:
   - AcknowList (1.7)
   - Alamofire (4.7.3)
   - Bolts-Swift (1.4.0)
-  - CaseContainer (0.8.0)
+  - CaseContainer (0.9.0)
   - KeychainAccess (3.1.2)
-  - Kingfisher (4.10.0)
+  - Kingfisher (4.10.1)
   - Moya (11.0.2):
     - Moya/Core (= 11.0.2)
   - Moya/Core (11.0.2):
@@ -12,20 +12,20 @@ PODS:
     - Result (~> 3.0)
   - ParallaxHeader (2.0.0)
   - Result (3.2.4)
-  - SimpleCell (0.5.0)
+  - SimpleCell (0.6.0)
   - SkyFloatingLabelTextField (3.6.0)
-  - Square (0.3.0)
+  - Square (0.4.0)
   - Then (2.4.0)
 
 DEPENDENCIES:
   - AcknowList (~> 1.7.0)
   - Bolts-Swift (~> 1.4.0)
-  - CaseContainer (~> 0.8.0)
+  - CaseContainer (~> 0.9.0)
   - KeychainAccess (~> 3.1.2)
   - Kingfisher (~> 4.10.0)
   - Moya (~> 11.0)
   - ParallaxHeader (~> 2.0.0)
-  - SimpleCell (~> 0.5.0)
+  - SimpleCell (~> 0.6.0)
   - SkyFloatingLabelTextField (~> 3.6.0)
   - Square
   - Then (~> 2.4.0)
@@ -50,17 +50,17 @@ SPEC CHECKSUMS:
   AcknowList: 286185b24c2c2df63a2bb4137f853e4384b4358b
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   Bolts-Swift: 650d72e8017721b1a6bbe43d542c4578f8e5ba6f
-  CaseContainer: 20d937923ef6dd31683cf8e6bbfa01bf4d8f8c2d
+  CaseContainer: b82af6f5e93893c270eebda1bf8f7e453d6bfb1c
   KeychainAccess: b3816fddcf28aa29d94b10ec305cd52be14c472b
-  Kingfisher: 43c4b802d8b5256cf1f4379e9cd10b329be6d3e2
+  Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
   Moya: a725035953bc1c0eb1be505ab903984501d82440
   ParallaxHeader: fb6ee97915626454f3c029a97b424f79a777c642
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
-  SimpleCell: 7922cdb87cae6ed268377a1d1a83820d22a76b8b
+  SimpleCell: e025d9ae5586d97464abf17e274c9820bd89be49
   SkyFloatingLabelTextField: 38164979b79512f9ff9288ad8acfc4bbf5d843e3
-  Square: 042d3f78c679b482348c19be0fa4a7e7a2bd1374
+  Square: b8fa92626640889291135ff1773bbaadf90463e8
   Then: 71866660c7af35a7343831f7668e7cd2b62ee0f2
 
-PODFILE CHECKSUM: 89181e25f550f6c29404b374a33b56d61a0c0772
+PODFILE CHECKSUM: dbafb493b960a2c2432f2405372fc87a74ef2e69
 
 COCOAPODS: 1.6.0.beta.1

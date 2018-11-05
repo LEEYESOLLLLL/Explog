@@ -147,8 +147,6 @@ extension PostDetailViewController {
     }
     
     @objc func likeButtonAction(_ sender: UIBarButtonItem) {
-        // 버튼 상태 변경
-        // Request
         v.loadLikeButton()
         provider.request(.like(postPK: coverData.pk)) { [weak self] (result) in
             guard let strongSelf = self else {
