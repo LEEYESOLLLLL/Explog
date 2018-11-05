@@ -75,14 +75,3 @@ extension FeedModel {
     }
 }
 
-// MARK: Like API Model
-struct LikeModel: Codable {
-    var liked: [Int]?
-    var numLiked: Int?
-    
-    enum CodingKeys: String,CodingKey {
-        case liked
-        case numLiked = "num_liked"
-    }
-}
-

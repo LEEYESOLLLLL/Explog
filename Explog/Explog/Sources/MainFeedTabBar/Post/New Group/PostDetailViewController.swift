@@ -150,9 +150,23 @@ extension PostDetailViewController {
         // 버튼 상태 변경
         // Request
         v.loadLikeButton()
-        provider.request(.like(postPK: coverData.pk)) { (result) in
+        provider.request(.like(postPK: coverData.pk)) { [weak self] (result) in
+            guard let strongSelf = self else {
+                return
+            }
             switch result {
-            case .success(let response): print("\(response), \(response.statusCode), \(#function)")
+            case .success(let response):
+                switch (200...299) ~= response.statusCode {
+                case true:
+                    if let model = try? response.map(LikeModel.self),
+                        let liked = model.liked,
+                        let numLiked = model.numLiked {
+                        strongSelf.coverData.liked = liked
+                        strongSelf.coverData.numLiked = numLiked
+                    }
+                case false: Square.display("Fail to Request")
+                }
+                
             case .failure(let error): Square.display("Sever Error: " + error.localizedDescription)
             }
         }
@@ -171,7 +185,6 @@ extension PostDetailViewController {
 
 // MARK: Edit Buttons
 extension PostDetailViewController: PassableDataDelegate {
-    
     @objc func highlightTextButtonAction(_ sender: UIButton) {
         toggleState = .origin
         let vc = UploadTextViewController(textType: .highlight, postPK: postPK)
@@ -200,6 +213,7 @@ extension PostDetailViewController: PassableDataDelegate {
     }
 }
 
+// MARK: UITableView Delegate
 extension PostDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard case .ready(let item) = state,
@@ -213,6 +227,9 @@ extension PostDetailViewController: UITableViewDelegate {
         }
     }
 }
+
+// MARK: for Editing UITableView
+// Delete Contents API do not work
 
 extension PostDetailViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {

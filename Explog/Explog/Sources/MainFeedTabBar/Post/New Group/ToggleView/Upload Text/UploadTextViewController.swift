@@ -28,13 +28,8 @@ final class UploadTextViewController: BaseViewController {
         super.init()
     }
     
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    required init() {
-        fatalError("init() has not been implemented")
-    }
+    required public init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    required init() { fatalError("init() has not been implemented") }
     
     let provider = MoyaProvider<Post>(plugins: [NetworkLoggerPlugin()])
     private var text: String {
@@ -46,10 +41,15 @@ final class UploadTextViewController: BaseViewController {
         super.loadView()
         view = v
     }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.barStyle = .default
+    }
+}
+
+extension UploadTextViewController {
+    @objc func backButtonAction(_ sender: UIBarButtonItem) {
+        navigationController?.popViewController(animated: true)
     }
     
     @objc func uploadTextButtonAction(_ sender: UIBarButtonItem) {
@@ -77,7 +77,8 @@ final class UploadTextViewController: BaseViewController {
                     }
         }
     }
-    
+}
+extension UploadTextViewController { 
     @objc func keyboardWillShow(noti: NSNotification) {
         guard let notiInfo = noti.userInfo as NSDictionary?,
             let keyboardFrema = notiInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
