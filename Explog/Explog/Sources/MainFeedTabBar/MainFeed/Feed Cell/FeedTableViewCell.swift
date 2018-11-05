@@ -143,7 +143,6 @@ final class FeedTableViewCell: UITableViewCell {
         }else {
             likeState = .original
         }
-        // 여기에 로직을 추가해주자.
         coverImage.kf.indicatorType = .activity
         coverImage.kf.setImage(with: url,
                                placeholder: nil,

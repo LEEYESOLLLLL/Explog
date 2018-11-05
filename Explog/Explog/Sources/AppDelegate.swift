@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func setTabBarViewControllers() -> UITabBarController {
         // initilize ViewControllers
         let mainFeedVC = FeedContainerViewController.create()
-        let searchVC = SearchViewController.create()
+        let searchVC = UINavigationController(rootViewController: SearchViewController.create())
         let postVC = PostViewController.create()
         let likeVC = LikeViewController.create()
         let profileVC = UINavigationController(rootViewController: ProfileViewController.create(editMode: .on))
@@ -45,7 +45,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func requesetNotification() {
         UNUserNotificationCenter
             .current()
-            .requestAuthorization(options: [.alert, .sound, .badge]) { (grant, error) in                 print("grant is \(grant), error is \(String(describing: error?.localizedDescription)))")
+            .requestAuthorization(options: [.alert, .sound, .badge]) { (grant, error) in
+                print("grant is \(grant), error is \(String(describing: error?.localizedDescription)))")
                 if grant == true {
                     DispatchQueue.main.async {
                         UIApplication.shared.registerForRemoteNotifications()

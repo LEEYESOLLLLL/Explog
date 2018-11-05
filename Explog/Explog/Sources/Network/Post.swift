@@ -8,17 +8,18 @@
 
 import Foundation
 import Moya
-//title    포스트 하나의 제목    String    True
-//start_date    여행 시작 시점    String
-//end_date    여행이 끝나는 시    String
-//continent    Post의 여행 대륙 정보를 표현    String
-//img    포스트 표지사진 URL    String
+extension Post {
+    typealias ContentType = PostDetailViewController.ContentType
+}
+
 enum Post {
     case post(title: String, startDate: String, endDate: String, continent: String, img: UIImage)
     case detail(postPK: Int)
     case text(postPK: Int, content: String, createdAt: String, type: String)
     case photo(postPK: Int, photo: UIImage)
     case like(postPK: Int)
+    case delete(postPK: Int)
+    case deleteContents(contentType: ContentType, contentPK: Int)
 }
 
 extension Post: TargetType {
@@ -29,7 +30,12 @@ extension Post: TargetType {
         case .text(let postPK,_, _, _): return "/post/\(postPK)/text/"
         case .photo(let postPK, _):     return "/post/\(postPK)/photo/"
         case .like(let postPK):         return "/post/\(postPK)/like/"
-            
+        case .delete(let postPK):       return "/post/\(postPK)/update/"
+        case .deleteContents(let contentType, let contentPK):
+            switch contentType {
+            case .txt: return "/post/text/\(contentPK)/"
+            case .img: return "/post/photo/\(contentPK)/"
+            }
         }
     }
     
@@ -40,6 +46,8 @@ extension Post: TargetType {
         case .text(_, _, _, _):    return .post
         case .photo(_, _):         return .post
         case .like:                return .post
+        case .delete:              return .delete
+        case .deleteContents:      return .delete
         }
     }
     
@@ -93,7 +101,9 @@ extension Post: TargetType {
                 fileName: UUID().uuidString + ".jpg",
                 mimeType: "image/jpg")])
             
-        case .like: return .requestPlain
+        case .like:           return .requestPlain
+        case .delete:         return .requestPlain
+        case .deleteContents: return .requestPlain
         }
     }
     

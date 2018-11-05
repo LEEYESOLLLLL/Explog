@@ -12,7 +12,6 @@ import Moya
 enum Feed {
     case category(continent: Int)
     case next(continent: Int, query: String)
-    case like(postPK: Int)
 }
 
 extension Feed: TargetType {
@@ -20,7 +19,6 @@ extension Feed: TargetType {
         switch self {
         case .category(let continent): return "/post/\(continent)/list"
         case .next(let continent, _):  return "/post/\(continent)/list"
-        case .like(let postPK): return "/post/\(postPK)/like/"
         }
         
     }
@@ -29,7 +27,6 @@ extension Feed: TargetType {
         switch self {
         case .category:  return .get
         case .next:      return .get
-        case .like:      return .post
         }
     }
     
@@ -46,8 +43,6 @@ extension Feed: TargetType {
             return .requestParameters(
                 parameters: [splitedQuery[0]: splitedQuery[1]],
                 encoding: URLEncoding.default)
-            
-        case .like: return .requestPlain
         }
     }
     
@@ -56,13 +51,6 @@ extension Feed: TargetType {
         switch self {
         case .category, .next:
             return ["Content-Type": "application/json"]
-        case .like:
-            guard let token = KeychainService.token else {
-                return nil
-            }
-            return [
-                "Authorization": "Token \(token)",
-                "Content-Type": "application/json"]
         }
     }
 }

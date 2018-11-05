@@ -8,6 +8,7 @@
 import UIKit
 import Moya
 import BoltsSwift
+import Square
 
 final class ProfileViewController: BaseViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -50,7 +51,7 @@ final class ProfileViewController: BaseViewController {
     }
     
     var provider = MoyaProvider<User>(plugins: [NetworkLoggerPlugin()])
-    var feedProvider = MoyaProvider<Feed>(plugins: [NetworkLoggerPlugin()])
+    var postProvider = MoyaProvider<Post>(plugins: [NetworkLoggerPlugin()])
     var otherUserPK: Int?
     lazy var v = ProfileView(controlBy: self)
     override func loadView() {
@@ -118,7 +119,7 @@ extension ProfileViewController {
     @discardableResult
     func like(_ postPrivateKey: Int, index: Int) -> BoltsSwift.Task<LikeModel> {
         let taskCompletionSource = TaskCompletionSource<LikeModel>()
-        feedProvider.request(.like(postPK: postPrivateKey)) { [weak self] (result) in
+        postProvider.request(.like(postPK: postPrivateKey)) { [weak self] (result) in
             guard let strongSelf = self,
                 case .ready(let item) = strongSelf.state else {
                     return
@@ -144,6 +145,31 @@ extension ProfileViewController {
     }
 }
 
+extension ProfileViewController {
+    func delete(_ postPrivateKey: Int, index: Int) {
+        postProvider.request(.delete(postPK: postPrivateKey)) { [weak self] (result) in
+            guard let strongSelf = self, case .ready(let item) = strongSelf.state else {
+                return
+            }
+            switch result {
+            case .success(let response):
+                switch (200...299) ~= response.statusCode {
+                case true :
+                    var copy = item
+                    copy.posts.remove(at: index)
+                    strongSelf.state = .ready(item: copy)
+                    Square.display("Your post has deleted successfully")
+                case false: Square.display("Request Error")
+                }
+                
+            case .failure(let error): print(error.localizedDescription, #function)
+            }
+            
+        }
+        
+    }
+}
+
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return ProfileView.UI.tableViewCellHegiht
@@ -160,6 +186,25 @@ extension ProfileViewController: UITableViewDelegate {
     }
 }
 
+// MARK: Edit
+extension ProfileViewController {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return editMode == .on ? true : false
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { [weak self] (rowAction, indexPath) in
+            guard let strongSelf = self,
+                case .ready(let item) = strongSelf.state else {
+                return
+            }
+            
+            let post = item.posts[indexPath.row]
+            strongSelf.delete(post.pk, index: indexPath.row)
+        }
+        return [deleteAction]
+    }
+}
 extension ProfileViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1

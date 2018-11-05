@@ -15,14 +15,19 @@ final class UploadTextView: BaseView<UploadTextViewController> {
         $0.text = "Tell your friends about your trip!"
     }
     
-    lazy var uploadTextButton = UIBarButtonItem(
-        barButtonSystemItem: .compose,
-        target: vc,
-        action: #selector(vc.uploadTextButtonAction(_:)))
+    lazy var backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "back-24pk").withRenderingMode(.alwaysOriginal),
+                                     style: .plain,
+                                     target: vc,
+                                     action: #selector(vc.backButtonAction(_:)))
+    lazy var uploadTextButton = UIBarButtonItem(image: #imageLiteral(resourceName: "paper-black-512-px").resizeImage(UI.donButtonSize, opaque: false).withRenderingMode(.alwaysOriginal),
+                                                style: .plain,
+                                                target: vc,
+                                                action: #selector(vc.uploadTextButtonAction(_:)))
     
     struct UI {
         static var highlightFontsize: CGFloat = 35
         static var basicFontsize: CGFloat = 30
+        static var donButtonSize: CGFloat = 26
     }
     
     override func setupUI() {
@@ -39,6 +44,7 @@ final class UploadTextView: BaseView<UploadTextViewController> {
     
     override func setupBinding() {
         vc.navigationItem.hidesBackButton = false
+        vc.navigationItem.leftBarButtonItem = backButton
         vc.navigationItem.rightBarButtonItem = uploadTextButton
         vc.navigationItem.title = "Add Text"
         

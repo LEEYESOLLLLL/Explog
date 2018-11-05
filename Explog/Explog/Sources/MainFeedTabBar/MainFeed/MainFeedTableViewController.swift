@@ -16,6 +16,7 @@ import Square
 
 final class FeedTableViewController: ParallaxTableViewController {
     let provider = MoyaProvider<Feed>()//.(plugins: [NetworkLoggerPlugin(])
+    let postProvider = MoyaProvider<Post>()
     var state: State = .loading {
         didSet {
             switch state {
@@ -118,7 +119,7 @@ extension FeedTableViewController {
     @discardableResult
     func like(_ postPrivateKey: Int, index: Int) -> BoltsSwift.Task<LikeModel> {
         let taskCompletionSource = TaskCompletionSource<LikeModel>()
-        provider.request(.like(postPK: postPrivateKey)) { [weak self] (result) in
+        postProvider.request(.like(postPK: postPrivateKey)) { [weak self] (result) in
             guard let strongSelf = self,
                 case .ready(let item) = strongSelf.state else {
                     return
