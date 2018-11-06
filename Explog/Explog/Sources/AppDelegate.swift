@@ -24,8 +24,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         // MARK: temporarily
-        setKeyWindow()
-        requesetNotification()
+//        setKeyWindow()
+//        requesetNotification()
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = RemoveAllViewController()
+        window?.makeKeyAndVisible()
         return true
     }
     

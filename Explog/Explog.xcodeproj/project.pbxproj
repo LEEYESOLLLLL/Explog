@@ -65,6 +65,7 @@
 		045FF0DF21803C5F003ECA23 /* PhotoGridState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045FF0DE21803C5F003ECA23 /* PhotoGridState.swift */; };
 		045FF103218093A9003ECA23 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045FF102218093A9003ECA23 /* Post.swift */; };
 		046460AB2188247E00EFE40B /* DetailPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046460AA2188247E00EFE40B /* DetailPhotoCell.swift */; };
+		046562812191E7750070683E /* RemoveAllViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046562802191E7750070683E /* RemoveAllViewController.swift */; };
 		046A8CA5218967D500C12390 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046A8CA4218967D500C12390 /* ProfileCell.swift */; };
 		046A8CA72189761700C12390 /* ProfileState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046A8CA62189761700C12390 /* ProfileState.swift */; };
 		046A8CC72189817B00C12390 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046A8CC62189817B00C12390 /* User.swift */; };
@@ -192,6 +193,7 @@
 		045FF0DE21803C5F003ECA23 /* PhotoGridState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGridState.swift; sourceTree = "<group>"; };
 		045FF102218093A9003ECA23 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		046460AA2188247E00EFE40B /* DetailPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPhotoCell.swift; sourceTree = "<group>"; };
+		046562802191E7750070683E /* RemoveAllViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveAllViewController.swift; sourceTree = "<group>"; };
 		046A8CA4218967D500C12390 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		046A8CA62189761700C12390 /* ProfileState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileState.swift; sourceTree = "<group>"; };
 		046A8CC62189817B00C12390 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 			isa = PBXGroup;
 			children = (
 				0423A5FF212B72F000DD9747 /* AppDelegate.swift */,
+				046562802191E7750070683E /* RemoveAllViewController.swift */,
 				043B46572180F29F00EA8EFC /* GlobalExtension.swift */,
 				0423A617212B7BF000DD9747 /* Base */,
 				0423A626212B8D9A00DD9747 /* MainFeedTabBar */,
@@ -980,6 +983,7 @@
 				04B38AC821787CAF00E17908 /* KeychainService.swift in Sources */,
 				04F1A3C2218C5B3800CF99A1 /* ChangePasswordView.swift in Sources */,
 				04C70AAA2183296A00B43683 /* UINavigationController+Transpar.swift in Sources */,
+				046562812191E7750070683E /* RemoveAllViewController.swift in Sources */,
 				041D0032218CAAE3009430FE /* UIBarButton+BackgroundImage.swift in Sources */,
 				045FF103218093A9003ECA23 /* Post.swift in Sources */,
 				04C8F709218B2C0900CA296F /* SettingProfileViewController.swift in Sources */,
