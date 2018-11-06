@@ -1,41 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="OLM-wB-Czl">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
-        <scene sceneID="EHf-IW-A2E">
+        <scene sceneID="Vub-gE-khe">
             <objects>
-                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                <viewController id="OLM-wB-Czl" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qVh-Rv-a5I">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EXPLOG" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7S1-Kj-94q">
-                                <rect key="frame" x="113" y="309.5" width="149" height="48"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EXPLOG" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nww-v0-KIN">
+                                <rect key="frame" x="129" y="309.5" width="149" height="48"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="40"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" red="0.45098039220000002" green="0.97254901959999995" blue="0.59215686270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="transport-logo" translatesAutoresizingMaskIntoConstraints="NO" id="syb-P2-XG0">
+                                <rect key="frame" x="79" y="308.5" width="42" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="42" id="ZZK-Ay-zkr"/>
+                                    <constraint firstAttribute="height" constant="50" id="vml-fB-aXI"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.16078431372549018" green="0.67843137254901964" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="0.87450980389999999" green="0.87323927879999996" blue="0.8732540607" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="7S1-Kj-94q" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Gda-mo-Y9w"/>
-                            <constraint firstItem="7S1-Kj-94q" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="swc-QV-gMy"/>
+                            <constraint firstItem="nww-v0-KIN" firstAttribute="leading" secondItem="syb-P2-XG0" secondAttribute="trailing" constant="8" id="AQ0-Il-wSG"/>
+                            <constraint firstItem="syb-P2-XG0" firstAttribute="centerY" secondItem="qVh-Rv-a5I" secondAttribute="centerY" id="Xne-kG-Icz"/>
+                            <constraint firstItem="nww-v0-KIN" firstAttribute="centerY" secondItem="qVh-Rv-a5I" secondAttribute="centerY" id="ufQ-7t-FBS"/>
+                            <constraint firstItem="nww-v0-KIN" firstAttribute="centerX" secondItem="qVh-Rv-a5I" secondAttribute="centerX" constant="16" id="xdL-Nx-YqN"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <viewLayoutGuide key="safeArea" id="U2A-jL-Rvc"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uBd-6D-59s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-442" y="343"/>
+            <point key="canvasLocation" x="-737" y="-273"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="transport-logo" width="909" height="872"/>
+    </resources>
 </document>
