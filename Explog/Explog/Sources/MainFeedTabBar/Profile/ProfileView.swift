@@ -73,7 +73,7 @@ final class ProfileView: BaseView<ProfileViewController> {
                                              height: UIScreen.main.bounds.height * 0.12)
         static var topLabelMargin = UIApplication.shared.statusBarFrame.height + 8
         static var statusBarHeight = UIApplication.shared.statusBarFrame.height
-        static var tableViewCellHegiht = UIScreen.main.bounds.height / 4.4
+        static var tableViewCellHegiht = UIScreen.main.bounds.height / 4.0
     }
     
     override func setupUI() {

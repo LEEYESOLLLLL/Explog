@@ -148,6 +148,7 @@ extension FeedTableViewController {
 // MARK: TableViewDelegate
 extension FeedTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         guard case .ready(let item) = state,
             item.posts.count > indexPath.row else {
                 return
@@ -216,6 +217,6 @@ extension FeedTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.bounds.height / 3.6
+        return tableView.bounds.height / 3
     }
 }

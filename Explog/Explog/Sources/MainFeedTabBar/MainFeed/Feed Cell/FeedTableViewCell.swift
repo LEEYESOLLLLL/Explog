@@ -11,13 +11,12 @@ import Kingfisher
 import BoltsSwift
 
 final class FeedTableViewCell: UITableViewCell {
-    var containerView = UIView().then {
-        $0.backgroundColor = .white
-        $0.clipsToBounds = true
-        $0.layer.cornerRadius = 10
+    var roundShadowContainerView = RoundShadowView().then {
+        $0.backgroundColor = .clear
+        $0.layer.cornerRadius = RoundShadowView.UI.layerCornerRadius
     }
     var coverImage = UIImageView().then {
-        $0.contentMode = .scaleToFill
+        $0.contentMode = .scaleAspectFill
     }
     
     var darkBlurView = UIVisualEffectView().then {
@@ -61,7 +60,7 @@ final class FeedTableViewCell: UITableViewCell {
     
     
     struct UI {
-        static var cellSpacing: CGFloat = 1
+        static var cellSpacing: CGFloat = 16
         static var labelSpacing: CGFloat = 16
         static var likeButtonSize: CGFloat = 22
     }
@@ -76,41 +75,41 @@ final class FeedTableViewCell: UITableViewCell {
     }
     
     func setupUI() {
-        contentView.addSubview(containerView)
-        containerView.addSubviews([coverImage, darkBlurView, descriptionCoverStackView, numberOfLikeLabel, likeButton])
+        contentView.addSubview(roundShadowContainerView)
+        roundShadowContainerView.contentView.addSubviews([coverImage, darkBlurView, descriptionCoverStackView, numberOfLikeLabel, likeButton])
         descriptionCoverStackView.addArrangedSubviews([titleLabel, dateLabel, authorLabel])
         
-        containerView
-            .topAnchor(to: contentView.topAnchor, constant: UI.cellSpacing)
+        roundShadowContainerView
+            .topAnchor(to: contentView.topAnchor, constant: UI.cellSpacing / 2)
             .bottomAnchor(to: contentView.bottomAnchor, constant: -UI.cellSpacing)
             .leadingAnchor(to: contentView.leadingAnchor, constant: UI.cellSpacing)
             .trailingAnchor(to: contentView.trailingAnchor, constant: -UI.cellSpacing)
             .activateAnchors()
         
         coverImage
-            .topAnchor(to: containerView.topAnchor)
-            .bottomAnchor(to: containerView.bottomAnchor)
-            .leadingAnchor(to: containerView.leadingAnchor)
-            .trailingAnchor(to: containerView.trailingAnchor)
+            .topAnchor(to: roundShadowContainerView.topAnchor)
+            .bottomAnchor(to: roundShadowContainerView.bottomAnchor)
+            .leadingAnchor(to: roundShadowContainerView.leadingAnchor)
+            .trailingAnchor(to: roundShadowContainerView.trailingAnchor)
             .activateAnchors()
         
         darkBlurView
-            .topAnchor(to: containerView.topAnchor)
-            .bottomAnchor(to: containerView.bottomAnchor)
-            .leadingAnchor(to: containerView.leadingAnchor)
-            .trailingAnchor(to: containerView.trailingAnchor)
+            .topAnchor(to: roundShadowContainerView.topAnchor)
+            .bottomAnchor(to: roundShadowContainerView.bottomAnchor)
+            .leadingAnchor(to: roundShadowContainerView.leadingAnchor)
+            .trailingAnchor(to: roundShadowContainerView.trailingAnchor)
             .activateAnchors()
         
         descriptionCoverStackView
-            .topAnchor(to: containerView.layoutMarginsGuide.topAnchor)
-            .bottomAnchor(to: containerView.layoutMarginsGuide.bottomAnchor)
-            .leadingAnchor(to: containerView.layoutMarginsGuide.leadingAnchor)
-            .trailingAnchor(to: containerView.layoutMarginsGuide.trailingAnchor)
+            .topAnchor(to: roundShadowContainerView.layoutMarginsGuide.topAnchor)
+            .bottomAnchor(to: roundShadowContainerView.layoutMarginsGuide.bottomAnchor)
+            .leadingAnchor(to: roundShadowContainerView.layoutMarginsGuide.leadingAnchor)
+            .trailingAnchor(to: roundShadowContainerView.layoutMarginsGuide.trailingAnchor)
             .activateAnchors()
         
         numberOfLikeLabel
-            .trailingAnchor(to: containerView.layoutMarginsGuide.trailingAnchor)
-            .bottomAnchor(to: containerView.layoutMarginsGuide.bottomAnchor)
+            .trailingAnchor(to: roundShadowContainerView.layoutMarginsGuide.trailingAnchor)
+            .bottomAnchor(to: roundShadowContainerView.layoutMarginsGuide.bottomAnchor)
             .activateAnchors()
         
         likeButton
