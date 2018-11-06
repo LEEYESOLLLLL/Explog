@@ -50,6 +50,7 @@
 		04266A8421906B8B00B18C8E /* ReplyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04266A8321906B8B00B18C8E /* ReplyState.swift */; };
 		04266A8621906FCC00B18C8E /* Noti.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04266A8521906FCC00B18C8E /* Noti.swift */; };
 		04266A88219072EC00B18C8E /* NotiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04266A87219072EC00B18C8E /* NotiModel.swift */; };
+		04266AE42191643800B18C8E /* RoundShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04266AE32191643800B18C8E /* RoundShadowView.swift */; };
 		043B46582180F29F00EA8EFC /* GlobalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043B46572180F29F00EA8EFC /* GlobalExtension.swift */; };
 		044E663E2182FD930047D5F2 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E663D2182FD930047D5F2 /* PostDetailView.swift */; };
 		044E66412182FE6C0047D5F2 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E66402182FE6C0047D5F2 /* PostDetailViewController.swift */; };
@@ -175,6 +176,7 @@
 		04266A8321906B8B00B18C8E /* ReplyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyState.swift; sourceTree = "<group>"; };
 		04266A8521906FCC00B18C8E /* Noti.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Noti.swift; sourceTree = "<group>"; };
 		04266A87219072EC00B18C8E /* NotiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiModel.swift; sourceTree = "<group>"; };
+		04266AE32191643800B18C8E /* RoundShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundShadowView.swift; sourceTree = "<group>"; };
 		043B46572180F29F00EA8EFC /* GlobalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalExtension.swift; sourceTree = "<group>"; };
 		043CBD8E217228CF00CB910A /* Explog.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Explog.entitlements; sourceTree = "<group>"; };
 		044E663D2182FD930047D5F2 /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
@@ -587,6 +589,7 @@
 			children = (
 				04BDBDED218D8A40005B2F68 /* FeedCellState.swift */,
 				04EBBA362137E8C900CA73A0 /* FeedTableViewCell.swift */,
+				04266AE32191643800B18C8E /* RoundShadowView.swift */,
 			);
 			path = "Feed Cell";
 			sourceTree = "<group>";
@@ -983,6 +986,7 @@
 				046A8CC72189817B00C12390 /* User.swift in Sources */,
 				045FF095217F4382003ECA23 /* DatePickerAlertController.swift in Sources */,
 				04266A792190245400B18C8E /* Search.swift in Sources */,
+				04266AE42191643800B18C8E /* RoundShadowView.swift in Sources */,
 				04EBBA372137E8C900CA73A0 /* FeedTableViewCell.swift in Sources */,
 				046A8CA5218967D500C12390 /* ProfileCell.swift in Sources */,
 			);
