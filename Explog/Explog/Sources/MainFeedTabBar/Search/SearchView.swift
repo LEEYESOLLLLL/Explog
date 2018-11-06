@@ -47,7 +47,7 @@ final class SearchView: BaseView<SearchViewController> {
     
     func setupNavigationBar() {
         vc.navigationItem.hidesSearchBarWhenScrolling = false
-        vc.navigationItem.title = "Search Trip🐳"
+        vc.navigationItem.title = "Search Trip"
         vc.navigationItem.searchController = searchController
         vc.definesPresentationContext = true
         vc.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
