@@ -12,7 +12,7 @@ import Kingfisher
 final class DetailTextCell: UITableViewCell {
     // ImageView, BoldyText, Label..
     var contentText = UILabel().then {
-        $0.setup(textColor: .black, fontStyle: .body, textAlignment: .natural, numberOfLines: 0)
+        $0.setup(textColor: .black, fontStyle: .body, textAlignment: .center, numberOfLines: 0)
         $0.lineBreakMode = .byWordWrapping
         $0.adjustsFontForContentSizeCategory = true 
     }
