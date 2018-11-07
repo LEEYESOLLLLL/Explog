@@ -828,7 +828,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n# do not assign the new build number if there is no changes\nDIFF=`git diff`\nif [[ $DIFF == \"\" ]]; then exit 0; fi\n\n# path to the property list where the version number should be changed\nPLIST=\"${PROJECT_DIR}/${INFOPLIST_FILE}\"\n\n# the latest tag that will be used as a short version number\nVERSION_NUMBER=`git describe | awk '{ split($0, a, \"-\"); print a[1] }'`\n\n# the number of commits in repository to be used for the build number\nNUMBER_OF_COMMITS=`git rev-list HEAD --count`\n\n# a future build number should consider its own commit\nBUILD_NUMBER=$((NUMBER_OF_COMMITS+1))\n\n/usr/libexec/PlistBuddy -c \"Set CFBundleShortVersionString $VERSION_NUMBER\" \"${PLIST}\"\n/usr/libexec/PlistBuddy -c \"Set CFBundleVersion $BUILD_NUMBER\" \"${PLIST}\"\n";
+			shellScript = "$SRCROOT/Scripts/setup_versionnumber.sh\n";
 		};
 		04A911D22192E004008432A9 /* Set up Build numer via number of commit */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -846,7 +846,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\ngit=`sh /etc/profile; which git`\nbranch_name=`$git symbolic-ref HEAD | sed -e 's,.*/\\\\(.*\\\\),\\\\1,'`\ngit_count=`$git rev-list $branch_name |wc -l | sed 's/^ *//;s/ *$//'`\n\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $git_count\" \"${PRODUCT_SETTINGS_PATH}\"\n\necho \"Updated build number in ${PRODUCT_SETTINGS_PATH} to $git_count\"\n";
+			shellScript = "$SRCROOT/Scripts/setup_buildnumber.sh\n";
 		};
 		6791C75AAB1A12F1E3ADEDD3 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
