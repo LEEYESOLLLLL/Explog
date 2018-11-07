@@ -723,8 +723,6 @@
 				0423A5F9212B72F000DD9747 /* Frameworks */,
 				0423A5FA212B72F000DD9747 /* Resources */,
 				6791C75AAB1A12F1E3ADEDD3 /* [CP] Embed Pods Frameworks */,
-				04A911D12192E003008432A9 /* Set up Version Number via Git tag  */,
-				04A911D22192E004008432A9 /* Set up Build numer via number of commit */,
 			);
 			buildRules = (
 			);
@@ -812,42 +810,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		04A911D12192E003008432A9 /* Set up Version Number via Git tag  */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Set up Version Number via Git tag ";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "$SRCROOT/Scripts/setup_versionnumber.sh\n";
-		};
-		04A911D22192E004008432A9 /* Set up Build numer via number of commit */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Set up Build numer via number of commit";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "$SRCROOT/Scripts/setup_buildnumber.sh\n";
-		};
 		6791C75AAB1A12F1E3ADEDD3 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
