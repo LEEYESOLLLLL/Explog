@@ -79,7 +79,6 @@ class PostDetailView: BaseView<PostDetailViewController> {
     }
     
     var authorButton = UIButton().then {
-        $0.setImage(#imageLiteral(resourceName: "continent1"), for: .normal)
         $0.contentMode = .scaleAspectFit
         $0.layer.cornerRadius = UI.authorButtonDimension/2
         $0.clipsToBounds = true
@@ -267,11 +266,14 @@ class PostDetailView: BaseView<PostDetailViewController> {
         titleLabel.text = title
         dateLabel.text = "\(startDate) ~ \(endDate)"
         continentLabel.text = continentType.string
-        authorButton.imageView?.kf.setImage(with: authorURL,
-                                            placeholder: nil,
-                                            options: [.transition(.fade(1))],
-                                            progressBlock: nil,
-                                            completionHandler: nil)
+        authorButton.kf.setImage(with: authorURL,
+                                 for: .normal,
+                                 placeholder: nil,
+                                 options: [.transition(.fade(1))],
+                                 progressBlock: nil,
+                                 completionHandler: nil)
+        
+        
         authorNickNameLabel.text = data.author.username
     }
     
