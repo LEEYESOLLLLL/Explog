@@ -17,7 +17,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0.0</string>
 	<key>CFBundleVersion</key>
-	<string>141</string>
+	<string>148</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -26,7 +26,7 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>This application wants to access photos and camera.</string>
+	<string>Explog is that Camera access is required to take photos for trip posting uploading.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This application wants to access photos and camera.</string>
 	<key>UIBackgroundModes</key>
