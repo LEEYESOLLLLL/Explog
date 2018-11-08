@@ -83,6 +83,7 @@
 		04B38AEC2178821200E17908 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AEB2178821200E17908 /* SignUpViewController.swift */; };
 		04B38AEE2178826000E17908 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AED2178826000E17908 /* AuthView.swift */; };
 		04B8FBEA21940C6A0090938E /* UIApplication+SettingURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8FBE921940C6A0090938E /* UIApplication+SettingURL.swift */; };
+		04B8FC0C2194274F0090938E /* ImagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8FC0B2194274F0090938E /* ImagePickerViewController.swift */; };
 		04BDBDEE218D8A40005B2F68 /* FeedCellState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BDBDED218D8A40005B2F68 /* FeedCellState.swift */; };
 		04BDBDF1218D8B9D005B2F68 /* FeedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BDBDF0218D8B9D005B2F68 /* FeedState.swift */; };
 		04C70AA42183188E00B43683 /* DetailTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C70AA32183188E00B43683 /* DetailTextCell.swift */; };
@@ -211,6 +212,7 @@
 		04B38AEB2178821200E17908 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		04B38AED2178826000E17908 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		04B8FBE921940C6A0090938E /* UIApplication+SettingURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+SettingURL.swift"; sourceTree = "<group>"; };
+		04B8FC0B2194274F0090938E /* ImagePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerViewController.swift; sourceTree = "<group>"; };
 		04BDBDED218D8A40005B2F68 /* FeedCellState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCellState.swift; sourceTree = "<group>"; };
 		04BDBDF0218D8B9D005B2F68 /* FeedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedState.swift; sourceTree = "<group>"; };
 		04C70AA32183188E00B43683 /* DetailTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTextCell.swift; sourceTree = "<group>"; };
@@ -538,6 +540,7 @@
 			children = (
 				045FF0DE21803C5F003ECA23 /* PhotoGridState.swift */,
 				045FF0B8217F9395003ECA23 /* PhotoGridView.swift */,
+				04B8FC0B2194274F0090938E /* ImagePickerViewController.swift */,
 				045FF0B6217F9377003ECA23 /* PhotoGridController.swift */,
 				045FF0BA217F98E9003ECA23 /* PhotoGridCell.swift */,
 			);
@@ -921,6 +924,7 @@
 				04F72A5F217C36CE0099C7C9 /* Auth.swift in Sources */,
 				0423A63B212B97E000DD9747 /* ProfileViewController.swift in Sources */,
 				043B46582180F29F00EA8EFC /* GlobalExtension.swift in Sources */,
+				04B8FC0C2194274F0090938E /* ImagePickerViewController.swift in Sources */,
 				0423A623212B8D0A00DD9747 /* BaseTabBarController.swift in Sources */,
 				045FF097217F4399003ECA23 /* ContinentPickerAlertViewController.swift in Sources */,
 				0423A61F212B896A00DD9747 /* MainFeedTabBarView.swift in Sources */,
