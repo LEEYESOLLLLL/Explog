@@ -29,14 +29,7 @@ final class PhotoGridView: BaseView<PhotoGridViewController> {
     
     // AVPhotoCaptureOutput produces a memory leak when initialized
     // https://forums.developer.apple.com/thread/70449
-    var imagePickerViewController = UIImagePickerController().then {
-        $0.modalPresentationStyle = .overCurrentContext
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
-            $0.sourceType = .camera
-        }else {
-            $0.sourceType = .photoLibrary // for simulrator
-        }
-    }
+    var imagePickerViewController = ImagePickerViewController()
     
     var permissionView = UIView().then {
         $0.backgroundColor = .white
