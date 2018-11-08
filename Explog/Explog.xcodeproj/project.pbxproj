@@ -84,6 +84,10 @@
 		04B38AEE2178826000E17908 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AED2178826000E17908 /* AuthView.swift */; };
 		04B8FBEA21940C6A0090938E /* UIApplication+SettingURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8FBE921940C6A0090938E /* UIApplication+SettingURL.swift */; };
 		04B8FC0C2194274F0090938E /* ImagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8FC0B2194274F0090938E /* ImagePickerViewController.swift */; };
+		04B8FC34219452800090938E /* PrivacyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8FC33219452800090938E /* PrivacyType.swift */; };
+		04B8FC36219452B50090938E /* PrivateAccessProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8FC35219452B50090938E /* PrivateAccessProvider.swift */; };
+		04B8FC38219452D10090938E /* PhotoAccessProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8FC37219452D10090938E /* PhotoAccessProvider.swift */; };
+		04B8FC3A219452DC0090938E /* CameraAccessProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8FC39219452DC0090938E /* CameraAccessProvider.swift */; };
 		04BDBDEE218D8A40005B2F68 /* FeedCellState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BDBDED218D8A40005B2F68 /* FeedCellState.swift */; };
 		04BDBDF1218D8B9D005B2F68 /* FeedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BDBDF0218D8B9D005B2F68 /* FeedState.swift */; };
 		04C70AA42183188E00B43683 /* DetailTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C70AA32183188E00B43683 /* DetailTextCell.swift */; };
@@ -213,6 +217,10 @@
 		04B38AED2178826000E17908 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		04B8FBE921940C6A0090938E /* UIApplication+SettingURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+SettingURL.swift"; sourceTree = "<group>"; };
 		04B8FC0B2194274F0090938E /* ImagePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerViewController.swift; sourceTree = "<group>"; };
+		04B8FC33219452800090938E /* PrivacyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyType.swift; sourceTree = "<group>"; };
+		04B8FC35219452B50090938E /* PrivateAccessProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateAccessProvider.swift; sourceTree = "<group>"; };
+		04B8FC37219452D10090938E /* PhotoAccessProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAccessProvider.swift; sourceTree = "<group>"; };
+		04B8FC39219452DC0090938E /* CameraAccessProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraAccessProvider.swift; sourceTree = "<group>"; };
 		04BDBDED218D8A40005B2F68 /* FeedCellState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCellState.swift; sourceTree = "<group>"; };
 		04BDBDF0218D8B9D005B2F68 /* FeedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedState.swift; sourceTree = "<group>"; };
 		04C70AA32183188E00B43683 /* DetailTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTextCell.swift; sourceTree = "<group>"; };
@@ -538,9 +546,10 @@
 		045FF0BC217F9C93003ECA23 /* PhotoGrid */ = {
 			isa = PBXGroup;
 			children = (
+				04B8FC3C219452F90090938E /* Privacy Type */,
 				045FF0DE21803C5F003ECA23 /* PhotoGridState.swift */,
-				045FF0B8217F9395003ECA23 /* PhotoGridView.swift */,
 				04B8FC0B2194274F0090938E /* ImagePickerViewController.swift */,
+				045FF0B8217F9395003ECA23 /* PhotoGridView.swift */,
 				045FF0B6217F9377003ECA23 /* PhotoGridController.swift */,
 				045FF0BA217F98E9003ECA23 /* PhotoGridCell.swift */,
 			);
@@ -588,6 +597,25 @@
 				04F71EA3217AF3C50099C7C9 /* Keychain */,
 			);
 			path = Auth;
+			sourceTree = "<group>";
+		};
+		04B8FC3B219452E60090938E /* Privacy Provider */ = {
+			isa = PBXGroup;
+			children = (
+				04B8FC37219452D10090938E /* PhotoAccessProvider.swift */,
+				04B8FC39219452DC0090938E /* CameraAccessProvider.swift */,
+			);
+			path = "Privacy Provider";
+			sourceTree = "<group>";
+		};
+		04B8FC3C219452F90090938E /* Privacy Type */ = {
+			isa = PBXGroup;
+			children = (
+				04B8FC3B219452E60090938E /* Privacy Provider */,
+				04B8FC33219452800090938E /* PrivacyType.swift */,
+				04B8FC35219452B50090938E /* PrivateAccessProvider.swift */,
+			);
+			path = "Privacy Type";
 			sourceTree = "<group>";
 		};
 		04BDBDEF218D8B8F005B2F68 /* Feed Cell */ = {
@@ -915,6 +943,7 @@
 				04C70B2C2186DAE200B43683 /* UploadTextView.swift in Sources */,
 				0423A614212B756700DD9747 /* BaseView.swift in Sources */,
 				047FE5DF216CF69C009B56BB /* UIScreen+Sugar.swift in Sources */,
+				04B8FC38219452D10090938E /* PhotoAccessProvider.swift in Sources */,
 				046A8CA72189761700C12390 /* ProfileState.swift in Sources */,
 				04266A67218ED09900B18C8E /* ReplyCell.swift in Sources */,
 				04C8F370218B0A3B00CA296F /* File.swift in Sources */,
@@ -951,6 +980,7 @@
 				04F72A5D217B44E30099C7C9 /* Regex.swift in Sources */,
 				04C70B26218581AC00B43683 /* PostDetailModel.swift in Sources */,
 				04C70B4E21870E4300B43683 /* PassableDataDelegate.swift in Sources */,
+				04B8FC34219452800090938E /* PrivacyType.swift in Sources */,
 				0423A633212B978C00DD9747 /* PostViewController.swift in Sources */,
 				04F71E9A217AE3900099C7C9 /* UIStackVIew+ArrangedSubview.swift in Sources */,
 				0413DCBD21781CD10031474A /* FeedLabel.swift in Sources */,
@@ -977,6 +1007,7 @@
 				041D0034218CAFDD009430FE /* UIImage+Resize.swift in Sources */,
 				04266A65218ECA0100B18C8E /* ReplyViewController.swift in Sources */,
 				046A8CC9218986DA00C12390 /* UserModel.swift in Sources */,
+				04B8FC36219452B50090938E /* PrivateAccessProvider.swift in Sources */,
 				04266A8621906FCC00B18C8E /* Noti.swift in Sources */,
 				047E59902189D9EE00BD2810 /* SettingTableViewCell.swift in Sources */,
 				044E663E2182FD930047D5F2 /* PostDetailView.swift in Sources */,
@@ -1008,6 +1039,7 @@
 				04C70AAA2183296A00B43683 /* UINavigationController+Transpar.swift in Sources */,
 				041D0032218CAAE3009430FE /* UIBarButton+BackgroundImage.swift in Sources */,
 				045FF103218093A9003ECA23 /* Post.swift in Sources */,
+				04B8FC3A219452DC0090938E /* CameraAccessProvider.swift in Sources */,
 				04C8F709218B2C0900CA296F /* SettingProfileViewController.swift in Sources */,
 				046A8CC72189817B00C12390 /* User.swift in Sources */,
 				045FF095217F4382003ECA23 /* DatePickerAlertController.swift in Sources */,
