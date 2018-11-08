@@ -8,6 +8,7 @@
 
 import UIKit
 import Photos
+import Square
 
 
 
@@ -34,37 +35,36 @@ class PhotoGridViewController: BaseViewController {
         return PHAsset.fetchAssets(with: allPhotosOptions)
     }
     
-    lazy var photos = PhotoGridViewController.loadPhotos()
+    var photos: PHFetchResult<PHAsset> = PHFetchResult<PHAsset>()
     lazy var imageManager = PHCachingImageManager()
     
     var selectedState: SelectedState = .notSelected {
         didSet {
             switch selectedState {
-            case .selected:
-                v.doneButtonEnable(order: true)
-            case .notSelected:
-                v.doneButtonEnable(order: false)
+            case .selected: v.doneButtonEnable(order: true)
+            case .notSelected: v.doneButtonEnable(order: false)
             }
         }
     }
     
     // MARK: PassableData Delegate
     weak var delegate: PassableDataDelegate?
-    
-    
+    var privacyAuthorizationState = PHPhotoLibrary.authorizationStatus()
     override func loadView() {
         super.loadView()
         view = v
     }
     
+}
+extension PhotoGridViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        selectedState = .notSelected
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        v.permissionAction(type: privacyAuthorizationState)
     }
     
     @objc func dismissBarButtonAction(_ sender: UIBarButtonItem) {
@@ -80,6 +80,23 @@ class PhotoGridViewController: BaseViewController {
     }
 }
 
+// MARK: Privacy Photo
+extension PhotoGridViewController {
+    @objc func permissionButtonAction(_ sender: UIButton) {
+        switch privacyAuthorizationState {
+        case .authorized: break
+        case .denied: UIApplication.shared.openSettings()
+        case .notDetermined, .restricted:
+            PHPhotoLibrary.requestAuthorization { (authorizationState) in
+                switch authorizationState {
+                case .authorized: DispatchQueue.main.async { self.v.permissionAction(type: authorizationState) }
+                case .denied: DispatchQueue.main.async { self.dismiss(animated: true, completion: nil) }
+                case .notDetermined, .restricted: break
+                }
+            }
+        }
+    }
+}
 extension PhotoGridViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -101,7 +118,6 @@ extension PhotoGridViewController: UICollectionViewDelegate {
             cell.drawSelectBox(order: true)
         }
     }
-    
 }
 extension PhotoGridViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {

@@ -82,6 +82,7 @@
 		04B38AEA2178820C00E17908 /* EmailLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AE92178820C00E17908 /* EmailLoginViewController.swift */; };
 		04B38AEC2178821200E17908 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AEB2178821200E17908 /* SignUpViewController.swift */; };
 		04B38AEE2178826000E17908 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AED2178826000E17908 /* AuthView.swift */; };
+		04B8FBEA21940C6A0090938E /* UIApplication+SettingURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8FBE921940C6A0090938E /* UIApplication+SettingURL.swift */; };
 		04BDBDEE218D8A40005B2F68 /* FeedCellState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BDBDED218D8A40005B2F68 /* FeedCellState.swift */; };
 		04BDBDF1218D8B9D005B2F68 /* FeedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BDBDF0218D8B9D005B2F68 /* FeedState.swift */; };
 		04C70AA42183188E00B43683 /* DetailTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C70AA32183188E00B43683 /* DetailTextCell.swift */; };
@@ -209,6 +210,7 @@
 		04B38AE92178820C00E17908 /* EmailLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLoginViewController.swift; sourceTree = "<group>"; };
 		04B38AEB2178821200E17908 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		04B38AED2178826000E17908 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		04B8FBE921940C6A0090938E /* UIApplication+SettingURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+SettingURL.swift"; sourceTree = "<group>"; };
 		04BDBDED218D8A40005B2F68 /* FeedCellState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCellState.swift; sourceTree = "<group>"; };
 		04BDBDF0218D8B9D005B2F68 /* FeedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedState.swift; sourceTree = "<group>"; };
 		04C70AA32183188E00B43683 /* DetailTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTextCell.swift; sourceTree = "<group>"; };
@@ -417,6 +419,7 @@
 				04C8F36F218B0A3B00CA296F /* File.swift */,
 				041D0031218CAAE3009430FE /* UIBarButton+BackgroundImage.swift */,
 				041D0033218CAFDD009430FE /* UIImage+Resize.swift */,
+				04B8FBE921940C6A0090938E /* UIApplication+SettingURL.swift */,
 			);
 			path = Utiles;
 			sourceTree = "<group>";
@@ -1008,6 +1011,7 @@
 				04266AE42191643800B18C8E /* RoundShadowView.swift in Sources */,
 				04EBBA372137E8C900CA73A0 /* FeedTableViewCell.swift in Sources */,
 				046A8CA5218967D500C12390 /* ProfileCell.swift in Sources */,
+				04B8FBEA21940C6A0090938E /* UIApplication+SettingURL.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
