@@ -28,6 +28,15 @@ enum PrivacyType: String, Localizable {
     func localizedValue() -> String {
         return NSLocalizedString(self.rawValue, comment: "Table View cell label for \(self.rawValue)")
     }
+    
+    var providing: PrivateAccessProvider {
+        switch self {
+        case .camera:
+            return CameraAccessProvider()
+        case .photosLibrary:
+            return PhotoAccessProvider()
+        }
+    }
 }
 
 struct PrivateDataAccessActions {
@@ -36,22 +45,9 @@ struct PrivateDataAccessActions {
     var requestAccessAction: PrivateAccessRequestProvider
     
     init(for type: PrivacyType) {
-        var selectedActions: AnyObject? = nil
         dataType = type
-        
-        switch type {
-        case .camera:
-            selectedActions = CameraAccessProvider()
-        case .photosLibrary:
-            selectedActions = PhotoAccessProvider()
-        }
-        
-        guard let accessAction = selectedActions as? PrivateDataAccessStatusProvider,
-            let requestAction = selectedActions as? PrivateAccessRequestProvider else {
-                fatalError()
-        }
-        accessStatusAction = accessAction
-        requestAccessAction = requestAction
+        accessStatusAction = type.providing as PrivateDataAccessStatusProvider
+        requestAccessAction = type.providing as PrivateAccessRequestProvider
     }
 }
 
