@@ -11,7 +11,7 @@ import Photos
 import AVFoundation
 
 final class ImagePickerViewController: UIImagePickerController {
-    var deviceAuthorizationState = AVCaptureDevice.authorizationStatus(for: .video)
+    var deviceAuthorizationAction = PrivateDataAccessActions(for: .camera)
     
     var dismissButton = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "cancel-1").resizeImage(UI.imageSize, opaque: false), for: .normal)
@@ -81,7 +81,7 @@ final class ImagePickerViewController: UIImagePickerController {
             .widthAnchor(constant: UIScreen.main.bounds.width/3)
             .activateAnchors()
         
-        permissionAction(type: deviceAuthorizationState)
+        permissionAction(type: deviceAuthorizationAction.accessStatusAction.accessLevel)
     }
     
     func setupBinding() {
@@ -90,26 +90,30 @@ final class ImagePickerViewController: UIImagePickerController {
         
     }
     
-    func permissionAction(type: AVAuthorizationStatus) {
+    func permissionAction(type: PrivateAccessLevel) {
         switch type {
-        case .authorized:
+        case .granted:
             sourceType = .camera
             modalPresentationStyle = .overCurrentContext
             permissionView.removeFromSuperview()
-        case .denied, .notDetermined, .restricted:
+        case .denied, .undetermined, .restricted:
             break
         }
     }
     
     @objc func permissionButtonAction(_ sender: UIButton) {
-        switch deviceAuthorizationState {
-        case .authorized: break
+        switch deviceAuthorizationAction.accessStatusAction.accessLevel {
+        case .granted: break
         case .denied: UIApplication.shared.openSettings()
-        case .notDetermined, .restricted:
-            AVCaptureDevice.requestAccess(for: .video) { (allowance) in
-                switch allowance {
-                case true : DispatchQueue.main.async { self.permissionAction(type: .authorized) }
-                case false : DispatchQueue.main.async { UIApplication.shared.keyWindow?.rootViewController!.dismiss(animated: true, completion: nil) }
+        case .undetermined, .restricted:
+            deviceAuthorizationAction.requestAccessAction.requestAccess { (allowance) in
+                switch allowance.accessLevel {
+                case .granted:
+                    DispatchQueue.main.async { self.permissionAction(type: allowance.accessLevel) }
+                case .denied:
+                    DispatchQueue.main.async { UIApplication.shared.keyWindow?.rootViewController!.dismiss(animated: true, completion: nil) }
+                case .restricted, .undetermined:
+                    break
                 }
             }
         }

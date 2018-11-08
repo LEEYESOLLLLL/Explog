@@ -50,6 +50,7 @@ class PhotoGridViewController: BaseViewController {
     // MARK: PassableData Delegate
     weak var delegate: PassableDataDelegate?
     var privacyAuthorizationState = PHPhotoLibrary.authorizationStatus()
+    var privacyAuthorizationAction = PrivateDataAccessActions(for: .photosLibrary)
     override func loadView() {
         super.loadView()
         view = v
@@ -64,7 +65,7 @@ extension PhotoGridViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        v.permissionAction(type: privacyAuthorizationState)
+        v.permissionAction(type: privacyAuthorizationAction.accessStatusAction.accessLevel)
     }
     
     @objc func dismissBarButtonAction(_ sender: UIBarButtonItem) {
@@ -83,15 +84,17 @@ extension PhotoGridViewController {
 // MARK: Privacy Photo
 extension PhotoGridViewController {
     @objc func permissionButtonAction(_ sender: UIButton) {
-        switch privacyAuthorizationState {
-        case .authorized: break
-        case .denied: UIApplication.shared.openSettings()
-        case .notDetermined, .restricted:
-            PHPhotoLibrary.requestAuthorization { (authorizationState) in
-                switch authorizationState {
-                case .authorized: DispatchQueue.main.async { self.v.permissionAction(type: authorizationState) }
-                case .denied: DispatchQueue.main.async { self.dismiss(animated: true, completion: nil) }
-                case .notDetermined, .restricted: break
+        switch privacyAuthorizationAction.accessStatusAction.accessLevel {
+        case .granted: break
+        case .denied: UIApplication.shared.openSettings()    
+        case .undetermined, .restricted:
+            privacyAuthorizationAction.requestAccessAction.requestAccess { (authorizationState) in
+                switch authorizationState.accessLevel {
+                case .granted:
+                    DispatchQueue.main.async { self.v.permissionAction(type: authorizationState.accessLevel) }
+                case .denied:
+                    DispatchQueue.main.async { self.dismiss(animated: true, completion: nil) }
+                case .undetermined, .restricted: break
                 }
             }
         }

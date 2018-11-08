@@ -117,14 +117,14 @@ final class PhotoGridView: BaseView<PhotoGridViewController> {
         }
     }
     
-    func permissionAction(type: PHAuthorizationStatus) {
+    func permissionAction(type: PrivateAccessLevel) {
         switch type {
-        case .authorized:
+        case .granted:
             permissionView.removeFromSuperview()
             vc.photos = PhotoGridViewController.loadPhotos()
             collectionView.reloadData()
             UIView.animate(withDuration: 0.2) { self.collectionView.layer.opacity = 1.0 }
-        case .denied, .notDetermined, .restricted: break
+        case .denied, .undetermined, .restricted: break
         }
     }
 }
