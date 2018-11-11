@@ -41,6 +41,11 @@ Create ipa
 fastlane ios upload
 ```
 Upload to App Stroe
+### ios do_all
+```
+fastlane ios do_all
+```
+All combind
 
 ----
 
