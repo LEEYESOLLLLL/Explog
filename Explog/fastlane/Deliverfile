@@ -9,7 +9,7 @@ app_review_information(
   email_address: "dev.mjun@gmail.com",
   demo_user: "traveler@gmail.com",
   demo_password: "1234567890",
-  notes: ""
+  notes: "To be needed Account when login in"
 )
 
 # 3
