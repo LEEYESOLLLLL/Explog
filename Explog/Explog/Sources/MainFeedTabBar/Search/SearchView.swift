@@ -21,10 +21,11 @@ final class SearchView: BaseView<SearchViewController> {
         $0.searchBar.showsCancelButton = true
         $0.searchBar.isTranslucent = false
         $0.searchBar.barTintColor = .white
+        $0.hidesNavigationBarDuringPresentation = false
     }
     
     struct UI {
-        static var tableViewHeight: CGFloat = UIScreen.main.bounds.height / 5.5
+        static var tableViewHeight: CGFloat = UIScreen.main.bounds.height / 4.0
     }
     
     override func setupUI() {
@@ -47,8 +48,8 @@ final class SearchView: BaseView<SearchViewController> {
     
     func setupNavigationBar() {
         vc.navigationItem.hidesSearchBarWhenScrolling = false
-        vc.navigationItem.title = "Search Trip"
-        vc.navigationItem.searchController = searchController
+        vc.navigationItem.titleView = searchController.searchBar
+        searchController.hidesNavigationBarDuringPresentation = false
         vc.definesPresentationContext = true
         vc.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         vc.navigationController?.navigationBar.barTintColor = .appStyle
@@ -63,10 +64,10 @@ final class SearchView: BaseView<SearchViewController> {
             .defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).textColor = UIColor.black
         
-        let mutableString = NSMutableAttributedString(string: "Search")
+        let mutableString = NSMutableAttributedString(string: "Search Trip!")
         mutableString.addAttribute(NSAttributedString.Key.foregroundColor,
                                    value: UIColor.gray,
-                                   range: NSRange(location: 0,length: 6))
+                                   range: NSRange(location: 0,length: 12))
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).attributedPlaceholder = mutableString
         
     }

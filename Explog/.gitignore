@@ -88,3 +88,5 @@ fastlane/test_output
 
 ## Certification
 Cert/
+*.p12
+*.mobileprovision

@@ -1,0 +1,74 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+platform :ios do
+  desc "Creating a code signing certificate and provisioning profile"
+  lane :provision do 
+    # 1
+    produce(
+      app_name: 'Explog',
+      app_identifier: 'kr.mjun.explog',
+      language: 'Korean',
+      app_version: '1.0.0', 
+
+      # setup service 
+      enable_services: { 
+        game_center: "on", 
+        in_app_purchase: "on",
+        network_extension: "on",
+        push_notification: "on"
+      }
+    )
+    # 2
+    # cert already created before creating fastlane
+    import_certificate( 
+      keychain_name: "RenewalExplog-Cert.p12",
+      certificate_path: "./RenewalExplog-Cert.p12", ## not working in other path..
+      certificate_password: ENV["CERTIFICATE_PASSWORD"] || "default"
+      )
+    #3
+    sigh(force: true)
+  end 
+
+  desc "Create Screnshots"
+  lane :screenshot do 
+    snapshot 
+  end 
+
+  # Using temporary
+  desc "Cover Device Frame into exsting Images for App stroe "
+  lane :make_frame do 
+    frameit(white: true)
+  end 
+
+  desc "Create ipa"
+  lane :build do 
+    gym
+  end 
+
+  desc "Upload to App Stroe"
+  lane :upload do 
+    set_changelog(app_identifier: "kr.mjun.explog", version: "1.0.0", changelog: "Keeping App optimization")
+    deliver
+    # deliver(
+    #   submit_for_review: false
+    # )
+  end 
+
+  error do |lane, exception|
+  # This block is called if there was an error running a lane.
+  end
+end
