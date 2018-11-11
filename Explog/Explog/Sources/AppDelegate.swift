@@ -101,7 +101,7 @@ extension AppDelegate {
                 return
             }
             if type == MainFeedTabBarViewController.Titles.Noti {
-                $0.tabBarItem.badgeValue = "\(UIApplication.shared.applicationIconBadgeNumber)"
+                $0.tabBarItem.badgeValue = UIApplication.shared.applicationIconBadgeNumber == 0 ? nil : "\(UIApplication.shared.applicationIconBadgeNumber)"
             }
         }
     }
