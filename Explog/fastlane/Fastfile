@@ -46,9 +46,9 @@ platform :ios do
   desc "Create Screnshots"
   lane :screenshot do 
     snapshot 
-    frameit(white: true)
   end 
 
+  # Using temporary
   desc "Cover Device Frame into exsting Images for App stroe "
   lane :make_frame do 
     frameit(white: true)
@@ -61,8 +61,24 @@ platform :ios do
 
   desc "Upload to App Stroe"
   lane :upload do 
-    deliver
+    set_changelog(changelog: "Keeping App optimization")
+    # deliver
+    deliver(
+      skip_screenshots: true,
+      skip_binary_upload: true, 
+      skip_metadata: true, 
+      submit_for_review: true
+    )
   end 
+
+  desc "All combind"
+  lane :do_all do 
+    provision 
+    screenshot 
+    build 
+    upload 
+  end 
+
 
   error do |lane, exception|
   # This block is called if there was an error running a lane.
