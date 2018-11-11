@@ -46,9 +46,9 @@ platform :ios do
   desc "Create Screnshots"
   lane :screenshot do 
     snapshot 
-    frameit(white: true)
   end 
 
+  # Using temporary
   desc "Cover Device Frame into exsting Images for App stroe "
   lane :make_frame do 
     frameit(white: true)
@@ -61,7 +61,11 @@ platform :ios do
 
   desc "Upload to App Stroe"
   lane :upload do 
+    set_changelog(app_identifier: "kr.mjun.explog", version: "1.0.0", changelog: "Keeping App optimization")
     deliver
+    # deliver(
+    #   submit_for_review: false
+    # )
   end 
 
   error do |lane, exception|
