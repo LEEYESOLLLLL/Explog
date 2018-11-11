@@ -1,0 +1,51 @@
+{
+  "device_frame_version": "latest",
+  "default": {
+    "keyword": {
+      "fonts": [
+        {
+          "font": "./fonts/AppleSDGothicNeo.ttc",
+          "supported": ["ko-KR"]
+        }
+      ]
+    },
+    "title": {
+      "fonts": [
+        {
+          "font": "./fonts/AppleSDGothicNeo.ttc",
+          "supported": ["ko-KR"]
+        }
+      ],
+      "color": "#323232"
+    },
+    "background": "./background.jpg",
+    "padding": 50
+  },
+
+  "data": [
+    {
+      "filter": "One",
+      "keyword": {
+        "color": "#d21559"
+      }
+    },
+    {
+      "filter": "Two",
+      "keyword": {
+        "color": "#feb909"
+      }
+    },
+    {
+      "filter": "Three",
+      "keyword": {
+        "color": "#aa4dbc"
+      }
+    },
+    {
+      "filter": "Four",
+      "keyword": {
+        "color": "#31bb48"
+      }
+    }
+  ]
+}
