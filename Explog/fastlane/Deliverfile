@@ -1,30 +1,32 @@
-# # 1
-# price_tier 0
+force true
+price_tier 0
 
-# # 2
-# app_review_information(
-#   first_name: "Ju",
-#   last_name: "Minjun",
-#   phone_number: "+82 010-8966-4111",
-#   email_address: "dev.mjun@gmail.com",
-#   demo_user: "traveler@gmail.com",
-#   demo_password: "1234567890",
-#   notes: ""
-# )
 
-# # 3
-# submission_information({    
-#     export_compliance_encryption_updated: false,
-#     export_compliance_uses_encryption: false,
-#     content_rights_contains_third_party_content: false,
-#     add_id_info_uses_idfa: false
-# })
+app_review_information(
+  first_name: "Ju",
+  last_name: "Minjun",
+  phone_number: "+82 010-8966-4111",
+  email_address: "dev.mjun@gmail.com",
+  demo_user: "traveler@gmail.com",
+  demo_password: "1234567890",
+  notes: "To be needed Account when login in"
+)
 
-# # 4
-# automatic_release false
+submission_information({    
+    export_compliance_encryption_updated: false,
+    export_compliance_uses_encryption: false,
+    export_compliance_compliance_required: false, 
+    content_rights_contains_third_party_content: false,
+    add_id_info_uses_idfa: false
+})
 
-# # 5
-# app_icon './fastlane/metadata/AppIcon.png'
+release_notes(
+	{"ko-KR" => "검색 부분 최적화 및, UI 변경"}
+	)
+automatic_release false
 
-# # 6
-# app_rating_config_path "./fastlane/metadata/itunes_rating_config.json"
+
+app_icon './Explog/Assets/Assets.xcassets/AppIcon.appiconset/ItunesArtwork@2x.png'
+
+
+app_rating_config_path "./fastlane/metadata/itunes_rating_config.json"
