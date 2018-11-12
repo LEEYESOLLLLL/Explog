@@ -46,7 +46,7 @@ platform :ios do
   desc "Create Screnshots"
   lane :screenshot do 
     snapshot 
-    make_frame
+    # make_frame
   end 
 
   # Using temporary

@@ -4,7 +4,7 @@
     "keyword": {
       "fonts": [
         {
-          "font": "./fonts/AppleSDGothicNeo.ttc",
+          "font": "./fonts/D2Coding-Ver1.3.2-20180524-all.ttc",
           "supported": ["ko-KR"]
         }
       ]
@@ -12,40 +12,54 @@
     "title": {
       "fonts": [
         {
-          "font": "./fonts/AppleSDGothicNeo.ttc",
+          "font": "./fonts/D2Coding-Ver1.3.2-20180524-all.ttc",
           "supported": ["ko-KR"]
         }
       ],
       "color": "#323232"
     },
     "background": "./background.jpg",
-    "padding": 50
+    "padding": 0,
+    "show_complete_frame": true,
+    "font_scale_factor": 0.0001
   },
 
-  "data": [
-    {
-      "filter": "One",
-      "keyword": {
-        "color": "#d21559"
-      }
-    },
-    {
-      "filter": "Two",
-      "keyword": {
-        "color": "#feb909"
-      }
-    },
-    {
-      "filter": "Three",
-      "keyword": {
-        "color": "#aa4dbc"
-      }
-    },
-    {
-      "filter": "Four",
-      "keyword": {
-        "color": "#31bb48"
-      }
-    }
-  ]
+  "data": []
+  //   {
+  //     "filter": "One",
+  //     "keyword": {
+  //       "color": "#d21559"
+  //     }
+  //   },
+  //   {
+  //     "filter": "Two",
+  //     "keyword": {
+  //       "color": "#feb909"
+  //     }
+  //   },
+  //   {
+  //     "filter": "Three",
+  //     "keyword": {
+  //       "color": "#aa4dbc"
+  //     }
+  //   },
+  //   {
+  //     "filter": "Four",
+  //     "keyword": {
+  //       "color": "#31bb48"
+  //     }
+  //   }
+  // ]
 }
+
+
+// {
+//   "device_frame_version": "latest",
+//   "default": {
+//     "show_complete_frame": false,
+//     "stack_title": false,
+//     "background": "./background.jpg",
+//     "padding": 0
+//   },
+//   "data": []
+// }
