@@ -35,8 +35,8 @@ platform :ios do
     # 2
     # cert already created before creating fastlane
     import_certificate( 
-      keychain_name: "RenewalExplog-Cert.p12",
-      certificate_path: "./RenewalExplog-Cert.p12", ## not working in other path..
+      keychain_name: "Explog_ios_distribution.cer",
+      certificate_path: "./Explog_ios_distribution.cer", ## not working in other path..
       certificate_password: ENV["CERTIFICATE_PASSWORD"] || "default"
       )
     #3
@@ -46,12 +46,13 @@ platform :ios do
   desc "Create Screnshots"
   lane :screenshot do 
     snapshot 
+    # make_frame
   end 
 
   # Using temporary
   desc "Cover Device Frame into exsting Images for App stroe "
   lane :make_frame do 
-    frameit(white: true)
+    frame_screenshots(white: true)
   end 
 
   desc "Create ipa"

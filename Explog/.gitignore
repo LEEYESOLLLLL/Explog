@@ -63,7 +63,7 @@ playground.xcworkspace
 
 fastlane/report.xml
 fastlane/Preview.html
-fastlane/screenshots
+# fastlane/screenshots
 fastlane/test_output
 
 ### Xcode ###
