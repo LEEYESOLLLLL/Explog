@@ -1326,7 +1326,7 @@
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=100 -Xfrontend -warn-long-expression-type-checking=100 $(inherited) -D COCOAPODS";
 				PRODUCT_BUNDLE_IDENTIFIER = kr.mjun.explog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Renewal-Explog";
+				PROVISIONING_PROFILE_SPECIFIER = "kr.mjun.explog Develop";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_VERSION = 4.2;
 				SWIFT_WHOLE_MODULE_OPTIMIZATION = YES;
@@ -1352,7 +1352,7 @@
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=100 -Xfrontend -warn-long-expression-type-checking=100 $(inherited) -D COCOAPODS";
 				PRODUCT_BUNDLE_IDENTIFIER = kr.mjun.explog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Renewal-Explog-Distribution";
+				PROVISIONING_PROFILE_SPECIFIER = "kr.mjun.explog AppStore";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_VERSION = 4.2;
 				SWIFT_WHOLE_MODULE_OPTIMIZATION = YES;
