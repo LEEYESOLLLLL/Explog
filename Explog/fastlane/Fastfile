@@ -35,8 +35,8 @@ platform :ios do
     # 2
     # cert already created before creating fastlane
     import_certificate( 
-      keychain_name: "RenewalExplog-Cert.p12",
-      certificate_path: "./RenewalExplog-Cert.p12", ## not working in other path..
+      keychain_name: "Explog_ios_distribution.cer",
+      certificate_path: "./Explog_ios_distribution.cer", ## not working in other path..
       certificate_password: ENV["CERTIFICATE_PASSWORD"] || "default"
       )
     #3
