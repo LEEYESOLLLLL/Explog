@@ -221,7 +221,7 @@ extension PostDetailViewController: UITableViewDelegate {
         }
         switch contentType {
         case .txt: return UITableView.automaticDimension
-        case .img: return UIScreen.main.bounds.height / 2.2
+        case .img: return UIScreen.mainHeight / 2.2
         }
     }
 }

@@ -106,14 +106,15 @@ final class PostView: BaseView<PostViewController> {
     var continentButton = UIButton().then {
         $0.setTitle("Asia", for: .normal)
         $0.setTitleColor(.white, highlightedStateColor: .gray)
-        
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.white.cgColor
     }
     
+    
+    
     struct UI {
         static var titleImageViewHeight: CGFloat = UIScreen.mainHeight/2
-        static var iconSize: CGSize = UIScreen.main.bounds.size * 0.026
+        static var iconSize: CGSize = UIScreen.mainSize * 0.026
         static var topButtonMargin: CGFloat = 6
         static var counterLableSize = CGSize(width: 50, height: 50)
         static var stackViewSpacing: CGFloat = (UIScreen.mainWidth - UIScreen.mainWidth*0.3) / 2
@@ -143,7 +144,7 @@ final class PostView: BaseView<PostViewController> {
             .bottomAnchor(to: containerScrollView.bottomAnchor)
             .leadingAnchor(to: containerScrollView.leadingAnchor)
             .trailingAnchor(to: containerScrollView.trailingAnchor)
-            .dimensionAnchors(size: UIScreen.main.bounds.size)
+            .dimensionAnchors(size: UIScreen.mainSize)
             .activateAnchors()
         
         coverImageView
@@ -231,7 +232,6 @@ final class PostView: BaseView<PostViewController> {
             coverImg: img)
     }
 }
-
 
 struct PostInformation {
     var title: String

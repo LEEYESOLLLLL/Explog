@@ -38,7 +38,7 @@ final class ReplyView: BaseView<ReplyViewController> {
     
     var inputContainer = UIView().then {
         $0.backgroundColor = .white
-        let lineView = UIView(frame: CGRect(x: 0, y: 1, width: UIScreen.main.bounds.width, height: 1))
+        let lineView = UIView(frame: CGRect(x: 0, y: 1, width: UIScreen.mainWidth, height: 1))
         lineView.backgroundColor = .darkGray
         $0.addSubview(lineView)
     }
@@ -72,8 +72,8 @@ final class ReplyView: BaseView<ReplyViewController> {
     struct UI {
         static var backButtonSize: CGFloat = 22
         static var margin: CGFloat = 8
-        static var postButtonwidth: CGFloat = UIScreen.main.bounds.width / 4.5
-        static var inputviewHeight: CGFloat = UIScreen.main.bounds.height * 0.10
+        static var postButtonwidth: CGFloat = UIScreen.mainWidth / 4.5
+        static var inputviewHeight: CGFloat = UIScreen.mainHeight * 0.10
     }
     override func setupUI() {
         backgroundColor = .white

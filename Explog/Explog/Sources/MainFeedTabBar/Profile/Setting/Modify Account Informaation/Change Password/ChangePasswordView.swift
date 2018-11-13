@@ -53,7 +53,7 @@ final class ChangePasswordView: BaseView<ChangePasswordViewController> {
     struct UI {
         static var margin: CGFloat = 8
         static var stackViewMargin: CGFloat = UI.margin * 2
-        static var stackViewHeight = UIScreen.main.bounds.height / 5
+        static var stackViewHeight = UIScreen.mainHeight / 5
     }
     
     override func setupUI() {

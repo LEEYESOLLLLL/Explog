@@ -15,6 +15,7 @@ struct KeychainService {
         server: "http://explog.ap-northeast-2.elasticbeanstalk.com",
         protocolType: .http)
     }
+    private init() { }
 }
 
 extension KeychainService {

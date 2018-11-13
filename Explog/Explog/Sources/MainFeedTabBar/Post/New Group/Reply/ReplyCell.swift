@@ -38,8 +38,8 @@ final class ReplyCell: UITableViewCell {
     }
     
     struct UI {
-        static var profileImagesize = CGSize(width: UIScreen.main.bounds.width * 0.16,
-                                             height: UIScreen.main.bounds.width * 0.16)
+        static var profileImagesize = CGSize(width: UIScreen.mainWidth * 0.16,
+                                             height: UIScreen.mainWidth * 0.16)
         static var margin: CGFloat = 8
     }
     

@@ -30,18 +30,29 @@ final class PostViewController: BaseViewController {
         super.loadView()
         view = v
     }
-    
+}
+extension PostViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationItem.title = nil
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if !Persistence.isConfirm {
+            present(CautionViewController(modalStyle: .overCurrentContext),
+                    animated: true, completion: nil)
+        }
+    }
+    
     
     @objc func dismissButtonAction(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
-    
+}
+
+extension PostViewController {
     @objc func createPostButtonAction(_ sender: UIButton) {
         guard let currentPostCoverInformation = v.currentPostCoverInformation() else { return }
         provider.request(.post(
