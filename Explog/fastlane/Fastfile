@@ -22,7 +22,7 @@ platform :ios do
       app_name: 'Explog',
       app_identifier: 'kr.mjun.explog',
       language: 'Korean',
-      app_version: '1.0.0', 
+      app_version: '1.1.0', 
 
       # setup service 
       enable_services: { 
@@ -46,7 +46,7 @@ platform :ios do
   desc "Create Screnshots"
   lane :screenshot do 
     snapshot 
-    # make_frame
+    make_frame
   end 
 
   # Using temporary
@@ -65,8 +65,8 @@ platform :ios do
     set_changelog(changelog: "Keeping App optimization")
     # deliver
     deliver(
-      skip_screenshots: true,
-      skip_binary_upload: true, 
+      skip_screenshots: false,
+      skip_binary_upload: false, 
       skip_metadata: true, 
       submit_for_review: true
     )
