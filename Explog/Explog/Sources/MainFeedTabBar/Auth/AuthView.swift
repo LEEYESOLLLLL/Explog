@@ -63,9 +63,9 @@ final class AuthView: BaseView<AuthViewController> {
     
     struct UI {
         static var dismissButtonTopMargin: CGFloat = 6
-        static var dismissButtonSize: CGSize = UIScreen.main.bounds.size * 0.024
-        static var logoLabelTopMargin: CGFloat = UIScreen.main.bounds.height/5
-        static var stackViewBottomMargin: CGFloat = UIScreen.main.bounds.height/6
+        static var dismissButtonSize: CGSize = UIScreen.mainSize * 0.024
+        static var logoLabelTopMargin: CGFloat = UIScreen.mainHeight / 5
+        static var stackViewBottomMargin: CGFloat = UIScreen.mainHeight / 6
         static var stackViewleadingAndtrailingMargin: CGFloat = 6
     }
     override func setupUI() {

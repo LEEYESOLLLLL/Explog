@@ -34,8 +34,8 @@ final class NotiCell: UITableViewCell {
     }
     
     struct UI {
-        static var profileImageSize = CGSize(width: UIScreen.main.bounds.width * 0.2,
-                                             height: UIScreen.main.bounds.width * 0.2)
+        static var profileImageSize = CGSize(width: UIScreen.mainWidth * 0.2,
+                                             height: UIScreen.mainWidth * 0.2)
         static var margin: CGFloat = 8
     }
     

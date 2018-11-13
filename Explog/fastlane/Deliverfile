@@ -26,7 +26,7 @@ release_notes(
 automatic_release false
 
 
-app_icon './Explog/Assets/Assets.xcassets/AppIcon.appiconset/ItunesArtwork@2x.png'
+app_icon './fastlane/metadata/app_icon.jpg'
 
 
 app_rating_config_path "./fastlane/metadata/itunes_rating_config.json"

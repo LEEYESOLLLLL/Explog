@@ -9,7 +9,6 @@
 import UIKit
 
 final class SettingView: BaseView<SettingViewController> {
-    
     var tableView = UITableView().then {
         $0.backgroundColor = .white
         $0.separatorInset = UIEdgeInsets(top: 0, left: UI.margin, bottom: 0, right: -UI.margin)
@@ -23,7 +22,7 @@ final class SettingView: BaseView<SettingViewController> {
                                           action: #selector(vc.backButtonAction(_:)))
     
     struct UI {
-        static var sectionHeight = UIScreen.main.bounds.height * 0.08
+        static var sectionHeight = UIScreen.mainHeight * 0.08
         static var margin: CGFloat = 4
     }
     override func setupUI() {

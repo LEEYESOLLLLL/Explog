@@ -110,7 +110,7 @@ final class ToggleView: UIView {
             
             // 2
             packageingStackView()
-            superView.toggleViewWidth.constant = UIScreen.main.bounds.width - (PostDetailView.UI.margin * 2)
+            superView.toggleViewWidth.constant = UIScreen.mainWidth - (PostDetailView.UI.margin * 2)
         case false:
             wholeStackView.clearSubViewOfSubViews()
             initialSetupUI()
