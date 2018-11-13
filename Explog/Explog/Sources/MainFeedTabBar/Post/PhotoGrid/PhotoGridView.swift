@@ -57,11 +57,11 @@ final class PhotoGridView: BaseView<PhotoGridViewController> {
     
     struct UI {
         static var cellItemSpacing: CGFloat = 2
-        static var cellSize = CGSize(width: (UIScreen.main.bounds.width / 3) - UI.cellItemSpacing,
-                                     height: UIScreen.main.bounds.height / 6)
+        static var cellSize = CGSize(width: (UIScreen.mainWidth / 3) - UI.cellItemSpacing,
+                                     height: UIScreen.mainHeight / 6)
         static var cellMargin: CGFloat = 1
         static var margin: CGFloat = 8
-        static var descriptionMargin = (UIScreen.main.bounds.width/3) * 0.5
+        static var descriptionMargin = (UIScreen.mainWidth / 3) * 0.5
         
     }
     
@@ -93,7 +93,7 @@ final class PhotoGridView: BaseView<PhotoGridViewController> {
         permissionButton
             .centerXAnchor(to: permissionView.centerXAnchor)
             .centerYAnchor(to: permissionView.centerYAnchor)
-            .widthAnchor(constant: UIScreen.main.bounds.width/3)
+            .widthAnchor(constant: UIScreen.mainWidth/3)
             .activateAnchors()
     }
     

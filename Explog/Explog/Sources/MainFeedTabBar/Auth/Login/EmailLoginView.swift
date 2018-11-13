@@ -63,10 +63,10 @@ final class EmailLoginView: BaseView<EmailLoginViewController> {
     
     struct UI {
         static var dismissButtonMargin: CGFloat = 6
-        static var dismissButtonSize: CGSize = UIScreen.main.bounds.size * 0.024 
+        static var dismissButtonSize: CGSize = UIScreen.mainSize * 0.024
         static var stackViewleadingAndtrailingMargin: CGFloat = 6
-        static var stackViewTopMargin: CGFloat = UIScreen.main.bounds.height/7
-        static var stackViewHeight: CGFloat = UIScreen.main.bounds.height/4
+        static var stackViewTopMargin: CGFloat = UIScreen.mainHeight/7
+        static var stackViewHeight: CGFloat = UIScreen.mainHeight/4
         static var loginBuggonTopMargin: CGFloat = 20
     }
     
@@ -89,7 +89,7 @@ final class EmailLoginView: BaseView<EmailLoginViewController> {
             .bottomAnchor(to: containerScrollView.bottomAnchor)
             .leadingAnchor(to: containerScrollView.leadingAnchor)
             .trailingAnchor(to: containerScrollView.trailingAnchor)
-            .dimensionAnchors(size: UIScreen.main.bounds.size)
+            .dimensionAnchors(size: UIScreen.mainSize)
             .activateAnchors()
         
         darkBlurView

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040E6428219A79B1001E6B7B /* CautionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E6427219A79B1001E6B7B /* CautionView.swift */; };
+		040E642B219A7BE3001E6B7B /* CautionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E642A219A7BE3001E6B7B /* CautionViewController.swift */; };
+		040E642D219A7DA2001E6B7B /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E642C219A7DA2001E6B7B /* PersistenceService.swift */; };
+		040E644D219A8A1B001E6B7B /* AgreementText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E644C219A8A1B001E6B7B /* AgreementText.swift */; };
 		0413DC7321772C560031474A /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0413DC7221772C560031474A /* Tests.swift */; };
 		0413DC7C21775D0A0031474A /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0413DC7B21775D0A0031474A /* FeedModel.swift */; };
 		0413DC7F21775DC30031474A /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0413DC7E21775DC30031474A /* Feed.swift */; };
@@ -144,6 +148,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		040E6427219A79B1001E6B7B /* CautionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CautionView.swift; sourceTree = "<group>"; };
+		040E642A219A7BE3001E6B7B /* CautionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CautionViewController.swift; sourceTree = "<group>"; };
+		040E642C219A7DA2001E6B7B /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
+		040E644C219A8A1B001E6B7B /* AgreementText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementText.swift; sourceTree = "<group>"; };
 		0413DC7021772C560031474A /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0413DC7221772C560031474A /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		0413DC7421772C560031474A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -298,6 +306,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		040E6429219A79B7001E6B7B /* Caution */ = {
+			isa = PBXGroup;
+			children = (
+				040E644C219A8A1B001E6B7B /* AgreementText.swift */,
+				040E6427219A79B1001E6B7B /* CautionView.swift */,
+				040E642A219A7BE3001E6B7B /* CautionViewController.swift */,
+			);
+			path = Caution;
+			sourceTree = "<group>";
+		};
 		0413DC7121772C560031474A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -498,6 +516,7 @@
 			children = (
 				045FF0BD217F9CA4003ECA23 /* AlertControllerWithPickerView */,
 				045FF0BC217F9C93003ECA23 /* PhotoGrid */,
+				040E6429219A79B7001E6B7B /* Caution */,
 				045FF090217E62BC003ECA23 /* PostState.swift */,
 				04C70B4D21870E4300B43683 /* PassableDataDelegate.swift */,
 				0423A630212B978000DD9747 /* PostView.swift */,
@@ -738,6 +757,7 @@
 			isa = PBXGroup;
 			children = (
 				04B38AC721787CAF00E17908 /* KeychainService.swift */,
+				040E642C219A7DA2001E6B7B /* PersistenceService.swift */,
 			);
 			path = Keychain;
 			sourceTree = "<group>";
@@ -1037,6 +1057,7 @@
 				04F72A61217C36FD0099C7C9 /* baseURL.swift in Sources */,
 				04F72A5D217B44E30099C7C9 /* Regex.swift in Sources */,
 				04C70B26218581AC00B43683 /* PostDetailModel.swift in Sources */,
+				040E644D219A8A1B001E6B7B /* AgreementText.swift in Sources */,
 				04C70B4E21870E4300B43683 /* PassableDataDelegate.swift in Sources */,
 				04B8FC34219452800090938E /* PrivacyType.swift in Sources */,
 				0423A633212B978C00DD9747 /* PostViewController.swift in Sources */,
@@ -1058,6 +1079,7 @@
 				04C70AA42183188E00B43683 /* DetailTextCell.swift in Sources */,
 				04B38AEE2178826000E17908 /* AuthView.swift in Sources */,
 				04B38AEA2178820C00E17908 /* EmailLoginViewController.swift in Sources */,
+				040E6428219A79B1001E6B7B /* CautionView.swift in Sources */,
 				04266A7B2190454A00B18C8E /* SearchState.swift in Sources */,
 				04266A8221906A2700B18C8E /* NotiCell.swift in Sources */,
 				04B38AEC2178821200E17908 /* SignUpViewController.swift in Sources */,
@@ -1067,6 +1089,7 @@
 				046A8CC9218986DA00C12390 /* UserModel.swift in Sources */,
 				04B8FC36219452B50090938E /* PrivateAccessProvider.swift in Sources */,
 				04266A8621906FCC00B18C8E /* Noti.swift in Sources */,
+				040E642B219A7BE3001E6B7B /* CautionViewController.swift in Sources */,
 				047E59902189D9EE00BD2810 /* SettingTableViewCell.swift in Sources */,
 				044E663E2182FD930047D5F2 /* PostDetailView.swift in Sources */,
 				04266A63218EC9FB00B18C8E /* ReplyView.swift in Sources */,
@@ -1088,6 +1111,7 @@
 				04F1A3C4218C5B3E00CF99A1 /* ChangePasswordViewController.swift in Sources */,
 				0423A600212B72F000DD9747 /* AppDelegate.swift in Sources */,
 				04BDBDF1218D8B9D005B2F68 /* FeedState.swift in Sources */,
+				040E642D219A7DA2001E6B7B /* PersistenceService.swift in Sources */,
 				04F72A63217C49A50099C7C9 /* AuthModel.swift in Sources */,
 				04F71E9E217AF3910099C7C9 /* SignUpView.swift in Sources */,
 				045FF0B9217F9395003ECA23 /* PhotoGridView.swift in Sources */,
