@@ -46,12 +46,13 @@ platform :ios do
   desc "Create Screnshots"
   lane :screenshot do 
     snapshot 
+    # make_frame
   end 
 
   # Using temporary
   desc "Cover Device Frame into exsting Images for App stroe "
   lane :make_frame do 
-    frameit(white: true)
+    frame_screenshots(white: true)
   end 
 
   desc "Create ipa"

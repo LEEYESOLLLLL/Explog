@@ -73,11 +73,11 @@ final class SettingProfileView: BaseView<SettingProfileViewController> {
     
     
     struct UI {
-        static var profileImageSize = CGSize(width: UIScreen.main.bounds.width/3.8,
-                                             height: UIScreen.main.bounds.width/3.8)
+        static var profileImageSize = CGSize(width: UIScreen.mainWidth / 3.8,
+                                             height: UIScreen.mainWidth / 3.8)
         static var margin: CGFloat = 8
         static var stackViewMargin: CGFloat = UI.margin * 2
-        static var stackViewHeight = UIScreen.main.bounds.height / 8
+        static var stackViewHeight = UIScreen.mainHeight / 8
     }
     
     

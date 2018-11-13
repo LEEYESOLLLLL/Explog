@@ -78,7 +78,7 @@ final class ImagePickerViewController: UIImagePickerController {
         permissionButton
             .centerXAnchor(to: permissionView.centerXAnchor)
             .centerYAnchor(to: permissionView.centerYAnchor)
-            .widthAnchor(constant: UIScreen.main.bounds.width/3)
+            .widthAnchor(constant: UIScreen.mainWidth / 3)
             .activateAnchors()
         
         permissionAction(type: deviceAuthorizationAction.accessStatusAction.accessLevel)

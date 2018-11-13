@@ -25,7 +25,7 @@ final class SearchView: BaseView<SearchViewController> {
     }
     
     struct UI {
-        static var tableViewHeight: CGFloat = UIScreen.main.bounds.height / 4.0
+        static var tableViewHeight: CGFloat = UIScreen.mainHeight / 4.0
     }
     
     override func setupUI() {

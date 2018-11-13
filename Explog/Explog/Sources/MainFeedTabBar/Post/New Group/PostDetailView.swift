@@ -126,10 +126,10 @@ class PostDetailView: BaseView<PostDetailViewController> {
     struct UI {
         static var margin: CGFloat = 8
         static var titleHeaderFontSize: CGFloat = 30
-        static var dateAndContinetStackViewHeight: CGFloat = UIScreen.main.bounds.height/10
-        static var authorButtonDimension: CGFloat = UIScreen.main.bounds.width * 0.175
-        static var toggleViewSqureSide: CGFloat = UIScreen.main.bounds.width * 0.225
-        static var coverImageHeight: CGFloat = UIScreen.main.bounds.height * 0.66
+        static var dateAndContinetStackViewHeight: CGFloat = UIScreen.mainHeight/10
+        static var authorButtonDimension: CGFloat = UIScreen.mainWidth * 0.175
+        static var toggleViewSqureSide: CGFloat = UIScreen.mainWidth * 0.225
+        static var coverImageHeight: CGFloat = UIScreen.mainHeight * 0.66
         static var disMissimageDimension: CGFloat = 22
         static var likeImageDimenstion: CGFloat = 26
     }
@@ -168,7 +168,7 @@ class PostDetailView: BaseView<PostDetailViewController> {
             .activateAnchors()
         
         titleLabel
-            .centerYAnchor(to: coverInformationView.centerYAnchor, constant: -UIScreen.main.bounds.height*0.1)
+            .centerYAnchor(to: coverInformationView.centerYAnchor, constant: -UIScreen.mainHeight * 0.1)
             .leadingAnchor(to: coverInformationView.leadingAnchor)
             .trailingAnchor(to: coverInformationView.trailingAnchor)
             .activateAnchors()

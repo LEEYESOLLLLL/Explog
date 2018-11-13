@@ -67,13 +67,13 @@ final class ProfileView: BaseView<ProfileViewController> {
                                           target: vc,
                                           action: #selector(vc.backButtonAction(_:)))
     struct UI {
-        static var coverImageHeight: CGFloat = UIScreen.main.bounds.height * 0.3
+        static var coverImageHeight: CGFloat = UIScreen.mainHeight * 0.3
         static var margin: CGFloat = 8
-        static var profileImageSize = CGSize(width: UIScreen.main.bounds.height * 0.12,
-                                             height: UIScreen.main.bounds.height * 0.12)
+        static var profileImageSize = CGSize(width: UIScreen.mainHeight * 0.12,
+                                             height: UIScreen.mainHeight * 0.12)
         static var topLabelMargin = UIApplication.shared.statusBarFrame.height + 8
         static var statusBarHeight = UIApplication.shared.statusBarFrame.height
-        static var tableViewCellHegiht = UIScreen.main.bounds.height / 4.0
+        static var tableViewCellHegiht = UIScreen.mainHeight / 4.0
     }
     
     override func setupUI() {
