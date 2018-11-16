@@ -48,6 +48,12 @@ class PostDetailView: BaseView<PostDetailViewController> {
                                           target: vc,
                                           action: #selector(vc.doneButtonAction(_:)))
     
+    lazy var moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "more-512px").resizeImage(UI.likeImageDimenstion, opaque: false).withRenderingMode(.alwaysOriginal),
+                                     style: .plain,
+                                     target: vc,
+                                     action: #selector(vc.moreButtonAction(_:)))
+    
+    
     // For HeaderView for TableView's ParallaxHeader
     var coverInformationView = UIView().then {
         $0.backgroundColor = .white
@@ -230,7 +236,7 @@ class PostDetailView: BaseView<PostDetailViewController> {
         case .on:
             vc.navigationItem.setRightBarButtonItems([doneButton, likeButton, replyButton], animated: true)
         case .off:
-            vc.navigationItem.setRightBarButtonItems([likeButton, replyButton], animated: true)
+            vc.navigationItem.setRightBarButtonItems([moreButton, likeButton, replyButton], animated: true)
         }
         if let userPK = KeychainService.pk, let convertUserPK = Int(userPK),
             vc.coverData.liked.contains(convertUserPK) {

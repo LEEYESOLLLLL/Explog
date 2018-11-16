@@ -21,6 +21,7 @@ target 'Explog' do
   ## UI
   pod 'SkyFloatingLabelTextField', '~> 3.6.0'
   pod 'ParallaxHeader', '~> 2.0.0'
+  pod 'M13Checkbox'
 
   ## Abstract
   pod 'Then', '~> 2.4.0'
@@ -30,6 +31,10 @@ target 'Explog' do
   ## generating Open-source information
   pod 'AcknowList', '~> 1.7.0'
 
+  ## Firebase for Report
+  pod 'Firebase/Core'
+  pod 'Firebase/Database' 
+
   # Pods for Explog
 end
 
@@ -37,7 +42,7 @@ end
 ## just temporary action  
 post_install do |installer|
   installer.pods_project.targets.each do |target|
-      if ['ParallaxHeader'].include? target.name
+      if ['ParallaxHeader', 'M13Checkbox'].include? target.name
           target.build_configurations.each do |config|
               config.build_settings['SWIFT_VERSION'] = '4.0'
           end

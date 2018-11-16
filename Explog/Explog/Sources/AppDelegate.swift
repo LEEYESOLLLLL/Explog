@@ -9,21 +9,19 @@
 import UIKit
 import KeychainAccess
 import UserNotifications
+import Firebase
 
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-    
-    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        return true 
-    }
 }
 
 // MARK: Initialization
 extension AppDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         // MARK: temporarily
+        FirebaseApp.configure()
         setKeyWindow()
         requesetNotification()
         return true
