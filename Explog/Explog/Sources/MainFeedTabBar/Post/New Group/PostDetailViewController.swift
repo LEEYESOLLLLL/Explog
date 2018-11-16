@@ -179,6 +179,28 @@ extension PostDetailViewController {
         view.window?.rootViewController?.dismiss(animated: true, completion: nil)
         navigationController?.popViewController(animated: true)
     }
+    
+    @objc func moreButtonAction(_ sender: UIBarButtonItem) {
+        Square.display(nil, message: nil,
+                       alertActions: [.cancel(message: "Cancle"),
+                                      .destructive(message: "Flag as inappropriate")],
+                       preferredStyle: .actionSheet) { [weak self] (_, index) in
+                                        guard let type = MoreButtonType(rawValue: index),
+                                            let strongSelf = self else {
+                                            return
+                                        }
+                                        switch type {
+                                        case .cancel: break
+                                        case .report:
+                                            let vc = UINavigationController(rootViewController: ReportViewController(postPK: strongSelf.postPK))
+                                            strongSelf.present(vc, animated: true, completion: nil)
+                                        }
+                                        
+                                    
+            
+        }
+        
+    }
 }
 
 // MARK: Edit Buttons

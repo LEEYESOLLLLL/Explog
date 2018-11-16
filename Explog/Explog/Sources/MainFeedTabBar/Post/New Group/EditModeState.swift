@@ -28,3 +28,9 @@ extension PostDetailViewController {
     
     typealias TextType = UploadTextViewController.TextType
 }
+extension PostDetailViewController {
+    enum MoreButtonType: Int, CaseIterable {
+        case cancel = 0
+        case report
+    }
+}

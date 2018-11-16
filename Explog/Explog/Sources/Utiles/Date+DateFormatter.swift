@@ -16,6 +16,17 @@ extension Date {
     }
 }
 
+extension Date {
+    /**
+     2018-00-00 24:00:00
+     */
+    func convertedNow() -> String {
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return dateformatter.string(from: self)
+    }
+}
+
 extension String {
     func convertDate() -> Date? {
         let dateformatter = DateFormatter()
