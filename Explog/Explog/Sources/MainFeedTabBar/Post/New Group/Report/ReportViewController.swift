@@ -27,8 +27,6 @@ final class ReportViewController: BaseViewController  {
         super.loadView()
         view = v
     }
-    
-    
 }
 
 
@@ -48,8 +46,8 @@ extension ReportViewController {
     
     @objc func doneButtonAction(_ sender: UIBarButtonItem) {
         guard let token = KeychainService.token,
-        let selectedType = v.selectedReportType() else {
-            return
+            let selectedType = v.selectedReportType() else {
+                return
         }
         /**
          UUID is purpose that is not to override for reports list

@@ -23,10 +23,11 @@ final class ReplyView: BaseView<ReplyViewController> {
             }
         }
     }
-    lazy var backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "cancel-1").resizeImage(UI.backButtonSize, opaque: false).withRenderingMode(.alwaysOriginal),
-                                          style: .plain,
-                                          target: vc,
-                                          action: #selector(vc.backButtonAction(_:)))
+    lazy var backButton = UIBarButtonItem(
+        image: #imageLiteral(resourceName: "cancel-1").resizeImage(UI.backButtonSize, opaque: false).withRenderingMode(.alwaysOriginal),
+        style: .plain,
+        target: vc,
+        action: #selector(vc.backButtonAction(_:)))
     
     var replyTableView = UITableView().then {
         $0.backgroundColor = .white
@@ -62,13 +63,15 @@ final class ReplyView: BaseView<ReplyViewController> {
     }
     
     
-    lazy var inputContainerViewBottomConstraint = NSLayoutConstraint(item: inputContainer,
-                                                           attribute: .bottom,
-                                                           relatedBy: .equal,
-                                                           toItem: self,
-                                                           attribute: .bottom,
-                                                           multiplier: 1.0,
-                                                           constant: 0)
+    lazy var inputContainerViewBottomConstraint = NSLayoutConstraint(
+        item: inputContainer,
+        attribute: .bottom,
+        relatedBy: .equal,
+        toItem: self,
+        attribute: .bottom,
+        multiplier: 1.0,
+        constant: 0)
+    
     struct UI {
         static var backButtonSize: CGFloat = 22
         static var margin: CGFloat = 8
@@ -142,7 +145,7 @@ final class ReplyView: BaseView<ReplyViewController> {
         }
         replyTableView.reloadData()
         replyTableView.scrollToRow(at: IndexPath(item: item.count - 1, section: 0),
-                                     at: .bottom, animated: true)
+                                   at: .bottom, animated: true)
         endEditing(true)       
     }
 }

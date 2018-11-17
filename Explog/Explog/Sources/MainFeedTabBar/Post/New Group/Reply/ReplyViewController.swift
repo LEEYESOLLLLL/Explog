@@ -26,7 +26,7 @@ final class ReplyViewController: BaseViewController  {
     required init() { fatalError("init() has not been implemented") }
     required public init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
-    static func create(postPK privateKey: Int) -> ReplyViewController {
+    static func create(postPK privateKey: Int) -> Self {
         let `self` = self.init(postPK: privateKey)
         return self
     }
@@ -51,18 +51,19 @@ final class ReplyViewController: BaseViewController  {
 }
 
 extension ReplyViewController {
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.keyboardWillShow(noti:)) ,
-                                               name: UIResponder.keyboardWillShowNotification,
-                                               object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.keyboardWillShow(noti:)) ,
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil)
         
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.keyboardWillHide(noti:)) ,
-                                               name: UIResponder.keyboardWillHideNotification,
-                                               object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.keyboardWillHide(noti:)) ,
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil)
     }
     
     @objc private func keyboardWillShow(noti: NSNotification) {
@@ -182,7 +183,8 @@ extension ReplyViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let removeAction = UITableViewRowAction(style: .destructive, title: "Delete") { [weak self] (rowaction, indexPath) in
+        let removeAction = UITableViewRowAction(
+        style: .destructive, title: "Delete") { [weak self] (rowaction, indexPath) in
             guard let strongSelf = self,
                 case .ready(let item) = strongSelf.state else {
                     return

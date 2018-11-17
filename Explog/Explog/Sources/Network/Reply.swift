@@ -43,8 +43,8 @@ extension Reply: TargetType {
             guard let comments = comments.data(using: .utf8) else {
                 return .requestPlain
             }
-            return .uploadMultipart([MultipartFormData(
-                provider: .data(comments), name: "content")])
+            return .uploadMultipart([
+                MultipartFormData(provider: .data(comments), name: "content")])
         case .delete: return .requestPlain 
         }
     }

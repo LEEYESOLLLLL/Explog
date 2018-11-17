@@ -9,6 +9,16 @@
 import UIKit
 import Square
 
+extension MainFeedTabBarViewController {
+    enum Titles: String {
+        case Feed
+        case Search
+        case Post
+        case Noti
+        case Profile
+    }
+}
+
 final class MainFeedTabBarViewController: BaseTabBarController {
     override func viewDidLoad() {
         delegate = self
@@ -22,10 +32,15 @@ final class MainFeedTabBarViewController: BaseTabBarController {
     }
     
     func updateBadgeNumber() {
-        guard let viewControllers = viewControllers else { return }
+        guard let viewControllers = viewControllers else {
+            return
+        }
         if UIApplication.shared.applicationIconBadgeNumber > 0 {
             viewControllers.forEach {
-                guard let title = $0.title, let type = Titles(rawValue: title) else { return }
+                guard let title = $0.title,
+                    let type = Titles(rawValue: title) else {
+                        return
+                }
                 if type == .Noti {
                     $0.tabBarItem.badgeValue = "\(UIApplication.shared.applicationIconBadgeNumber)"
                 }
@@ -36,7 +51,6 @@ final class MainFeedTabBarViewController: BaseTabBarController {
 }
 
 extension MainFeedTabBarViewController: UITabBarControllerDelegate {
-    
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         
     }
@@ -48,39 +62,28 @@ extension MainFeedTabBarViewController: UITabBarControllerDelegate {
         }
         
         guard KeychainService.token != nil else {
-            Square.display("Require Login", message: "Do you want to go to the login screen?",
-                           alertActions: [.cancel(message: "Cancel"), .default(message: "OK")]) { [weak self] (alertAction, index) in
-                            guard let strongSelf = self else { return }
-                            if index == 1 {
-                                let authController = AuthViewController()
-                                strongSelf.present(authController, animated: true, completion: nil)
-                            }
+            Square.display(
+                "Require Login", message: "Do you want to go to the login screen?",
+                alertActions: [.cancel(message: "Cancel"), .default(message: "OK")]) { [weak self] (alertAction, index) in
+                    guard let strongSelf = self else {
+                        return
+                    }
+                    if index == 1 {
+                        let authController = AuthViewController()
+                        strongSelf.present(authController, animated: true, completion: nil)
+                    }
             }
             return false
         }
         switch title {
-        case .Feed:   return true
+        case .Feed: return true
         case .Search: return true
         case .Post:
             present(PostViewController.create(), animated: true, completion: nil)
             return false
-        case .Noti:    return true
+        case .Noti: return true
         case .Profile: return true
         }
     }
-    
-    
-    
-    
-    
 }
 
-extension MainFeedTabBarViewController {
-    enum Titles: String {
-        case Feed
-        case Search
-        case Post
-        case Noti
-        case Profile
-    }
-}

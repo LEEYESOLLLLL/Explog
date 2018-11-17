@@ -16,12 +16,6 @@ extension ToggleView {
 }
 
 final class ToggleView: UIView {
-    // 상태 toggle, ToggleType, origin, spread
-    // 초기화시, 넣어줄 버튼들.
-    // 이미지와 타이틀도 함께
-    // 토글상태만 주자. 그 속에 있는 버튼의 액션은 해당 VC에서 관리하게 하고
-    // 토글 되고, 안되고의 상태는 state프로퍼티로 관리할수 있게 하자.
-    
     var state: ToggleType = .origin {
         didSet {
             switch state {
@@ -33,7 +27,6 @@ final class ToggleView: UIView {
         }
     }
     
-    // 버튼, 타이틀, 위치, 정사각형의 한변
     private var elements: [(title: String, button: UIButton)]
     var squreSide: CGFloat
     

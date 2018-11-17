@@ -26,9 +26,7 @@ final class ReportCell: UITableViewCell {
     // checkbox 를 누르면, cell 선택하게,
     // cell을 누르면 checkbox 선택하게 로직짜야함..
     func setupUI() {
-        checkbox = M13Checkbox(frame: CGRect(x: 0, y: 0,
-                                             width: 30,
-                                             height: 30))
+        checkbox = M13Checkbox(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         checkbox.stateChangeAnimation = .bounce(.fill)
         checkbox.isUserInteractionEnabled = false
         accessoryView = checkbox

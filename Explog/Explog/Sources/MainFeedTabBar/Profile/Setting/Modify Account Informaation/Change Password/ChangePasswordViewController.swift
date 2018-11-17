@@ -12,7 +12,7 @@ import Square
 import Moya
 
 final class ChangePasswordViewController: BaseViewController  {
-    static func create() -> ChangePasswordViewController {
+    static func create() -> Self {
         let `self` = self.init()
         return self
     }
@@ -31,33 +31,34 @@ extension ChangePasswordViewController  {
     }
     
     @objc func doneButtonAction(_ sender: UIBarButtonItem) {
-        guard let oldPassword = v.oldPasswordTextField.text,
-            let newPassword = v.changePasswordTextField.text,
+        guard let oldPassword =   v.oldPasswordTextField.text,
+            let newPassword =     v.changePasswordTextField.text,
             let confirmPassword = v.confirmPasswordTextField.text,
             newPassword == confirmPassword else {
                 Square.display("The new password and confirm password are not the same")
                 return
         }
         
-        provider.request(.updatePassword(oldPassword: oldPassword,
-                                         newPassword: newPassword)) { [weak self] (result) in
-            guard let strongSelf = self else {
-                return
-            }
-            switch result {
-            case .success(let response):
-                switch (200...299) ~= response.statusCode {
-                case true :
-                    Square.display("Your password change was successful.", message: "",
-                                   alertAction: ActionType.default(message: "OK"),
-                                   acceptBlock: {
-                                    strongSelf.navigationController?.popViewController(animated: true)
-                    })
-                case false : Square.display("The old password is invalid.")
+        provider.request(.updatePassword(
+            oldPassword: oldPassword,
+            newPassword: newPassword)) { [weak self] (result) in
+                guard let strongSelf = self else {
+                    return
                 }
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
+                switch result {
+                case .success(let response):
+                    switch (200...299) ~= response.statusCode {
+                    case true :
+                        Square.display("Your password change was successful.", message: "",
+                                       alertAction: ActionType.default(message: "OK"),
+                                       acceptBlock: {
+                                        strongSelf.navigationController?.popViewController(animated: true)
+                        })
+                    case false : Square.display("The old password is invalid.")
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
         }
     }
 }

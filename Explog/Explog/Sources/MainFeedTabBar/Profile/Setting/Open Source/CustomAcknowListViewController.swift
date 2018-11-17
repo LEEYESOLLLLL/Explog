@@ -12,10 +12,12 @@ import AcknowList
 final class CustomAcknowListViewController: AcknowListViewController {
     
     
-    lazy var backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "back-24pk").withRenderingMode(.alwaysOriginal),
-                                     style: .plain,
-                                     target: self,
-                                     action: #selector(backButtonAction(_:)))
+    lazy var backButton = UIBarButtonItem(
+        image: #imageLiteral(resourceName: "back-24pk").withRenderingMode(.alwaysOriginal),
+        style: .plain,
+        target: self,
+        action: #selector(backButtonAction(_:)))
+    
     @objc func backButtonAction(_ sender: UIBarButtonItem) {
         navigationController?.popViewController(animated: true)
     }

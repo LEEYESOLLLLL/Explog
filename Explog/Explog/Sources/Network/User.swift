@@ -47,25 +47,26 @@ extension User: TargetType {
         case .updateProfile(let username,let photo):
             guard let username = username.data(using: .utf8),
                 let image = photo.jpegData(compressionQuality: 0.3) else {
-                return .requestPlain
+                    return .requestPlain
             }
             
-            return .uploadMultipart([MultipartFormData(provider: .data(username),
-                                                       name: "username"),
-                                     MultipartFormData(provider: .data(image),
-                                                       name: "img_profile",
-                                                       fileName: UUID().uuidString + ".jpg",
-                                                       mimeType: "image/jpg")
-                ])
+            return .uploadMultipart([
+                MultipartFormData(provider: .data(username),name: "username"),
+                MultipartFormData(
+                    provider: .data(image),
+                    name: "img_profile",
+                    fileName: UUID().uuidString + ".jpg",
+                    mimeType: "image/jpg")])
             
         case .updatePassword(let oldPassword, let newPassword):
             guard let oldPassword = oldPassword.data(using: .utf8),
-            let newPassword = newPassword.data(using: .utf8) else {
-                return .requestPlain
+                let newPassword = newPassword.data(using: .utf8) else {
+                    return .requestPlain
             }
             
-            return .uploadMultipart(["old_password": oldPassword,
-                                     "new_password": newPassword].convertedMutiPartFormData())
+            return .uploadMultipart([
+                MultipartFormData(provider: .data(oldPassword), name: "old_password"),
+                MultipartFormData(provider: .data(newPassword), name: "new_password")])
         }
     }
     

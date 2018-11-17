@@ -12,8 +12,6 @@ import Kingfisher
 final class DetailPhotoCell: UITableViewCell {
     var contentImageView = UIImageView().then {
         $0.contentMode = .scaleToFill
-        // scaleAspectFill Cell 전체가 꽉참
-        //
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -53,10 +51,11 @@ final class DetailPhotoCell: UITableViewCell {
         }
         
         self.contentImageView.kf.indicatorType = .activity
-        self.contentImageView.kf.setImage(with: imgURL,
-                                          placeholder: nil,
-                                          options: [.transition(ImageTransition.fade(1))],
-                                          progressBlock: nil,
-                                          completionHandler: nil)
+        self.contentImageView.kf.setImage(
+            with: imgURL,
+            placeholder: nil,
+            options: [.transition(ImageTransition.fade(1))],
+            progressBlock: nil,
+            completionHandler: nil)
     }
 }

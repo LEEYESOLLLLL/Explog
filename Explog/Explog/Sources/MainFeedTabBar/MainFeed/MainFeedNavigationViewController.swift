@@ -119,6 +119,4 @@ extension FeedContainerViewController: CaseContainerDelegate {
         headerImageView.layer.opacity = Float( 1 - progress )
         
     }
-    
-    
 }
