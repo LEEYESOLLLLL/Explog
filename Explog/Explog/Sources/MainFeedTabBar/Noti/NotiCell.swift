@@ -74,11 +74,12 @@ final class NotiCell: UITableViewCell {
         guard let imgURL = URL(string: model.author.imgProfile) else {
             return
         }
-        profileImage.kf.setImage(with: imgURL,
-                                 placeholder: UIImage().resizeImage(UI.profileImageSize.width, opaque: false),
-                                 options: [.transition(.fade(0.5))],
-                                 progressBlock: nil,
-                                 completionHandler: nil)
+        profileImage.kf.setImage(
+            with: imgURL,
+            placeholder: UIImage().resizeImage(UI.profileImageSize.width, opaque: false),
+            options: [.transition(.fade(0.5))],
+            progressBlock: nil,
+            completionHandler: nil)
         dateLabel.text = model.likedDate
         infoLabel.text = model.author.username + " 님이" + "`\(model.posttitle)`" + "의 여행기를 좋아합니다"
         

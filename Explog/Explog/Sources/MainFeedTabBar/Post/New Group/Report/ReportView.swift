@@ -17,16 +17,18 @@ final class ReportView: BaseView<ReportViewController> {
         
     }
     
-    lazy var backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "back-24pk").withRenderingMode(.alwaysOriginal),
-                                          style: .plain,
-                                          target: vc,
-                                          action: #selector(vc.backButtonAction(_:)))
+    lazy var backButton = UIBarButtonItem(
+        image: #imageLiteral(resourceName: "back-24pk").withRenderingMode(.alwaysOriginal),
+        style: .plain,
+        target: vc,
+        action: #selector(vc.backButtonAction(_:)))
     
-    lazy var doneButton = UIBarButtonItem(barButtonSystemItem: .done,
-                                          target: vc,
-                                          action: #selector(vc.doneButtonAction(_:))).then {
-                                            $0.tintColor = .black
-                                            $0.isEnabled = false
+    lazy var doneButton = UIBarButtonItem(
+        barButtonSystemItem: .done,
+        target: vc,
+        action: #selector(vc.doneButtonAction(_:))).then {
+            $0.tintColor = .black
+            $0.isEnabled = false
     }
     
     struct UI {

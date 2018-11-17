@@ -58,7 +58,9 @@ extension NotiViewController {
                 }
             }
             .continueWith { [weak self] _ in
-                guard let strongSelf = self else { return }
+                guard let strongSelf = self else {
+                    return
+                }
                 strongSelf.notiList()
         }
     }

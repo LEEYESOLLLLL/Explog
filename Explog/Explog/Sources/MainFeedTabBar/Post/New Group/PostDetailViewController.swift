@@ -57,11 +57,8 @@ class PostDetailViewController: BaseViewController {
     }
     
     private var toggleState: ToggleView.ToggleType {
-        get {
-            return v.toggleView.state
-        }set {
-            v.toggleView.state = newValue
-        }
+        get { return v.toggleView.state }
+        set { v.toggleView.state = newValue }
     }
     
     var coverData: PostCoverModel
@@ -76,7 +73,8 @@ class PostDetailViewController: BaseViewController {
         super.loadView()
         view = v
     }
-    
+}
+extension PostDetailViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.barStyle = .black
@@ -84,7 +82,6 @@ class PostDetailViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         v.activityView.startAnimating()
         requestTask().continueWith { [weak self] task in
             guard let strongSelf = self else {
@@ -185,19 +182,19 @@ extension PostDetailViewController {
                        alertActions: [.cancel(message: "Cancle"),
                                       .destructive(message: "Flag as inappropriate")],
                        preferredStyle: .actionSheet) { [weak self] (_, index) in
-                                        guard let type = MoreButtonType(rawValue: index),
-                                            let strongSelf = self else {
-                                            return
-                                        }
-                                        switch type {
-                                        case .cancel: break
-                                        case .report:
-                                            let vc = UINavigationController(rootViewController: ReportViewController(postPK: strongSelf.postPK))
-                                            strongSelf.present(vc, animated: true, completion: nil)
-                                        }
-                                        
-                                    
-            
+                        guard let type = MoreButtonType(rawValue: index),
+                            let strongSelf = self else {
+                                return
+                        }
+                        switch type {
+                        case .cancel: break
+                        case .report:
+                            let vc = UINavigationController(rootViewController: ReportViewController(postPK: strongSelf.postPK))
+                            strongSelf.present(vc, animated: true, completion: nil)
+                        }
+                        
+                        
+                        
         }
         
     }

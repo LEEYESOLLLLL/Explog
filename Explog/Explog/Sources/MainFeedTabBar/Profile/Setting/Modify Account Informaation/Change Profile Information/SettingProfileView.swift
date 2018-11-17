@@ -22,17 +22,19 @@ final class SettingProfileView: BaseView<SettingProfileViewController> {
         $0.backgroundColor = .white
     }
     
-    lazy var backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "back-24pk").withRenderingMode(.alwaysOriginal),
-                                          style: .plain,
-                                          target: vc,
-                                          action: #selector(vc.backButtonAction(_:))).then {
-                                            $0.tintColor = .black
+    lazy var backButton = UIBarButtonItem(
+        image: #imageLiteral(resourceName: "back-24pk").withRenderingMode(.alwaysOriginal),
+        style: .plain,
+        target: vc,
+        action: #selector(vc.backButtonAction(_:))).then {
+            $0.tintColor = .black
     }
     
-    lazy var doneButton = UIBarButtonItem(barButtonSystemItem: .done,
-                                          target: vc,
-                                          action: #selector(vc.doneButtonAction(_:))).then {
-                                            $0.tintColor = .black
+    lazy var doneButton = UIBarButtonItem(
+        barButtonSystemItem: .done,
+        target: vc,
+        action: #selector(vc.doneButtonAction(_:))).then {
+            $0.tintColor = .black
     }
     
     var profileImageButton = UIButton().then {
@@ -109,7 +111,7 @@ final class SettingProfileView: BaseView<SettingProfileViewController> {
             .centerXAnchor(to: contentView.centerXAnchor)
             .dimensionAnchors(size: UI.profileImageSize)
             .activateAnchors()
-
+        
         changeProfileButton
             .topAnchor(to: profileImageButton.bottomAnchor, constant: UI.margin)
             .leadingAnchor(to: contentView.leadingAnchor)
@@ -146,12 +148,13 @@ final class SettingProfileView: BaseView<SettingProfileViewController> {
             let imgURL = URL(string: imgPath) else {
                 return
         }
-        profileImageButton.kf.setImage(with: imgURL,
-                                       for: .normal,
-                                       placeholder: nil,
-                                       options: [.transition(.fade(0.5))],
-                                       progressBlock: nil,
-                                       completionHandler: nil)
+        profileImageButton.kf.setImage(
+            with: imgURL,
+            for: .normal,
+            placeholder: nil,
+            options: [.transition(.fade(0.5))],
+            progressBlock: nil,
+            completionHandler: nil)
         
         emailTextField.text = model.email
         userNameTextField.text = model.username

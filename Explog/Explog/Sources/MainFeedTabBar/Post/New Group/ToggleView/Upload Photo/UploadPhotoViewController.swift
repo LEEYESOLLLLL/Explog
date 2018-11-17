@@ -20,7 +20,7 @@ final class UploadPhotoViewController: PhotoGridViewController {
         super.init()
     }
     
-    static func create(postPK: Int) -> UploadPhotoViewController {
+    static func create(postPK: Int) -> Self {
         let `self` = self.init(postPK: postPK)
         self.title = "Camera Roll"
         return self

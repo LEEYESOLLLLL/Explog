@@ -50,7 +50,7 @@ extension Search: TargetType {
             
             var splitedQuery = query.split(separator: "=").compactMap { String($0) }
             return .uploadCompositeMultipart([MultipartFormData(provider: .data(word), name: "word")],
-                                          urlParameters: [splitedQuery[0]: splitedQuery[1]])
+                                             urlParameters: [splitedQuery[0]: splitedQuery[1]])
         }
     }
     

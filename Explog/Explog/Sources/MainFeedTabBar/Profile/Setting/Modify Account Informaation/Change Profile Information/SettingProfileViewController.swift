@@ -24,7 +24,7 @@ final class SettingProfileViewController: BaseViewController {
         view = v
     }
     
-    static func create() -> SettingProfileViewController {
+    static func create() -> Self {
         let `self` = self.init()
         return self
     }

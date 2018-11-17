@@ -56,25 +56,25 @@ extension UploadTextViewController {
         guard v.textView.text.count > 0 else {
             return
         }
-        provider.request(
-            .text(postPK: postPK,
-                  content: text,
-                  createdAt: Date().convertedString(),
-                  type: textType.rawValue)) { [weak self] result in
-                    guard let strongSelf = self else {
-                        return
+        provider.request(.text(
+            postPK: postPK,
+            content: text,
+            createdAt: Date().convertedString(),
+            type: textType.rawValue)) { [weak self] result in
+                guard let strongSelf = self else {
+                    return
+                }
+                switch result {
+                case .success(let response):
+                    switch (200...299) ~= response.statusCode {
+                    case true :
+                        strongSelf.navigationController?.popViewController(animated: true)
+                    case false :
+                        print("fail to Request: \(#function)")
                     }
-                    switch result {
-                    case .success(let response):
-                        switch (200...299) ~= response.statusCode {
-                        case true :
-                            strongSelf.navigationController?.popViewController(animated: true)
-                        case false :
-                            print("fail to Request: \(#function)")
-                        }
-                    case .failure(let error):
-                        print(error.localizedDescription)
-                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
         }
     }
 }

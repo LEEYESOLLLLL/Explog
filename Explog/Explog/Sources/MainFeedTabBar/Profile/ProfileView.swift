@@ -52,20 +52,22 @@ final class ProfileView: BaseView<ProfileViewController> {
      * in iPhoneX, XR and XS Real Devices(Not simulator) UIBarButtonItem's TintColor do not working
      * I think to be in the connection that `lazy keyword` and iPhone X series bug
      */    
-    lazy var settingBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "three-24px-black").withRenderingMode(.alwaysOriginal),
-                                                style: .plain,
-                                                target: vc,
-                                                action: #selector(vc.settingBarButtonAction(_:)))
+    lazy var settingBarButton = UIBarButtonItem(
+        image: #imageLiteral(resourceName: "three-24px-black").withRenderingMode(.alwaysOriginal),
+        style: .plain,
+        target: vc,
+        action: #selector(vc.settingBarButtonAction(_:)))
     
     var activityIndicator = UIActivityIndicatorView(style: .gray)
     lazy var refreshControl = UIRefreshControl().then {
         $0.addTarget(vc, action: #selector(vc.refreshControlAction(_:)), for: .valueChanged)
     }
     
-    lazy var backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "back-24pk").withRenderingMode(.alwaysOriginal),
-                                          style: .plain,
-                                          target: vc,
-                                          action: #selector(vc.backButtonAction(_:)))
+    lazy var backButton = UIBarButtonItem(
+        image: #imageLiteral(resourceName: "back-24pk").withRenderingMode(.alwaysOriginal),
+        style: .plain,
+        target: vc,
+        action: #selector(vc.backButtonAction(_:)))
     struct UI {
         static var coverImageHeight: CGFloat = UIScreen.mainHeight * 0.3
         static var margin: CGFloat = 8
@@ -137,8 +139,9 @@ final class ProfileView: BaseView<ProfileViewController> {
         profileTableView
             .parallaxHeader
             .parallaxHeaderDidScrollHandler = { [weak vc, weak self] parallax in
-                guard let strongVC = vc, let strongSelf = self else {
-                    return
+                guard let strongVC = vc,
+                    let strongSelf = self else {
+                        return
                 }
                 let progress = parallax.progress
                 let statnd = UI.statusBarHeight / parallax.height

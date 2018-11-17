@@ -148,8 +148,9 @@ extension ProfileViewController {
 extension ProfileViewController {
     func delete(_ postPrivateKey: Int, index: Int) {
         postProvider.request(.delete(postPK: postPrivateKey)) { [weak self] (result) in
-            guard let strongSelf = self, case .ready(let item) = strongSelf.state else {
-                return
+            guard let strongSelf = self,
+                case .ready(let item) = strongSelf.state else {
+                    return
             }
             switch result {
             case .success(let response):
@@ -196,7 +197,7 @@ extension ProfileViewController {
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { [weak self] (rowAction, indexPath) in
             guard let strongSelf = self,
                 case .ready(let item) = strongSelf.state else {
-                return
+                    return
             }
             
             let post = item.posts[indexPath.row]

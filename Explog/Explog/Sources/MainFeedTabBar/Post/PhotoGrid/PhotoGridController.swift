@@ -13,7 +13,7 @@ import Square
 
 
 class PhotoGridViewController: BaseViewController {
-    static func create() -> PhotoGridViewController {
+    static func create() -> Self {
         let `self` = self.init()
         self.title = "Camera Roll"
         return self
