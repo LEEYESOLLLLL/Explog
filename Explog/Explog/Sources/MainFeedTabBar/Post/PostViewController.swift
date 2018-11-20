@@ -61,7 +61,7 @@ extension PostViewController {
             endDate: currentPostCoverInformation.endData,
             continent: currentPostCoverInformation.continent,
             img: currentPostCoverInformation.coverImg)) { [weak self] result in
-                guard let strongSelf = self else { return }
+                guard let self = self else { return }
                 switch result {
                 case .success(let response):
                     switch (200...299) ~= response.statusCode {
@@ -69,7 +69,7 @@ extension PostViewController {
                         do {
                             let coverData = try response.map(PostCoverModel.self)
                             let detailVC = PostDetailViewController.create(editMode: .on, coverData: coverData)
-                            strongSelf.show(detailVC, sender: nil)
+                            self.show(detailVC, sender: nil)
                         }catch {
                             print("fail to convert Model: \(#function)")
                         }
@@ -99,7 +99,7 @@ extension PostViewController {
         }
         let datepickerAlertController = DatePickerAlertController(preferredStyle: .actionSheet)
         let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
-            guard let strongSelf = self,
+            guard let self = self,
                 let pickDate = datepickerAlertController.readableDate.convertDate() else {
                     return
             }
@@ -107,13 +107,13 @@ extension PostViewController {
             switch buttonType {
             case .start:
                 // endTitleLabel
-                if let endTitleLable = strongSelf.v.endDateButton.titleLabel,
+                if let endTitleLable = self.v.endDateButton.titleLabel,
                     let endTitleLabelDate = endTitleLable.text?.convertDate() {
                     compairableResult = pickDate > endTitleLabelDate ? false : true
                 }
             case .end:
                 // startTitleLabel
-                if let startTitleLabel = strongSelf.v.startDateButton.titleLabel,
+                if let startTitleLabel = self.v.startDateButton.titleLabel,
                     let startTitleLabelDate = startTitleLabel.text?.convertDate() {
                     compairableResult = pickDate < startTitleLabelDate ? false : true
                 }

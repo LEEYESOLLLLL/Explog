@@ -61,14 +61,14 @@ extension UploadTextViewController {
             content: text,
             createdAt: Date().convertedString(),
             type: textType.rawValue)) { [weak self] result in
-                guard let strongSelf = self else {
+                guard let self = self else {
                     return
                 }
                 switch result {
                 case .success(let response):
                     switch (200...299) ~= response.statusCode {
                     case true :
-                        strongSelf.navigationController?.popViewController(animated: true)
+                        self.navigationController?.popViewController(animated: true)
                     case false :
                         print("fail to Request: \(#function)")
                     }

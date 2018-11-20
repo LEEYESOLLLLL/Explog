@@ -76,16 +76,16 @@ final class FeedTableViewController: ParallaxTableViewController {
 extension FeedTableViewController {
     func networkServiceWith(continent: Int) {
         provider.request(.category(continent: continent)) { [weak self] result in
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             switch result {
             case .success(let response):
                 do {
-                    strongSelf.state = .ready(try response.map(FeedModel.self))
+                    self.state = .ready(try response.map(FeedModel.self))
                 }catch {
-                    strongSelf.state = .error
+                    self.state = .error
                 }
             case.failure(let error) :
-                strongSelf.state = .error
+                self.state = .error
                 print(error.localizedDescription)
             }
         }
@@ -93,22 +93,22 @@ extension FeedTableViewController {
     
     func loadNetwork(continent: Int, query nextpageQuery: String) {
         provider.request(.next(continent: continent, query: nextpageQuery)) { [weak self] result in
-            guard let strongSelf = self,
-                case .ready(let item) = strongSelf.state else {
+            guard let self = self,
+                case .ready(let item) = self.state else {
                 return
             }
             switch result {
             case .success(let response):
                 do {
                     let convertedData = try response.map(FeedModel.self)
-                    strongSelf.state = .ready(item + convertedData)
+                    self.state = .ready(item + convertedData)
                 }catch {
                     print(error.localizedDescription)
-                    strongSelf.state = .error
+                    self.state = .error
                 }
             case .failure(let error):
                 print(error.localizedDescription)
-                strongSelf.state = .error
+                self.state = .error
             }
         }
     }
@@ -120,8 +120,8 @@ extension FeedTableViewController {
     func like(_ postPrivateKey: Int, index: Int) -> BoltsSwift.Task<LikeModel> {
         let taskCompletionSource = TaskCompletionSource<LikeModel>()
         postProvider.request(.like(postPK: postPrivateKey)) { [weak self] (result) in
-            guard let strongSelf = self,
-                case .ready(let item) = strongSelf.state else {
+            guard let self = self,
+                case .ready(let item) = self.state else {
                     return
             }
             switch result {
@@ -131,7 +131,7 @@ extension FeedTableViewController {
                     if let likeModel = try? response.map(LikeModel.self) {
                         var copy = item
                         copy.posts[index].modifiedLike(model: likeModel)
-                        strongSelf.state = .ready(copy)
+                        self.state = .ready(copy)
                         taskCompletionSource.set(result: likeModel)
                     }
                 case false :
@@ -161,10 +161,10 @@ extension FeedTableViewController {
         }else {
             Square.display("Require Login", message: "Do you want to go to the login screen?",
                            alertActions: [.cancel(message: "Cancel"), .default(message: "OK")]) { [weak self] (alertAction, index) in
-                            guard let strongSelf = self else { return }
+                            guard let self = self else { return }
                             if index == 1 {
                                 let authController = AuthViewController()
-                                strongSelf.present(authController, animated: true, completion: nil)
+                                self.present(authController, animated: true, completion: nil)
                             }
             }
         }
@@ -190,10 +190,10 @@ extension FeedTableViewController {
         }
         let post = item.posts[indexPath.row]
         cell.configure(model: post) { [weak self] (postPK: Int) -> BoltsSwift.Task<LikeModel> in
-            guard let strongSelf = self else {
+            guard let self = self else {
                 fatalError()
             }
-            return strongSelf.like(postPK, index: indexPath.row)
+            return self.like(postPK, index: indexPath.row)
         }
     }
     

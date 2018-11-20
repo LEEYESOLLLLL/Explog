@@ -55,9 +55,9 @@ final class PhotoGridCell: UICollectionViewCell {
             targetSize: bounds.size,
             contentMode: .aspectFill,
             options: nil) { [weak self] (image, _) in
-                guard let strongSelf = self else { return }
-                if strongSelf.representedAssetIdentifier == asset.localIdentifier {
-                    strongSelf.imageView.image = image
+                guard let self = self else { return }
+                if self.representedAssetIdentifier == asset.localIdentifier {
+                    self.imageView.image = image
                 }
         }
         state = isSelected ? .selected : .nonSelected
