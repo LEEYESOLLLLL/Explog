@@ -224,12 +224,12 @@ class PostDetailView: BaseView<PostDetailViewController> {
         targetingButtons()
         
         postTableView.parallaxHeader.parallaxHeaderDidScrollHandler = { [weak self] parallaxHeader in
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             if parallaxHeader.progress <= 0.0 {
-                strongSelf.vc.navigationController?.navigationBar.barTintColor = .appStyle
-                strongSelf.vc.navigationController?.navigationBar.isTranslucent = false
+                self.vc.navigationController?.navigationBar.barTintColor = .appStyle
+                self.vc.navigationController?.navigationBar.isTranslucent = false
             }else {
-                strongSelf.vc.navigationController?.navigationBar.isTranslucent = true
+                self.vc.navigationController?.navigationBar.isTranslucent = true
             }
         }
         addGestureRecognizer(toggleViewTapGesture)

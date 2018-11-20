@@ -64,7 +64,7 @@ extension ProfileViewController {
         super.viewWillAppear(animated)
         initialComposition()
         provider.request(.profile(otherUserPK: otherUserPK)) { [weak self] (result) in
-            guard let strongSelf = self else {
+            guard let self = self else {
                 return
             }
             switch result {
@@ -73,8 +73,8 @@ extension ProfileViewController {
                 case true:
                     do {
                         let userModel = try response.map(UserModel.self)
-                        strongSelf.v.initializeProfile(userModel)
-                        strongSelf.state = .ready(item: userModel)
+                        self.v.initializeProfile(userModel)
+                        self.state = .ready(item: userModel)
                         
                     }catch {
                         print("fail to convert Model: \(#function)")
@@ -85,7 +85,7 @@ extension ProfileViewController {
             case .failure(let error):
                 print("Serve Error: \(error.localizedDescription)")
             }
-            DispatchQueue.main.async { strongSelf.v.activityIndicator.stopAnimating() }
+            DispatchQueue.main.async { self.v.activityIndicator.stopAnimating() }
         }
     }
     
@@ -120,8 +120,8 @@ extension ProfileViewController {
     func like(_ postPrivateKey: Int, index: Int) -> BoltsSwift.Task<LikeModel> {
         let taskCompletionSource = TaskCompletionSource<LikeModel>()
         postProvider.request(.like(postPK: postPrivateKey)) { [weak self] (result) in
-            guard let strongSelf = self,
-                case .ready(let item) = strongSelf.state else {
+            guard let self = self,
+                case .ready(let item) = self.state else {
                     return
             }
             switch result {
@@ -131,7 +131,7 @@ extension ProfileViewController {
                     if let likeModel = try? response.map(LikeModel.self) {
                         var copy = item
                         copy.posts[index].modifiedLike(model: likeModel)
-                        strongSelf.state = .ready(item: copy)
+                        self.state = .ready(item: copy)
                         taskCompletionSource.set(result: likeModel)
                     }
                 case false :
@@ -148,8 +148,8 @@ extension ProfileViewController {
 extension ProfileViewController {
     func delete(_ postPrivateKey: Int, index: Int) {
         postProvider.request(.delete(postPK: postPrivateKey)) { [weak self] (result) in
-            guard let strongSelf = self,
-                case .ready(let item) = strongSelf.state else {
+            guard let self = self,
+                case .ready(let item) = self.state else {
                     return
             }
             switch result {
@@ -158,7 +158,7 @@ extension ProfileViewController {
                 case true :
                     var copy = item
                     copy.posts.remove(at: index)
-                    strongSelf.state = .ready(item: copy)
+                    self.state = .ready(item: copy)
                     Square.display("Your post has deleted successfully")
                 case false: Square.display("Request Error")
                 }
@@ -195,13 +195,13 @@ extension ProfileViewController {
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { [weak self] (rowAction, indexPath) in
-            guard let strongSelf = self,
-                case .ready(let item) = strongSelf.state else {
+            guard let self = self,
+                case .ready(let item) = self.state else {
                     return
             }
             
             let post = item.posts[indexPath.row]
-            strongSelf.delete(post.pk, index: indexPath.row)
+            self.delete(post.pk, index: indexPath.row)
         }
         return [deleteAction]
     }
@@ -229,10 +229,10 @@ extension ProfileViewController: UITableViewDataSource {
         }
         let post = item.posts[indexPath.row].converted(author: item.author())
         cell.configure(model: post) { [weak self] (postPK: Int) -> BoltsSwift.Task<LikeModel> in
-            guard let strongSelf = self else {
+            guard let self = self else {
                 fatalError()
             }
-            return strongSelf.like(postPK, index: indexPath.row)
+            return self.like(postPK, index: indexPath.row)
         }
     }
 }

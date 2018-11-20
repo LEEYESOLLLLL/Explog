@@ -49,19 +49,19 @@ extension NotiViewController {
         super.viewWillAppear(animated)
         resetBadge()
             .continueWith { [weak self] task in
-                guard let strongSelf = self else {
+                guard let self = self else {
                     return
                 }
                 if task.completed {
-                    strongSelf.tabBarItem.badgeValue = nil
+                    self.tabBarItem.badgeValue = nil
                     UIApplication.shared.applicationIconBadgeNumber = 0
                 }
             }
             .continueWith { [weak self] _ in
-                guard let strongSelf = self else {
+                guard let self = self else {
                     return
                 }
-                strongSelf.notiList()
+                self.notiList()
         }
     }
     
@@ -78,7 +78,7 @@ extension NotiViewController {
     
     private func notiList() {
         provider.request(.list) { [weak self] (result) in
-            guard let strongSelf = self else {
+            guard let self = self else {
                 return
             }
             switch result {
@@ -87,8 +87,8 @@ extension NotiViewController {
                 case true :
                     do {
                         let model = try response.map(NotiListModel.self)
-                        strongSelf.state = .ready(model)
-                        strongSelf.v.likeTableView.reloadData()
+                        self.state = .ready(model)
+                        self.v.likeTableView.reloadData()
                     }catch {
                     }
                 case false : Square.display("Request Error..")
@@ -109,8 +109,8 @@ extension NotiViewController {
         }
         
         provider.request(.next(query: query)) { [weak self] result in
-            guard let strongSelf = self,
-                case .ready(let item) = strongSelf.state  else {
+            guard let self = self,
+                case .ready(let item) = self.state  else {
                     return
             }
             switch result {
@@ -120,7 +120,7 @@ extension NotiViewController {
                     do {
                         let model = try response.map(NotiListModel.self)
                         if let combind = item + model {
-                            strongSelf.state = .ready(combind)
+                            self.state = .ready(combind)
                         }
                     }catch {
                         print("\(#function), Fail to Convert Model")

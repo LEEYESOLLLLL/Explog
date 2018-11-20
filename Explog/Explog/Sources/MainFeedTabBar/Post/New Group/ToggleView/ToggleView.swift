@@ -123,13 +123,13 @@ final class ToggleView: UIView {
         addSubview(wholeStackView)
         wholeStackView.addArrangedSubviews([buttonsStackView, titlesStackView])
         elements.forEach {[weak self] (title: String, button: UIButton) in
-            guard let strongSelf = self else { return }
-            strongSelf.buttonsStackView.addArrangedSubview(button)
+            guard let self = self else { return }
+            self.buttonsStackView.addArrangedSubview(button)
             
             let label = UILabel()
             label.setup(textColor: .white, fontStyle: .body, textAlignment: .center, numberOfLines: 1)
             label.text = title
-            strongSelf.titlesStackView.addArrangedSubview(label)
+            self.titlesStackView.addArrangedSubview(label)
         }
         
         wholeStackView

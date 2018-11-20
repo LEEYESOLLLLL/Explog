@@ -140,7 +140,7 @@ final class ProfileView: BaseView<ProfileViewController> {
             .parallaxHeader
             .parallaxHeaderDidScrollHandler = { [weak vc, weak self] parallax in
                 guard let strongVC = vc,
-                    let strongSelf = self else {
+                    let self = self else {
                         return
                 }
                 let progress = parallax.progress
@@ -148,12 +148,12 @@ final class ProfileView: BaseView<ProfileViewController> {
                 switch statnd >= progress {
                 case true: // white
                     strongVC.navigationController?.navigationBar.barStyle = .black
-                    strongSelf.backButton.image = #imageLiteral(resourceName: "back-24px-white").withRenderingMode(.alwaysOriginal)
-                    strongSelf.settingBarButton.image = #imageLiteral(resourceName: "three-24px-white").withRenderingMode(.alwaysOriginal)
+                    self.backButton.image = #imageLiteral(resourceName: "back-24px-white").withRenderingMode(.alwaysOriginal)
+                    self.settingBarButton.image = #imageLiteral(resourceName: "three-24px-white").withRenderingMode(.alwaysOriginal)
                 case false: // black
                     strongVC.navigationController?.navigationBar.barStyle = .default
-                    strongSelf.backButton.image = #imageLiteral(resourceName: "back-24pk").withRenderingMode(.alwaysOriginal)
-                    strongSelf.settingBarButton.image = #imageLiteral(resourceName: "three-24px-black").withRenderingMode(.alwaysOriginal)
+                    self.backButton.image = #imageLiteral(resourceName: "back-24pk").withRenderingMode(.alwaysOriginal)
+                    self.settingBarButton.image = #imageLiteral(resourceName: "three-24px-black").withRenderingMode(.alwaysOriginal)
                 }
         }
     }
