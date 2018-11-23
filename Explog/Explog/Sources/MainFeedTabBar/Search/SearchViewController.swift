@@ -43,6 +43,7 @@ final class SearchViewController: BaseViewController {
         super.viewWillAppear(animated)
         navigationController?.transparentNaviBar(false)
         tabBarController?.tabBar.isHidden = false
+        view.layoutIfNeeded()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -67,7 +68,7 @@ extension SearchViewController {
 }
 
 extension SearchViewController {
-    func retrieve(word: String) {
+    private func retrieve(word: String) {
         provider.request(.retrieve(word: word.trimmingCharacters(in: .whitespacesAndNewlines))) { [weak self] result in
             guard let self = self else {
                 return
@@ -98,7 +99,7 @@ extension SearchViewController {
         }
     }
     
-    func loadNetwork(word: String, nextPath: String) {
+    private func loadNetwork(word: String, nextPath: String) {
         guard let nextURL = try? nextPath.asURL(),
             let forNextPageQuery = nextURL.query else {
                 return
@@ -136,7 +137,7 @@ extension SearchViewController {
 // MARK: Like
 extension SearchViewController {
     @discardableResult
-    func like(_ postPrivateKey: Int, index: Int) -> BoltsSwift.Task<LikeModel> {
+    private func like(_ postPrivateKey: Int, index: Int) -> BoltsSwift.Task<LikeModel> {
         let taskCompletionSource = TaskCompletionSource<LikeModel>()
         postProvider.request(.like(postPK: postPrivateKey)) { [weak self] (result) in
             guard let self = self,
@@ -166,12 +167,11 @@ extension SearchViewController {
 
 extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        guard case .populated(let item) = state,
-            item.posts.count > indexPath.row else {
+        guard state.currentPosts.count > indexPath.row else {
                 return
         }
-        let postCover = item.posts[indexPath.row]
+        tableView.deselectRow(at: indexPath, animated: true)
+        let postCover = state.currentPosts[indexPath.row]
         let detailViewController = PostDetailViewController.create(editMode: .off, coverData: postCover)
         show(detailViewController, sender: nil)
     }
@@ -231,8 +231,8 @@ extension SearchViewController: UISearchResultsUpdating {
         pendingWork(text)
     }
     
+    // Request, trigering
     func pendingWork(_ text: String) {
-        // Request, trigering
         pendingWorkItem?.cancel()
         let newWorkItem = DispatchWorkItem { [weak self] in
             guard let self = self else {

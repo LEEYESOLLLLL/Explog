@@ -32,7 +32,7 @@ final class SearchView: BaseView<SearchViewController> {
         addSubviews([searchTableView])
         
         searchTableView
-            .topAnchor(to: topAnchor)
+            .topAnchor(to: safeAreaLayoutGuide.topAnchor)
             .leadingAnchor(to: leadingAnchor)
             .trailingAnchor(to: trailingAnchor)
             .bottomAnchor(to: bottomAnchor)
