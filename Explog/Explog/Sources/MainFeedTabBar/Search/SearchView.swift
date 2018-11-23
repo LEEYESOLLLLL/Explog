@@ -53,22 +53,19 @@ final class SearchView: BaseView<SearchViewController> {
         vc.definesPresentationContext = true
         vc.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         vc.navigationController?.navigationBar.barTintColor = .appStyle
-        vc.navigationController?.navigationBar.barStyle = .black
-        
+        vc.navigationController?.navigationBar.barStyle = .black   
     }
     
-    // placeHolder 색상, text 색상 black
+    // placeHolder Color, text Color black
     func setupSearchBarUI() {
-        UITextField
-            .appearance(whenContainedInInstancesOf: [UISearchBar.self])
-            .defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).textColor = UIColor.black
-        
-        let mutableString = NSMutableAttributedString(string: "Search Trip!")
-        mutableString.addAttribute(NSAttributedString.Key.foregroundColor,
-                                   value: UIColor.gray,
-                                   range: NSRange(location: 0,length: 12))
-        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).attributedPlaceholder = mutableString
-        
+        searchController.searchBar.placeholder = "Search trip in the world"
+    }
+    
+    func setup(footerView: ViewControllerStateView?) {
+        switch footerView?.stateType {
+        case .empty?, .error?:  searchTableView.isScrollEnabled = false
+        default:                searchTableView.isScrollEnabled = true
+        }
+        searchTableView.tableFooterView = footerView
     }
 }

@@ -27,7 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 // MARK: Initialization
 extension AppDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        // MARK: temporarily
         setupLogginService()
         FirebaseApp.configure()
         setKeyWindow()

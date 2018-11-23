@@ -81,6 +81,7 @@
 		047E59942189E69100BD2810 /* SettingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047E59932189E69100BD2810 /* SettingHeaderView.swift */; };
 		047FE5DC216CF063009B56BB /* MainFeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FE5DB216CF063009B56BB /* MainFeedTableViewController.swift */; };
 		047FE5DF216CF69C009B56BB /* UIScreen+Sugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FE5DE216CF69C009B56BB /* UIScreen+Sugar.swift */; };
+		049F7BF121A800D8000B0602 /* ViewControllerStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049F7BF021A800D8000B0602 /* ViewControllerStateView.swift */; };
 		04B38AC821787CAF00E17908 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AC721787CAF00E17908 /* KeychainService.swift */; };
 		04B38AE82178820400E17908 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AE72178820400E17908 /* AuthViewController.swift */; };
 		04B38AEA2178820C00E17908 /* EmailLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AE92178820C00E17908 /* EmailLoginViewController.swift */; };
@@ -233,6 +234,7 @@
 		047E59932189E69100BD2810 /* SettingHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHeaderView.swift; sourceTree = "<group>"; };
 		047FE5DB216CF063009B56BB /* MainFeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFeedTableViewController.swift; sourceTree = "<group>"; };
 		047FE5DE216CF69C009B56BB /* UIScreen+Sugar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Sugar.swift"; sourceTree = "<group>"; };
+		049F7BF021A800D8000B0602 /* ViewControllerStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerStateView.swift; sourceTree = "<group>"; };
 		04B38AC721787CAF00E17908 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		04B38AE72178820400E17908 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		04B38AE92178820C00E17908 /* EmailLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLoginViewController.swift; sourceTree = "<group>"; };
@@ -494,6 +496,7 @@
 				0423A61E212B896A00DD9747 /* MainFeedTabBarView.swift */,
 				0423A620212B899500DD9747 /* MainFeedTabBarViewController.swift */,
 				0423A62B212B8F4600DD9747 /* MainFeed */,
+				049F7C1221A8424E000B0602 /* ViewControllerState View */,
 				0423A63C212B97E600DD9747 /* Search */,
 				0423A63D212B97EA00DD9747 /* Post */,
 				0423A63E212B97F100DD9747 /* Noti */,
@@ -640,6 +643,14 @@
 				04F72A5C217B44E30099C7C9 /* Regex.swift */,
 			);
 			path = "Regular Expression";
+			sourceTree = "<group>";
+		};
+		049F7C1221A8424E000B0602 /* ViewControllerState View */ = {
+			isa = PBXGroup;
+			children = (
+				049F7BF021A800D8000B0602 /* ViewControllerStateView.swift */,
+			);
+			path = "ViewControllerState View";
 			sourceTree = "<group>";
 		};
 		04B38AC62178799A00E17908 /* Auth */ = {
@@ -974,7 +985,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Explog/Pods-Explog-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Explog/Pods-Explog-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AcknowList/AcknowList.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts-Swift/BoltsSwift.framework",
@@ -1017,7 +1028,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Explog/Pods-Explog-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Explog/Pods-Explog-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DE9417A69F11ED79CAD66F04 /* [CP] Check Pods Manifest.lock */ = {
@@ -1155,6 +1166,7 @@
 				04F71E9E217AF3910099C7C9 /* SignUpView.swift in Sources */,
 				04D12998219E109300538EF6 /* ReportView.swift in Sources */,
 				045FF0B9217F9395003ECA23 /* PhotoGridView.swift in Sources */,
+				049F7BF121A800D8000B0602 /* ViewControllerStateView.swift in Sources */,
 				04D1299A219E109900538EF6 /* ReportViewController.swift in Sources */,
 				04F71E9C217AF38A0099C7C9 /* EmailLoginView.swift in Sources */,
 				04B38AC821787CAF00E17908 /* KeychainService.swift in Sources */,
