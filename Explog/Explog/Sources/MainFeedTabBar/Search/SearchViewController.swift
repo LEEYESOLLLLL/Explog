@@ -51,7 +51,7 @@ final class SearchViewController: BaseViewController {
 extension SearchViewController {
     func retrieve(word: String) {
         provider.request(.retrieve(word: word.trimmingCharacters(in: .whitespacesAndNewlines))) { [weak self] result in
-            guard let strongSelf = self else {
+            guard let self = self else {
                 return
             }
             switch result {
@@ -59,7 +59,7 @@ extension SearchViewController {
                 switch (200...299) ~= response.statusCode {
                 case true:
                     if let model = try? response.map(FeedModel.self) {
-                       strongSelf.state = .ready(model)
+                       self.state = .ready(model)
                     }
                 case false:
                     Square.display("Request Error")
@@ -77,8 +77,8 @@ extension SearchViewController {
         }
         
         provider.request(.next(word: word, query: forNextPageQuery)) { [weak self] (result) in
-            guard let strongSelf = self,
-                case .ready(let item) = strongSelf.state else {
+            guard let self = self,
+                case .ready(let item) = self.state else {
                 return
             }
             switch result {
@@ -86,7 +86,7 @@ extension SearchViewController {
                 switch (200...299) ~= response.statusCode {
                 case true :
                     if let model = try? response.map(FeedModel.self) {
-                        strongSelf.state = .ready(item + model)
+                        self.state = .ready(item + model)
                     }
                 case false : print("Request Error: \(#function)")
                 }
@@ -101,8 +101,8 @@ extension SearchViewController {
     func like(_ postPrivateKey: Int, index: Int) -> BoltsSwift.Task<LikeModel> {
         let taskCompletionSource = TaskCompletionSource<LikeModel>()
         postProvider.request(.like(postPK: postPrivateKey)) { [weak self] (result) in
-            guard let strongSelf = self,
-                case .ready(let item) = strongSelf.state else {
+            guard let self = self,
+                case .ready(let item) = self.state else {
                     return
             }
             switch result {
@@ -112,7 +112,7 @@ extension SearchViewController {
                     if let likeModel = try? response.map(LikeModel.self) {
                         var copy = item
                         copy.posts[index].modifiedLike(model: likeModel)
-                        strongSelf.state = .ready(copy)
+                        self.state = .ready(copy)
                         taskCompletionSource.set(result: likeModel)
                     }
                 case false :
@@ -170,10 +170,10 @@ extension SearchViewController {
         
         let post = item.posts[indexPath.row]
         cell.configure(model: post) { [weak self] (postPK: Int) -> BoltsSwift.Task<LikeModel> in
-            guard let strongSelf = self else {
+            guard let self = self else {
                 fatalError()
             }
-            return strongSelf.like(postPK, index: indexPath.row)
+            return self.like(postPK, index: indexPath.row)
         }
         
         // LastIndex
@@ -200,10 +200,10 @@ extension SearchViewController: UISearchResultsUpdating {
         // Request, trrigering
         pendingWorkItem?.cancel()
         let newWorkItem = DispatchWorkItem { [weak self] in
-            guard let strongSelf = self else {
+            guard let self = self else {
                 return
             }
-            strongSelf.retrieve(word: text)
+            self.retrieve(word: text)
         }
         pendingWorkItem = newWorkItem
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250),

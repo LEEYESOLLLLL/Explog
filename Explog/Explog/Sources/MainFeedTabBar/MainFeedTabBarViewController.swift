@@ -65,12 +65,12 @@ extension MainFeedTabBarViewController: UITabBarControllerDelegate {
             Square.display(
                 "Require Login", message: "Do you want to go to the login screen?",
                 alertActions: [.cancel(message: "Cancel"), .default(message: "OK")]) { [weak self] (alertAction, index) in
-                    guard let strongSelf = self else {
+                    guard let self = self else {
                         return
                     }
                     if index == 1 {
                         let authController = AuthViewController()
-                        strongSelf.present(authController, animated: true, completion: nil)
+                        self.present(authController, animated: true, completion: nil)
                     }
             }
             return false

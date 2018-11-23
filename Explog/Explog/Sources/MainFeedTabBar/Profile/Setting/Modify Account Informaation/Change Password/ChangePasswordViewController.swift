@@ -42,7 +42,7 @@ extension ChangePasswordViewController  {
         provider.request(.updatePassword(
             oldPassword: oldPassword,
             newPassword: newPassword)) { [weak self] (result) in
-                guard let strongSelf = self else {
+                guard let self = self else {
                     return
                 }
                 switch result {
@@ -52,7 +52,7 @@ extension ChangePasswordViewController  {
                         Square.display("Your password change was successful.", message: "",
                                        alertAction: ActionType.default(message: "OK"),
                                        acceptBlock: {
-                                        strongSelf.navigationController?.popViewController(animated: true)
+                                        self.navigationController?.popViewController(animated: true)
                         })
                     case false : Square.display("The old password is invalid.")
                     }

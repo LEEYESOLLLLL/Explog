@@ -71,13 +71,13 @@ extension UploadPhotoViewController {
 extension UploadPhotoViewController: PassableDataDelegate {
     func pass(data: UIImage) {
         provider.request(.photo(postPK: postPK, photo: data)) { [weak self] result in
-            guard let strongSelf = self else {
+            guard let self = self else {
                 return
             }
             switch result {
             case .success(let response):
                 switch (200...299) ~= response.statusCode {
-                case true : strongSelf.navigationController?.popViewController(animated: true)
+                case true : self.navigationController?.popViewController(animated: true)
                 case false:
                     print("fail to Request: \(#function)")
                 }

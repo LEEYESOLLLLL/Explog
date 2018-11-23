@@ -64,7 +64,7 @@ final class EmailLoginViewController: BaseViewController {
                 return
         }
         provider.request(.login(email: email, password: password)) { [weak self] result in
-                guard let strongSelf = self else { return }
+                guard let self = self else { return }
                 switch result {
                 case .success(let response):
                     if 200...299 ~= response.statusCode {
@@ -72,7 +72,7 @@ final class EmailLoginViewController: BaseViewController {
                             let loginModel = try response.map(AuthModel.self)
                             KeychainService.configure(material: loginModel.token, key: .token)
                             KeychainService.configure(material: String(loginModel.pk), key: .pk)
-                            strongSelf.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+                            self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
                         }catch {
                             print("invalidate LoginModel")
                         }

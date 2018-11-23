@@ -43,7 +43,7 @@ final class SettingProfileViewController: BaseViewController {
         super.viewDidLoad()
         v.start(true)
         provider.request(.profile(otherUserPK: nil)) { [weak self] (result) in
-            guard let strongSelf = self else {
+            guard let self = self else {
                 return
             }
             
@@ -53,7 +53,7 @@ final class SettingProfileViewController: BaseViewController {
                 case true :
                     do {
                         let model = try response.map(UserModel.self)
-                        strongSelf.v.configureUI(with: model)
+                        self.v.configureUI(with: model)
                     }catch {
                         print("fail to convert Model: \(#function)")
                     }
@@ -63,7 +63,7 @@ final class SettingProfileViewController: BaseViewController {
             case .failure(let error):
                 print(error.localizedDescription)
             }
-            UIView.animate(withDuration: 0.3) { strongSelf.v.start(false) }
+            UIView.animate(withDuration: 0.3) { self.v.start(false) }
         }
     }
 }
@@ -81,13 +81,13 @@ extension SettingProfileViewController {
                 return
         }
         provider.request(.updateProfile(username: username, photo: photo)) { [weak self] (result) in
-            guard let strongSelf = self  else {
+            guard let self = self  else {
                 return
             }
             switch result {
             case .success(let response):
                 switch (200...299) ~= response.statusCode {
-                case true : strongSelf.navigationController?.popViewController(animated: true)
+                case true : self.navigationController?.popViewController(animated: true)
                 case false: Square.display("Alredy exist input username")
                 }
                 

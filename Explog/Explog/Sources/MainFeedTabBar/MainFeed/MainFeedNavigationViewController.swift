@@ -18,12 +18,12 @@ final class FeedContainerViewController: CaseContainerViewController {
         viewContorllers = titles
             .enumerated()
             .compactMap { [weak self] (tag: Int, title: String) -> ParallaxTableViewController? in
-                guard let strongSelf = self else {
+                guard let self = self else {
                     return nil
                 }
                 return FeedTableViewController.createWith(
                     title: title,
-                    owner: strongSelf,
+                    owner: self,
                     tag: tag+Int(1) )
         }
         appearence = Appearance(
