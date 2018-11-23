@@ -10,7 +10,14 @@ import UIKit
 import KeychainAccess
 import UserNotifications
 import Firebase
+import SwiftyBeaver
 
+/*
+ Beaver
+ e1PYdR
+ ndeEkqiLos6CWBi4utcqwtzhoaiunf6y
+ gtkxf6dbqlrfpxqkulwxt1bgringeLsy
+ */
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,13 +27,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 // MARK: Initialization
 extension AppDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        // MARK: temporarily
+        setupLogginService()
         FirebaseApp.configure()
         setKeyWindow()
         requesetNotification()
         return true
     }
-    
+}
+
+// MARK: Loggin Service
+extension AppDelegate  {
+    func setupLogginService() {
+        let console = ConsoleDestination()
+        let platform = SBPlatformDestination(
+            appID: "e1PYdR",
+            appSecret: "ndeEkqiLos6CWBi4utcqwtzhoaiunf6y",
+            encryptionKey: "gtkxf6dbqlrfpxqkulwxt1bgringeLsy")
+        SwiftyBeaver.addDestinations([console, platform])
+    }
+}
+
+// MARK: Setup Window
+extension AppDelegate  {
     private func setKeyWindow() {
         window = UIWindow(frame: UIScreen.mainbounds)
         window?.rootViewController = setTabBarViewControllers()
@@ -42,7 +64,10 @@ extension AppDelegate {
         let profileVC  = UINavigationController(rootViewController: ProfileViewController.create(editMode: .on))
         return MainFeedTabBarViewController(viewControllers: [mainFeedVC, searchVC, postVC, likeVC, profileVC])
     }
-    
+}
+
+// MARK: Setup Push Notification
+extension AppDelegate {
     private func requesetNotification() {
         UNUserNotificationCenter
             .current()

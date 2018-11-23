@@ -9,8 +9,23 @@
 import UIKit
 
 extension SearchViewController {
+    typealias Posts = [FeedModel.Post]
     enum State {
         case loading
-        case ready(FeedModel)
+        case populated(posts: FeedModel)
+        case paging(posts: FeedModel, nextPage: String)
+        case empty
+        case error(error: Error?, message: String)
+        
+        var currentPosts: Posts {
+            switch self {
+            case .populated(let item):
+                return item.posts
+            case .paging(let item, _):
+                return item.posts
+            default :
+                return []
+            }
+        }   
     }
 }
