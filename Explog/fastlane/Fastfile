@@ -43,16 +43,6 @@ platform :ios do
     sigh(force: true)
   end 
 
-  desc "Create pem file"
-  lane :pem do 
-  	get_push_certificate(
-  	force: false, # create a new profile, even if the old one is still valid
-  	app_identifier: "kr.mjun.explog", # optional app identifier,
-  	save_private_key: true,
-  	active_days_limit: "30" 
-  end 
-
-
   desc "Create Screnshots"
   lane :screenshot do 
     snapshot 

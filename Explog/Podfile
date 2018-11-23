@@ -35,6 +35,9 @@ target 'Explog' do
   pod 'Firebase/Core'
   pod 'Firebase/Database' 
 
+  # Logging Service 
+  pod 'SwiftyBeaver', '~> 1.6.1'
+
   # Pods for Explog
 end
 

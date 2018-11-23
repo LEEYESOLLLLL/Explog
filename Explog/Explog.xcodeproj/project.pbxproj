@@ -118,6 +118,7 @@
 		04D129BE219E2CA200538EF6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04D129BD219E2CA200538EF6 /* GoogleService-Info.plist */; };
 		04D59136217C804E00EE8696 /* UIButton+SetTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D59135217C804E00EE8696 /* UIButton+SetTitle.swift */; };
 		04D59138217C849900EE8696 /* ActivityIndicatorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D59137217C849900EE8696 /* ActivityIndicatorButton.swift */; };
+		04D92A8821A69C90000ED295 /* SwiftyBeaver+AddDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D92A8721A69C90000ED295 /* SwiftyBeaver+AddDestination.swift */; };
 		04EBBA2F2137A6DB00CA73A0 /* UICollectionView+init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EBBA2E2137A6DB00CA73A0 /* UICollectionView+init.swift */; };
 		04EBBA372137E8C900CA73A0 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EBBA362137E8C900CA73A0 /* FeedTableViewCell.swift */; };
 		04F1A3BF218C491A00CF99A1 /* SettingProfilePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F1A3BE218C491A00CF99A1 /* SettingProfilePhotoViewController.swift */; };
@@ -271,6 +272,7 @@
 		04D129BD219E2CA200538EF6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		04D59135217C804E00EE8696 /* UIButton+SetTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+SetTitle.swift"; sourceTree = "<group>"; };
 		04D59137217C849900EE8696 /* ActivityIndicatorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorButton.swift; sourceTree = "<group>"; };
+		04D92A8721A69C90000ED295 /* SwiftyBeaver+AddDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftyBeaver+AddDestination.swift"; sourceTree = "<group>"; };
 		04EBBA2E2137A6DB00CA73A0 /* UICollectionView+init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+init.swift"; sourceTree = "<group>"; };
 		04EBBA362137E8C900CA73A0 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
 		04F1A3BE218C491A00CF99A1 /* SettingProfilePhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfilePhotoViewController.swift; sourceTree = "<group>"; };
@@ -481,6 +483,7 @@
 				041D0031218CAAE3009430FE /* UIBarButton+BackgroundImage.swift */,
 				041D0033218CAFDD009430FE /* UIImage+Resize.swift */,
 				04B8FBE921940C6A0090938E /* UIApplication+SettingURL.swift */,
+				04D92A8721A69C90000ED295 /* SwiftyBeaver+AddDestination.swift */,
 			);
 			path = Utiles;
 			sourceTree = "<group>";
@@ -971,7 +974,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Explog/Pods-Explog-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-Explog/Pods-Explog-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AcknowList/AcknowList.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts-Swift/BoltsSwift.framework",
@@ -986,6 +989,7 @@
 				"${BUILT_PRODUCTS_DIR}/SimpleCell/SimpleCell.framework",
 				"${BUILT_PRODUCTS_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/Square/Square.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
 				"${BUILT_PRODUCTS_DIR}/Then/Then.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -1006,13 +1010,14 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleCell.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkyFloatingLabelTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Square.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Then.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Explog/Pods-Explog-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Explog/Pods-Explog-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DE9417A69F11ED79CAD66F04 /* [CP] Check Pods Manifest.lock */ = {
@@ -1127,6 +1132,7 @@
 				04266A63218EC9FB00B18C8E /* ReplyView.swift in Sources */,
 				0423A625212B8D1400DD9747 /* BaseNavigationController.swift in Sources */,
 				0423A642212B9C1800DD9747 /* AppColor.swift in Sources */,
+				04D92A8821A69C90000ED295 /* SwiftyBeaver+AddDestination.swift in Sources */,
 				04C70B2E2186DAE700B43683 /* UploadTextViewController.swift in Sources */,
 				044E66412182FE6C0047D5F2 /* PostDetailViewController.swift in Sources */,
 				04D1299E219E120900538EF6 /* ReportListModel.swift in Sources */,
@@ -1374,7 +1380,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Explog/Explog.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Minjun Ju (4YD4P8R58G)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = E8CS7J8RX4;
 				INFOPLIST_FILE = Explog/Assets/Info.plist;
@@ -1386,7 +1392,7 @@
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=100 -Xfrontend -warn-long-expression-type-checking=100 $(inherited) -D COCOAPODS";
 				PRODUCT_BUNDLE_IDENTIFIER = kr.mjun.explog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "kr.mjun.explog Develop";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development kr.mjun.explog";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_VERSION = 4.2;
 				SWIFT_WHOLE_MODULE_OPTIMIZATION = YES;
@@ -1400,7 +1406,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Explog/Explog.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Minjun Ju (E8CS7J8RX4)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = E8CS7J8RX4;
 				INFOPLIST_FILE = Explog/Assets/Info.plist;
@@ -1412,7 +1418,7 @@
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=100 -Xfrontend -warn-long-expression-type-checking=100 $(inherited) -D COCOAPODS";
 				PRODUCT_BUNDLE_IDENTIFIER = kr.mjun.explog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "kr.mjun.explog AppStore";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development kr.mjun.explog";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_VERSION = 4.2;
 				SWIFT_WHOLE_MODULE_OPTIMIZATION = YES;

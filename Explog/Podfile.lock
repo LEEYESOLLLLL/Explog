@@ -72,6 +72,7 @@ PODS:
   - SimpleCell (0.6.0)
   - SkyFloatingLabelTextField (3.6.0)
   - Square (0.5.0)
+  - SwiftyBeaver (1.6.1)
   - Then (2.4.0)
 
 DEPENDENCIES:
@@ -88,6 +89,7 @@ DEPENDENCIES:
   - SimpleCell (~> 0.6.0)
   - SkyFloatingLabelTextField (~> 3.6.0)
   - Square
+  - SwiftyBeaver (~> 1.6.1)
   - Then (~> 2.4.0)
 
 SPEC REPOS:
@@ -114,6 +116,7 @@ SPEC REPOS:
     - SimpleCell
     - SkyFloatingLabelTextField
     - Square
+    - SwiftyBeaver
     - Then
 
 SPEC CHECKSUMS:
@@ -139,8 +142,9 @@ SPEC CHECKSUMS:
   SimpleCell: e025d9ae5586d97464abf17e274c9820bd89be49
   SkyFloatingLabelTextField: 38164979b79512f9ff9288ad8acfc4bbf5d843e3
   Square: 1de756224d23e3541a30f92c4f51926a331d19eb
+  SwiftyBeaver: ccfcdf85a04d429f1633f668650b0ce8020bda3a
   Then: 71866660c7af35a7343831f7668e7cd2b62ee0f2
 
-PODFILE CHECKSUM: 7e224a5eec2a263090079dee650ebecd512c07e6
+PODFILE CHECKSUM: e4fb48559343cedcf4ad0402e14bae83bd4d4a14
 
-COCOAPODS: 1.6.0.beta.2
+COCOAPODS: 1.5.3
