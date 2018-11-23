@@ -12,6 +12,10 @@ struct FeedModel: Codable {
     var posts: [Post]
     var previous: String?
     var next: String?
+    
+    var hasNext: Bool {
+        return next != nil
+    }
 }
 
 extension FeedModel {

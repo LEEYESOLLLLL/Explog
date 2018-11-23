@@ -15,8 +15,8 @@ import Square
 
 
 final class FeedTableViewController: ParallaxTableViewController {
-    let provider = MoyaProvider<Feed>()//.(plugins: [NetworkLoggerPlugin(])
-    let postProvider = MoyaProvider<Post>()
+    let provider = MoyaProvider<Feed>()//(plugins: [NetworkLoggerPlugin(verbose:true)])
+    let postProvider = MoyaProvider<Post>()//(plugins: [NetworkLoggerPlugin(verbose:true)])
     var state: State = .loading {
         didSet {
             switch state {

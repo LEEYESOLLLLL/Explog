@@ -82,7 +82,5 @@ final class NotiCell: UITableViewCell {
             completionHandler: nil)
         dateLabel.text = model.likedDate
         infoLabel.text = model.author.username + " 님이" + "`\(model.posttitle)`" + "의 여행기를 좋아합니다"
-        
     }
-    
 }

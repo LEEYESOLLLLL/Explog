@@ -81,6 +81,7 @@
 		047E59942189E69100BD2810 /* SettingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047E59932189E69100BD2810 /* SettingHeaderView.swift */; };
 		047FE5DC216CF063009B56BB /* MainFeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FE5DB216CF063009B56BB /* MainFeedTableViewController.swift */; };
 		047FE5DF216CF69C009B56BB /* UIScreen+Sugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FE5DE216CF69C009B56BB /* UIScreen+Sugar.swift */; };
+		049F7BF121A800D8000B0602 /* ViewControllerStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049F7BF021A800D8000B0602 /* ViewControllerStateView.swift */; };
 		04B38AC821787CAF00E17908 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AC721787CAF00E17908 /* KeychainService.swift */; };
 		04B38AE82178820400E17908 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AE72178820400E17908 /* AuthViewController.swift */; };
 		04B38AEA2178820C00E17908 /* EmailLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AE92178820C00E17908 /* EmailLoginViewController.swift */; };
@@ -118,6 +119,7 @@
 		04D129BE219E2CA200538EF6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04D129BD219E2CA200538EF6 /* GoogleService-Info.plist */; };
 		04D59136217C804E00EE8696 /* UIButton+SetTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D59135217C804E00EE8696 /* UIButton+SetTitle.swift */; };
 		04D59138217C849900EE8696 /* ActivityIndicatorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D59137217C849900EE8696 /* ActivityIndicatorButton.swift */; };
+		04D92A8821A69C90000ED295 /* SwiftyBeaver+AddDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D92A8721A69C90000ED295 /* SwiftyBeaver+AddDestination.swift */; };
 		04EBBA2F2137A6DB00CA73A0 /* UICollectionView+init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EBBA2E2137A6DB00CA73A0 /* UICollectionView+init.swift */; };
 		04EBBA372137E8C900CA73A0 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EBBA362137E8C900CA73A0 /* FeedTableViewCell.swift */; };
 		04F1A3BF218C491A00CF99A1 /* SettingProfilePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F1A3BE218C491A00CF99A1 /* SettingProfilePhotoViewController.swift */; };
@@ -232,6 +234,7 @@
 		047E59932189E69100BD2810 /* SettingHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHeaderView.swift; sourceTree = "<group>"; };
 		047FE5DB216CF063009B56BB /* MainFeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFeedTableViewController.swift; sourceTree = "<group>"; };
 		047FE5DE216CF69C009B56BB /* UIScreen+Sugar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Sugar.swift"; sourceTree = "<group>"; };
+		049F7BF021A800D8000B0602 /* ViewControllerStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerStateView.swift; sourceTree = "<group>"; };
 		04B38AC721787CAF00E17908 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		04B38AE72178820400E17908 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		04B38AE92178820C00E17908 /* EmailLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLoginViewController.swift; sourceTree = "<group>"; };
@@ -271,6 +274,7 @@
 		04D129BD219E2CA200538EF6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		04D59135217C804E00EE8696 /* UIButton+SetTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+SetTitle.swift"; sourceTree = "<group>"; };
 		04D59137217C849900EE8696 /* ActivityIndicatorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorButton.swift; sourceTree = "<group>"; };
+		04D92A8721A69C90000ED295 /* SwiftyBeaver+AddDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftyBeaver+AddDestination.swift"; sourceTree = "<group>"; };
 		04EBBA2E2137A6DB00CA73A0 /* UICollectionView+init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+init.swift"; sourceTree = "<group>"; };
 		04EBBA362137E8C900CA73A0 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
 		04F1A3BE218C491A00CF99A1 /* SettingProfilePhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfilePhotoViewController.swift; sourceTree = "<group>"; };
@@ -481,6 +485,7 @@
 				041D0031218CAAE3009430FE /* UIBarButton+BackgroundImage.swift */,
 				041D0033218CAFDD009430FE /* UIImage+Resize.swift */,
 				04B8FBE921940C6A0090938E /* UIApplication+SettingURL.swift */,
+				04D92A8721A69C90000ED295 /* SwiftyBeaver+AddDestination.swift */,
 			);
 			path = Utiles;
 			sourceTree = "<group>";
@@ -491,6 +496,7 @@
 				0423A61E212B896A00DD9747 /* MainFeedTabBarView.swift */,
 				0423A620212B899500DD9747 /* MainFeedTabBarViewController.swift */,
 				0423A62B212B8F4600DD9747 /* MainFeed */,
+				049F7C1221A8424E000B0602 /* ViewControllerState View */,
 				0423A63C212B97E600DD9747 /* Search */,
 				0423A63D212B97EA00DD9747 /* Post */,
 				0423A63E212B97F100DD9747 /* Noti */,
@@ -637,6 +643,14 @@
 				04F72A5C217B44E30099C7C9 /* Regex.swift */,
 			);
 			path = "Regular Expression";
+			sourceTree = "<group>";
+		};
+		049F7C1221A8424E000B0602 /* ViewControllerState View */ = {
+			isa = PBXGroup;
+			children = (
+				049F7BF021A800D8000B0602 /* ViewControllerStateView.swift */,
+			);
+			path = "ViewControllerState View";
 			sourceTree = "<group>";
 		};
 		04B38AC62178799A00E17908 /* Auth */ = {
@@ -986,6 +1000,7 @@
 				"${BUILT_PRODUCTS_DIR}/SimpleCell/SimpleCell.framework",
 				"${BUILT_PRODUCTS_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/Square/Square.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
 				"${BUILT_PRODUCTS_DIR}/Then/Then.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -1006,6 +1021,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleCell.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkyFloatingLabelTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Square.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Then.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -1127,6 +1143,7 @@
 				04266A63218EC9FB00B18C8E /* ReplyView.swift in Sources */,
 				0423A625212B8D1400DD9747 /* BaseNavigationController.swift in Sources */,
 				0423A642212B9C1800DD9747 /* AppColor.swift in Sources */,
+				04D92A8821A69C90000ED295 /* SwiftyBeaver+AddDestination.swift in Sources */,
 				04C70B2E2186DAE700B43683 /* UploadTextViewController.swift in Sources */,
 				044E66412182FE6C0047D5F2 /* PostDetailViewController.swift in Sources */,
 				04D1299E219E120900538EF6 /* ReportListModel.swift in Sources */,
@@ -1149,6 +1166,7 @@
 				04F71E9E217AF3910099C7C9 /* SignUpView.swift in Sources */,
 				04D12998219E109300538EF6 /* ReportView.swift in Sources */,
 				045FF0B9217F9395003ECA23 /* PhotoGridView.swift in Sources */,
+				049F7BF121A800D8000B0602 /* ViewControllerStateView.swift in Sources */,
 				04D1299A219E109900538EF6 /* ReportViewController.swift in Sources */,
 				04F71E9C217AF38A0099C7C9 /* EmailLoginView.swift in Sources */,
 				04B38AC821787CAF00E17908 /* KeychainService.swift in Sources */,
