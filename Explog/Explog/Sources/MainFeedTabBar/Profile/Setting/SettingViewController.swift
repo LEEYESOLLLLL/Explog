@@ -12,9 +12,6 @@ import Kingfisher
 import MessageUI
 import AcknowList
 
-
-
-
 final class SettingViewController: BaseViewController {
     lazy var v = SettingView(controlBy: self)
     
@@ -22,11 +19,6 @@ final class SettingViewController: BaseViewController {
     override func loadView() {
         super.loadView()
         view = v 
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
     }
 }
 
@@ -36,6 +28,7 @@ extension SettingViewController {
     }
 }
 
+// MARK: TableView Delegate
 extension SettingViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true) // for Flash
@@ -80,7 +73,7 @@ extension SettingViewController: UITableViewDelegate {
                 let composeVC = MFMailComposeViewController.create(owner: self)
                 self.present(composeVC, animated: true, completion: nil)
             }else {
-                Square.display("unable to send an email. if you didn't configure Email Account,  need to configure Email Account.")
+                Square.display("Unable to send an email. if you didn't configure Email Account,  need to configure Email Account.")
             }
             
         case .logout:
@@ -96,7 +89,6 @@ extension SettingViewController: UITableViewDelegate {
                     }
                 }
             }
-            
         }
     }
 }

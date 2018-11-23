@@ -12,13 +12,6 @@ import UserNotifications
 import Firebase
 import SwiftyBeaver
 
-/*
- Beaver
- e1PYdR
- ndeEkqiLos6CWBi4utcqwtzhoaiunf6y
- gtkxf6dbqlrfpxqkulwxt1bgringeLsy
- */
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
@@ -44,6 +37,7 @@ extension AppDelegate  {
             appSecret: "ndeEkqiLos6CWBi4utcqwtzhoaiunf6y",
             encryptionKey: "gtkxf6dbqlrfpxqkulwxt1bgringeLsy")
         SwiftyBeaver.addDestinations([console, platform])
+        SwiftyBeaver.verbose("Start App Latest Tiem: " + Date().convertedNow())
     }
 }
 

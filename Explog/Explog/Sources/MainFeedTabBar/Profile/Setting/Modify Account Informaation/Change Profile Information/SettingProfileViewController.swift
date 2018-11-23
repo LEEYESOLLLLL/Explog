@@ -10,6 +10,7 @@ import UIKit
 import SkyFloatingLabelTextField
 import Moya
 import Square
+import SwiftyBeaver
 
 extension SettingProfileViewController {
     enum State {
@@ -29,15 +30,6 @@ final class SettingProfileViewController: BaseViewController {
         return self
     }
     
-    var state: State = .loading {
-        didSet {
-            switch state {
-            case .loading: break
-            case .ready(_): break
-            }
-        }
-    }
-    
     let provider = MoyaProvider<User>(plugins: [NetworkLoggerPlugin()])
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,13 +47,13 @@ final class SettingProfileViewController: BaseViewController {
                         let model = try response.map(UserModel.self)
                         self.v.configureUI(with: model)
                     }catch {
-                        print("fail to convert Model: \(#function)")
+                        SwiftyBeaver.debug("fail to convert Model: \(#function)")
                     }
                 case false:
-                    print("fail to Request: \(#function)")
+                    SwiftyBeaver.debug("fail to Request: \(#function)")
                 }
             case .failure(let error):
-                print(error.localizedDescription)
+                SwiftyBeaver.error(error.localizedDescription)
             }
             UIView.animate(withDuration: 0.3) { self.v.start(false) }
         }
@@ -91,7 +83,8 @@ extension SettingProfileViewController {
                 case false: Square.display("Alredy exist input username")
                 }
                 
-            case .failure(let error): print(error.localizedDescription)
+            case .failure(let error):
+                SwiftyBeaver.error("\(error.localizedDescription)")
             }
         }
     }
