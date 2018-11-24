@@ -10,6 +10,7 @@ import UIKit
 import Moya
 import BoltsSwift
 import Square
+import SwiftyBeaver
 
 class PostDetailViewController: BaseViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -89,7 +90,7 @@ extension PostDetailViewController {
             }
             
             if task.cancelled || task.faulted {
-                print(task.error!.localizedDescription)
+                SwiftyBeaver.error(task.error.debugDescription)
             }else {
                 guard let model = task.result else {
                     return

@@ -15,7 +15,7 @@ extension ViewControllerStateView {
         case error
         case empty
         case initial
-        case errorWithRetry(owner: UIViewController, selector: Selector)
+        case retryOnError(owner: UIViewController, selector: Selector)
     }
 }
 
@@ -58,7 +58,7 @@ class ViewControllerStateView: UIView {
             setupState(#imageLiteral(resourceName: "error"), description: "Something worng.\n\nCheckout your internect connecting or try agian")
         case .empty:
             setupState(#imageLiteral(resourceName: "empty-folder-512px"), description: "No Trips match your search word")
-        case .errorWithRetry(let owner, let selector):
+        case .retryOnError(let owner, let selector):
             descriptionButton.isUserInteractionEnabled = true
             descriptionButton.addTarget(owner, action: selector, for: .touchUpInside)
             setupState(#imageLiteral(resourceName: "return-512px"), description: "Something worng.\n\nCheckout your internect connecting or try agian")
@@ -107,7 +107,7 @@ extension ViewControllerStateView {
             .activateAnchors()
         
         descriptionButton.setBackgroundImage(image, for: .normal)
-        if case .error = stateType, case .errorWithRetry = stateType {
+        if case .error = stateType, case .retryOnError = stateType {
             let mutatingString = NSMutableAttributedString(
                 string: description)
             if let font = UIFont(name: .defaultFontName, size: 24) {

@@ -8,6 +8,8 @@
 
 import UIKit
 import Moya
+import Square
+import SwiftyBeaver
 
 final class UploadPhotoViewController: PhotoGridViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -77,12 +79,13 @@ extension UploadPhotoViewController: PassableDataDelegate {
             switch result {
             case .success(let response):
                 switch (200...299) ~= response.statusCode {
-                case true : self.navigationController?.popViewController(animated: true)
+                case true :
+                    self.navigationController?.popViewController(animated: true)
                 case false:
-                    print("fail to Request: \(#function)")
+                    Square.display("Fail to Request")
                 }
             case .failure(let error):
-                print(error.localizedDescription, "\(#function)")
+                SwiftyBeaver.error("\(error)")
             }
         }
     }

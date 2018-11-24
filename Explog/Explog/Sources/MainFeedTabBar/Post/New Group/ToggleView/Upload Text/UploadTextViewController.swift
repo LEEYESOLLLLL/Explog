@@ -8,6 +8,8 @@
 
 import UIKit
 import Moya
+import SwiftyBeaver
+import Square
 
 extension UploadTextViewController {
     enum TextType: String {
@@ -70,10 +72,10 @@ extension UploadTextViewController {
                     case true :
                         self.navigationController?.popViewController(animated: true)
                     case false :
-                        print("fail to Request: \(#function)")
+                        Square.display("Fail to Request. You need to check Internet Connecting or try again")
                     }
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    SwiftyBeaver.error("Not Internet Connecting: \(error)")
                 }
         }
     }

@@ -58,7 +58,7 @@ final class ProfileView: BaseView<ProfileViewController> {
         target: vc,
         action: #selector(vc.settingBarButtonAction(_:)))
     
-    var activityIndicator = UIActivityIndicatorView(style: .gray)
+    
     lazy var refreshControl = UIRefreshControl().then {
         $0.addTarget(vc, action: #selector(vc.refreshControlAction(_:)), for: .valueChanged)
     }
@@ -79,7 +79,7 @@ final class ProfileView: BaseView<ProfileViewController> {
     }
     
     override func setupUI() {
-        addSubviews([profileTableView, activityIndicator])
+        addSubviews([profileTableView])
         profileHeader.addSubviews([nameLabel, profileImage, emailLabel])
         
         profileTableView
@@ -117,11 +117,6 @@ final class ProfileView: BaseView<ProfileViewController> {
             .leadingAnchor(to: nameLabel.leadingAnchor)
             .trailingAnchor(to: nameLabel.trailingAnchor)
             .bottomAnchor(lessThanOrEqualTo: profileHeader.bottomAnchor, constant: -UI.margin)
-            .activateAnchors()
-        
-        activityIndicator
-            .centerXAnchor(to: centerXAnchor)
-            .centerYAnchor(to: centerYAnchor)
             .activateAnchors()
     }
     

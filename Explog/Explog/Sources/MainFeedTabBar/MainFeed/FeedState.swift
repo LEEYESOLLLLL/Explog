@@ -15,7 +15,7 @@ extension FeedTableViewController {
         case loading
         case populated(feedModel: FeedModel)
         case paging(feedModel: FeedModel, nextPage: String)
-        case errorWithRetry
+        case retryOnError
         
         var currentFeedModel: Posts {
             switch self {

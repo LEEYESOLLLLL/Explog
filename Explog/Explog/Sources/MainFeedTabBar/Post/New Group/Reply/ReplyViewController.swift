@@ -10,6 +10,7 @@ import UIKit
 import Moya
 import Square
 import BoltsSwift
+import SwiftyBeaver
 
 
 
@@ -100,11 +101,10 @@ extension ReplyViewController {
                     let model = try response.map([ReplyModel].self)
                     self.state = .ready(item: model)
                 }catch {
-                    print("fail to convert Model: \(#function)")
+                    SwiftyBeaver.error("fail to convert Model")
                 }
-                
             case .failure(let error):
-                print("Serve Error: \(error.localizedDescription)")
+                SwiftyBeaver.error("\(error)")
             }
         }
     }
@@ -141,11 +141,11 @@ extension ReplyViewController {
                     self.state = .ready(item: copy)
                     self.v.terminationEffect()
                 }catch {
-                    print("fail to convert Model: \(#function)")
+                    SwiftyBeaver.error("fail to convert Model")
                 }
                 
             case .failure(let error):
-                print(error.localizedDescription)
+                SwiftyBeaver.error(error.localizedDescription)
             }
         }
     }
@@ -228,7 +228,7 @@ extension ReplyViewController {
                 return
         }
         cell.configure(item[indexPath.row])
-        print("indexPath: \(indexPath)")
+        
     }
 }
 
