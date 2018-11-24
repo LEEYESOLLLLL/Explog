@@ -9,6 +9,7 @@
 import UIKit
 import Moya
 import Square
+import SwiftyBeaver
 
 final class PostViewController: BaseViewController {
     static func create() -> UINavigationController {
@@ -31,6 +32,8 @@ final class PostViewController: BaseViewController {
         view = v
     }
 }
+
+// MARK: Repeat execution
 extension PostViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -41,46 +44,46 @@ extension PostViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if !Persistence.isConfirm {
-            present(CautionViewController(modalStyle: .overCurrentContext),
-                    animated: true, completion: nil)
+            present(CautionViewController(modalStyle: .overCurrentContext), animated: true, completion: nil)
         }
     }
-    
     
     @objc func dismissButtonAction(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
 }
 
+// MARK: Networking action
 extension PostViewController {
     @objc func createPostButtonAction(_ sender: UIButton) {
         guard let currentPostCoverInformation = v.currentPostCoverInformation() else { return }
-        provider.request(.post(
-            title: currentPostCoverInformation.title,
-            startDate: currentPostCoverInformation.startData,
-            endDate: currentPostCoverInformation.endData,
-            continent: currentPostCoverInformation.continent,
-            img: currentPostCoverInformation.coverImg)) { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success(let response):
-                    switch (200...299) ~= response.statusCode {
-                    case true :
-                        do {
-                            let coverData = try response.map(PostCoverModel.self)
-                            let detailVC = PostDetailViewController.create(editMode: .on, coverData: coverData)
-                            self.show(detailVC, sender: nil)
-                        }catch {
-                            print("fail to convert Model: \(#function)")
-                        }
-                    case false:
-                        print("fail to Request: \(#function)")
-                        
-                    }
-                    
-                case .failure(let error):
-                    print("Serve Error: \(error.localizedDescription)")
-                }
+        provider.request(.post(title: currentPostCoverInformation.title,
+                               startDate: currentPostCoverInformation.startData,
+                               endDate: currentPostCoverInformation.endData,
+                               continent: currentPostCoverInformation.continent,
+                               img: currentPostCoverInformation.coverImg)) { [weak self] result in
+                                guard let self = self else {
+                                    return
+                                }
+                                
+                                switch result {
+                                case .success(let response):
+                                    switch (200...299) ~= response.statusCode {
+                                    case true :
+                                        guard let coverData = try? response.map(PostCoverModel.self) else {
+                                            SwiftyBeaver.warning("Not Converting PostCoverModel")
+                                            return
+                                        }
+                                        
+                                        let detailVC = PostDetailViewController.create(editMode: .on, coverData: coverData)
+                                        self.show(detailVC, sender: nil)
+                                    case false:
+                                        SwiftyBeaver.warning("Fast to Reqeust")
+                                    }
+                                    
+                                case .failure(let error):
+                                    SwiftyBeaver.error("Weak Internet Connection: \(error)")
+                                }
         }
     }
     
@@ -118,10 +121,10 @@ extension PostViewController {
                     compairableResult = pickDate < startTitleLabelDate ? false : true
                 }
             }
-            if compairableResult {
-                sender.setTitle(pickDate.convertedString(), for: [.normal, .highlighted])
-            } else {
-                Square.display("Start Date can't be later than End Date or End Date can't be earlier than Start Date")
+            
+            switch compairableResult {
+            case true :  sender.setTitle(pickDate.convertedString(), for: [.normal, .highlighted])
+            case false : Square.display("Start Date can't be later than End Date or End Date can't be earlier than Start Date")
             }
         }
         datepickerAlertController.addAction(okAction)

@@ -81,8 +81,8 @@ final class FeedTableViewController: ParallaxTableViewController {
             tableView.tableFooterView = nil
         case .paging:
             tableView.tableFooterView = ViewControllerStateView(state: .loading)
-        case .errorWithRetry:
-            tableView.tableFooterView = ViewControllerStateView(state: .errorWithRetry(owner: self, selector: #selector(retry)))
+        case .retryOnError:
+            tableView.tableFooterView = ViewControllerStateView(state: .retryOnError(owner: self, selector: #selector(retry)))
         }
         tableView.reloadData()
     }
@@ -100,7 +100,7 @@ extension FeedTableViewController {
             case .success(let response):
                 guard let model = try? response.map(FeedModel.self) else {
                     SwiftyBeaver.error("No Convert FeedModel")
-                    self.state = .errorWithRetry
+                    self.state = .retryOnError
                     return
                 }
                 
@@ -111,7 +111,7 @@ extension FeedTableViewController {
                 }
             case.failure(let error) :
                 SwiftyBeaver.error("No Connect Internet: \(String(describing: error.errorDescription))")
-                self.state = .errorWithRetry
+                self.state = .retryOnError
             }
         }
     }
@@ -129,7 +129,7 @@ extension FeedTableViewController {
             case .success(let response):
                 guard let model = try? response.map(FeedModel.self) else {
                     SwiftyBeaver.error("No Convert FeedModel")
-                    self.state = .errorWithRetry
+                    self.state = .retryOnError
                     return
                 }
                 
@@ -141,7 +141,7 @@ extension FeedTableViewController {
                 
             case .failure(let error):
                 SwiftyBeaver.error("No Convert FeedModel: \(String(describing: error.errorDescription))")
-                self.state = .errorWithRetry
+                self.state = .retryOnError
             }
         }
     }

@@ -19,7 +19,7 @@ extension NotiViewController {
         case loading
         case populated(notifications: NotiListModel)
         case paging(notifications: NotiListModel, nextPage: String)
-        case errorWithRetry(Error?, message: String?)
+        case retryOnError(Error?, message: String?)
         
         var currentNotifications: [NotiInfo]? {
             switch self {
@@ -63,9 +63,9 @@ final class NotiViewController: BaseViewController {
             v.setup(footerView: nil)
         case .paging:
             v.setup(footerView: ViewControllerStateView(state: .loading))
-        case .errorWithRetry(let error, let message):
+        case .retryOnError(let error, let message):
             SwiftyBeaver.error(error.debugDescription, message ?? "")
-            v.setup(footerView: ViewControllerStateView(state: .errorWithRetry(owner: self, selector: #selector(retry(_:)) )))
+            v.setup(footerView: ViewControllerStateView(state: .retryOnError(owner: self, selector: #selector(retry(_:)) )))
         }
         v.likeTableView.reloadData()
     }
@@ -96,7 +96,7 @@ extension NotiViewController {
                     self.tabBarItem.badgeValue = nil
                     UIApplication.shared.applicationIconBadgeNumber = 0
                 } else {
-                    self.state = .errorWithRetry(task.error, message: nil)
+                    self.state = .retryOnError(task.error, message: nil)
                 }
             }
             .continueWith { [weak self] _ in
@@ -139,10 +139,10 @@ extension NotiViewController {
                         self.state = .populated(notifications: model)
                     }
                 case false :
-                    self.state = .errorWithRetry(nil, message: "Request Error..")
+                    self.state = .retryOnError(nil, message: "Request Error..")
                 }
             case .failure(let error):
-                self.state = .errorWithRetry(error, message: nil)
+                self.state = .retryOnError(error, message: nil)
             }
         }
     }
@@ -177,10 +177,10 @@ extension NotiViewController {
                     }
                     
                 case false :
-                    self.state = .errorWithRetry(nil, message: "NextPage Request Error")
+                    self.state = .retryOnError(nil, message: "NextPage Request Error")
                 }
             case .failure(let error):
-                self.state = .errorWithRetry(error, message: nil)
+                self.state = .retryOnError(error, message: nil)
             }
         }
     }
