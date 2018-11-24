@@ -9,14 +9,11 @@
 import UIKit
 
 final class SplahView: BaseView<SplahViewController> {
-    
-    
-    
     override func setupUI() {
         
     }
+    
     override func setupBinding() {
         
     }
-    
 }

@@ -10,37 +10,45 @@ import UIKit
 import SkyFloatingLabelTextField
 import Moya
 import Square
+import SwiftyBeaver
 
 final class EmailLoginViewController: BaseViewController {
-    lazy var v = EmailLoginView(controlBy: self)
-    var state: State = .invalidate(textField: nil) {
-        didSet {
-            switch state {
-            case .invalidate(let skyTextField):
-                if let skyTextField = skyTextField {
-                    v.verifyTextFieldState(skyTextField)
-                    v.verifyLoginButtonState()
-                }
-            case .validate(let skyTextField):
-                v.verifyTextFieldState(skyTextField)
-                skyTextField.titleColor = .appStyle
-                skyTextField.errorMessage = ""
-                v.verifyLoginButtonState()
-            }
-        }
-    }
-    
-    let provider = MoyaProvider<Auth>(plugins: [ NetworkLoggerPlugin() ])
-    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
+    
+    lazy var v = EmailLoginView(controlBy: self)
+    var state: State = .invalidate(textField: nil) {
+        didSet {
+            managingState()
+        }
+    }
+    let provider = MoyaProvider<Auth>(plugins: [NetworkLoggerPlugin()])
     
     override func loadView() {
         super.loadView()
         view = v
     }
     
+    private func managingState() {
+        switch state {
+        case .invalidate(let skyTextField):
+            if let skyTextField = skyTextField {
+                v.verifyTextFieldState(skyTextField)
+                v.verifyLoginButtonState()
+            }
+        case .validate(let skyTextField):
+            v.verifyTextFieldState(skyTextField)
+            skyTextField.titleColor = .appStyle
+            skyTextField.errorMessage = ""
+            v.verifyLoginButtonState()
+        }
+        
+    }
+}
+
+// MARK: Actions
+extension EmailLoginViewController {
     @objc func dismissButtonAction(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
@@ -64,25 +72,25 @@ final class EmailLoginViewController: BaseViewController {
                 return
         }
         provider.request(.login(email: email, password: password)) { [weak self] result in
-                guard let strongSelf = self else { return }
-                switch result {
-                case .success(let response):
-                    if 200...299 ~= response.statusCode {
-                        do {
-                            let loginModel = try response.map(AuthModel.self)
-                            KeychainService.configure(material: loginModel.token, key: .token)
-                            KeychainService.configure(material: String(loginModel.pk), key: .pk)
-                            strongSelf.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-                        }catch {
-                            print("invalidate LoginModel")
-                        }
-                    }else {
-                        Square.display("you did input an invalid ID and Password")
+            guard let self = self else { return }
+            switch result {
+            case .success(let response):
+                if 200...299 ~= response.statusCode {
+                    do {
+                        let loginModel = try response.map(AuthModel.self)
+                        KeychainService.configure(material: loginModel.token, key: .token)
+                        KeychainService.configure(material: String(loginModel.pk), key: .pk)
+                        self.view.window?.rootViewController?.dismiss(animated: false, completion: nil)
+                    }catch {
+                        SwiftyBeaver.debug("invalidate LoginModel")
                     }
-                case .failure(let error):
-                    print(error.localizedDescription)
-                    
+                }else {
+                    Square.display("You have tpyed the wrong password and Email")
                 }
+            case .failure(let error):
+                SwiftyBeaver.debug(error.localizedDescription, "Server Error")
+                Square.display("No You type valid ID and Password")
+            }
             sender.stopAnimating()
         }
     }
@@ -104,9 +112,9 @@ extension EmailLoginViewController {
 extension EmailLoginViewController: UITextFieldDelegate {
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard let skyTextField = textField as? SkyFloatingLabelTextField,
-        let identifier = skyTextField.placeholder,
-        let textFieldType = TextFieldType(rawValue: identifier) else {
-            return false
+            let identifier = skyTextField.placeholder,
+            let textFieldType = TextFieldType(rawValue: identifier) else {
+                return false
         }
         
         switch textFieldType {

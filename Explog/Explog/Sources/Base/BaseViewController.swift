@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyBeaver
 
 /**
  fundamental ViewController Protocol
@@ -29,7 +30,7 @@ public class BaseViewController: UIViewController, ViewControllerType {
     }
     
     deinit {
-        print("\(self) have deinited")
+        SwiftyBeaver.info("\(self) have deinited")
     }
 }
 

@@ -58,25 +58,19 @@ extension Post: TargetType {
     var task: Task {
         switch self {
         case .post(let title, let startDate, let endDate, let continent, let img):
-            guard let title = title.data(using: .utf8),
+            guard let title =     title.data(using: .utf8),
                 let startDate = startDate.data(using: .utf8),
-                let endDate = endDate.data(using: .utf8),
+                let endDate =   endDate.data(using: .utf8),
                 let continent = continent.data(using: .utf8),
-                let img = img.jpegData(compressionQuality: 0.3) else {
+                let img =       img.jpegData(compressionQuality: 0.3) else {
                     return .requestPlain
             }
-            var multipartDataDic = ["title": title,
-                                    "start_date": startDate,
-                                    "end_date":endDate,
-                                    "continent": continent].convertedMutiPartFormData()
-            let multipartImg = MultipartFormData(
-                provider: .data(img),
-                name: "img",
-                fileName: UUID().uuidString + ".jpg",
-                mimeType: "image/jpg")
-            multipartDataDic.append(multipartImg)
-            return .uploadMultipart(multipartDataDic)
-            
+            return .uploadMultipart([
+                MultipartFormData(provider: .data(title),     name: "title"),
+                MultipartFormData(provider: .data(startDate), name: "start_date"),
+                MultipartFormData(provider: .data(endDate),   name: "end_date"),
+                MultipartFormData(provider: .data(continent), name: "continent"),
+                MultipartFormData(provider: .data(img), name: "img", fileName: UUID().uuidString + ".jpg", mimeType: "image/jpg")])
         case .detail(_):
             return .requestPlain
             
@@ -86,11 +80,11 @@ extension Post: TargetType {
                 let type = type.data(using: .utf8) else {
                     return .requestPlain
             }
+            return .uploadMultipart([
+                MultipartFormData(provider: .data(content), name: "content"),
+                MultipartFormData(provider: .data(createdAt), name: "createdAt"),
+                MultipartFormData(provider: .data(type), name: "type")])
             
-            let multipartDataDic = ["content": content,
-                                    "created_at": createdAt,
-                                    "type":type].convertedMutiPartFormData()
-            return .uploadMultipart(multipartDataDic)
         case .photo(_, let photo):
                 guard let img = photo.jpegData(compressionQuality: 0.3) else {
                     return .requestPlain
@@ -108,7 +102,9 @@ extension Post: TargetType {
     }
     
     var headers: [String : String]? {
-        guard let token = KeychainService.token else { return nil }
+        guard let token = KeychainService.token else {
+            return nil
+        }
         return [
             "Authorization": "Token \(token)",
             "Content-Type": "application/json"]

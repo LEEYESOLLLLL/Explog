@@ -10,7 +10,7 @@ import UIKit
 import KeychainAccess
 import UserNotifications
 import Firebase
-
+import SwiftyBeaver
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,13 +20,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 // MARK: Initialization
 extension AppDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        // MARK: temporarily
+        setupLogginService()
         FirebaseApp.configure()
         setKeyWindow()
         requesetNotification()
         return true
     }
-    
+}
+
+// MARK: Loggin Service
+extension AppDelegate  {
+    func setupLogginService() {
+        let console = ConsoleDestination()
+        let platform = SBPlatformDestination(
+            appID: "e1PYdR",
+            appSecret: "ndeEkqiLos6CWBi4utcqwtzhoaiunf6y",
+            encryptionKey: "gtkxf6dbqlrfpxqkulwxt1bgringeLsy")
+        SwiftyBeaver.addDestinations([console, platform])
+        SwiftyBeaver.verbose("The most recent Time that did finish launching: " + Date().convertedNow())
+    }
+}
+
+// MARK: Setup Window
+extension AppDelegate  {
     private func setKeyWindow() {
         window = UIWindow(frame: UIScreen.mainbounds)
         window?.rootViewController = setTabBarViewControllers()
@@ -36,18 +52,22 @@ extension AppDelegate {
     private func setTabBarViewControllers() -> UITabBarController {
         // initilize ViewControllers
         let mainFeedVC = FeedContainerViewController.create()
-        let searchVC = UINavigationController(rootViewController: SearchViewController.create())
-        let postVC = PostViewController.create()
-        let likeVC = NotiViewController.create()
-        let profileVC = UINavigationController(rootViewController: ProfileViewController.create(editMode: .on))
+        let searchVC   = UINavigationController(rootViewController: SearchViewController.create())
+        let postVC     = PostViewController.create()
+        let likeVC     = NotiViewController.create()
+        let profileVC  = UINavigationController(rootViewController: ProfileViewController.create(editMode: .on))
         return MainFeedTabBarViewController(viewControllers: [mainFeedVC, searchVC, postVC, likeVC, profileVC])
     }
-    
+}
+
+// MARK: Setup Push Notification
+extension AppDelegate {
     private func requesetNotification() {
         UNUserNotificationCenter
             .current()
-            .requestAuthorization(options: [.alert, .sound, .badge]) { (grant, error) in
-                print("grant is \(grant), error is \(String(describing: error?.localizedDescription)))")
+            .requestAuthorization(
+            options: [.alert, .sound, .badge]) { (grant, error) in
+                SwiftyBeaver.info("grant is \(grant), error is \(String(describing: error?.localizedDescription)))")
                 if grant == true {
                     DispatchQueue.main.async {
                         UIApplication.shared.registerForRemoteNotifications()
@@ -62,24 +82,23 @@ extension AppDelegate {
 extension AppDelegate {
     // this method is called if user permit app getting Notification,
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        let deviceToken = deviceToken.map { (data) -> String in
-            return String(format: "%02.2hhx", data)
-        }.joined()
-        
+        let deviceToken = deviceToken
+            .map { return String(format: "%02.2hhx", $0) }
+            .joined()
         KeychainService.configure(material: deviceToken, key: .deviceToken)
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("Not Getting Token: \(error.localizedDescription)")
+        SwiftyBeaver.info("Not Getting Token: \(error.localizedDescription)")
     }
 }
 
 extension AppDelegate {
     // When being touched through noti
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-//        guard let apsInfo = userInfo["aps"] as? [String: Any], let numberOfBadge = apsInfo["badge"] as? Int else {
-//            return
-//        }
+        //        guard let apsInfo = userInfo["aps"] as? [String: Any], let numberOfBadge = apsInfo["badge"] as? Int else {
+        //            return
+        //        }
         setupBadge(application)
     }
     
@@ -96,15 +115,13 @@ extension AppDelegate {
         viewControllers.forEach {
             guard let title = $0.title,
                 let type = MainFeedTabBarViewController.Titles(rawValue: title) else {
-                return
+                    return
             }
             if type == MainFeedTabBarViewController.Titles.Noti {
                 $0.tabBarItem.badgeValue = UIApplication.shared.applicationIconBadgeNumber == 0 ? nil : "\(UIApplication.shared.applicationIconBadgeNumber)"
             }
         }
     }
-
-    
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate {

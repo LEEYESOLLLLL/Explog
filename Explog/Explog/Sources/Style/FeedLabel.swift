@@ -13,10 +13,11 @@ extension UILabel {
                fontStyle style: UIFont.TextStyle,
                textAlignment alignment: NSTextAlignment,
                numberOfLines lines: Int) {
+        
         textColor = color
         font = UIFont.preferredFont(forTextStyle: style)
         textAlignment = alignment
         numberOfLines = lines
-    
+        
     }
 }

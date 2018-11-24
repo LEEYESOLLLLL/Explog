@@ -11,6 +11,7 @@ import Moya
 import Square
 import Kingfisher
 import BoltsSwift
+import SwiftyBeaver
 
 
 final class SearchViewController: BaseViewController {
@@ -25,14 +26,11 @@ final class SearchViewController: BaseViewController {
     }
     
     let provider = MoyaProvider<Search>(plugins:[NetworkLoggerPlugin()])
-    let postProvider = MoyaProvider<Post>()
+    let postProvider = MoyaProvider<Post>(plugins:[NetworkLoggerPlugin()])
     private var pendingWorkItem: DispatchWorkItem?
     var state: State = .loading {
         didSet {
-            switch state {
-            case .loading: break
-            case .ready: v.searchTableView.reloadData()
-            }
+            manageState()
         }
     }
     lazy var v = SearchView(controlBy: self)
@@ -45,64 +43,109 @@ final class SearchViewController: BaseViewController {
         super.viewWillAppear(animated)
         navigationController?.transparentNaviBar(false)
         tabBarController?.tabBar.isHidden = false
+        view.layoutIfNeeded()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        v.searchController.searchBar.becomeFirstResponder()
     }
 }
 
 extension SearchViewController {
-    func retrieve(word: String) {
+    private func manageState() {
+        switch state {
+        case .loading:
+            v.setup(footerView: ViewControllerStateView(state: .loading))
+        case .populated:
+            v.setup(footerView: nil)
+        case .paging(_ , _):
+            v.setup(footerView: ViewControllerStateView(state: .loading))
+        case .empty:
+            v.setup(footerView: ViewControllerStateView(state: .empty))
+        case .error(let error, let message):
+            SwiftyBeaver.error(error?.localizedDescription ?? "", message)
+            v.setup(footerView: ViewControllerStateView(state: .error))
+        }
+        v.searchTableView.reloadData()
+    }
+}
+
+extension SearchViewController {
+    private func retrieve(word: String) {
         provider.request(.retrieve(word: word.trimmingCharacters(in: .whitespacesAndNewlines))) { [weak self] result in
-            guard let strongSelf = self else {
+            guard let self = self else {
                 return
             }
             switch result {
             case .success(let response):
                 switch (200...299) ~= response.statusCode {
                 case true:
-                    if let model = try? response.map(FeedModel.self) {
-                       strongSelf.state = .ready(model)
+                    guard let model = try? response.map(FeedModel.self) else {
+                        return
                     }
+                    guard model.posts.count != 0 else {
+                        self.state = .empty
+                        return
+                    }
+                    if let nextPage = model.next, model.hasNext {
+                        self.state = .paging(posts: model, nextPage: nextPage)
+                    }else {
+                        self.state = .populated(posts: model)
+                    }
+                    
                 case false:
-                    Square.display("Request Error")
-                    print("Request Error: \(#function)")
+                    self.state = .error(error: nil, message: "\(#function)")
                 }
-            case .failure(let error): print(error.localizedDescription)
+            case .failure(let error):
+                self.state = .error(error: error, message: "Server Error for Searching Request")
             }
         }
     }
     
-    func loadNetwork(word: String, nextPath: String) {
+    private func loadNetwork(word: String, nextPath: String) {
         guard let nextURL = try? nextPath.asURL(),
             let forNextPageQuery = nextURL.query else {
                 return
         }
-        
         provider.request(.next(word: word, query: forNextPageQuery)) { [weak self] (result) in
-            guard let strongSelf = self,
-                case .ready(let item) = strongSelf.state else {
-                return
+            guard let self = self,
+                case .paging(let item, _) = self.state else {
+                    return
             }
             switch result {
             case .success(let response):
                 switch (200...299) ~= response.statusCode {
-                case true :
-                    if let model = try? response.map(FeedModel.self) {
-                        strongSelf.state = .ready(item + model)
+                case true:
+                    guard let model = try? response.map(FeedModel.self) else {
+                        self.state = .error(error: nil, message: "No data converting")
+                        return
                     }
-                case false : print("Request Error: \(#function)")
+                    if let nextPage = model.next {
+                        self.state = .paging(posts: item + model, nextPage: nextPage)
+                    }else {
+                        self.state = .populated(posts: item + model)
+                    }
+                    
+                case false:
+                    self.state = .error(error: nil, message: "\(#function)")
                 }
                 
             case .failure(let error):
-                print(error.localizedDescription, #function)
+                self.state = .error(error: error, message: "Server Error for Searching Request Next Pageing")
             }
         }
     }
-    
+}
+
+// MARK: Like
+extension SearchViewController {
     @discardableResult
-    func like(_ postPrivateKey: Int, index: Int) -> BoltsSwift.Task<LikeModel> {
+    private func like(_ postPrivateKey: Int, index: Int) -> BoltsSwift.Task<LikeModel> {
         let taskCompletionSource = TaskCompletionSource<LikeModel>()
         postProvider.request(.like(postPK: postPrivateKey)) { [weak self] (result) in
-            guard let strongSelf = self,
-                case .ready(let item) = strongSelf.state else {
+            guard let self = self,
+                case .populated(let item) = self.state else {
                     return
             }
             switch result {
@@ -112,7 +155,7 @@ extension SearchViewController {
                     if let likeModel = try? response.map(LikeModel.self) {
                         var copy = item
                         copy.posts[index].modifiedLike(model: likeModel)
-                        strongSelf.state = .ready(copy)
+                        self.state = .populated(posts: copy)
                         taskCompletionSource.set(result: likeModel)
                     }
                 case false :
@@ -128,12 +171,11 @@ extension SearchViewController {
 
 extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        guard case .ready(let item) = state,
-            item.posts.count > indexPath.row else {
+        guard state.currentPosts.count > indexPath.row else {
                 return
         }
-        let postCover = item.posts[indexPath.row]
+        tableView.deselectRow(at: indexPath, animated: true)
+        let postCover = state.currentPosts[indexPath.row]
         let detailViewController = PostDetailViewController.create(editMode: .off, coverData: postCover)
         show(detailViewController, sender: nil)
     }
@@ -146,8 +188,7 @@ extension SearchViewController: UITableViewDataSource {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard case .ready(let item) = state else { return 0 }
-        return item.posts.count
+        return state.currentPosts.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -163,22 +204,20 @@ extension SearchViewController {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let cell = cell as? SearchCell,
-            case .ready(let item) = state,
             let text = v.searchController.searchBar.text else {
-            return
+                return
         }
         
-        let post = item.posts[indexPath.row]
+        let post = state.currentPosts[indexPath.row]
         cell.configure(model: post) { [weak self] (postPK: Int) -> BoltsSwift.Task<LikeModel> in
-            guard let strongSelf = self else {
+            guard let self = self else {
                 fatalError()
             }
-            return strongSelf.like(postPK, index: indexPath.row)
+            return self.like(postPK, index: indexPath.row)
         }
         
-        // LastIndex
-        if let next = item.next, item.posts.count - 1 == indexPath.row {
-            loadNetwork(word: text ,nextPath: next)
+        if case .paging(_, let nextPage) = state, state.currentPosts.count - 1 == indexPath.row {
+            loadNetwork(word: text, nextPath: nextPage)
         }
     }
     
@@ -191,22 +230,24 @@ extension SearchViewController: UISearchResultsUpdating {
     public func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text,
             text.count > 0 else {
-            return
+                return
         }
         pendingWork(text)
     }
     
+    // Request, trigering
     func pendingWork(_ text: String) {
-        // Request, trrigering
         pendingWorkItem?.cancel()
         let newWorkItem = DispatchWorkItem { [weak self] in
-            guard let strongSelf = self else {
+            guard let self = self else {
                 return
             }
-            strongSelf.retrieve(word: text)
+            self.state = .loading
+            self.retrieve(word: text)
         }
         pendingWorkItem = newWorkItem
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250),
-                                      execute: newWorkItem)
+        DispatchQueue.main.asyncAfter(
+            deadline: .now() + .milliseconds(250),
+            execute: newWorkItem)
     }
 }

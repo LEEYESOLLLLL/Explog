@@ -12,7 +12,7 @@ import Kingfisher
 final class NotiCell: UITableViewCell {
     
     var profileImage = UIImageView().then {
-        $0.contentMode = .scaleAspectFill
+        $0.contentMode = .scaleToFill
         $0.clipsToBounds = true
         $0.layer.cornerRadius = UI.profileImageSize.width / 2
     }
@@ -53,13 +53,14 @@ final class NotiCell: UITableViewCell {
             .activateAnchors()
         
         dateLabel
-            .topAnchor(to: profileImage.topAnchor)
+            .topAnchor(to: contentView.topAnchor, constant: UI.margin)
             .leadingAnchor(to: profileImage.layoutMarginsGuide.trailingAnchor, constant: UI.margin * 2)
             .trailingAnchor(to: contentView.trailingAnchor, constant: -UI.margin)
             .activateAnchors()
         
         infoLabel
             .topAnchor(to: dateLabel.bottomAnchor, constant: UI.margin)
+            .heightAnchor(constant: UI.profileImageSize.height)
             .bottomAnchor(to: contentView.bottomAnchor, constant: -UI.margin)
             .leadingAnchor(to: dateLabel.leadingAnchor)
             .trailingAnchor(to: dateLabel.trailingAnchor)
@@ -74,14 +75,13 @@ final class NotiCell: UITableViewCell {
         guard let imgURL = URL(string: model.author.imgProfile) else {
             return
         }
-        profileImage.kf.setImage(with: imgURL,
-                                 placeholder: UIImage().resizeImage(UI.profileImageSize.width, opaque: false),
-                                 options: [.transition(.fade(0.5))],
-                                 progressBlock: nil,
-                                 completionHandler: nil)
+        profileImage.kf.setImage(
+            with: imgURL,
+            placeholder: UIImage().resizeImage(UI.profileImageSize.width, opaque: false),
+            options: [.transition(.fade(0.5))],
+            progressBlock: nil,
+            completionHandler: nil)
         dateLabel.text = model.likedDate
         infoLabel.text = model.author.username + " 님이" + "`\(model.posttitle)`" + "의 여행기를 좋아합니다"
-        
     }
-    
 }

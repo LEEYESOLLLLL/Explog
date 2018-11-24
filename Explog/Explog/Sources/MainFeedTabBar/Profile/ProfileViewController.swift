@@ -9,6 +9,7 @@ import UIKit
 import Moya
 import BoltsSwift
 import Square
+import SwiftyBeaver
 
 final class ProfileViewController: BaseViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -41,13 +42,8 @@ final class ProfileViewController: BaseViewController {
     
     var state: State = .loading {
         didSet {
-            switch state {
-            case .loading: break
-            case .ready(_ ):
-                DispatchQueue.main.async { self.v.profileTableView.reloadData() }
-            }
+            managingState()
         }
-        
     }
     
     var provider = MoyaProvider<User>(plugins: [NetworkLoggerPlugin()])
@@ -58,13 +54,41 @@ final class ProfileViewController: BaseViewController {
         super.loadView()
         view = v
     }
+    
+    private func managingState() {
+        switch state {
+        case .initial:
+            initialComposition()
+            initialRequest()
+            v.profileTableView.reloadData()
+        case .loading:
+            v.profileTableView.tableFooterView = ViewControllerStateView(state: .loading)
+            v.profileTableView.reloadData()
+        case .populated:
+            v.profileTableView.tableFooterView = nil
+            v.profileTableView.reloadData()
+        case .retryOnError:
+            v.profileTableView.tableFooterView = ViewControllerStateView(state: .retryOnError(owner: self, selector: #selector(retry(_:))))
+        }
+    }
+    
+    @objc func retry(_ sender: UIButton) {
+        state = .loading
+        state = .initial
+    }
 }
+
+// MARK: initially set up
 extension ProfileViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        initialComposition()
+        state = .loading
+        state = .initial
+    }
+    
+    private func initialRequest() {
         provider.request(.profile(otherUserPK: otherUserPK)) { [weak self] (result) in
-            guard let strongSelf = self else {
+            guard let self = self else {
                 return
             }
             switch result {
@@ -73,19 +97,20 @@ extension ProfileViewController {
                 case true:
                     do {
                         let userModel = try response.map(UserModel.self)
-                        strongSelf.v.initializeProfile(userModel)
-                        strongSelf.state = .ready(item: userModel)
-                        
+                        self.v.initializeProfile(userModel)
+                        self.state = .populated(userModel: userModel)
                     }catch {
-                        print("fail to convert Model: \(#function)")
+                        SwiftyBeaver.debug("fail to convert Model: \(#function)")
+                        self.state = .retryOnError
                     }
                 case false :
-                    print("fail to Request: \(#function)")
+                    SwiftyBeaver.debug("fail to Request")
+                    self.state = .retryOnError
                 }
             case .failure(let error):
-                print("Serve Error: \(error.localizedDescription)")
+                SwiftyBeaver.debug("Server Error: \(error.localizedDescription)")
+                self.state = .retryOnError
             }
-            DispatchQueue.main.async { strongSelf.v.activityIndicator.stopAnimating() }
         }
     }
     
@@ -93,9 +118,11 @@ extension ProfileViewController {
         tabBarController?.tabBar.isHidden = false
         navigationController?.navigationBar.barStyle = .default
         navigationController?.transparentNaviBar(true)
-        v.activityIndicator.startAnimating()
     }
-    
+}
+
+// MARK: Retry 
+extension ProfileViewController {
     @objc func refreshControlAction(_ sender: UIRefreshControl) {
         sender.beginRefreshing()
         viewWillAppear(true)
@@ -103,6 +130,7 @@ extension ProfileViewController {
     }
 }
 
+// MARK: UI - Bar Button
 extension ProfileViewController {
     @objc func settingBarButtonAction(_ sender: UIBarButtonItem) {
         let settingViewController = SettingViewController()
@@ -115,14 +143,14 @@ extension ProfileViewController {
     }
 }
 
+// MARK: Like Action
 extension ProfileViewController {
     @discardableResult
     func like(_ postPrivateKey: Int, index: Int) -> BoltsSwift.Task<LikeModel> {
         let taskCompletionSource = TaskCompletionSource<LikeModel>()
         postProvider.request(.like(postPK: postPrivateKey)) { [weak self] (result) in
-            guard let strongSelf = self,
-                case .ready(let item) = strongSelf.state else {
-                    return
+            guard let self = self, case .populated(let item) = self.state else {
+                return
             }
             switch result {
             case .success(let response):
@@ -131,7 +159,7 @@ extension ProfileViewController {
                     if let likeModel = try? response.map(LikeModel.self) {
                         var copy = item
                         copy.posts[index].modifiedLike(model: likeModel)
-                        strongSelf.state = .ready(item: copy)
+                        self.state = .populated(userModel: copy)
                         taskCompletionSource.set(result: likeModel)
                     }
                 case false :
@@ -145,11 +173,13 @@ extension ProfileViewController {
     }
 }
 
+// MARK: Delete Post Action
 extension ProfileViewController {
     func delete(_ postPrivateKey: Int, index: Int) {
         postProvider.request(.delete(postPK: postPrivateKey)) { [weak self] (result) in
-            guard let strongSelf = self, case .ready(let item) = strongSelf.state else {
-                return
+            guard let self = self,
+                case .populated(let item) = self.state else {
+                    return
             }
             switch result {
             case .success(let response):
@@ -157,36 +187,40 @@ extension ProfileViewController {
                 case true :
                     var copy = item
                     copy.posts.remove(at: index)
-                    strongSelf.state = .ready(item: copy)
+                    self.state = .populated(userModel: copy)
                     Square.display("Your post has deleted successfully")
-                case false: Square.display("Request Error")
+                case false:
+                    SwiftyBeaver.debug("Request Error")
+                    Square.display("Request Error")
                 }
                 
-            case .failure(let error): print(error.localizedDescription, #function)
+            case .failure(let error):
+                SwiftyBeaver.debug("Server Error: \(error.localizedDescription)")
+                self.state = .retryOnError
             }
-            
         }
-        
     }
 }
 
+// MARK: TableView Delegate
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return ProfileView.UI.tableViewCellHegiht
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard case .ready(let item) = state, item.posts.count > indexPath.row else {
+        guard case .populated(let item) = state, item.posts.count > indexPath.row else {
             return
         }
         let postCover = item.posts[indexPath.row].converted(author: item.author())
-        let detailVC = PostDetailViewController.create(editMode: otherUserPK != nil ? .off : .on,
-                                                       coverData: postCover)
+        let detailVC = PostDetailViewController.create(
+            editMode: otherUserPK != nil ? .off : .on,
+            coverData: postCover)
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }
 
-// MARK: Edit
+// MARK: Edit - TableViwe Delegate
 extension ProfileViewController {
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return editMode == .on ? true : false
@@ -194,44 +228,49 @@ extension ProfileViewController {
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { [weak self] (rowAction, indexPath) in
-            guard let strongSelf = self,
-                case .ready(let item) = strongSelf.state else {
-                return
+            guard let self = self,
+                case .populated(let item) = self.state else {
+                    return
             }
             
             let post = item.posts[indexPath.row]
-            strongSelf.delete(post.pk, index: indexPath.row)
+            self.delete(post.pk, index: indexPath.row)
         }
         return [deleteAction]
     }
 }
+
+// MARK: TableView DataSource - 1
 extension ProfileViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard case .ready(let item) = state else {
+        guard case .populated(let item) = state else {
             return 0
         }
         return item.posts.count
     }
-    
+}
+
+// MARK: TableView Data Source - 2
+extension ProfileViewController {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return tableView.dequeue(ProfileCell.self)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let cell = cell as? ProfileCell,
-            case .ready(let item) = state else {
+            case .populated(let item) = state else {
                 return
         }
         let post = item.posts[indexPath.row].converted(author: item.author())
         cell.configure(model: post) { [weak self] (postPK: Int) -> BoltsSwift.Task<LikeModel> in
-            guard let strongSelf = self else {
+            guard let self = self else {
                 fatalError()
             }
-            return strongSelf.like(postPK, index: indexPath.row)
+            return self.like(postPK, index: indexPath.row)
         }
     }
 }

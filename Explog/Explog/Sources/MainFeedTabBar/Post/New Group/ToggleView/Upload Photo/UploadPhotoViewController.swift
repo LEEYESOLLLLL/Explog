@@ -8,6 +8,8 @@
 
 import UIKit
 import Moya
+import Square
+import SwiftyBeaver
 
 final class UploadPhotoViewController: PhotoGridViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -20,7 +22,7 @@ final class UploadPhotoViewController: PhotoGridViewController {
         super.init()
     }
     
-    static func create(postPK: Int) -> UploadPhotoViewController {
+    static func create(postPK: Int) -> Self {
         let `self` = self.init(postPK: postPK)
         self.title = "Camera Roll"
         return self
@@ -71,18 +73,19 @@ extension UploadPhotoViewController {
 extension UploadPhotoViewController: PassableDataDelegate {
     func pass(data: UIImage) {
         provider.request(.photo(postPK: postPK, photo: data)) { [weak self] result in
-            guard let strongSelf = self else {
+            guard let self = self else {
                 return
             }
             switch result {
             case .success(let response):
                 switch (200...299) ~= response.statusCode {
-                case true : strongSelf.navigationController?.popViewController(animated: true)
+                case true :
+                    self.navigationController?.popViewController(animated: true)
                 case false:
-                    print("fail to Request: \(#function)")
+                    Square.display("Fail to Request")
                 }
             case .failure(let error):
-                print(error.localizedDescription, "\(#function)")
+                SwiftyBeaver.error("\(error)")
             }
         }
     }

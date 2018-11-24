@@ -10,11 +10,27 @@ import UIKit
 import Moya
 import Square
 import BoltsSwift
+import SwiftyBeaver
 
 extension NotiViewController {
+    // loading, paging, empty, error
+    typealias NotiInfo = NotiListModel.NotiInfo
     enum State {
         case loading
-        case ready(NotiListModel)
+        case populated(notifications: NotiListModel)
+        case paging(notifications: NotiListModel, nextPage: String)
+        case retryOnError(Error?, message: String?)
+        
+        var currentNotifications: [NotiInfo]? {
+            switch self {
+            case .populated(let notifications):
+                return notifications.results
+            case .paging(let notifications, _):
+                return notifications.results
+            default:
+                return nil
+            }
+        }
     }
 }
 
@@ -29,10 +45,7 @@ final class NotiViewController: BaseViewController {
     let provider = MoyaProvider<Noti>(plugins: [NetworkLoggerPlugin()])
     var state: State = .loading {
         didSet {
-            switch state {
-            case .loading: break
-            case .ready: DispatchQueue.main.async { self.v.likeTableView.reloadData() }
-            }
+            managingState()
         }
     }
     
@@ -40,6 +53,33 @@ final class NotiViewController: BaseViewController {
     override func loadView() {
         super.loadView()
         view = v
+    }
+    
+    private func managingState() {
+        switch state {
+        case .loading:
+            v.setup(footerView: ViewControllerStateView(state: .loading))
+        case .populated:
+            v.setup(footerView: nil)
+        case .paging:
+            v.setup(footerView: ViewControllerStateView(state: .loading))
+        case .retryOnError(let error, let message):
+            SwiftyBeaver.error(error.debugDescription, message ?? "")
+            v.setup(footerView: ViewControllerStateView(state: .retryOnError(owner: self, selector: #selector(retry(_:)) )))
+        }
+        v.likeTableView.reloadData()
+    }
+    
+    @objc func retry(_ sender: UIButton) {
+        viewWillAppear(true)
+        viewDidAppear(true)
+    }
+}
+
+extension NotiViewController {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        v.likeTableView.reloadData()
     }
 }
 
@@ -49,17 +89,22 @@ extension NotiViewController {
         super.viewWillAppear(animated)
         resetBadge()
             .continueWith { [weak self] task in
-                guard let strongSelf = self else {
+                guard let self = self else {
                     return
                 }
                 if task.completed {
-                    strongSelf.tabBarItem.badgeValue = nil
+                    self.tabBarItem.badgeValue = nil
                     UIApplication.shared.applicationIconBadgeNumber = 0
+                } else {
+                    self.state = .retryOnError(task.error, message: nil)
                 }
             }
             .continueWith { [weak self] _ in
-                guard let strongSelf = self else { return }
-                strongSelf.notiList()
+                guard let self = self else {
+                    return
+                }
+                self.state = .loading
+                self.notiList()
         }
     }
     
@@ -76,29 +121,34 @@ extension NotiViewController {
     
     private func notiList() {
         provider.request(.list) { [weak self] (result) in
-            guard let strongSelf = self else {
+            guard let self = self else {
                 return
             }
             switch result {
             case .success(let response):
                 switch (200...299) ~= response.statusCode {
                 case true :
-                    do {
-                        let model = try response.map(NotiListModel.self)
-                        strongSelf.state = .ready(model)
-                        strongSelf.v.likeTableView.reloadData()
-                    }catch {
+                    guard let model = try? response.map(NotiListModel.self) else {
+                        SwiftyBeaver.debug("No Covert NotiListModel")
+                        return
                     }
-                case false : Square.display("Request Error..")
+                    
+                    if let nextPage = model.next {
+                        self.state = .paging(notifications: model, nextPage: nextPage)
+                    }else {
+                        self.state = .populated(notifications: model)
+                    }
+                case false :
+                    self.state = .retryOnError(nil, message: "Request Error..")
                 }
             case .failure(let error):
-                Square.display("Weak Internet Connection")
-                print(error.localizedDescription)
+                self.state = .retryOnError(error, message: nil)
             }
         }
     }
 }
 
+// MARK: Paging
 extension NotiViewController {
     func goNext(path: String) {
         guard let nextURL = try? path.asURL(),
@@ -107,57 +157,53 @@ extension NotiViewController {
         }
         
         provider.request(.next(query: query)) { [weak self] result in
-            guard let strongSelf = self,
-                case .ready(let item) = strongSelf.state  else {
+            guard let self = self,
+                case .paging(let currentNotifications, _) = self.state  else {
                     return
             }
             switch result {
             case .success(let response):
                 switch (200...299) ~= response.statusCode {
                 case true :
-                    do {
-                        let model = try response.map(NotiListModel.self)
-                        if let combind = item + model {
-                            strongSelf.state = .ready(combind)
-                        }
-                    }catch {
-                        print("\(#function), Fail to Convert Model")
+                    guard let model = try? response.map(NotiListModel.self),
+                        let combindedModel = currentNotifications + model else {
+                            SwiftyBeaver.debug("No combind NotiListModel")
+                        return
                     }
-                case false :
-                    print("\(#function), Request Error")
+                    if let nextPage = model.next {
+                        self.state = .paging(notifications: combindedModel, nextPage: nextPage)
+                    }else {
+                        self.state = .populated(notifications: combindedModel)
+                    }
                     
+                case false :
+                    self.state = .retryOnError(nil, message: "NextPage Request Error")
                 }
-            case .failure(let error): print(error.localizedDescription, #function)
+            case .failure(let error):
+                self.state = .retryOnError(error, message: nil)
             }
         }
     }
 }
 
-extension NotiViewController {
-    // For rendering
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        v.likeTableView.reloadData()
-    }
-}
-
+// MARK: TableView Delegate
 extension NotiViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
+// MARK: TableView DataSource 
 extension NotiViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard case .ready(let item) = state,
-            let results = item.results else {
-                return 0
+        guard let notifications = state.currentNotifications else {
+            return 0
         }
         
-        return results.count
+        return notifications.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -166,16 +212,17 @@ extension NotiViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let cell = cell as? NotiCell,
-            case .ready(let item) = state,
-            let results = item.results,
-            results.count > indexPath.row else {
+            let notifications = state.currentNotifications,
+            notifications.count > indexPath.row else {
                 return
         }
         
-        let info = results[indexPath.row]
+        let info = notifications[indexPath.row]
         cell.configure(info)
-        if let next = item.next, results.count - 1 == indexPath.row {
-            self.goNext(path: next)
+        
+        if case .paging(_ , let nextPage) = state, notifications.count > indexPath.row {
+            self.goNext(path: nextPage)
+            
         }
     }
 }

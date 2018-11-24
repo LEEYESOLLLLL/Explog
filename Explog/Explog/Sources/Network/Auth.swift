@@ -8,11 +8,11 @@
 
 import Foundation
 import Moya
+import SwiftyBeaver
 
 enum Auth {
     case login(email: String, password: String)
     case signUp(username: String, email: String, password: String)
-    
 }
 
 extension Auth: TargetType {
@@ -41,7 +41,7 @@ extension Auth: TargetType {
         case .login(let email, let password):
             guard let multipartFormEmail = email.data(using: .utf8),
                 let multipartFormPassword = password.data(using: .utf8) else {
-                    print("Server error..")
+                    SwiftyBeaver.info("Server error.. in login")
                     return .requestPlain
             }
             
@@ -60,7 +60,7 @@ extension Auth: TargetType {
             guard let multipartFormUsername = username.data(using: .utf8),
             let multipartFormEmail = email.data(using: .utf8),
                 let multipartFormPassword = password.data(using: .utf8) else {
-                    print("Server error..")
+                    SwiftyBeaver.info("Server error.. in Sign up")
                     return .requestPlain
             }
             

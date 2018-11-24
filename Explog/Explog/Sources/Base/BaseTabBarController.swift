@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyBeaver
 
 /**
  BaseTabBarController is used as foundation of UITabBarController
@@ -18,12 +19,11 @@ public class BaseTabBarController: UITabBarController, ViewControllerType {
         viewControllers = vcs
     }
     
-    
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     deinit {
-        print("\(self) have deinited")
+        SwiftyBeaver.info("\(self) have deinited")
     }
 }

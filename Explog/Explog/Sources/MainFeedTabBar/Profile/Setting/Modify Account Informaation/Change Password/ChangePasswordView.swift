@@ -11,18 +11,20 @@ import SkyFloatingLabelTextField
 
 final class ChangePasswordView: BaseView<ChangePasswordViewController> {
     
-    lazy var backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "back-24pk").withRenderingMode(.alwaysOriginal),
-                                          style: .plain,
-                                          target: vc,
-                                          action: #selector(vc.backButtonAction(_:))).then {
-                                            $0.tintColor = .black
+    lazy var backButton = UIBarButtonItem(
+        image: #imageLiteral(resourceName: "back-24pk").withRenderingMode(.alwaysOriginal),
+        style: .plain,
+        target: vc,
+        action: #selector(vc.backButtonAction(_:))).then {
+            $0.tintColor = .black
     }
     
-    lazy var doneButton = UIBarButtonItem(barButtonSystemItem: .done,
-                                          target: vc,
-                                          action: #selector(vc.doneButtonAction(_:))).then {
-                                            $0.tintColor = .black
-                                            $0.isEnabled = false
+    lazy var doneButton = UIBarButtonItem(
+        barButtonSystemItem: .done,
+        target: vc,
+        action: #selector(vc.doneButtonAction(_:))).then {
+            $0.tintColor = .black
+            $0.isEnabled = false
     }
     
     var oldPasswordTextField = SkyFloatingLabelTextField().then {
@@ -82,5 +84,5 @@ final class ChangePasswordView: BaseView<ChangePasswordViewController> {
     func isActiveDoneButton(_ value: Bool) {
         doneButton.isEnabled = value
     }
-
+    
 }

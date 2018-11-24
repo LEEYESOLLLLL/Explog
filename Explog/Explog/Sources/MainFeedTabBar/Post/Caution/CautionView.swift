@@ -53,7 +53,7 @@ final class CautionView: BaseView<CautionViewController> {
         static var confirmButtonHeight: CGFloat = 50
     }
     
-    // Textfield, //확인 눌렀을때 콜백.
+
     override func setupUI() {
         backgroundColor = .clear
         addSubviews([darkBlurView, dismissButton, agreementStackView])

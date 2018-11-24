@@ -32,12 +32,11 @@ extension SettingCell {
     func feature(_ text: String) {
         textLabel?.text = text
         ImageCache.default.calculateDiskCacheSize {[weak self] (n: UInt) in
-            guard let strongSelf = self else { return }
-            strongSelf.detailTextLabel?.text = ByteCountFormatter.string(fromByteCount: Int64(n), countStyle: .file)
+            guard let self = self else { return }
+            self.detailTextLabel?.text = ByteCountFormatter.string(fromByteCount: Int64(n), countStyle: .file)
         }
     }
 }
-
 
 extension SettingCell {
     func openSource(_ text: String) {
@@ -60,7 +59,6 @@ extension SettingCell {
         textLabel?.text = text 
     }
 }
-
 
 extension SettingCell {
     func logout(_ text: String) {

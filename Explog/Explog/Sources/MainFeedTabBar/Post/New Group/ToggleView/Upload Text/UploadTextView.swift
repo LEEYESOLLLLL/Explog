@@ -15,14 +15,17 @@ final class UploadTextView: BaseView<UploadTextViewController> {
         $0.text = "Tell your friends about your trip!"
     }
     
-    lazy var backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "back-24pk").withRenderingMode(.alwaysOriginal),
-                                     style: .plain,
-                                     target: vc,
-                                     action: #selector(vc.backButtonAction(_:)))
-    lazy var uploadTextButton = UIBarButtonItem(image: #imageLiteral(resourceName: "paper-black-512-px").resizeImage(UI.donButtonSize, opaque: false).withRenderingMode(.alwaysOriginal),
-                                                style: .plain,
-                                                target: vc,
-                                                action: #selector(vc.uploadTextButtonAction(_:)))
+    lazy var backButton = UIBarButtonItem(
+        image: #imageLiteral(resourceName: "back-24pk").withRenderingMode(.alwaysOriginal),
+        style: .plain,
+        target: vc,
+        action: #selector(vc.backButtonAction(_:)))
+    
+    lazy var uploadTextButton = UIBarButtonItem(
+        image: #imageLiteral(resourceName: "paper-black-512-px").resizeImage(UI.donButtonSize, opaque: false).withRenderingMode(.alwaysOriginal),
+        style: .plain,
+        target: vc,
+        action: #selector(vc.uploadTextButtonAction(_:)))
     
     struct UI {
         static var highlightFontsize: CGFloat = 35
@@ -54,15 +57,16 @@ final class UploadTextView: BaseView<UploadTextViewController> {
         textView.delegate = vc
         
         // 1. registe Notification
-        NotificationCenter.default.addObserver(vc,
-                                               selector: #selector(vc.keyboardWillShow(noti:)) ,
-                                               name: UIResponder.keyboardWillShowNotification,
-                                               object: nil)
-        NotificationCenter.default.addObserver(vc,
-                                               selector: #selector(vc.keyboardWillHide(noti:)) ,
-                                               name: UIResponder.keyboardWillHideNotification,
-                                               object: nil)
+        NotificationCenter.default.addObserver(
+            vc,
+            selector: #selector(vc.keyboardWillShow(noti:)),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil)
+        
+        NotificationCenter.default.addObserver(
+            vc,
+            selector: #selector(vc.keyboardWillHide(noti:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil)
     }
-    
-    
 }

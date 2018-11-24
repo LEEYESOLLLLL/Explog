@@ -10,6 +10,7 @@ import UIKit
 import Moya
 import Square
 import BoltsSwift
+import SwiftyBeaver
 
 
 
@@ -26,7 +27,7 @@ final class ReplyViewController: BaseViewController  {
     required init() { fatalError("init() has not been implemented") }
     required public init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
-    static func create(postPK privateKey: Int) -> ReplyViewController {
+    static func create(postPK privateKey: Int) -> Self {
         let `self` = self.init(postPK: privateKey)
         return self
     }
@@ -51,18 +52,19 @@ final class ReplyViewController: BaseViewController  {
 }
 
 extension ReplyViewController {
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.keyboardWillShow(noti:)) ,
-                                               name: UIResponder.keyboardWillShowNotification,
-                                               object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.keyboardWillShow(noti:)) ,
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil)
         
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.keyboardWillHide(noti:)) ,
-                                               name: UIResponder.keyboardWillHideNotification,
-                                               object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.keyboardWillHide(noti:)) ,
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil)
     }
     
     @objc private func keyboardWillShow(noti: NSNotification) {
@@ -90,20 +92,19 @@ extension ReplyViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         provider.request(.list(postPK: postPK)) { [weak self] (result) in
-            guard let strongSelf = self else {
+            guard let self = self else {
                 return
             }
             switch result {
             case .success(let response):
                 do {
                     let model = try response.map([ReplyModel].self)
-                    strongSelf.state = .ready(item: model)
+                    self.state = .ready(item: model)
                 }catch {
-                    print("fail to convert Model: \(#function)")
+                    SwiftyBeaver.error("fail to convert Model")
                 }
-                
             case .failure(let error):
-                print("Serve Error: \(error.localizedDescription)")
+                SwiftyBeaver.error("\(error)")
             }
         }
     }
@@ -127,8 +128,8 @@ extension ReplyViewController {
                 return
         }
         provider.request(.create(postPK: postPK, comments: text)) { [weak self] result in
-            guard let strongSelf = self,
-                case .ready(let item) = strongSelf.state else {
+            guard let self = self,
+                case .ready(let item) = self.state else {
                     return
             }
             
@@ -137,14 +138,14 @@ extension ReplyViewController {
                 do {
                     var copy = item
                     copy.append(try response.map(ReplyModel.self))
-                    strongSelf.state = .ready(item: copy)
-                    strongSelf.v.terminationEffect()
+                    self.state = .ready(item: copy)
+                    self.v.terminationEffect()
                 }catch {
-                    print("fail to convert Model: \(#function)")
+                    SwiftyBeaver.error("fail to convert Model")
                 }
                 
             case .failure(let error):
-                print(error.localizedDescription)
+                SwiftyBeaver.error(error.localizedDescription)
             }
         }
     }
@@ -152,14 +153,14 @@ extension ReplyViewController {
     func delete(reply postPK: Int, indexPath: IndexPath) -> BoltsSwift.Task<Void>{
         let completionSource = TaskCompletionSource<Void>()
         provider.request(.delete(postPK: postPK)) { [weak self] result in
-            guard let strongSelf = self,
-                case .ready(let item) = strongSelf.state else {
+            guard let self = self,
+                case .ready(let item) = self.state else {
                     return
             }
             switch result {
             case .success:
                 var copy = item; copy.remove(at: indexPath.row)
-                strongSelf.state = .ready(item: copy)
+                self.state = .ready(item: copy)
                 completionSource.set(result: ())
             case .failure(let error):
                 completionSource.set(error: error)
@@ -182,16 +183,16 @@ extension ReplyViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let removeAction = UITableViewRowAction(style: .destructive, title: "Delete") { [weak self] (rowaction, indexPath) in
-            guard let strongSelf = self,
-                case .ready(let item) = strongSelf.state else {
+        let removeAction = UITableViewRowAction(
+        style: .destructive, title: "Delete") { [weak self] (rowaction, indexPath) in
+            guard let self = self,
+                case .ready(let item) = self.state else {
                     return
             }
             let replyPK = item[indexPath.row].pk
-            strongSelf
-                .delete(reply: replyPK, indexPath: indexPath)
+            self.delete(reply: replyPK, indexPath: indexPath)
                 .continueWith { _ in
-                    strongSelf.v.replyTableView.reloadData()
+                    self.v.replyTableView.reloadData()
                     Square.display("Removed Comments")
             }
         }
@@ -227,7 +228,7 @@ extension ReplyViewController {
                 return
         }
         cell.configure(item[indexPath.row])
-        print("indexPath: \(indexPath)")
+        
     }
 }
 

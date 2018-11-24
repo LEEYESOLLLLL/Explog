@@ -10,44 +10,52 @@ import UIKit
 import SkyFloatingLabelTextField
 import Moya
 import Square
+import SwiftyBeaver
+
+extension SignUpViewController {
+    enum State {
+        case validate(TextField: SkyFloatingLabelTextField)
+        case invalidate(textField: SkyFloatingLabelTextField?)
+    }
+}
 
 final class SignUpViewController: BaseViewController {
-    lazy var v = SignUpView(controlBy: self)
-    
-    var state: State = .invalidate(textField: nil) {
-        didSet {
-            switch state {
-            case .invalidate(let skyTextField):
-                if let skyTextField = skyTextField {
-                    v.verifyTextFieldState(skyTextField)
-                }
-                v.verifySignUpButtonState()
-            case .validate(let skyTextField):
-                v.verifyTextFieldState(skyTextField)
-                skyTextField.titleColor = .appStyle
-                skyTextField.errorMessage = ""
-                v.verifySignUpButtonState()
-            }
-        }
-    }
-    let provider = MoyaProvider<Auth>(plugins: [ NetworkLoggerPlugin() ])
-    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
+    lazy var v = SignUpView(controlBy: self)
+    var state: State = .invalidate(textField: nil) {
+        didSet {
+            managingState()
+        }
+    }
+    let provider = MoyaProvider<Auth>(plugins: [ NetworkLoggerPlugin() ])
     override func loadView() {
         super.loadView()
         view = v
     }
     
+    private func managingState() {
+        switch state {
+        case .invalidate(let skyTextField):
+            if let skyTextField = skyTextField {
+                v.verifyTextFieldState(skyTextField)
+            }
+            v.verifySignUpButtonState()
+        case .validate(let skyTextField):
+            v.verifyTextFieldState(skyTextField)
+            skyTextField.titleColor = .appStyle
+            skyTextField.errorMessage = ""
+            v.verifySignUpButtonState()
+        }
+    }
+}
+
+// MARK: Actions
+extension SignUpViewController {
     @objc func dismissButtonAction(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
     }
     
     @objc func textFieldDidChange(_ textField: Any) {
@@ -65,8 +73,12 @@ final class SignUpViewController: BaseViewController {
         v.showSecurityText()
     }
     
+}
+
+// MARK: Registe USER in Serve
+extension SignUpViewController {
+    // Request SiginUp..
     @objc func signUpButtonAction(_ sender: ActivityIndicatorButton) {
-        // request SiginUp..
         sender.startAnimating()
         guard let username = v.usernameTextField.text,
             let email = v.emailTextField.text,
@@ -74,11 +86,8 @@ final class SignUpViewController: BaseViewController {
                 sender.stopAnimating()
                 return
         }
-        provider.request(.signUp(
-            username: username,
-            email: email,
-            password: password)) { [weak self] result in
-                guard let strongSelf = self else { return }
+        provider.request(.signUp(username: username, email: email, password: password)) { [weak self] result in
+                guard let self = self else { return }
                 switch result {
                 case .success(let response):
                     if 200...299 ~= response.statusCode {
@@ -86,26 +95,17 @@ final class SignUpViewController: BaseViewController {
                             let loginModel = try response.map(AuthModel.self)
                             KeychainService.configure(material: loginModel.token, key: .token)
                             KeychainService.configure(material: String(loginModel.pk), key: .pk)
-                            strongSelf.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+                            self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
                         }catch {
-                            print("invalidate LoginModel")
+                            SwiftyBeaver.debug("invalidate LoginModel")
                         }
                     }else {
                         Square.display("Email and User Name already exists")
                     }
-                case .failure(let error):
-                    print(error.localizedDescription)
-                    
+                case .failure(let error): SwiftyBeaver.error(error.localizedDescription)
                 }
                 sender.stopAnimating()
         }
-    }
-}
-
-extension SignUpViewController {
-    enum State {
-        case validate(TextField: SkyFloatingLabelTextField)
-        case invalidate(textField: SkyFloatingLabelTextField?)
     }
 }
 

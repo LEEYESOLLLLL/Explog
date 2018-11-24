@@ -77,13 +77,14 @@ final class ReplyCell: UITableViewCell {
     func configure(_ model: ReplyModel) {
         guard let author = model.author,
             let imgURL = URL(string: author.imgProfile) else {
-            return
+                return
         }
-        profileImageView.kf.setImage(with: imgURL,
-                                     placeholder: UIImage().resizeImage(UI.profileImagesize.width, opaque: false),
-                                     options: [.transition(.fade(0.5))],
-                                     progressBlock: nil,
-                                     completionHandler: nil)
+        profileImageView.kf.setImage(
+            with: imgURL,
+            placeholder: UIImage().resizeImage(UI.profileImagesize.width, opaque: false),
+            options: [.transition(.fade(0.5))],
+            progressBlock: nil,
+            completionHandler: nil)
         
         self.usernameLabel.text = author.username
         self.contentsLabel.text = model.content

@@ -10,6 +10,7 @@ import UIKit
 import Moya
 import BoltsSwift
 import Square
+import SwiftyBeaver
 
 class PostDetailViewController: BaseViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -57,11 +58,8 @@ class PostDetailViewController: BaseViewController {
     }
     
     private var toggleState: ToggleView.ToggleType {
-        get {
-            return v.toggleView.state
-        }set {
-            v.toggleView.state = newValue
-        }
+        get { return v.toggleView.state }
+        set { v.toggleView.state = newValue }
     }
     
     var coverData: PostCoverModel
@@ -76,7 +74,8 @@ class PostDetailViewController: BaseViewController {
         super.loadView()
         view = v
     }
-    
+}
+extension PostDetailViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.barStyle = .black
@@ -84,24 +83,23 @@ class PostDetailViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         v.activityView.startAnimating()
         requestTask().continueWith { [weak self] task in
-            guard let strongSelf = self else {
+            guard let self = self else {
                 return
             }
             
             if task.cancelled || task.faulted {
-                print(task.error!.localizedDescription)
+                SwiftyBeaver.error(task.error.debugDescription)
             }else {
                 guard let model = task.result else {
                     return
                 }
-                strongSelf.state = .ready(detailModel: model)  
-                strongSelf.v.postTableView.reloadData()
+                self.state = .ready(detailModel: model)
+                self.v.postTableView.reloadData()
                 
             }
-            strongSelf.v.activityView.stopAnimating()
+            self.v.activityView.stopAnimating()
         }
     }
     
@@ -149,7 +147,7 @@ extension PostDetailViewController {
     @objc func likeButtonAction(_ sender: UIBarButtonItem) {
         v.loadLikeButton()
         provider.request(.like(postPK: coverData.pk)) { [weak self] (result) in
-            guard let strongSelf = self else {
+            guard let self = self else {
                 return
             }
             switch result {
@@ -159,8 +157,8 @@ extension PostDetailViewController {
                     if let model = try? response.map(LikeModel.self),
                         let liked = model.liked,
                         let numLiked = model.numLiked {
-                        strongSelf.coverData.liked = liked
-                        strongSelf.coverData.numLiked = numLiked
+                        self.coverData.liked = liked
+                        self.coverData.numLiked = numLiked
                     }
                 case false: Square.display("Fail to Request")
                 }
@@ -185,19 +183,19 @@ extension PostDetailViewController {
                        alertActions: [.cancel(message: "Cancle"),
                                       .destructive(message: "Flag as inappropriate")],
                        preferredStyle: .actionSheet) { [weak self] (_, index) in
-                                        guard let type = MoreButtonType(rawValue: index),
-                                            let strongSelf = self else {
-                                            return
-                                        }
-                                        switch type {
-                                        case .cancel: break
-                                        case .report:
-                                            let vc = UINavigationController(rootViewController: ReportViewController(postPK: strongSelf.postPK))
-                                            strongSelf.present(vc, animated: true, completion: nil)
-                                        }
-                                        
-                                    
-            
+                        guard let type = MoreButtonType(rawValue: index),
+                            let self = self else {
+                                return
+                        }
+                        switch type {
+                        case .cancel: break
+                        case .report:
+                            let vc = UINavigationController(rootViewController: ReportViewController(postPK: self.postPK))
+                            self.present(vc, animated: true, completion: nil)
+                        }
+                        
+                        
+                        
         }
         
     }

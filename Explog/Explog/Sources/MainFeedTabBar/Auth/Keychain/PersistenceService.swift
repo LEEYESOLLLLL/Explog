@@ -8,6 +8,7 @@
 
 import UIKit
 import KeychainAccess
+import SwiftyBeaver
 
 struct Persistence {
     static var service: Keychain {
@@ -46,7 +47,7 @@ extension Persistence {
             do {
                 try service.remove(item.rawValue)
             }catch {
-                print("not found key")
+                SwiftyBeaver.info("not found key")
             }
         }
     }

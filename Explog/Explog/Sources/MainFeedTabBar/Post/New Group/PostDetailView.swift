@@ -25,33 +25,38 @@ class PostDetailView: BaseView<PostDetailViewController> {
         $0.backgroundColor = UIColor.darkText
     }
     
-    lazy var dismissButton = UIBarButtonItem(image: #imageLiteral(resourceName: "cancel-1").resizeImage(UI.disMissimageDimension, opaque: false).withRenderingMode(.alwaysOriginal),
-                                             style: .plain,
-                                             target: vc,
-                                             action: #selector(vc.dismissButtonAction(_:)))
+    lazy var dismissButton = UIBarButtonItem(
+        image: #imageLiteral(resourceName: "cancel-1").resizeImage(UI.disMissimageDimension, opaque: false).withRenderingMode(.alwaysOriginal),
+        style: .plain,
+        target: vc,
+        action: #selector(vc.dismissButtonAction(_:)))
     
-    lazy var likeButton = UIBarButtonItem(image:#imageLiteral(resourceName: "like-white").resizeImage(UI.likeImageDimenstion, opaque: false).withRenderingMode(.alwaysOriginal),
-                                          style: .plain,
-                                          target: vc,
-                                          action: #selector(vc.likeButtonAction(_:)))
+    lazy var likeButton = UIBarButtonItem(
+        image:#imageLiteral(resourceName: "like-white").resizeImage(UI.likeImageDimenstion, opaque: false).withRenderingMode(.alwaysOriginal),
+        style: .plain,
+        target: vc,
+        action: #selector(vc.likeButtonAction(_:)))
     
-    lazy var replyButton = UIBarButtonItem(image: #imageLiteral(resourceName: "comment-white-512px").resizeImage(UI.likeImageDimenstion, opaque: false).withRenderingMode(.alwaysOriginal),
-                                           style: .plain,
-                                           target: vc,
-                                           action: #selector(vc.replyButtonAction(_:))).then {
-                                            $0.image?.withRenderingMode(.alwaysTemplate)
-                                            $0.tintColor = .red
+    lazy var replyButton = UIBarButtonItem(
+        image: #imageLiteral(resourceName: "comment-white-512px").resizeImage(UI.likeImageDimenstion, opaque: false).withRenderingMode(.alwaysOriginal),
+        style: .plain,
+        target: vc,
+        action: #selector(vc.replyButtonAction(_:))).then {
+            $0.image?.withRenderingMode(.alwaysTemplate)
+            $0.tintColor = .red
     }
     
-    lazy var doneButton = UIBarButtonItem(image: #imageLiteral(resourceName: "paper-white-512px").resizeImage(UI.likeImageDimenstion, opaque: false).withRenderingMode(.alwaysOriginal),
-                                          style: .plain,
-                                          target: vc,
-                                          action: #selector(vc.doneButtonAction(_:)))
+    lazy var doneButton = UIBarButtonItem(
+        image: #imageLiteral(resourceName: "paper-white-512px").resizeImage(UI.likeImageDimenstion, opaque: false).withRenderingMode(.alwaysOriginal),
+        style: .plain,
+        target: vc,
+        action: #selector(vc.doneButtonAction(_:)))
     
-    lazy var moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "more-512px").resizeImage(UI.likeImageDimenstion, opaque: false).withRenderingMode(.alwaysOriginal),
-                                     style: .plain,
-                                     target: vc,
-                                     action: #selector(vc.moreButtonAction(_:)))
+    lazy var moreButton = UIBarButtonItem(
+        image: #imageLiteral(resourceName: "more-512px").resizeImage(UI.likeImageDimenstion, opaque: false).withRenderingMode(.alwaysOriginal),
+        style: .plain,
+        target: vc,
+        action: #selector(vc.moreButtonAction(_:)))
     
     
     // For HeaderView for TableView's ParallaxHeader
@@ -219,12 +224,12 @@ class PostDetailView: BaseView<PostDetailViewController> {
         targetingButtons()
         
         postTableView.parallaxHeader.parallaxHeaderDidScrollHandler = { [weak self] parallaxHeader in
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             if parallaxHeader.progress <= 0.0 {
-                strongSelf.vc.navigationController?.navigationBar.barTintColor = .appStyle
-                strongSelf.vc.navigationController?.navigationBar.isTranslucent = false
+                self.vc.navigationController?.navigationBar.barTintColor = .appStyle
+                self.vc.navigationController?.navigationBar.isTranslucent = false
             }else {
-                strongSelf.vc.navigationController?.navigationBar.isTranslucent = true
+                self.vc.navigationController?.navigationBar.isTranslucent = true
             }
         }
         addGestureRecognizer(toggleViewTapGesture)
@@ -264,21 +269,23 @@ class PostDetailView: BaseView<PostDetailViewController> {
                 return
         }
         
-        coverImage.kf.setImage(with: imgURL,
-                               placeholder: nil,
-                               options: [.transition(.fade(1))],
-                               progressBlock: nil,
-                               completionHandler: nil)
+        coverImage.kf.setImage(
+            with: imgURL,
+            placeholder: nil,
+            options: [.transition(.fade(1))],
+            progressBlock: nil,
+            completionHandler: nil)
+        
         titleLabel.text = title
         dateLabel.text = "\(startDate) ~ \(endDate)"
         continentLabel.text = continentType.string
-        authorButton.kf.setImage(with: authorURL,
-                                 for: .normal,
-                                 placeholder: nil,
-                                 options: [.transition(.fade(1))],
-                                 progressBlock: nil,
-                                 completionHandler: nil)
-        
+        authorButton.kf.setImage(
+            with: authorURL,
+            for: .normal,
+            placeholder: nil,
+            options: [.transition(.fade(1))],
+            progressBlock: nil,
+            completionHandler: nil)
         
         authorNickNameLabel.text = data.author.username
     }

@@ -16,9 +16,12 @@ extension ProfileViewController {
 }
 
 extension ProfileViewController {
+    // initial, populated, loading, error 
     enum State {
+        case initial 
         case loading
-        case ready(item: UserModel)
+        case populated(userModel: UserModel)
+        case retryOnError
     }
 }
 

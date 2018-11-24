@@ -10,6 +10,7 @@ import UIKit
 import SkyFloatingLabelTextField
 import Moya
 import Square
+import SwiftyBeaver
 
 extension SettingProfileViewController {
     enum State {
@@ -24,18 +25,9 @@ final class SettingProfileViewController: BaseViewController {
         view = v
     }
     
-    static func create() -> SettingProfileViewController {
+    static func create() -> Self {
         let `self` = self.init()
         return self
-    }
-    
-    var state: State = .loading {
-        didSet {
-            switch state {
-            case .loading: break
-            case .ready(_): break
-            }
-        }
     }
     
     let provider = MoyaProvider<User>(plugins: [NetworkLoggerPlugin()])
@@ -43,7 +35,7 @@ final class SettingProfileViewController: BaseViewController {
         super.viewDidLoad()
         v.start(true)
         provider.request(.profile(otherUserPK: nil)) { [weak self] (result) in
-            guard let strongSelf = self else {
+            guard let self = self else {
                 return
             }
             
@@ -53,17 +45,17 @@ final class SettingProfileViewController: BaseViewController {
                 case true :
                     do {
                         let model = try response.map(UserModel.self)
-                        strongSelf.v.configureUI(with: model)
+                        self.v.configureUI(with: model)
                     }catch {
-                        print("fail to convert Model: \(#function)")
+                        SwiftyBeaver.debug("fail to convert Model: \(#function)")
                     }
                 case false:
-                    print("fail to Request: \(#function)")
+                    SwiftyBeaver.debug("fail to Request: \(#function)")
                 }
             case .failure(let error):
-                print(error.localizedDescription)
+                SwiftyBeaver.error(error.localizedDescription)
             }
-            UIView.animate(withDuration: 0.3) { strongSelf.v.start(false) }
+            UIView.animate(withDuration: 0.3) { self.v.start(false) }
         }
     }
 }
@@ -81,17 +73,18 @@ extension SettingProfileViewController {
                 return
         }
         provider.request(.updateProfile(username: username, photo: photo)) { [weak self] (result) in
-            guard let strongSelf = self  else {
+            guard let self = self  else {
                 return
             }
             switch result {
             case .success(let response):
                 switch (200...299) ~= response.statusCode {
-                case true : strongSelf.navigationController?.popViewController(animated: true)
+                case true : self.navigationController?.popViewController(animated: true)
                 case false: Square.display("Alredy exist input username")
                 }
                 
-            case .failure(let error): print(error.localizedDescription)
+            case .failure(let error):
+                SwiftyBeaver.error("\(error.localizedDescription)")
             }
         }
     }
