@@ -13,7 +13,12 @@ final class NotiView: BaseView<NotiViewController> {
         $0.register(cell: NotiCell.self)
         $0.backgroundColor = .white
         $0.rowHeight = UITableView.automaticDimension
-        $0.estimatedRowHeight = 88
+
+        $0.estimatedRowHeight = UI.rowHeight
+    }
+    
+    struct UI {
+        static var rowHeight: CGFloat = UIScreen.mainHeight * 0.13
     }
     override func setupUI() {
         backgroundColor = .white
@@ -30,5 +35,13 @@ final class NotiView: BaseView<NotiViewController> {
     override func setupBinding() {
         likeTableView.delegate = vc
         likeTableView.dataSource = vc
+    }
+    
+    func setup(footerView: ViewControllerStateView?) {
+        switch footerView?.stateType {
+        case .empty?, .error?:  likeTableView.isScrollEnabled = false
+        default:                likeTableView.isScrollEnabled = true
+        }
+        likeTableView.tableFooterView = footerView
     }
 }

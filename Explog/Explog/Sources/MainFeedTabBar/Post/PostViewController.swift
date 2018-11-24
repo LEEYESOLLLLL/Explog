@@ -25,7 +25,7 @@ final class PostViewController: BaseViewController {
         return .lightContent
     }
     
-    let provider = MoyaProvider<Post>.init(plugins: [NetworkLoggerPlugin()])
+    let provider = MoyaProvider<Post>()//(plugins: [NetworkLoggerPlugin()])
     override func loadView() {
         super.loadView()
         view = v

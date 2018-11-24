@@ -38,7 +38,6 @@ extension SettingCell {
     }
 }
 
-
 extension SettingCell {
     func openSource(_ text: String) {
         guard let type = SettingViewController.Information(rawValue: text) else {
@@ -60,7 +59,6 @@ extension SettingCell {
         textLabel?.text = text 
     }
 }
-
 
 extension SettingCell {
     func logout(_ text: String) {

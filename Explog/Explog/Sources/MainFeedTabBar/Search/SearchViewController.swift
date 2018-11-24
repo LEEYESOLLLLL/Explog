@@ -55,10 +55,14 @@ final class SearchViewController: BaseViewController {
 extension SearchViewController {
     private func manageState() {
         switch state {
-        case .loading:       v.setup(footerView: ViewControllerStateView(state: .loading))
-        case .populated:     v.setup(footerView: nil)
-        case .paging(_ , _): v.setup(footerView: ViewControllerStateView(state: .loading))
-        case .empty:         v.setup(footerView: ViewControllerStateView(state: .empty))
+        case .loading:
+            v.setup(footerView: ViewControllerStateView(state: .loading))
+        case .populated:
+            v.setup(footerView: nil)
+        case .paging(_ , _):
+            v.setup(footerView: ViewControllerStateView(state: .loading))
+        case .empty:
+            v.setup(footerView: ViewControllerStateView(state: .empty))
         case .error(let error, let message):
             SwiftyBeaver.error(error?.localizedDescription ?? "", message)
             v.setup(footerView: ViewControllerStateView(state: .error))

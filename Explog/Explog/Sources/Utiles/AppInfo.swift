@@ -36,7 +36,9 @@ class AppInfo {
     static func appName() -> String {
         return Bundle.main.infoDictionary?["CFBundleName"] as! String
     }
+    
     /// Returns Api Version Number
+    /// Runtime error, now 
     static func apiVersionNumber() -> String {
         return Bundle.main.infoDictionary?["API_VERSION"] as! String
     }

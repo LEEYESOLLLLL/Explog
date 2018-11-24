@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyBeaver
 
 /**
  BaseNavigiationController is used as foundation of UINavigationController
@@ -23,7 +24,7 @@ public class BaseNavigiationController: UINavigationController, ViewControllerTy
     }
     
     deinit {
-        print("\(self) have deinited")
+        SwiftyBeaver.info("\(self) have deinited")
     }
 }
 

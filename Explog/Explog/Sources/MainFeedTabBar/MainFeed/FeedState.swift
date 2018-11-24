@@ -9,9 +9,23 @@
 import UIKit
 
 extension FeedTableViewController {
+    typealias Posts = [FeedModel.Post]
     enum State {
+        case initial
         case loading
-        case ready(FeedModel)
-        case error
+        case populated(feedModel: FeedModel)
+        case paging(feedModel: FeedModel, nextPage: String)
+        case errorWithRetry
+        
+        var currentFeedModel: Posts {
+            switch self {
+            case .populated(let feeeModel):
+                return feeeModel.posts
+            case .paging(let feedModel, _):
+                return feedModel.posts
+            default:
+                return []
+            }
+        }
     }
 }

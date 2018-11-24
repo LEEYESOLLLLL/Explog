@@ -14,6 +14,10 @@ struct NotiListModel: Codable {
     var previous: String?
     var results: [NotiInfo]?
     
+    var hasNext: Bool {
+        return results != nil 
+    }
+    
     enum CodingKeys: String, CodingKey {
         case count
         case next

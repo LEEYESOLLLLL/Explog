@@ -11,7 +11,6 @@ import AcknowList
 
 final class CustomAcknowListViewController: AcknowListViewController {
     
-    
     lazy var backButton = UIBarButtonItem(
         image: #imageLiteral(resourceName: "back-24pk").withRenderingMode(.alwaysOriginal),
         style: .plain,

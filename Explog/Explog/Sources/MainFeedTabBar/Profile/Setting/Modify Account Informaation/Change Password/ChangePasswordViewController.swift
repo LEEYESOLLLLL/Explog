@@ -10,6 +10,7 @@ import UIKit
 import SkyFloatingLabelTextField
 import Square
 import Moya
+import SwiftyBeaver
 
 final class ChangePasswordViewController: BaseViewController  {
     static func create() -> Self {
@@ -57,7 +58,7 @@ extension ChangePasswordViewController  {
                     case false : Square.display("The old password is invalid.")
                     }
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    SwiftyBeaver.error(error.localizedDescription)
                 }
         }
     }

@@ -9,11 +9,13 @@
 import UIKit
 
 extension ViewControllerStateView {
-    enum State: CaseIterable {
+    enum State  {
+        
         case loading
         case error
         case empty
         case initial
+        case errorWithRetry(owner: UIViewController, selector: Selector)
     }
 }
 
@@ -23,9 +25,9 @@ class ViewControllerStateView: UIView {
     private let descriptionLabel = UILabel().then {
         $0.setup(textColor: .darkGray, fontStyle: .body, textAlignment: .center, numberOfLines: 0)
     }
-    private let descriptionImageView = UIImageView().then {
+    private let descriptionButton = UIButton().then {
+        $0.isUserInteractionEnabled = false
         $0.contentMode = .scaleAspectFill
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -45,14 +47,21 @@ class ViewControllerStateView: UIView {
     
     let stateType: State
     
-    init(state: State, frame: CGRect = CGRect.zero) {
+    init(frame: CGRect = CGRect.zero, state: State) {
         self.stateType = state
         super.init(frame: frame)
         
         switch stateType {
-        case .loading: setupLoadingState()
-        case .error:   setupState(#imageLiteral(resourceName: "error"), description: "Something worng.\n\nCheckout your internect connecting or try agian")
-        case .empty:   setupState(#imageLiteral(resourceName: "empty-folder-512px"), description: "No Trips match your search word")
+        case .loading:
+            setupLoadingState()
+        case .error:
+            setupState(#imageLiteral(resourceName: "error"), description: "Something worng.\n\nCheckout your internect connecting or try agian")
+        case .empty:
+            setupState(#imageLiteral(resourceName: "empty-folder-512px"), description: "No Trips match your search word")
+        case .errorWithRetry(let owner, let selector):
+            descriptionButton.isUserInteractionEnabled = true
+            descriptionButton.addTarget(owner, action: selector, for: .touchUpInside)
+            setupState(#imageLiteral(resourceName: "return-512px"), description: "Something worng.\n\nCheckout your internect connecting or try agian")
         case .initial: break 
         }
     }
@@ -83,7 +92,7 @@ extension ViewControllerStateView {
     private func setupState(_ image: UIImage, description: String) {
         frame = UI.rect
         
-        addSubviews([descriptionLabel, descriptionImageView])
+        addSubviews([descriptionLabel, descriptionButton])
         descriptionLabel
             .centerXAnchor(to: centerXAnchor)
             .centerYAnchor(to: centerYAnchor)
@@ -91,7 +100,14 @@ extension ViewControllerStateView {
             .trailingAnchor(to: trailingAnchor, constant: -UI.margin)
             .activateAnchors()
         
-        if case .error = stateType {
+        descriptionButton
+            .centerXAnchor(to: centerXAnchor)
+            .bottomAnchor(to: descriptionLabel.topAnchor, constant: -UI.margin * 2)
+            .dimensionAnchors(size: UI.imageSize)
+            .activateAnchors()
+        
+        descriptionButton.setBackgroundImage(image, for: .normal)
+        if case .error = stateType, case .errorWithRetry = stateType {
             let mutatingString = NSMutableAttributedString(
                 string: description)
             if let font = UIFont(name: .defaultFontName, size: 24) {
@@ -101,12 +117,5 @@ extension ViewControllerStateView {
         }else {
             descriptionLabel.text = description
         }
-        
-        descriptionImageView
-            .centerXAnchor(to: centerXAnchor)
-            .bottomAnchor(to: descriptionLabel.topAnchor, constant: -UI.margin * 2)
-            .dimensionAnchors(size: UI.imageSize)
-            .activateAnchors()
-        descriptionImageView.image = image
     }
 }

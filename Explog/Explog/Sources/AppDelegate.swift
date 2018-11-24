@@ -12,13 +12,6 @@ import UserNotifications
 import Firebase
 import SwiftyBeaver
 
-/*
- Beaver
- e1PYdR
- ndeEkqiLos6CWBi4utcqwtzhoaiunf6y
- gtkxf6dbqlrfpxqkulwxt1bgringeLsy
- */
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
@@ -44,6 +37,7 @@ extension AppDelegate  {
             appSecret: "ndeEkqiLos6CWBi4utcqwtzhoaiunf6y",
             encryptionKey: "gtkxf6dbqlrfpxqkulwxt1bgringeLsy")
         SwiftyBeaver.addDestinations([console, platform])
+        SwiftyBeaver.verbose("The most recent Time that did finish launching: " + Date().convertedNow())
     }
 }
 
@@ -73,7 +67,7 @@ extension AppDelegate {
             .current()
             .requestAuthorization(
             options: [.alert, .sound, .badge]) { (grant, error) in
-                print("grant is \(grant), error is \(String(describing: error?.localizedDescription)))")
+                SwiftyBeaver.info("grant is \(grant), error is \(String(describing: error?.localizedDescription)))")
                 if grant == true {
                     DispatchQueue.main.async {
                         UIApplication.shared.registerForRemoteNotifications()
@@ -95,7 +89,7 @@ extension AppDelegate {
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("Not Getting Token: \(error.localizedDescription)")
+        SwiftyBeaver.info("Not Getting Token: \(error.localizedDescription)")
     }
 }
 

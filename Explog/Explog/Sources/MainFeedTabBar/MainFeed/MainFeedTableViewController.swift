@@ -12,18 +12,16 @@ import Moya
 import BoltsSwift
 import Kingfisher
 import Square
+import SwiftyBeaver
 
 
 final class FeedTableViewController: ParallaxTableViewController {
-    let provider = MoyaProvider<Feed>()//(plugins: [NetworkLoggerPlugin(verbose:true)])
-    let postProvider = MoyaProvider<Post>()//(plugins: [NetworkLoggerPlugin(verbose:true)])
-    var state: State = .loading {
+    let provider = MoyaProvider<Feed>(plugins: [NetworkLoggerPlugin()])
+    let postProvider = MoyaProvider<Post>(plugins: [NetworkLoggerPlugin()])
+    
+    var state: State = .initial {
         didSet {
-            switch state {
-            case .loading: setupUI()
-            case .ready:   tableView.reloadData()
-            case .error :  print("\(#function): cause error~")
-            }
+            managingState()
         }
     }
     
@@ -48,17 +46,18 @@ final class FeedTableViewController: ParallaxTableViewController {
         return self
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        state = .loading
-        setupBinding()
+        state = .initial
     }
     
     func setupUI() {
         self.tableView.separatorStyle = .none
         self.tableView.rowHeight = UITableView.automaticDimension
-        DispatchQueue.main.async { self.networkServiceWith(continent: self.tableView.tag) }
+        DispatchQueue.main.async {
+            self.state = .loading
+            self.networkServiceWith(continent: self.tableView.tag)
+        }
     }
     
     func setupBinding() {
@@ -66,9 +65,29 @@ final class FeedTableViewController: ParallaxTableViewController {
     }
     
     @objc func triggerInitializationAction(_ sender: UIRefreshControl) {
-        state = .loading
+        state = .initial
         tableView.reloadData()
         sender.endRefreshing()
+    }
+    
+    private func managingState() {
+        switch state {
+        case .initial:
+            setupUI()
+            setupBinding()
+        case .loading:
+            tableView.tableFooterView = ViewControllerStateView(state: .loading)
+        case .populated:
+            tableView.tableFooterView = nil
+        case .paging:
+            tableView.tableFooterView = ViewControllerStateView(state: .loading)
+        case .errorWithRetry:
+            tableView.tableFooterView = ViewControllerStateView(state: .errorWithRetry(owner: self, selector: #selector(retry)))
+        }
+        tableView.reloadData()
+    }
+    @objc func retry(_ sender: UIButton) {
+        triggerInitializationAction(triggerInitialization)
     }
 }
 
@@ -79,36 +98,50 @@ extension FeedTableViewController {
             guard let self = self else { return }
             switch result {
             case .success(let response):
-                do {
-                    self.state = .ready(try response.map(FeedModel.self))
-                }catch {
-                    self.state = .error
+                guard let model = try? response.map(FeedModel.self) else {
+                    SwiftyBeaver.error("No Convert FeedModel")
+                    self.state = .errorWithRetry
+                    return
+                }
+                
+                if let nextPage = model.next {
+                    self.state = .paging(feedModel: model, nextPage: nextPage)
+                }else {
+                    self.state = .populated(feedModel: model)
                 }
             case.failure(let error) :
-                self.state = .error
-                print(error.localizedDescription)
+                SwiftyBeaver.error("No Connect Internet: \(String(describing: error.errorDescription))")
+                self.state = .errorWithRetry
             }
         }
     }
     
-    func loadNetwork(continent: Int, query nextpageQuery: String) {
-        provider.request(.next(continent: continent, query: nextpageQuery)) { [weak self] result in
-            guard let self = self,
-                case .ready(let item) = self.state else {
+    func loadNetwork(continent: Int, nextPage nextURL: String) {
+        guard let nextURL = try? nextURL.asURL(),
+            let NextPageQuery = nextURL.query else  {
                 return
+        }
+        provider.request(.next(continent: continent, query: NextPageQuery)) { [weak self] result in
+            guard let self = self, case .paging(let item, _) = self.state else {
+                    return
             }
             switch result {
             case .success(let response):
-                do {
-                    let convertedData = try response.map(FeedModel.self)
-                    self.state = .ready(item + convertedData)
-                }catch {
-                    print(error.localizedDescription)
-                    self.state = .error
+                guard let model = try? response.map(FeedModel.self) else {
+                    SwiftyBeaver.error("No Convert FeedModel")
+                    self.state = .errorWithRetry
+                    return
                 }
+                
+                if let nextPage = model.next {
+                    self.state = .paging(feedModel: item + model, nextPage: nextPage)
+                }else {
+                    self.state = .populated(feedModel: item + model)
+                }
+                
             case .failure(let error):
-                print(error.localizedDescription)
-                self.state = .error
+                SwiftyBeaver.error("No Convert FeedModel: \(String(describing: error.errorDescription))")
+                self.state = .errorWithRetry
             }
         }
     }
@@ -121,7 +154,7 @@ extension FeedTableViewController {
         let taskCompletionSource = TaskCompletionSource<LikeModel>()
         postProvider.request(.like(postPK: postPrivateKey)) { [weak self] (result) in
             guard let self = self,
-                case .ready(let item) = self.state else {
+                case .populated(let item) = self.state else {
                     return
             }
             switch result {
@@ -131,7 +164,7 @@ extension FeedTableViewController {
                     if let likeModel = try? response.map(LikeModel.self) {
                         var copy = item
                         copy.posts[index].modifiedLike(model: likeModel)
-                        self.state = .ready(copy)
+                        self.state = .populated(feedModel: copy)
                         taskCompletionSource.set(result: likeModel)
                     }
                 case false :
@@ -149,7 +182,7 @@ extension FeedTableViewController {
 extension FeedTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        guard case .ready(let item) = state,
+        guard case .populated(let item) = state,
             item.posts.count > indexPath.row else {
                 return
         }
@@ -171,52 +204,51 @@ extension FeedTableViewController {
     }
 }
 
-// MARK: TableView DataSource
+// MARK: TableView DataSource - 1
 extension FeedTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard case .ready(let item) = state else { return 0 }
-        return item.posts.count
+        return state.currentFeedModel.count
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return tableView.bounds.height / 3
+    }
+    
+}
+
+// MARK: TabbleView DataSource - 2
+extension FeedTableViewController {
+    // MARK: Call sequence - 1
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return tableView.dequeue(FeedTableViewCell.self)
     }
     
     // MARK: Call sequence - 2
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let cell = cell as? FeedTableViewCell,
-            case .ready(let item) = state else {
+        guard let cell = cell as? FeedTableViewCell, state.currentFeedModel.count > indexPath.row else {
                 return
         }
-        let post = item.posts[indexPath.row]
+        let post = state.currentFeedModel[indexPath.row]
         cell.configure(model: post) { [weak self] (postPK: Int) -> BoltsSwift.Task<LikeModel> in
             guard let self = self else {
                 fatalError()
             }
             return self.like(postPK, index: indexPath.row)
         }
+        
+        // Last Index
+        if case .paging(_, let nextPage) = state,
+            state.currentFeedModel.count - 1 == indexPath.row {
+            loadNetwork(continent: tableView.tag, nextPage: nextPage)
+        }
     }
     
     // MARK: Call sequence - 3
     override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         (cell as? FeedTableViewCell)?.coverImage.kf.cancelDownloadTask()
-    }
-    
-    // MARK: Call sequence - 1
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard case .ready(let item) = state else { fatalError() }
-        let cell = tableView.dequeue(FeedTableViewCell.self)
-        if let next = item.next,
-            indexPath.row == item.posts.count - 1,
-            let nextURL = try? next.asURL(),
-            let queryOfNextPage = nextURL.query {
-            loadNetwork(continent: tableView.tag, query: queryOfNextPage)
-        }
-        
-        return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.bounds.height / 3
     }
 }
