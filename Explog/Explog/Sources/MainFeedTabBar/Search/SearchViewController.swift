@@ -25,8 +25,8 @@ final class SearchViewController: BaseViewController {
         return self
     }
     
-    let provider = MoyaProvider<Search>()//(plugins:[NetworkLoggerPlugin()])
-    let postProvider = MoyaProvider<Post>()//(plugins:[NetworkLoggerPlugin()])
+    let provider = MoyaProvider<Search>(plugins:[NetworkLoggerPlugin()])
+    let postProvider = MoyaProvider<Post>(plugins:[NetworkLoggerPlugin()])
     private var pendingWorkItem: DispatchWorkItem?
     var state: State = .loading {
         didSet {

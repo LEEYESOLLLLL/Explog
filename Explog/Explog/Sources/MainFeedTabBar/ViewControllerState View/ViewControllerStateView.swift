@@ -105,8 +105,8 @@ extension ViewControllerStateView {
             .bottomAnchor(to: descriptionLabel.topAnchor, constant: -UI.margin * 2)
             .dimensionAnchors(size: UI.imageSize)
             .activateAnchors()
-        descriptionButton.setBackgroundImage(image, for: .normal)
         
+        descriptionButton.setBackgroundImage(image, for: .normal)
         if case .error = stateType, case .errorWithRetry = stateType {
             let mutatingString = NSMutableAttributedString(
                 string: description)

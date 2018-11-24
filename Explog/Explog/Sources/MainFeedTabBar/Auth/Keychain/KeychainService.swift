@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyBeaver
 import KeychainAccess
 
 struct KeychainService {
@@ -50,7 +51,7 @@ extension KeychainService {
                 try keychain.remove(key.rawValue)
             }
         }catch {
-            print("fail removing keychain items..")
+            SwiftyBeaver.info("fail removing keychain items..")
         }
     }
 }
