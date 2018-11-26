@@ -33,9 +33,9 @@ extension SettingViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true) // for Flash
         guard let section = Section(rawValue: indexPath.section),
-        let cell = tableView.cellForRow(at: indexPath) as? SettingCell,
-        let cellText = cell.textLabel?.text else {
-            return
+            let cell = tableView.cellForRow(at: indexPath) as? SettingCell,
+            let cellText = cell.textLabel?.text else {
+                return
         }
         
         switch section {
@@ -51,19 +51,19 @@ extension SettingViewController: UITableViewDelegate {
         case .feature:
             Square.display("Delegate Cache", message: "Do you want to delete stored cache?",
                            alertActions: [.cancel(message: "Cancel"), .destructive(message: "Delete")]) { (_, index) in
-                if index == 1 {
-                    KingfisherManager.shared.cache.allClear()
-                    tableView.reloadRows(at: [indexPath], with: .fade)
-                }
+                            if index == 1 {
+                                KingfisherManager.shared.cache.allClear()
+                                tableView.reloadRows(at: [indexPath], with: .fade)
+                            }
             }
-            
         case .information:
             guard let type = Information(rawValue: cellText) else {
-                    return
-                }
+                return
+            }
             
             switch type {
-            case .app_version: break
+            case .app_version:
+                break
             case .opensource_license:
                 let viewController = CustomAcknowListViewController(fileNamed: "Pods-Explog-acknowledgements")
                 navigationController?.pushViewController(viewController, animated: true)
@@ -79,15 +79,37 @@ extension SettingViewController: UITableViewDelegate {
         case .logout:
             Square.display("Warning", message: "Are you sure you wnat to log out?",
                            alertActions: [.cancel(message: "Cencel"), .destructive(message: "OK")]) { (alertAction, index) in
-                if index == 1 {
-                    if let rootViewController = UIApplication.shared.keyWindow?.rootViewController,
-                        let tabBarController = rootViewController as? UITabBarController {
-                        KeychainService.allClear()
-                        rootViewController.dismiss(animated: false) {
-                            tabBarController.selectedViewController = tabBarController.viewControllers?.first!
-                        }
-                    }
-                }
+                            if index == 1 {
+                                if let rootViewController = UIApplication.shared.keyWindow?.rootViewController,
+                                    let tabBarController = rootViewController as? UITabBarController {
+                                    KeychainService.allClear()
+                                    rootViewController.dismiss(animated: false) {
+                                        tabBarController.selectedViewController = tabBarController.viewControllers?.first!
+                                    }
+                                }
+                            }
+            }
+        }
+    }
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        guard let section = Section(rawValue: indexPath.section),
+            let cell = tableView.cellForRow(at: indexPath) as? SettingCell,
+            let cellText = cell.textLabel?.text else {
+                return false
+        }
+        
+        switch section {
+        case .account, .feature, .support, .logout:
+            return true
+        case .information:
+            guard let type = Information(rawValue: cellText) else {
+                return true
+            }
+            switch type {
+            case .app_version:
+                return false
+            case .opensource_license:
+                return true
             }
         }
     }
@@ -149,7 +171,7 @@ extension SettingViewController {
         switch section {
         case .account:     cell.account(Account.allCases[indexPath.row].rawValue)
         case .feature:     cell.feature(Feature.allCases[indexPath.row].rawValue)
-        case .information: cell.openSource(Information.allCases[indexPath.row].rawValue)
+        case .information: cell.information(Information.allCases[indexPath.row].rawValue)
         case .support:     cell.support(text: Support.allCases[indexPath.row].rawValue)
         case .logout:      cell.logout(Logout.allCases[indexPath.row].rawValue)
         }
