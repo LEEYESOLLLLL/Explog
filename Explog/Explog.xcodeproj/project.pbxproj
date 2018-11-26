@@ -87,6 +87,8 @@
 		04B38AEA2178820C00E17908 /* EmailLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AE92178820C00E17908 /* EmailLoginViewController.swift */; };
 		04B38AEC2178821200E17908 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AEB2178821200E17908 /* SignUpViewController.swift */; };
 		04B38AEE2178826000E17908 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AED2178826000E17908 /* AuthView.swift */; };
+		04B7E67421ABD8E30084FB6D /* AppVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B7E67321ABD8E30084FB6D /* AppVersion.swift */; };
+		04B7E67621ABE3260084FB6D /* AppInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B7E67521ABE3260084FB6D /* AppInfoModel.swift */; };
 		04B8FBEA21940C6A0090938E /* UIApplication+SettingURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8FBE921940C6A0090938E /* UIApplication+SettingURL.swift */; };
 		04B8FC0C2194274F0090938E /* ImagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8FC0B2194274F0090938E /* ImagePickerViewController.swift */; };
 		04B8FC34219452800090938E /* PrivacyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8FC33219452800090938E /* PrivacyType.swift */; };
@@ -240,6 +242,8 @@
 		04B38AE92178820C00E17908 /* EmailLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLoginViewController.swift; sourceTree = "<group>"; };
 		04B38AEB2178821200E17908 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		04B38AED2178826000E17908 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		04B7E67321ABD8E30084FB6D /* AppVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersion.swift; sourceTree = "<group>"; };
+		04B7E67521ABE3260084FB6D /* AppInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoModel.swift; sourceTree = "<group>"; };
 		04B8FBE921940C6A0090938E /* UIApplication+SettingURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+SettingURL.swift"; sourceTree = "<group>"; };
 		04B8FC0B2194274F0090938E /* ImagePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerViewController.swift; sourceTree = "<group>"; };
 		04B8FC33219452800090938E /* PrivacyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyType.swift; sourceTree = "<group>"; };
@@ -350,6 +354,7 @@
 				046A8CC8218986DA00C12390 /* UserModel.swift */,
 				04266A68218ED68A00B18C8E /* ReplyModel.swift */,
 				04266A87219072EC00B18C8E /* NotiModel.swift */,
+				04B7E67521ABE3260084FB6D /* AppInfoModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -365,6 +370,7 @@
 				04266A6A218ED6F700B18C8E /* Reply.swift */,
 				04266A782190245400B18C8E /* Search.swift */,
 				04266A8521906FCC00B18C8E /* Noti.swift */,
+				04B7E67321ABD8E30084FB6D /* AppVersion.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1122,6 +1128,7 @@
 				0423A637212B97B000DD9747 /* NotiViewController.swift in Sources */,
 				04C70ACA218456C600B43683 /* ToggleView.swift in Sources */,
 				047E598C2189D92500BD2810 /* SettingView.swift in Sources */,
+				04B7E67421ABD8E30084FB6D /* AppVersion.swift in Sources */,
 				04C8F707218B2C0100CA296F /* SettingProfileView.swift in Sources */,
 				0423A62D212B976D00DD9747 /* SearchView.swift in Sources */,
 				04C70AA42183188E00B43683 /* DetailTextCell.swift in Sources */,
@@ -1160,6 +1167,7 @@
 				04F1A3BF218C491A00CF99A1 /* SettingProfilePhotoViewController.swift in Sources */,
 				04F1A3C4218C5B3E00CF99A1 /* ChangePasswordViewController.swift in Sources */,
 				0423A600212B72F000DD9747 /* AppDelegate.swift in Sources */,
+				04B7E67621ABE3260084FB6D /* AppInfoModel.swift in Sources */,
 				04BDBDF1218D8B9D005B2F68 /* FeedState.swift in Sources */,
 				040E642D219A7DA2001E6B7B /* PersistenceService.swift in Sources */,
 				04F72A63217C49A50099C7C9 /* AuthModel.swift in Sources */,
