@@ -30,17 +30,26 @@ extension SettingCell {
 
 extension SettingCell {
     func feature(_ text: String) {
+        guard let type = SettingViewController.Feature(byLocalizedString: text) else {
+            return
+        }
+        
         textLabel?.text = text
-        ImageCache.default.calculateDiskCacheSize {[weak self] (n: UInt) in
-            guard let self = self else { return }
-            self.detailTextLabel?.text = ByteCountFormatter.string(fromByteCount: Int64(n), countStyle: .file)
+        switch type {
+        case .cashed:
+            ImageCache.default.calculateDiskCacheSize {[weak self] (n: UInt) in
+                guard let self = self else { return }
+                self.detailTextLabel?.text = ByteCountFormatter.string(fromByteCount: Int64(n), countStyle: .file)
+            }
+        case .language:
+            accessoryType = .disclosureIndicator
         }
     }
 }
 
 extension SettingCell {
     func information(_ text: String) {
-        guard let type = SettingViewController.Information(rawValue: text) else {
+        guard let type = SettingViewController.Information(byLocalizedString: text) else {
             return
         }
         

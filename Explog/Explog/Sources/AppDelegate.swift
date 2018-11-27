@@ -45,11 +45,11 @@ extension AppDelegate  {
 extension AppDelegate  {
     private func setKeyWindow() {
         window = UIWindow(frame: UIScreen.mainbounds)
-        window?.rootViewController = setTabBarViewControllers()
+        window?.rootViewController = AppDelegate.setTabBarViewControllers()
         window?.makeKeyAndVisible()
     }
     
-    private func setTabBarViewControllers() -> UITabBarController {
+    static func setTabBarViewControllers() -> UITabBarController {
         // initilize ViewControllers
         let mainFeedVC = FeedContainerViewController.create()
         let searchVC   = UINavigationController(rootViewController: SearchViewController.create())

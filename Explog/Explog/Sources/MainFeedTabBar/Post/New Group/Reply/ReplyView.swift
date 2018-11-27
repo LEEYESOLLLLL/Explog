@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Localize_Swift
 
 
 
@@ -48,14 +49,14 @@ final class ReplyView: BaseView<ReplyViewController> {
         $0.font = UIFont(name: .defaultFontName, size: 18)
         $0.textColor = .gray
         $0.textAlignment = .natural
-        $0.text = "input your comments🐳"
+        $0.text = "Input your comments🐳".localized()
         $0.isEditable = true
         $0.isUserInteractionEnabled = true
         
     }
     
     var createReplyButton = UIButton().then {
-        $0.setTitle("Post", for: [.normal, .highlighted])
+        $0.setTitle("Entry".localized(), for: [.normal, .highlighted])
         $0.setTitleColor(.white, for: .normal)
         $0.backgroundColor = .appStyle
         $0.clipsToBounds = true
@@ -127,7 +128,7 @@ final class ReplyView: BaseView<ReplyViewController> {
         vc.navigationItem.leftBarButtonItem = backButton
         vc.navigationController?.navigationBar.barTintColor = .appStyle
         vc.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        vc.navigationItem.title = "Comments"
+        vc.navigationItem.title = "Comments".localized()
         vc.navigationController?.navigationBar.barStyle = .black
     }
     

@@ -11,6 +11,7 @@ import Moya
 import Square
 import BoltsSwift
 import SwiftyBeaver
+import Localize_Swift
 
 extension NotiViewController {
     // loading, paging, empty, error
@@ -37,7 +38,7 @@ extension NotiViewController {
 final class NotiViewController: BaseViewController {
     static func create() -> Self {
         let `self` = self.init()
-        self.title = "Noti"
+        self.title = "Noti".localized()
         self.tabBarItem.image = #imageLiteral(resourceName: "noti-1")
         
         return self

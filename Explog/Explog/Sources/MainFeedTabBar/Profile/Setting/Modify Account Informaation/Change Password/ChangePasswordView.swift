@@ -8,6 +8,7 @@
 
 import UIKit
 import SkyFloatingLabelTextField
+import Localize_Swift
 
 final class ChangePasswordView: BaseView<ChangePasswordViewController> {
     
@@ -20,7 +21,8 @@ final class ChangePasswordView: BaseView<ChangePasswordViewController> {
     }
     
     lazy var doneButton = UIBarButtonItem(
-        barButtonSystemItem: .done,
+        title: "done".localized(),
+        style: .done,
         target: vc,
         action: #selector(vc.doneButtonAction(_:))).then {
             $0.tintColor = .black
@@ -74,7 +76,7 @@ final class ChangePasswordView: BaseView<ChangePasswordViewController> {
     override func setupBinding() {
         vc.navigationItem.leftBarButtonItem = backButton
         vc.navigationItem.rightBarButtonItem = doneButton
-        vc.navigationItem.title = "Change Password"
+        vc.navigationItem.title = "Change Password".localized()
         
         oldPasswordTextField.addTarget(vc, action: #selector(vc.textFieldDidChange(_:)), for: .editingChanged)
         changePasswordTextField.addTarget(vc, action: #selector(vc.textFieldDidChange(_:)), for: .editingChanged)

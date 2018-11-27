@@ -9,12 +9,20 @@
 
 import UIKit
 import CaseContainer
+import Localize_Swift
 
 
 final class FeedContainerViewController: CaseContainerViewController {
     required init() {
         super.init()
-        let titles: [String] = ["Asia", "Europe", "North America", "South America", "Africa", "Oceania"]
+        let titles: [String] = [
+            "Asia".localized(),
+            "Europe".localized(),
+            "North America".localized(),
+            "South America".localized(),
+            "Africa".localized(),
+            "Oceania".localized()
+        ]
         viewContorllers = titles
             .enumerated()
             .compactMap { [weak self] (tag: Int, title: String) -> ParallaxTableViewController? in
@@ -35,7 +43,7 @@ final class FeedContainerViewController: CaseContainerViewController {
     
     static func create() -> UINavigationController {
         let `self` = self.init()
-        self.title = "Feed"
+        self.title = "Feed".localized()
         self.tabBarItem.image = #imageLiteral(resourceName: "globe")
         let naviController = UINavigationController(rootViewController: self)
         naviController.setNavigationBarHidden(true, animated: false)

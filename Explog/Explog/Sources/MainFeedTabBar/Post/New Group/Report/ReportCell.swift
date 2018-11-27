@@ -10,7 +10,7 @@ import UIKit
 import M13Checkbox
 
 
-final class ReportCell: UITableViewCell {
+class ReportCell: UITableViewCell {
     var checkbox: M13Checkbox!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

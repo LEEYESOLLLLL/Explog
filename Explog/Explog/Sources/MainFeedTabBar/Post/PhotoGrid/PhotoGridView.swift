@@ -8,6 +8,7 @@
 
 import UIKit
 import Photos
+import Localize_Swift
 
 final class PhotoGridView: BaseView<PhotoGridViewController> {
     var collectionView = UICollectionView(collectionViewLayout: UICollectionViewFlowLayout()).then {
@@ -39,7 +40,7 @@ final class PhotoGridView: BaseView<PhotoGridViewController> {
         $0.setup(textColor: .darkGray, fontStyle: .body, textAlignment: .center, numberOfLines: 0)
         $0.lineBreakMode = .byWordWrapping
         let mutatingString = NSMutableAttributedString(
-            string: "Please Allow Photo Access\n\n This allows you to share photos from your library to your camera roll")
+            string: "Please Allow Photo Access\n\n This allows you to share photos from your library to your camera roll".localized())
         if let font = UIFont(name: .defaultFontName, size: 20) {
             mutatingString.addAttributes([.font: font.bold()],
                                          range: NSRange(location: 0, length: 25))
@@ -48,7 +49,7 @@ final class PhotoGridView: BaseView<PhotoGridViewController> {
     }
     
     var permissionButton = UIButton().then {
-        $0.setTitle("Continue", for: .normal)
+        $0.setTitle("Continue".localized(), for: .normal)
         $0.setTitleColor(.system(.blue) , for: .normal)
         $0.titleLabel?.font = UIFont(name: .defaultFontName, size: 20)?.bold()
         $0.layer.borderColor = UIColor.gray.cgColor

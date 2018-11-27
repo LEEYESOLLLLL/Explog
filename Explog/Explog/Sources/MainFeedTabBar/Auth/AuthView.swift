@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Localize_Swift
 
 final class AuthView: BaseView<AuthViewController> {
     var backgroundImage = UIImageView().then {
@@ -41,7 +42,7 @@ final class AuthView: BaseView<AuthViewController> {
         
     }
     var emailLoginButton = UIButton().then {
-        $0.setTitle("Login in with Email", for: [.normal, .highlighted])
+        $0.setTitle("Login in with Email".localized(), for: [.normal, .highlighted])
         $0.setTitleColor(.white, highlightedStateColor: .gray)
         $0.titleLabel?.textAlignment = .center
         $0.backgroundColor = .appStyle
@@ -54,7 +55,7 @@ final class AuthView: BaseView<AuthViewController> {
     }
     
     var signUpButton = UIButton().then {
-        $0.setTitle("Sign Up", for: [.normal, .highlighted])
+        $0.setTitle("Sign Up".localized(), for: [.normal, .highlighted])
         $0.setTitleColor(.white, highlightedStateColor: .gray)
         $0.titleLabel?.textAlignment = .center
         $0.layer.borderColor = UIColor.white.cgColor

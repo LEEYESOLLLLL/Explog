@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Localize_Swift
 
 final class ReportView: BaseView<ReportViewController> {
     var tableView = UITableView().then {
@@ -24,7 +25,8 @@ final class ReportView: BaseView<ReportViewController> {
         action: #selector(vc.backButtonAction(_:)))
     
     lazy var doneButton = UIBarButtonItem(
-        barButtonSystemItem: .done,
+        title: "done".localized(),
+        style: .done,
         target: vc,
         action: #selector(vc.doneButtonAction(_:))).then {
             $0.tintColor = .black

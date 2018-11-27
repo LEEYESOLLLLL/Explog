@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import Localize_Swift
 
 final class DatePickerAlertController: UIAlertController {
     var datePicker = UIDatePicker().then {
         $0.datePickerMode = .date
+        $0.locale = Locale(identifier: Localize.currentLanguage())
     }
     var readableDate: String {
         return datePicker.date.convertedString()
@@ -32,7 +34,7 @@ final class DatePickerAlertController: UIAlertController {
             .topAnchor(to: view.topAnchor)
             .centerXAnchor(to: view.centerXAnchor)
             .activateAnchors()
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel".localized(), style: .cancel, handler: nil)
         addAction(cancelAction)
     }
     @objc func datepickerAction(_ sender: UIDatePicker) { }

@@ -8,6 +8,7 @@
 
 import UIKit
 import SkyFloatingLabelTextField
+import Localize_Swift
 
 final class SignUpView: BaseView<SignUpViewController> {
     
@@ -61,7 +62,7 @@ final class SignUpView: BaseView<SignUpViewController> {
     }
     
     var signUpButton = ActivityIndicatorButton().then {
-        $0.setTitle("Sign up", for: [.normal, .highlighted])
+        $0.setTitle("Sign up".localized(), for: [.normal, .highlighted])
         $0.setTitleColor(.gray, highlightedStateColor: .blue)
         $0.isUserInteractionEnabled = false
         $0.layer.borderColor = UIColor.gray.cgColor

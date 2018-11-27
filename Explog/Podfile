@@ -38,6 +38,8 @@ target 'Explog' do
   # Logging Service 
   pod 'SwiftyBeaver', '~> 1.6.1'
 
+  # Internationalization vs Localization
+  pod 'Localize-Swift', '~> 2.0'
   # Pods for Explog
 end
 

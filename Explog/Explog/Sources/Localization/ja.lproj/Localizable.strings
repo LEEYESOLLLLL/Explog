@@ -1,0 +1,110 @@
+/* 
+  Localizable.strings
+  Explog
+
+  Created by Minjun Ju on 26/11/2018.
+  Copyright © 2018 com.dev.minjun. All rights reserved.
+*/
+
+/* Auth */
+"Login in with Email" = "メールでログイン";
+"Sign Up" = "サインアップ";
+"Log in" = "ログイン";
+
+/* TabBar Title */
+"Feed" = "フィード";
+"Search" = "サーチ";
+"Post" = "ポスト";
+"Noti" = "しらせ";
+"Profile" = "プロフィール";
+
+/* done button in navigation Bar Button */
+"done" = "完了";
+"Cancel" = "キャンセル";
+"OK" = "完了";
+"Delete" = "削除";
+"Warning" = "ウォーニング";
+
+/* Categories */
+"Asia" = "アジア";
+"Europe" = "ヨーロッパ";
+"North America" = "南アメリカ";
+"South America" = "北アメリカ";
+"Africa" = "アメリカ";
+"Oceania" = "オセアニア";
+
+/* Main Feed */
+"Require Login" = "ログインが必要";
+"Do you want to go to the login screen?" = "ログイン画面に行きたいですか？";
+
+/* Alert & Report */
+"Flag as inappropriate" = "不適切な書き込みだ";
+"Pornography" = "ポルノ";
+"Expletives" = "どくぐち";
+"Content that defames someone" = "人を批判する内容だ";
+"content that is unpleasant" = "不快な内容";
+"Etc." = "その他";
+
+/* NavigationBar Title */
+"Comments" = "リプ";
+
+/* Reply */
+"Input your comments🐳" = "ここに文章を入力してください🐳";
+"Entry" = "さくせい";
+
+/* Search */
+"Search trip in the world" = "旅行機を検索してください";
+
+/* ViewController State */
+"Something wrong.\n\n Check out your internet connecting or try again" = "間違ったアプローチです。\n\nインターネット接続を確認するか、アプリを再び実行してください。";
+"No Trips match your search word" = "検索語と一致しません。";
+
+/* Post */
+"Let's go on a trip!" = "日帰り旅行シーズン！💖";
+"  Cover" = "  表示画像";
+"Start Date can't be later than End Date or End Date can't be earlier than Start Date" = "開始日は終了日より後にすることはできません。終了日は開始日より前にすることはできません。";
+
+/* CautionView */
+"Find traveler who similar to me and share my trip. Inappropriate contents will be removed without notice or reported as spam\n\n- Inappropriate contents\n    - Content that defames someone\n    - Expletives\n    - Pornography\n    - Etc, Content that is offending someone" = "私と似ている旅行者を見つけ、旅行を分かち合う。不適切なコンテンツは予告なく削除されるか、スパムとして報告されます\n\n- 不適切なコンテンツ\n    - 人を批判する内容だ\n    - どくぐち\n    - ポルノ\n    - 不快な内容";
+"Confirm" = "承認";
+
+/* Camera & Photos Access Control */
+"Please Allow Camera Access\n\n This allows you to share taking your photos" = "カメラへのアクセスを許可してください.\n\n これにより、写真を共有することができます.";
+"Please Allow Photo Access\n\n This allows you to share photos from your library to your camera roll" = "写真へのアクセスを許可してください.\n\n これにより、ライブラリから写真をカメラロールに共有することができます.";
+"Continue" = "承認事項";
+
+/* Setting */
+"Setting" = "設定";
+"Account" = "アカウント";
+"Feature" = "特徴";
+"Information" = "情報";
+"Support" = "サポート";
+"Logout" = "ログアウト";
+
+// Setting - Section 1
+"Profile Settings" = "プロファイル設定";
+"Change Password" = "パスワードを変更する";
+"Change Profile Photo" = "プロフィール写真を変更する";
+
+// Setting - Section 2
+"Remove Cashed Data" = "キャッシュデータを削除する";
+"Language" = "言語";
+
+// Setting - Section 3
+"App Version" = "アプリのバージョン";
+"Open-Source License" = "オープンソースライセンス";
+
+// Setting - Section 4
+"FeedBack" = "メールお問い合わせ";
+
+// Setting - Section 5
+"Logout" = "ログアウト";
+
+"Delete Cache" = "キャッシュを削除する";
+"Do you want to delete stored cache?" = "保存されたキャッシュを削除しますか?";
+"Unable to send an email. if you didn't configure Email Account,  need to configure Email Account." = "メールを送信できません。電子メールアカウントを設定していない場合は、電子メールアカウントを設定する必要があります";
+"Are you sure you want to log out?" = "あなたは本当にログアウトするのですか？";
+
+/* Profile */
+"Your post has deleted successfully" = "投稿が正常に削除されました.";
+"Request Error" = "リクエストエラー";
