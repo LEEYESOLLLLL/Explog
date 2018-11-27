@@ -1,0 +1,112 @@
+/* 
+  Localizable.strings
+  Explog
+
+  Created by Minjun Ju on 26/11/2018.
+  Copyright © 2018 com.dev.minjun. All rights reserved.
+*/
+
+/* Auth */
+"Login in with Email" = "使用電子郵件登錄";
+"Sign Up" = "註冊";
+"Log in" = "登錄";
+
+/* TabBar Title */
+"Feed" = "主要";
+"Search" = "搜索";
+"Post" = "發帖";
+"Noti" = "通知";
+"Profile" = "人物简介";
+
+/* done button in navigation Bar Button */
+"done" = "完了";
+"Cancel" = "取消";
+"OK" = "確認";
+"Delete" = "削除";
+"Warning" = "危險";
+
+/* Categories */
+"Asia" = "亞洲";
+"Europe" = "歐洲";
+"North America" = "非洲";
+"South America" = "南美洲";
+"Africa" = "非洲";
+"Oceania" = "大洋洲";
+
+/* Main Feed */
+"Require Login" = "需要登錄";
+"Do you want to go to the login screen?" = "你想進入登錄界面嗎";
+
+/* Alert & Report */
+"Flag as inappropriate" = "舉報不當";
+"Pornography" = "色情片";
+"Expletives" = "辱說";
+"Content that defames someone" = "誹謗某人的內容";
+"content that is unpleasant" = "內容令人不快";
+"Etc." = "其它等.";
+
+/* NavigationBar Title */
+"Comments" = "跟帖";
+
+/* Reply */
+"Input your comments🐳" = "輸入您的評論🐳";
+"Entry" = "输入";
+
+/* Search */
+"Search trip in the world" = "搜索世界之旅";
+
+/* ViewController State */
+"Something wrong.\n\n Check out your internet connecting or try again" = "有問題.\n\n查看您的互聯網連接或重試";
+"No Trips match your search word" = "沒有旅行符合您的搜索詞";
+
+/* Post */
+"Let's go on a trip!" = "我們去旅行吧！💖";
+"  Cover" = "  標識";
+"Start Date can't be later than End Date or End Date can't be earlier than Start Date" = "開始日期不能晚於結束日期或結束日期不能早於開始日期";
+
+/* CautionView */
+"Find traveler who similar to me and share my trip. Inappropriate contents will be removed without notice or reported as spam\n\n- Inappropriate contents\n    - Content that defames someone\n    - Expletives\n    - Pornography\n    - Etc, Content that is offending someone" = "找到與我相似的旅行者並分享我的旅行。不當內容將被刪除，恕不另行通知或報告為垃圾郵件\n\n- 不恰當的內容\n    - 誹謗某人的內容\n    - 辱說\n    - 色情片\n    - 其它等, 內容令人不快";
+"Confirm" = "確認";
+
+/* Camera & Photos Access Control */
+"Please Allow Camera Access\n\n This allows you to share taking your photos" = "請允許相機訪問\n\n 這樣您就可以分享拍攝照片了";
+"Please Allow Photo Access\n\n This allows you to share photos from your library to your camera roll" = "請允許照片訪問\n\n 這允許您將庫中的照片共享到相機膠卷";
+"Continue" = "繼續";
+
+/* Setting */
+"Setting" = "設置";
+"Account" = "帳戶";
+"Feature" = "特徵";
+"Information" = "信息";
+"Support" = "支持";
+"Logout" = "退出";
+
+// Section 1
+"Profile Settings" = "檔案設置";
+"Change Password" = "更改密碼";
+"Change Profile Photo" = "更改檔案照片";
+
+// Section 2
+"Remove Cashed Data" = "刪除現有數據";
+"Language" = "語言";
+
+// Section 3
+"App Version" = "應用版本";
+"Open-Source License" = "開源許可證";
+
+// Section 4
+"FeedBack" = "反饋";
+
+// Section 5
+"Logout" = "登出";
+
+"Delete Cache" = "刪除緩存";
+"Do you want to delete stored cache?" = "要刪除存儲的緩存嗎？";
+"Unable to send an email. if you didn't configure Email Account,  need to configure Email Account." = "無法發送電子郵件。如果您未配置電子郵件帳戶，則需要配置電子郵件帳戶。";
+"Are you sure you want to log out?" = "你確定要退出嗎?";
+
+
+
+/* Profile */
+"Your post has deleted successfully" = "您的帖子已成功刪除.";
+"Request Error" = "請求錯誤";

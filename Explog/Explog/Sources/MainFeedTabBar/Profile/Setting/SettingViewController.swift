@@ -40,24 +40,36 @@ extension SettingViewController: UITableViewDelegate {
         
         switch section {
         case .account:
-            guard let type = Account(rawValue: cellText) else {
+            guard let type = Account(byLocalizedString: cellText) else {
                 return
             }
             switch type {
-            case .profile_setting: navigationController?.pushViewController(SettingProfileViewController.create(), animated: true)
-            case .change_password: navigationController?.pushViewController(ChangePasswordViewController.create(), animated: true)
+            case .profile_setting:
+                navigationController?.pushViewController(SettingProfileViewController.create(), animated: true)
+            case .change_password:
+                navigationController?.pushViewController(ChangePasswordViewController.create(), animated: true)
             }
             
         case .feature:
-            Square.display("Delegate Cache", message: "Do you want to delete stored cache?",
-                           alertActions: [.cancel(message: "Cancel"), .destructive(message: "Delete")]) { (_, index) in
-                            if index == 1 {
-                                KingfisherManager.shared.cache.allClear()
-                                tableView.reloadRows(at: [indexPath], with: .fade)
-                            }
+            guard let type = Feature(byLocalizedString: cellText) else {
+                return
             }
+            
+            switch type {
+            case .cashed:
+                Square.display("Delete Cache".localized(), message: "Do you want to delete stored cache?".localized(),
+                               alertActions: [.cancel(message: "Cancel".localized()), .destructive(message: "Delete".localized())]) { (_, index) in
+                                if index == 1 {
+                                    KingfisherManager.shared.cache.allClear()
+                                    tableView.reloadRows(at: [indexPath], with: .fade)
+                                }
+                }
+            case .language:
+                navigationController?.pushViewController(ChangeLanguageViewController(), animated: true)
+            }
+            
         case .information:
-            guard let type = Information(rawValue: cellText) else {
+            guard let type = Information(byLocalizedString: cellText) else {
                 return
             }
             
@@ -73,12 +85,12 @@ extension SettingViewController: UITableViewDelegate {
                 let composeVC = MFMailComposeViewController.create(owner: self)
                 self.present(composeVC, animated: true, completion: nil)
             }else {
-                Square.display("Unable to send an email. if you didn't configure Email Account,  need to configure Email Account.")
+                Square.display("Unable to send an email. if you didn't configure Email Account,  need to configure Email Account.".localized())
             }
             
         case .logout:
-            Square.display("Warning", message: "Are you sure you wnat to log out?",
-                           alertActions: [.cancel(message: "Cencel"), .destructive(message: "OK")]) { (alertAction, index) in
+            Square.display("Warning".localized(), message: "Are you sure you want to log out?".localized(),
+                           alertActions: [.cancel(message: "Cencel".localized()), .destructive(message: "OK".localized())]) { (alertAction, index) in
                             if index == 1 {
                                 if let rootViewController = UIApplication.shared.keyWindow?.rootViewController,
                                     let tabBarController = rootViewController as? UITabBarController {
@@ -137,7 +149,7 @@ extension SettingViewController {
             let section = Section(rawValue: section) else {
                 return
         }
-        header.sectionTitle.text = section.sectionString   
+        header.sectionTitle.text = section.sectionLocalizedString
     }
     
 }
@@ -155,7 +167,6 @@ extension SettingViewController {
         case .support:     return Support.allCases.count
         case .logout:      return Logout.allCases.count
         }
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -169,15 +180,13 @@ extension SettingViewController {
         }
         
         switch section {
-        case .account:     cell.account(Account.allCases[indexPath.row].rawValue)
-        case .feature:     cell.feature(Feature.allCases[indexPath.row].rawValue)
-        case .information: cell.information(Information.allCases[indexPath.row].rawValue)
-        case .support:     cell.support(text: Support.allCases[indexPath.row].rawValue)
-        case .logout:      cell.logout(Logout.allCases[indexPath.row].rawValue)
+        case .account:     cell.account(Account.allCases[indexPath.row].localizedString)
+        case .feature:     cell.feature(Feature.allCases[indexPath.row].localizedString)
+        case .information: cell.information(Information.allCases[indexPath.row].localizedString)
+        case .support:     cell.support(text: Support.allCases[indexPath.row].localizedString)
+        case .logout:      cell.logout(Logout.allCases[indexPath.row].localizedString)
         }
-        
     }
-    
 }
 
 extension SettingViewController: MFMailComposeViewControllerDelegate {

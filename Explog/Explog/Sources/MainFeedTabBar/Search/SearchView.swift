@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Localize_Swift
 
 final class SearchView: BaseView<SearchViewController> {
     var searchTableView = UITableView().then {
@@ -58,7 +59,10 @@ final class SearchView: BaseView<SearchViewController> {
     
     // placeHolder Color, text Color black
     func setupSearchBarUI() {
-        searchController.searchBar.placeholder = "Search trip in the world"
+        searchController.searchBar.placeholder = "Search trip in the world".localized()
+        if let cancelButton = searchController.searchBar.value(forKey: "cancelButton") as? UIButton {
+            cancelButton.setTitle("Cancel".localized(), for: .normal)
+        }
     }
     
     func setup(footerView: ViewControllerStateView?) {

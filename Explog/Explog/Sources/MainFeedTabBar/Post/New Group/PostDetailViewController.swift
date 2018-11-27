@@ -11,6 +11,7 @@ import Moya
 import BoltsSwift
 import Square
 import SwiftyBeaver
+import Localize_Swift
 
 class PostDetailViewController: BaseViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -180,15 +181,16 @@ extension PostDetailViewController {
     
     @objc func moreButtonAction(_ sender: UIBarButtonItem) {
         Square.display(nil, message: nil,
-                       alertActions: [.cancel(message: "Cancle"),
-                                      .destructive(message: "Flag as inappropriate")],
+                       alertActions: [.cancel(message: "Cancel".localized()),
+                                      .destructive(message: "Flag as inappropriate".localized())],
                        preferredStyle: .actionSheet) { [weak self] (_, index) in
                         guard let type = MoreButtonType(rawValue: index),
                             let self = self else {
                                 return
                         }
                         switch type {
-                        case .cancel: break
+                        case .cancel:
+                            break
                         case .report:
                             let vc = UINavigationController(rootViewController: ReportViewController(postPK: self.postPK))
                             self.present(vc, animated: true, completion: nil)

@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  Explog
+
+  Created by Minjun Ju on 27/11/2018.
+  Copyright © 2018 com.dev.minjun. All rights reserved.
+*/
+
+NSCameraUsageDescription = "Explog is that Camera access is required to take photos for trip posting uploading.";
+NSPhotoLibraryUsageDescription = "To upload a photo for the trip post, Explog needs to have access to photo library";

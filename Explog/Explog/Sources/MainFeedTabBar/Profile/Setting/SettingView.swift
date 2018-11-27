@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Localize_Swift
 
 final class SettingView: BaseView<SettingViewController> {
     var tableView = UITableView().then {
@@ -42,13 +43,12 @@ final class SettingView: BaseView<SettingViewController> {
         tableView.delegate = vc
         tableView.dataSource = vc
         setupNavigationBar()
-        
     }
     
     func setupNavigationBar() {
         vc.navigationController?.transparentNaviBar(false, navigationBarHidden: false)
         vc.navigationItem.leftBarButtonItem = backButton
-        vc.navigationItem.title = "Setting"
+        vc.navigationItem.title = "Setting".localized()
     }
     
     

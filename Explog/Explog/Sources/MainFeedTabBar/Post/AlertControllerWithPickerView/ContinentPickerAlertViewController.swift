@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Localize_Swift
 
 final class ContinentPickerAlertViewController: UIAlertController {
     // VC에서 받아야 하는것은 Picker에서 선택한 Continent, OK Action 이후에
@@ -26,7 +27,7 @@ final class ContinentPickerAlertViewController: UIAlertController {
             .centerXAnchor(to: view.centerXAnchor)
             .activateAnchors()
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel".localized(), style: .cancel, handler: nil)
         addAction(cancelAction)
     }
     
@@ -49,12 +50,12 @@ extension ContinentPickerAlertViewController {
         
         var string: String {
             switch self {
-            case .asia: return "Asia"
-            case .europe: return "Europe"
-            case .northAmerica: return "North America"
-            case .southAmerica: return "South America"
-            case .africa: return "Africa"
-            case .oceania: return "Oceania"
+            case .asia:         return "Asia".localized()
+            case .europe:       return "Europe".localized()
+            case .northAmerica: return "North America".localized()
+            case .southAmerica: return "South America".localized()
+            case .africa:       return "Africa".localized()
+            case .oceania:      return "Oceania".localized()
             }
         }
     }

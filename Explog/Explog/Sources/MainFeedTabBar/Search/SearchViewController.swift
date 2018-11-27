@@ -12,6 +12,7 @@ import Square
 import Kingfisher
 import BoltsSwift
 import SwiftyBeaver
+import Localize_Swift
 
 
 final class SearchViewController: BaseViewController {
@@ -20,7 +21,7 @@ final class SearchViewController: BaseViewController {
     }
     static func create() -> Self {
         let `self` = self.init()
-        self.title = "Search"
+        self.title = "Search".localized()
         self.tabBarItem.image = #imageLiteral(resourceName: "search")
         return self
     }

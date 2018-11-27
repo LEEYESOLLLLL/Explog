@@ -10,11 +10,12 @@ import UIKit
 import Moya
 import Square
 import SwiftyBeaver
+import Localize_Swift
 
 final class PostViewController: BaseViewController {
     static func create() -> UINavigationController {
         let `self` = self.init()
-        self.title = "Post"
+        self.title = "Post".localized()
         self.tabBarItem.image = #imageLiteral(resourceName: "create_post")
         let navigationController = UINavigationController(rootViewController: self)
         navigationController.setNavigationBarHidden(true, animated: false)
@@ -101,7 +102,7 @@ extension PostViewController {
             return
         }
         let datepickerAlertController = DatePickerAlertController(preferredStyle: .actionSheet)
-        let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+        let okAction = UIAlertAction(title: "OK".localized(), style: .default) { [weak self] _ in
             guard let self = self,
                 let pickDate = datepickerAlertController.readableDate.convertDate() else {
                     return
@@ -124,7 +125,7 @@ extension PostViewController {
             
             switch compairableResult {
             case true :  sender.setTitle(pickDate.convertedString(), for: [.normal, .highlighted])
-            case false : Square.display("Start Date can't be later than End Date or End Date can't be earlier than Start Date")
+            case false : Square.display("Start Date can't be later than End Date or End Date can't be earlier than Start Date".localized())
             }
         }
         datepickerAlertController.addAction(okAction)
@@ -134,7 +135,7 @@ extension PostViewController {
 extension PostViewController: PassableDataDelegate {
     @objc func continentButtonAction(_ sender: UIButton){
         let continentPickerAlertController = ContinentPickerAlertViewController(preferredStyle: .actionSheet)
-        let okAction = UIAlertAction(title: "OK", style: .default) { [weak continentPickerAlertController] _ in
+        let okAction = UIAlertAction(title: "OK".localized(), style: .default) { [weak continentPickerAlertController] _ in
             guard let strongContinentPickerAlertController = continentPickerAlertController,
                 let continent = strongContinentPickerAlertController.passContinent else {
                     return

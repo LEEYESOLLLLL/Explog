@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Localize_Swift
 
 extension CautionView {
     static var agreement_Text: String {
@@ -18,7 +19,8 @@ extension CautionView {
             - Expletives
             - Pornography
             - Etc, Content that is offending someone
-        """
+        """.localized()
+        
     }
     
 }
