@@ -72,9 +72,52 @@ platform :ios do
     )
   end 
 
+  desc "Match Action for development"
+  lane :explog_developerment do 
+  	match(git_url: "https://github.com/devmjun/Provisioning/",
+  		type: "development",
+  		app_identifier: "kr.mjun.explog",
+    	git_branch: "provision/explog",
+    	username: "dev.mjun@gmail.com",
+    	readonly: "true")
+  end 
+
+  desc "Match Action for appstore"
+  lane :explog_appstore do
+  	match(git_url: "https://github.com/devmjun/Provisioning/",
+    	type: "appstore",
+    	app_identifier: "kr.mjun.explog",
+    	git_branch: "provision/explog",
+    	username: "dev.mjun@gmail.com", 
+    	readonly: "true")
+  end 
+
+  desc "Upload beta test"
+  lane :beta do 
+  	# 1. provisining
+  	# 2. build 
+  	# 3. upload for beta test 
+  	# 4. check it to upload external link  
+  	explog_developerment
+  	explog_appstore
+  	build 
+  	pilot(
+  		username: "dev.mjun@gmail.com",
+  		app_identifier: "kr.mjun.explog",
+  		changelog: "Added to support multi-lingual",
+  		beta_app_description: "Added to support multi-lingual",
+  		distribute_external: true,
+  		groups: "beta-Group",
+  		ipa: "./build/Explog.ipa"
+  		)
+
+  end 
+
   desc "All combind"
-  lane :do_all do 
-    provision 
+  lane :upload_appstore do 
+    # provision 
+    explog_developerment
+  	explog_appstore
     screenshot 
     build 
     upload 
