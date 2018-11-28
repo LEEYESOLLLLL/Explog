@@ -72,6 +72,24 @@ platform :ios do
     )
   end 
 
+  desc "Upload beta test"
+  lane :beta do 
+  	# 1. provisining
+  	# 2. build 
+  	# 3. upload for beta test 
+  	# 4. check it to upload external link  
+
+  	pilot(
+  		username: "dev.mjun@gmail.com",
+  		app_identifier: "kr.mjun.explog",
+  		changelog: "Added to support multi-lingual"
+  		beta_app_description: "Added to support multi-lingual",
+  		distribute_external: true,
+  		ipa: "./build/Explog.ipa"
+  		)
+
+  end 
+
   desc "All combind"
   lane :do_all do 
     provision 
