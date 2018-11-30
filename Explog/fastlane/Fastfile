@@ -97,7 +97,7 @@ platform :ios do
   	# 1. provisining
   	# 2. build 
   	# 3. upload for beta test 
-  	# 4. check it to upload external link  
+  	# 4. check that to upload external link 
   	explog_developerment
   	explog_appstore
   	build 
@@ -113,7 +113,7 @@ platform :ios do
 
   end 
 
-  desc "All combind"
+  desc "Provisining & Building & Upload to AppStroe"
   lane :upload_appstore do 
     # provision 
     explog_developerment
