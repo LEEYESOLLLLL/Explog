@@ -38,21 +38,18 @@ final class ChangeLanguageView: BaseView<ChangeLanguageViewController> {
     override func setupUI() {
         addSubviews([languageTableView])
         languageTableView
-            .topAnchor(to: safeAreaLayoutGuide.topAnchor)
+            .topAnchor(to: topAnchor)
             .bottomAnchor(to: bottomAnchor)
             .leadingAnchor(to: leadingAnchor)
             .trailingAnchor(to: trailingAnchor)
             .activateAnchors()
-        
     }
     
     override func setupBinding() {
         languageTableView.delegate = vc
         languageTableView.dataSource = vc
-        
         vc.navigationItem.leftBarButtonItem = backButton
         vc.navigationItem.rightBarButtonItem = doneButton
         vc.navigationItem.title = "Language".localized()
-        
     }
 }

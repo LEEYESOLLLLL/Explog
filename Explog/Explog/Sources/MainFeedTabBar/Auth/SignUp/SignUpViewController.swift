@@ -24,13 +24,22 @@ final class SignUpViewController: BaseViewController {
         return .lightContent
     }
     
+    required init() {
+        super.init()
+        restorationClass = type(of: self)
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     lazy var v = SignUpView(controlBy: self)
     var state: State = .invalidate(textField: nil) {
         didSet {
             managingState()
         }
     }
-    let provider = MoyaProvider<Auth>(plugins: [ NetworkLoggerPlugin() ])
+    let provider = MoyaProvider<Auth>()//(plugins: [ NetworkLoggerPlugin() ])
     override func loadView() {
         super.loadView()
         view = v
@@ -109,3 +118,8 @@ extension SignUpViewController {
     }
 }
 
+extension SignUpViewController: UIViewControllerRestoration {
+    static func viewController(withRestorationIdentifierPath identifierComponents: [String], coder: NSCoder) -> UIViewController? {
+        return self.init()
+    }
+}

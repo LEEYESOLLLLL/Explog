@@ -17,8 +17,8 @@ import Localize_Swift
 
 
 final class FeedTableViewController: ParallaxTableViewController {
-    let provider = MoyaProvider<Feed>(plugins: [NetworkLoggerPlugin()])
-    let postProvider = MoyaProvider<Post>(plugins: [NetworkLoggerPlugin()])
+    let provider = MoyaProvider<Feed>()//(plugins: [NetworkLoggerPlugin()])
+    let postProvider = MoyaProvider<Post>()//(plugins: [NetworkLoggerPlugin()])
     
     var state: State = .initial {
         didSet {
@@ -50,6 +50,11 @@ final class FeedTableViewController: ParallaxTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         state = .initial
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
     }
     
     func setupUI() {

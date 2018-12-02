@@ -14,11 +14,29 @@ import AcknowList
 
 final class SettingViewController: BaseViewController {
     lazy var v = SettingView(controlBy: self)
-    
-    
     override func loadView() {
         super.loadView()
         view = v 
+    }
+    
+    required init() {
+        super.init()
+        restorationInit()
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        restorationInit()
+    }
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        restorationInit()
+    }
+    
+    private func restorationInit() {
+        restorationIdentifier = unUniqueIdentifier
+        restorationClass = type(of: self)
+        
     }
 }
 
@@ -192,5 +210,26 @@ extension SettingViewController {
 extension SettingViewController: MFMailComposeViewControllerDelegate {
     public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
+    }
+}
+
+// MARK: Preservation & Restoration
+extension SettingViewController: UIViewControllerRestoration {
+    
+    override func encodeRestorableState(with coder: NSCoder) {
+        super.encodeRestorableState(with: coder)
+        coder.encode(v, forKey: "View")
+        
+    }
+    
+    override func decodeRestorableState(with coder: NSCoder) {
+        super.decodeRestorableState(with: coder)
+        let mainView = coder.decodeObject(of: SettingView.self, forKey: "View")
+        view = mainView
+        
+    }
+    
+    static func viewController(withRestorationIdentifierPath identifierComponents: [String], coder: NSCoder) -> UIViewController? {
+        return self.init()
     }
 }

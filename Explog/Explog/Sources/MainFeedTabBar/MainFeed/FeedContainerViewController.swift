@@ -12,7 +12,7 @@ import CaseContainer
 import Localize_Swift
 
 
-final class FeedContainerViewController: CaseContainerViewController {
+final class FeedContainerViewController: CaseContainerViewController, UnuniqueNameType {
     required init() {
         super.init()
         let titles: [String] = [
@@ -39,6 +39,7 @@ final class FeedContainerViewController: CaseContainerViewController {
             tabScrollViewHeight: 50,
             indicatorColor: .appStyle,
             tabButtonColor: (normal: .gray, highLight: .black))
+        restorationIdentifier = unUniqueIdentifier
     }
     
     static func create() -> UINavigationController {
@@ -85,14 +86,14 @@ final class FeedContainerViewController: CaseContainerViewController {
         delegate = self
     }
     
-    
-    
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
+        restorationIdentifier = unUniqueIdentifier
     }   
     
     required init(maintain: [UIViewController], appearence: Appearance) {
-        fatalError("init(maintain:appearence:) has not been implemented")
+        super.init(maintain: maintain, appearence: appearence)
+        restorationIdentifier = unUniqueIdentifier
     }
 }
 
@@ -125,6 +126,5 @@ extension FeedContainerViewController: CaseContainerDelegate {
     
     func caseContainer(parallaxHeader progress: CGFloat) {
         headerImageView.layer.opacity = Float( 1 - progress )
-        
     }
 }

@@ -11,6 +11,15 @@ import Square
 import Localize_Swift
 
 final class MainFeedTabBarViewController: BaseTabBarController {
+    override init(viewControllers vcs: [UIViewController]) {
+        super.init(viewControllers: vcs)
+        viewControllers = vcs
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         delegate = self
         UITabBar.appearance().tintColor = .appStyle
@@ -74,6 +83,7 @@ extension MainFeedTabBarViewController: UITabBarControllerDelegate {
         case .Search:
             return true
         case .Post:
+            
             present(PostViewController.create(), animated: true, completion: nil)
             return false
         case .Noti:
@@ -83,4 +93,3 @@ extension MainFeedTabBarViewController: UITabBarControllerDelegate {
         }
     }
 }
-

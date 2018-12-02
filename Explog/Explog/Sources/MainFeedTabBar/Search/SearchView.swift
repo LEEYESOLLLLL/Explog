@@ -72,4 +72,9 @@ final class SearchView: BaseView<SearchViewController> {
         }
         searchTableView.tableFooterView = footerView
     }
+    
+    func retrieve(word: String) {
+        searchController.searchBar.text = word
+        endEditing(true)
+    }
 }

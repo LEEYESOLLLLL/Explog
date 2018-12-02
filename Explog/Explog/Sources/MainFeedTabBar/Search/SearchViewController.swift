@@ -26,8 +26,8 @@ final class SearchViewController: BaseViewController {
         return self
     }
     
-    let provider = MoyaProvider<Search>(plugins:[NetworkLoggerPlugin()])
-    let postProvider = MoyaProvider<Post>(plugins:[NetworkLoggerPlugin()])
+    let provider = MoyaProvider<Search>()//(plugins:[NetworkLoggerPlugin()])
+    let postProvider = MoyaProvider<Post>()//(plugins:[NetworkLoggerPlugin()])
     private var pendingWorkItem: DispatchWorkItem?
     var state: State = .loading {
         didSet {
@@ -251,4 +251,37 @@ extension SearchViewController: UISearchResultsUpdating {
             deadline: .now() + .milliseconds(250),
             execute: newWorkItem)
     }
+}
+
+// MARK: Preservation & Restoration
+extension SearchViewController {
+    // 검색어 복원
+    enum PreservationKeys: String {
+        case searchWord
+    }
+    
+    override func encodeRestorableState(with coder: NSCoder) {
+        super.encodeRestorableState(with: coder)
+        guard let searchWord = v.searchController.searchBar.text,
+            searchWord.count > 0, isViewLoaded else {
+            return
+        }
+        coder.encode(searchWord, forKey: PreservationKeys.searchWord.rawValue)
+    }
+    
+    override func decodeRestorableState(with coder: NSCoder) {
+        super.decodeRestorableState(with: coder)
+        guard let searchWord = coder.decodeObject(forKey: PreservationKeys.searchWord.rawValue) as? String else {
+            return
+        }
+        
+        v.retrieve(word: searchWord)
+        
+    }
+    
+    override func applicationFinishedRestoringState() {
+        // first
+        
+    }
+    
 }

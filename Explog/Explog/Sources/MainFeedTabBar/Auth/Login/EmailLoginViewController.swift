@@ -16,6 +16,14 @@ final class EmailLoginViewController: BaseViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
+    required init() {
+        super.init()
+        restorationClass = type(of: self)
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     lazy var v = EmailLoginView(controlBy: self)
     var state: State = .invalidate(textField: nil) {
@@ -23,7 +31,7 @@ final class EmailLoginViewController: BaseViewController {
             managingState()
         }
     }
-    let provider = MoyaProvider<Auth>(plugins: [NetworkLoggerPlugin()])
+    let provider = MoyaProvider<Auth>()//(plugins: [NetworkLoggerPlugin()])
     
     override func loadView() {
         super.loadView()
@@ -130,6 +138,14 @@ extension EmailLoginViewController: UITextFieldDelegate {
             return true
         }
     }
+}
+
+extension EmailLoginViewController: UIViewControllerRestoration {
+    static func viewController(withRestorationIdentifierPath identifierComponents: [String], coder: NSCoder) -> UIViewController? {
+        return self.init()
+    }
+    
+    
 }
 
 
