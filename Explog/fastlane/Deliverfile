@@ -1,17 +1,26 @@
 force true
 price_tier 0
 
+skip_screenshots false
+skip_binary_upload false
+skip_metadata false
+submit_for_review true
 
+# Should set or create 
+app_version("1.2.0")
+
+# 1 
 app_review_information(
   first_name: "Ju",
   last_name: "Minjun",
   phone_number: "+82 010-8966-4111",
   email_address: "dev.mjun@gmail.com",
-  demo_user: "traveler@gmail.com",
+  demo_user: "traveler1@gmail.com",
   demo_password: "1234567890",
   notes: "To be needed Account when login in"
 )
 
+# 2 
 submission_information({    
     export_compliance_encryption_updated: false,
     export_compliance_uses_encryption: false,
@@ -20,13 +29,23 @@ submission_information({
     add_id_info_uses_idfa: false
 })
 
-release_notes(
-	{"ko-KR" => "검색 부분 최적화 및, UI 변경"}
-	)
-automatic_release false
+# 3 
+trade_representative_contact_information({
+  is_displayed_on_app_store: false
+})
 
+# 4 
+app_rating_config_path "./fastlane/metadata/itunes_rating_config.json"
 
 app_icon './fastlane/metadata/app_icon.jpg'
 
+# 5
+automatic_release true
 
-app_rating_config_path "./fastlane/metadata/itunes_rating_config.json"
+# 6 Phased Release for Automatic Updates
+phased_release true 
+
+
+
+
+

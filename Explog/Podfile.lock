@@ -3,6 +3,8 @@ PODS:
   - Alamofire (4.8.0)
   - Bolts-Swift (1.4.0)
   - CaseContainer (0.9.3)
+  - Firebase (5.13.0):
+    - Firebase/Core (= 5.13.0)
   - Firebase/Core (5.13.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 5.3.0)
@@ -80,6 +82,7 @@ DEPENDENCIES:
   - AcknowList (~> 1.7.0)
   - Bolts-Swift (~> 1.4.0)
   - CaseContainer (~> 0.9.3)
+  - Firebase
   - Firebase/Core
   - Firebase/Database
   - KeychainAccess (~> 3.1.2)
@@ -149,6 +152,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: ccfcdf85a04d429f1633f668650b0ce8020bda3a
   Then: 71866660c7af35a7343831f7668e7cd2b62ee0f2
 
-PODFILE CHECKSUM: 298f57976c2ef642130040289332b900b7afad3d
+PODFILE CHECKSUM: 7b61867d50d88d73f26f6400baba7affab6f74a9
 
 COCOAPODS: 1.6.0.beta.2

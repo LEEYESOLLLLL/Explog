@@ -41,9 +41,9 @@ Create ipa
 fastlane ios upload
 ```
 Upload to App Stroe
-### ios explog_developerment
+### ios explog_development
 ```
-fastlane ios explog_developerment
+fastlane ios explog_development
 ```
 Match Action for development
 ### ios explog_appstore
@@ -61,6 +61,11 @@ Upload beta test
 fastlane ios upload_appstore
 ```
 Provisining & Building & Upload to AppStroe
+### ios upload_appstore_connect
+```
+fastlane ios upload_appstore_connect
+```
+Temporary Upload
 
 ----
 
