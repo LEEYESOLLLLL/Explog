@@ -61,6 +61,11 @@ Upload beta test
 fastlane ios upload_appstore
 ```
 Provisining & Building & Upload to AppStroe
+### ios upload_appstore_connect
+```
+fastlane ios upload_appstore_connect
+```
+Temporary Upload
 
 ----
 

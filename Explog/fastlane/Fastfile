@@ -62,14 +62,8 @@ platform :ios do
 
   desc "Upload to App Stroe"
   lane :upload do 
-    set_changelog(changelog: "Keeping App optimization")
     # deliver
-    deliver(
-      skip_screenshots: false,
-      skip_binary_upload: false, 
-      skip_metadata: false, 
-      submit_for_review: true
-    )
+    deliver
   end 
 
   desc "Match Action for development"
@@ -122,6 +116,14 @@ platform :ios do
     build 
     upload 
   end 
+
+  desc "Uplado to appstroe connect Without creating screenshot"
+  lane :upload_appstore_connect do
+  	explog_development
+  	explog_appstore
+  	build 
+    upload 
+end 
 
 
   error do |lane, exception|
