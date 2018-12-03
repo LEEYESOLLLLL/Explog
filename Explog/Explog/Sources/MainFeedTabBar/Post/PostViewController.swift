@@ -12,12 +12,12 @@ import Square
 import SwiftyBeaver
 import Localize_Swift
 
-final class PostViewController: BaseViewController {
-    static func create() -> UINavigationController {
+@objc final class PostViewController: BaseViewController {
+    static func create() -> BaseNavigiationController {
         let `self` = self.init()
         self.title = "Post".localized()
         self.tabBarItem.image = #imageLiteral(resourceName: "create_post")
-        let navigationController = UINavigationController(rootViewController: self)
+        let navigationController = BaseNavigiationController(rootViewController: self)
         navigationController.setNavigationBarHidden(true, animated: false)
         return navigationController
     }
@@ -58,33 +58,34 @@ extension PostViewController {
 extension PostViewController {
     @objc func createPostButtonAction(_ sender: UIButton) {
         guard let currentPostCoverInformation = v.currentPostCoverInformation() else { return }
-        provider.request(.post(title: currentPostCoverInformation.title,
-                               startDate: currentPostCoverInformation.startData,
-                               endDate: currentPostCoverInformation.endData,
-                               continent: currentPostCoverInformation.continent,
-                               img: currentPostCoverInformation.coverImg)) { [weak self] result in
-                                guard let self = self else {
-                                    return
-                                }
-                                
-                                switch result {
-                                case .success(let response):
-                                    switch (200...299) ~= response.statusCode {
-                                    case true :
-                                        guard let coverData = try? response.map(PostCoverModel.self) else {
-                                            SwiftyBeaver.warning("Not Converting PostCoverModel")
-                                            return
-                                        }
-                                        
-                                        let detailVC = PostDetailViewController.create(editMode: .on, coverData: coverData)
-                                        self.show(detailVC, sender: nil)
-                                    case false:
-                                        SwiftyBeaver.warning("Fast to Reqeust")
-                                    }
-                                    
-                                case .failure(let error):
-                                    SwiftyBeaver.error("Weak Internet Connection: \(error)")
-                                }
+        provider.request(.post(
+            title:     currentPostCoverInformation.title,
+            startDate: currentPostCoverInformation.startData,
+            endDate:   currentPostCoverInformation.endData,
+            continent: currentPostCoverInformation.continent,
+            img:       currentPostCoverInformation.coverImg)) { [weak self] result in
+                guard let self = self else {
+                    return
+                }
+                
+                switch result {
+                case .success(let response):
+                    switch (200...299) ~= response.statusCode {
+                    case true :
+                        guard let coverData = try? response.map(PostCoverModel.self) else {
+                            SwiftyBeaver.warning("Not Converting PostCoverModel")
+                            return
+                        }
+                        
+                        let detailVC = PostDetailViewController.create(editMode: .on, coverData: coverData)
+                        self.show(detailVC, sender: nil)
+                    case false:
+                        SwiftyBeaver.warning("Fast to Reqeust")
+                    }
+                    
+                case .failure(let error):
+                    SwiftyBeaver.error("Weak Internet Connection: \(error)")
+                }
         }
     }
     
@@ -174,5 +175,3 @@ extension PostViewController: UITextViewDelegate {
         }
     }
 }
-
-

@@ -188,6 +188,7 @@ final class PostView: BaseView<PostViewController> {
     }
     
     override func setupBinding() {
+        vc.navigationController?.setNavigationBarHidden(true, animated: false)
         dismissButton            .addTarget(vc, action: #selector(vc.dismissButtonAction(_:)), for: .touchUpInside)
         createPostButton         .addTarget(vc, action: #selector(vc.createPostButtonAction(_:)), for: .touchUpInside)
         changeCoverImageButton   .addTarget(vc, action: #selector(vc.changeCoverImageButtonAction(_:)), for: .touchUpInside)

@@ -27,10 +27,11 @@ final class SettingProfileViewController: BaseViewController {
     
     static func create() -> Self {
         let `self` = self.init()
+        self.restorationClass = type(of: self)
         return self
     }
     
-    let provider = MoyaProvider<User>(plugins: [NetworkLoggerPlugin()])
+    let provider = MoyaProvider<User>()//(plugins: [NetworkLoggerPlugin()])
     override func viewDidLoad() {
         super.viewDidLoad()
         v.start(true)
@@ -122,5 +123,11 @@ extension SettingProfileViewController: UITextFieldDelegate {
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         doneButtonAction(v.doneButton)
         return true
+    }
+}
+
+extension SettingProfileViewController: UIViewControllerRestoration {
+    static func viewController(withRestorationIdentifierPath identifierComponents: [String], coder: NSCoder) -> UIViewController? {
+        return self.create()
     }
 }

@@ -19,20 +19,23 @@ public protocol ViewControllerType: class {
 /**
  BaseViewController is used as foundation of UIViewControllers
  */
-public class BaseViewController: UIViewController, ViewControllerType {
-    
+public class BaseViewController: UIViewController, ViewControllerType, UnuniqueNameType {
     required init() {
         super.init(nibName: nil, bundle: nil)
+        restorationIdentifier = unUniqueIdentifier
     }
     
     required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
+        restorationIdentifier = unUniqueIdentifier
+    }
+    
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        restorationIdentifier = unUniqueIdentifier
     }
     
     deinit {
         SwiftyBeaver.info("\(self) have deinited")
     }
 }
-
-
-

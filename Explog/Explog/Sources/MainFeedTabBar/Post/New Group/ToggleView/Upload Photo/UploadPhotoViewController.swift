@@ -36,7 +36,7 @@ final class UploadPhotoViewController: PhotoGridViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    let provider = MoyaProvider<Post>(plugins: [NetworkLoggerPlugin()])
+    let provider = MoyaProvider<Post>()//(plugins: [NetworkLoggerPlugin()])
     
     override func viewDidLoad() {
         super.viewDidLoad()

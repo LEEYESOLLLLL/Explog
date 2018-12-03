@@ -14,6 +14,8 @@ final class SearchView: BaseView<SearchViewController> {
         $0.backgroundColor = .white
         $0.register(cell: SearchCell.self)
         $0.separatorStyle = .none
+        $0.contentInsetAdjustmentBehavior = .automatic
+        $0.insetsContentViewsToSafeArea = true
     }
     
     lazy var searchController = UISearchController(searchResultsController: nil).then {
@@ -33,7 +35,7 @@ final class SearchView: BaseView<SearchViewController> {
         addSubviews([searchTableView])
         
         searchTableView
-            .topAnchor(to: safeAreaLayoutGuide.topAnchor)
+            .topAnchor(to: topAnchor)
             .leadingAnchor(to: leadingAnchor)
             .trailingAnchor(to: trailingAnchor)
             .bottomAnchor(to: bottomAnchor)
@@ -71,5 +73,10 @@ final class SearchView: BaseView<SearchViewController> {
         default:                searchTableView.isScrollEnabled = true
         }
         searchTableView.tableFooterView = footerView
+    }
+    
+    func retrieve(word: String) {
+        searchController.searchBar.text = word
+        endEditing(true)
     }
 }

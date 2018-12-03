@@ -26,11 +26,10 @@
 		0423A616212B756D00DD9747 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A615212B756D00DD9747 /* BaseViewController.swift */; };
 		0423A619212B7C0900DD9747 /* SplahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A618212B7C0900DD9747 /* SplahView.swift */; };
 		0423A61C212B873900DD9747 /* UIView+SubViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A61B212B873900DD9747 /* UIView+SubViews.swift */; };
-		0423A61F212B896A00DD9747 /* MainFeedTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A61E212B896A00DD9747 /* MainFeedTabBarView.swift */; };
 		0423A621212B899500DD9747 /* MainFeedTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A620212B899500DD9747 /* MainFeedTabBarViewController.swift */; };
 		0423A623212B8D0A00DD9747 /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A622212B8D0A00DD9747 /* BaseTabBarController.swift */; };
 		0423A625212B8D1400DD9747 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A624212B8D1400DD9747 /* BaseNavigationController.swift */; };
-		0423A62A212B8F3C00DD9747 /* MainFeedNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A629212B8F3C00DD9747 /* MainFeedNavigationViewController.swift */; };
+		0423A62A212B8F3C00DD9747 /* FeedContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A629212B8F3C00DD9747 /* FeedContainerViewController.swift */; };
 		0423A62D212B976D00DD9747 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A62C212B976D00DD9747 /* SearchView.swift */; };
 		0423A62F212B977300DD9747 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A62E212B977300DD9747 /* SearchViewController.swift */; };
 		0423A631212B978000DD9747 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423A630212B978000DD9747 /* PostView.swift */; };
@@ -83,6 +82,9 @@
 		047E59942189E69100BD2810 /* SettingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047E59932189E69100BD2810 /* SettingHeaderView.swift */; };
 		047FE5DC216CF063009B56BB /* MainFeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FE5DB216CF063009B56BB /* MainFeedTableViewController.swift */; };
 		047FE5DF216CF69C009B56BB /* UIScreen+Sugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FE5DE216CF69C009B56BB /* UIScreen+Sugar.swift */; };
+		0491EBDA21B2CCA2000181D1 /* UnuniqueNameType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0491EBD921B2CCA2000181D1 /* UnuniqueNameType.swift */; };
+		0491EBE021B3DEA7000181D1 /* Data+Decode_Encode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0491EBDF21B3DEA7000181D1 /* Data+Decode_Encode.swift */; };
+		0491EBE421B43CE6000181D1 /* NSKeyedArchiver+NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0491EBE321B43CE6000181D1 /* NSKeyedArchiver+NSObject.swift */; };
 		049F7BF121A800D8000B0602 /* ViewControllerStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049F7BF021A800D8000B0602 /* ViewControllerStateView.swift */; };
 		04B38AC821787CAF00E17908 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AC721787CAF00E17908 /* KeychainService.swift */; };
 		04B38AE82178820400E17908 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AE72178820400E17908 /* AuthViewController.swift */; };
@@ -188,11 +190,10 @@
 		0423A615212B756D00DD9747 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		0423A618212B7C0900DD9747 /* SplahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplahView.swift; sourceTree = "<group>"; };
 		0423A61B212B873900DD9747 /* UIView+SubViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+SubViews.swift"; sourceTree = "<group>"; };
-		0423A61E212B896A00DD9747 /* MainFeedTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFeedTabBarView.swift; sourceTree = "<group>"; };
 		0423A620212B899500DD9747 /* MainFeedTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFeedTabBarViewController.swift; sourceTree = "<group>"; };
 		0423A622212B8D0A00DD9747 /* BaseTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
 		0423A624212B8D1400DD9747 /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
-		0423A629212B8F3C00DD9747 /* MainFeedNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFeedNavigationViewController.swift; sourceTree = "<group>"; };
+		0423A629212B8F3C00DD9747 /* FeedContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedContainerViewController.swift; sourceTree = "<group>"; };
 		0423A62C212B976D00DD9747 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		0423A62E212B977300DD9747 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		0423A630212B978000DD9747 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
@@ -254,6 +255,9 @@
 		047E59932189E69100BD2810 /* SettingHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHeaderView.swift; sourceTree = "<group>"; };
 		047FE5DB216CF063009B56BB /* MainFeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFeedTableViewController.swift; sourceTree = "<group>"; };
 		047FE5DE216CF69C009B56BB /* UIScreen+Sugar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Sugar.swift"; sourceTree = "<group>"; };
+		0491EBD921B2CCA2000181D1 /* UnuniqueNameType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnuniqueNameType.swift; sourceTree = "<group>"; };
+		0491EBDF21B3DEA7000181D1 /* Data+Decode_Encode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Decode_Encode.swift"; sourceTree = "<group>"; };
+		0491EBE321B43CE6000181D1 /* NSKeyedArchiver+NSObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSKeyedArchiver+NSObject.swift"; sourceTree = "<group>"; };
 		049F7BF021A800D8000B0602 /* ViewControllerStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerStateView.swift; sourceTree = "<group>"; };
 		04B38AC721787CAF00E17908 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		04B38AE72178820400E17908 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
@@ -381,6 +385,7 @@
 				04266A68218ED68A00B18C8E /* ReplyModel.swift */,
 				04266A87219072EC00B18C8E /* NotiModel.swift */,
 				04B7E67521ABE3260084FB6D /* AppInfoModel.swift */,
+				0491EBDF21B3DEA7000181D1 /* Data+Decode_Encode.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -482,6 +487,7 @@
 		0423A617212B7BF000DD9747 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				0491EBD921B2CCA2000181D1 /* UnuniqueNameType.swift */,
 				0423A613212B756700DD9747 /* BaseView.swift */,
 				0423A615212B756D00DD9747 /* BaseViewController.swift */,
 				0423A622212B8D0A00DD9747 /* BaseTabBarController.swift */,
@@ -519,6 +525,7 @@
 				041D0033218CAFDD009430FE /* UIImage+Resize.swift */,
 				04B8FBE921940C6A0090938E /* UIApplication+SettingURL.swift */,
 				04D92A8721A69C90000ED295 /* SwiftyBeaver+AddDestination.swift */,
+				0491EBE321B43CE6000181D1 /* NSKeyedArchiver+NSObject.swift */,
 			);
 			path = Utiles;
 			sourceTree = "<group>";
@@ -527,7 +534,6 @@
 			isa = PBXGroup;
 			children = (
 				04B7E6BB21AC62160084FB6D /* MainFeedTitles.swift */,
-				0423A61E212B896A00DD9747 /* MainFeedTabBarView.swift */,
 				0423A620212B899500DD9747 /* MainFeedTabBarViewController.swift */,
 				0423A62B212B8F4600DD9747 /* MainFeed */,
 				049F7C1221A8424E000B0602 /* ViewControllerState View */,
@@ -543,7 +549,7 @@
 		0423A62B212B8F4600DD9747 /* MainFeed */ = {
 			isa = PBXGroup;
 			children = (
-				0423A629212B8F3C00DD9747 /* MainFeedNavigationViewController.swift */,
+				0423A629212B8F3C00DD9747 /* FeedContainerViewController.swift */,
 				04BDBDF0218D8B9D005B2F68 /* FeedState.swift */,
 				047FE5DB216CF063009B56BB /* MainFeedTableViewController.swift */,
 				04BDBDEF218D8B8F005B2F68 /* Feed Cell */,
@@ -1134,6 +1140,7 @@
 				047FE5DF216CF69C009B56BB /* UIScreen+Sugar.swift in Sources */,
 				04B8FC38219452D10090938E /* PhotoAccessProvider.swift in Sources */,
 				046A8CA72189761700C12390 /* ProfileState.swift in Sources */,
+				0491EBE421B43CE6000181D1 /* NSKeyedArchiver+NSObject.swift in Sources */,
 				04266A67218ED09900B18C8E /* ReplyCell.swift in Sources */,
 				04C8F370218B0A3B00CA296F /* File.swift in Sources */,
 				0423A616212B756D00DD9747 /* BaseViewController.swift in Sources */,
@@ -1145,7 +1152,6 @@
 				04B8FC0C2194274F0090938E /* ImagePickerViewController.swift in Sources */,
 				0423A623212B8D0A00DD9747 /* BaseTabBarController.swift in Sources */,
 				045FF097217F4399003ECA23 /* ContinentPickerAlertViewController.swift in Sources */,
-				0423A61F212B896A00DD9747 /* MainFeedTabBarView.swift in Sources */,
 				0423A619212B7C0900DD9747 /* SplahView.swift in Sources */,
 				04266A7321900D2000B18C8E /* SearchCell.swift in Sources */,
 				04BDBDEE218D8A40005B2F68 /* FeedCellState.swift in Sources */,
@@ -1156,6 +1162,7 @@
 				0423A635212B979500DD9747 /* NotiView.swift in Sources */,
 				04C70AA821831F1C00B43683 /* EditModeState.swift in Sources */,
 				045FF0B7217F9377003ECA23 /* PhotoGridController.swift in Sources */,
+				0491EBDA21B2CCA2000181D1 /* UnuniqueNameType.swift in Sources */,
 				04D59136217C804E00EE8696 /* UIButton+SetTitle.swift in Sources */,
 				04C70B5021871DCE00B43683 /* UploadPhotoViewController.swift in Sources */,
 				046460AB2188247E00EFE40B /* DetailPhotoCell.swift in Sources */,
@@ -1196,7 +1203,7 @@
 				04266A7B2190454A00B18C8E /* SearchState.swift in Sources */,
 				04266A8221906A2700B18C8E /* NotiCell.swift in Sources */,
 				04B38AEC2178821200E17908 /* SignUpViewController.swift in Sources */,
-				0423A62A212B8F3C00DD9747 /* MainFeedNavigationViewController.swift in Sources */,
+				0423A62A212B8F3C00DD9747 /* FeedContainerViewController.swift in Sources */,
 				041D0034218CAFDD009430FE /* UIImage+Resize.swift in Sources */,
 				04266A65218ECA0100B18C8E /* ReplyViewController.swift in Sources */,
 				046A8CC9218986DA00C12390 /* UserModel.swift in Sources */,
@@ -1222,6 +1229,7 @@
 				047FE5DC216CF063009B56BB /* MainFeedTableViewController.swift in Sources */,
 				0423A631212B978000DD9747 /* PostView.swift in Sources */,
 				04D59138217C849900EE8696 /* ActivityIndicatorButton.swift in Sources */,
+				0491EBE021B3DEA7000181D1 /* Data+Decode_Encode.swift in Sources */,
 				0413DC7F21775DC30031474A /* Feed.swift in Sources */,
 				04C70AA621831DCD00B43683 /* PostCoverModel.swift in Sources */,
 				0413DC7C21775D0A0031474A /* FeedModel.swift in Sources */,

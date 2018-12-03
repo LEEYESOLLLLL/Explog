@@ -20,12 +20,12 @@ class PostDetailViewController: BaseViewController {
     required init(coverData: PostCoverModel) {
         self.coverData = coverData
         super.init()
+        self.restorationClass = type(of: self)
     }
     required public init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     required init() { fatalError("init() has not been implemented") }
     
-    static func create(editMode: EditMode = .off,
-                       coverData cover: PostCoverModel) -> PostDetailViewController {
+    static func create(editMode: EditMode = .off, coverData cover: PostCoverModel) -> PostDetailViewController {
         let `self` = self.init(coverData: cover)
         self.editMode = editMode
         return self
@@ -68,18 +68,23 @@ class PostDetailViewController: BaseViewController {
         return coverData.pk
     }
     
-    let provider = MoyaProvider<Post>(plugins: [NetworkLoggerPlugin()])
+    let provider = MoyaProvider<Post>()//(plugins: [NetworkLoggerPlugin()])
     
     lazy var v = PostDetailView(controlBy: self)
     override func loadView() {
         super.loadView()
         view = v
     }
+    
+    private func restorationInit() {
+        restorationClass = type(of: self)
+    }
 }
 extension PostDetailViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.barStyle = .black
+        navigationController?.navigationBar.barStyle = .black
+        navigationController?.transparentNaviBar(true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -180,26 +185,25 @@ extension PostDetailViewController {
     }
     
     @objc func moreButtonAction(_ sender: UIBarButtonItem) {
-        Square.display(nil, message: nil,
-                       alertActions: [.cancel(message: "Cancel".localized()),
-                                      .destructive(message: "Flag as inappropriate".localized())],
-                       preferredStyle: .actionSheet) { [weak self] (_, index) in
-                        guard let type = MoreButtonType(rawValue: index),
-                            let self = self else {
-                                return
-                        }
-                        switch type {
-                        case .cancel:
-                            break
-                        case .report:
-                            let vc = UINavigationController(rootViewController: ReportViewController(postPK: self.postPK))
-                            self.present(vc, animated: true, completion: nil)
-                        }
-                        
-                        
-                        
+        Square.display(
+            nil, message: nil,
+            alertActions: [
+                .cancel(message: "Cancel".localized()),
+                .destructive(message: "Flag as inappropriate".localized())
+            ],
+            preferredStyle: .actionSheet) { [weak self] (_, index) in
+                guard let type = MoreButtonType(rawValue: index),
+                    let self = self else {
+                        return
+                }
+                switch type {
+                case .cancel:
+                    break
+                case .report:
+                    let vc = UINavigationController(rootViewController: ReportViewController(postPK: self.postPK))
+                    self.present(vc, animated: true, completion: nil)
+                }
         }
-        
     }
 }
 
@@ -299,3 +303,29 @@ extension PostDetailViewController: UITableViewDataSource {
     }
 }
 
+extension PostDetailViewController: UIViewControllerRestoration {
+    enum Preservationkeys: String {
+        case editMode
+        case coverModel
+    }
+    override func encodeRestorableState(with coder: NSCoder) {
+        super.encodeRestorableState(with: coder)
+        guard isViewLoaded, let encodedCoverData = coverData.encodeJSON() else {
+            return
+        }
+        
+        coder.encode(editMode.rawValue, forKey: Preservationkeys.editMode.rawValue)
+        coder.encode(encodedCoverData, forKey: Preservationkeys.coverModel.rawValue)
+    }
+    static func viewController(withRestorationIdentifierPath identifierComponents: [String], coder: NSCoder) -> UIViewController? {
+        guard
+            let editModeStr = coder.decodeObject(forKey: Preservationkeys.editMode.rawValue) as? String,
+            let editMode = EditMode(rawValue: editModeStr),
+            let encodedCoverData = coder.decodeObject(forKey: Preservationkeys.coverModel.rawValue) as? Data,
+            let coverData =  encodedCoverData.decode(type: PostCoverModel.self) else {
+                SwiftyBeaver.error("fail to Convert Model")
+                return nil
+        }
+        return self.create(editMode: editMode, coverData: coverData)
+    }   
+}

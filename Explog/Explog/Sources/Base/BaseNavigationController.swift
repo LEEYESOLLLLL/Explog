@@ -14,13 +14,31 @@ import SwiftyBeaver
  
  - warning: This class is not used yet
  */
-public class BaseNavigiationController: UINavigationController, ViewControllerType {
+@objc public class BaseNavigiationController: UINavigationController, ViewControllerType, UnuniqueNameType {
+    init(rootViewController: UIViewController, needRestorationClass: Bool = false) {
+        super.init(rootViewController: rootViewController)
+        commonInit()
+        if needRestorationClass { restorationClass = type(of: self) }
+        
+    }
     override init(rootViewController: UIViewController) {
         super.init(rootViewController: rootViewController)
+        commonInit()
+    }
+    
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        commonInit()
     }
     
     required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
+        commonInit()
+    }
+    
+    // MARK: Initialization Manager
+    private func commonInit() {
+        restorationIdentifier = unUniqueIdentifier
     }
     
     deinit {
@@ -28,3 +46,8 @@ public class BaseNavigiationController: UINavigationController, ViewControllerTy
     }
 }
 
+extension BaseNavigiationController: UIViewControllerRestoration {
+    public static func viewController(withRestorationIdentifierPath identifierComponents: [String], coder: NSCoder) -> UIViewController? {
+        return self.init(coder: coder)
+    }
+}

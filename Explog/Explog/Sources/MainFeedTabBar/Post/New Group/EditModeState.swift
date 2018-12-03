@@ -9,7 +9,7 @@
 import UIKit
 
 extension PostDetailViewController {
-    enum EditMode {
+    enum EditMode: String {
         case on
         case off
     }

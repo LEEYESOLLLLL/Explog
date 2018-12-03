@@ -22,10 +22,15 @@ final class ReplyViewController: BaseViewController  {
     required init(postPK: Int) {
         self.postPK = postPK
         super.init()
+        restorationClass = type(of: self)
+    }
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
-    required init() { fatalError("init() has not been implemented") }
-    required public init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    required init() {
+        fatalError("init() has not been implemented")
+    }
     
     static func create(postPK privateKey: Int) -> Self {
         let `self` = self.init(postPK: privateKey)
@@ -33,7 +38,7 @@ final class ReplyViewController: BaseViewController  {
     }
     
     var postPK: Int
-    let provider = MoyaProvider<Reply>(plugins:[NetworkLoggerPlugin()])
+    let provider = MoyaProvider<Reply>()//(plugins:[NetworkLoggerPlugin()])
     var state: State = .loading {
         didSet {
             switch state {
@@ -247,5 +252,23 @@ extension ReplyViewController: UITextViewDelegate {
             v.uploadState = .unable
             Square.display("Comments can not exceed 100 letters.")
         }
+    }
+}
+
+extension ReplyViewController: UIViewControllerRestoration {
+    enum PreservationKeys: String {
+        case postPK
+    }
+    
+    override func encodeRestorableState(with coder: NSCoder) {
+        super.encodeRestorableState(with: coder)
+        guard isViewLoaded else {
+            return
+        }
+        coder.encode(postPK, forKey: PreservationKeys.postPK.rawValue)
+    }
+    
+    public static func viewController(withRestorationIdentifierPath identifierComponents: [String], coder: NSCoder) -> UIViewController? {
+        return self.create(postPK: coder.decodeInteger(forKey: PreservationKeys.postPK.rawValue))
     }
 }

@@ -10,7 +10,7 @@ target 'Explog' do
   pod 'Kingfisher', '~> 4.10.0'
  
   ## Container Viewcontroller 
-  pod 'CaseContainer', '~> 0.9.1'
+  pod 'CaseContainer', '~> 0.9.3'
 
   ## KeyChain
   pod 'KeychainAccess', '~> 3.1.2'
@@ -47,7 +47,7 @@ end
 ## just temporary action  
 post_install do |installer|
   installer.pods_project.targets.each do |target|
-      if ['ParallaxHeader', 'M13Checkbox'].include? target.name
+      if ['ParallaxHeader'].include? target.name
           target.build_configurations.each do |config|
               config.build_settings['SWIFT_VERSION'] = '4.0'
           end

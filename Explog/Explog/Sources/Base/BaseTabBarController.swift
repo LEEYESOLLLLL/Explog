@@ -12,17 +12,19 @@ import SwiftyBeaver
 /**
  BaseTabBarController is used as foundation of UITabBarController
  */
-public class BaseTabBarController: UITabBarController, ViewControllerType {
+public class BaseTabBarController: UITabBarController, ViewControllerType, UnuniqueNameType {
     
     init(viewControllers vcs: [UIViewController]) {
         super.init(nibName: nil, bundle: nil)
         viewControllers = vcs
+        restorationIdentifier = unUniqueIdentifier
     }
     
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        restorationIdentifier = unUniqueIdentifier
     }
-    
+        
     deinit {
         SwiftyBeaver.info("\(self) have deinited")
     }

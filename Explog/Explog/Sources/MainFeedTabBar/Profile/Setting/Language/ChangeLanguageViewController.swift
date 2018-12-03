@@ -16,8 +16,9 @@ final class ChangeLanguageViewController: BaseViewController {
     var cashedCellIndex: IndexPath!
     
     required init() {
-        self.availableLanguage = Localize.availableLanguages(true)
+        availableLanguage = Localize.availableLanguages(true)
         super.init()
+        self.restorationClass = type(of: self)
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -26,9 +27,7 @@ final class ChangeLanguageViewController: BaseViewController {
     override func loadView() {
         super.loadView()
         view = v
-    }
-    
-    
+    }   
 }
 
 extension ChangeLanguageViewController {
@@ -121,5 +120,11 @@ extension ChangeLanguageViewController {
         }
         header.sectionTitle.text = type.rawValue
     }
-    
+}
+
+extension ChangeLanguageViewController: UIViewControllerRestoration {
+    public static func viewController(withRestorationIdentifierPath identifierComponents: [String], coder: NSCoder) -> UIViewController? {
+        return self.init()
+        
+    }
 }

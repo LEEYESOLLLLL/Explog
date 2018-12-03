@@ -15,14 +15,15 @@ import SwiftyBeaver
 final class ChangePasswordViewController: BaseViewController  {
     static func create() -> Self {
         let `self` = self.init()
+        self.restorationClass = type(of: self)
         return self
     }
     lazy var v = ChangePasswordView(controlBy: self)
     
-    let provider = MoyaProvider<User>(plugins: [NetworkLoggerPlugin()])
+    let provider = MoyaProvider<User>()//(plugins: [NetworkLoggerPlugin()])
     override func loadView() {
         super.loadView()
-        view = v
+        view = v        
     }
 }
 
@@ -93,4 +94,12 @@ extension ChangePasswordViewController {
             v.isActiveDoneButton(false)
         }
     }
+}
+
+extension ChangePasswordViewController: UIViewControllerRestoration {
+    static func viewController(withRestorationIdentifierPath identifierComponents: [String], coder: NSCoder) -> UIViewController? {
+        return self.create()
+    }
+    
+    
 }

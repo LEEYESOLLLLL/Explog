@@ -12,7 +12,7 @@ import Moya
 import SwiftyBeaver
 
 class AppInfo {
-    static let provider = MoyaProvider<AppVersion>(plugins:[NetworkLoggerPlugin()])
+    static let provider = MoyaProvider<AppVersion>()//(plugins:[NetworkLoggerPlugin()])
     /// Returns DEBUG or RELEASE info with version and build number
     static func buildInfo() -> String {
         #if DEBUG

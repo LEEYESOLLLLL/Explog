@@ -16,13 +16,40 @@ import SwiftyBeaver
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 }
+// MARK: Setup Keywindow
+extension AppDelegate {
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        setKeyWindow()
+        return true
+    }
+    
+    private func setKeyWindow() {
+        window = UIWindow(frame: UIScreen.mainbounds)
+        if let keyWindow = window {
+            keyWindow.restorationIdentifier = "MainWindow"
+            keyWindow.rootViewController = AppDelegate.setTabBarViewControllers()
+            keyWindow.makeKeyAndVisible()
+        }
+    }
+    
+    /// used both in AppDelegate and Change Language in Setting
+    static func setTabBarViewControllers() -> UITabBarController {
+        // initilize ViewControllers
+        let mainFeedVC = BaseNavigiationController(rootViewController: FeedContainerViewController.create())
+        let searchVC   = BaseNavigiationController(rootViewController: SearchViewController.create())
+        let postVC     = PostViewController.create()
+        let likeVC     = NotiViewController.create()
+        let profileVC  = BaseNavigiationController(rootViewController: ProfileViewController.create(editMode: .on))
+        return MainFeedTabBarViewController(viewControllers: [mainFeedVC, searchVC, postVC, likeVC, profileVC])
+    }
+}
+
 
 // MARK: Initialization
 extension AppDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         setupLogginService()
         FirebaseApp.configure()
-        setKeyWindow()
         requesetNotification()
         return true
     }
@@ -41,24 +68,6 @@ extension AppDelegate  {
     }
 }
 
-// MARK: Setup Window
-extension AppDelegate  {
-    private func setKeyWindow() {
-        window = UIWindow(frame: UIScreen.mainbounds)
-        window?.rootViewController = AppDelegate.setTabBarViewControllers()
-        window?.makeKeyAndVisible()
-    }
-    
-    static func setTabBarViewControllers() -> UITabBarController {
-        // initilize ViewControllers
-        let mainFeedVC = FeedContainerViewController.create()
-        let searchVC   = UINavigationController(rootViewController: SearchViewController.create())
-        let postVC     = PostViewController.create()
-        let likeVC     = NotiViewController.create()
-        let profileVC  = UINavigationController(rootViewController: ProfileViewController.create(editMode: .on))
-        return MainFeedTabBarViewController(viewControllers: [mainFeedVC, searchVC, postVC, likeVC, profileVC])
-    }
-}
 
 // MARK: Setup Push Notification
 extension AppDelegate {
@@ -123,7 +132,21 @@ extension AppDelegate {
         }
     }
 }
+extension AppDelegate: UNUserNotificationCenterDelegate { }
 
-extension AppDelegate: UNUserNotificationCenterDelegate {
+// MARK: Available to do Preservation & Restoration feature
+extension AppDelegate {
+    func application(_ application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
+        #if DEBUG
+        let libraryDir = FileManager.default.urls(
+            for: .libraryDirectory,
+            in: .userDomainMask).first?.appendingPathComponent("Saved Application State")
+        SwiftyBeaver.verbose("Restoration files: \(String(describing: libraryDir?.path))")
+        #endif
+        return true
+    }
     
+    func application(_ application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
+        return true
+    }
 }

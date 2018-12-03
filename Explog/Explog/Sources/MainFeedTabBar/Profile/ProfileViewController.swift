@@ -47,8 +47,8 @@ final class ProfileViewController: BaseViewController {
         }
     }
     
-    var provider = MoyaProvider<User>(plugins: [NetworkLoggerPlugin()])
-    var postProvider = MoyaProvider<Post>(plugins: [NetworkLoggerPlugin()])
+    var provider = MoyaProvider<User>()//(plugins: [NetworkLoggerPlugin()])
+    var postProvider = MoyaProvider<Post>()//(plugins: [NetworkLoggerPlugin()])
     var otherUserPK: Int?
     lazy var v = ProfileView(controlBy: self)
     override func loadView() {
@@ -135,7 +135,7 @@ extension ProfileViewController {
 extension ProfileViewController {
     @objc func settingBarButtonAction(_ sender: UIBarButtonItem) {
         let settingViewController = SettingViewController()
-        let naviVC = UINavigationController(rootViewController: settingViewController)
+        let naviVC = BaseNavigiationController(rootViewController: settingViewController, needRestorationClass: true)
         present(naviVC, animated: true, completion: nil)
     }
     
