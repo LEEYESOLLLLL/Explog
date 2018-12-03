@@ -7,12 +7,18 @@
 //
 
 import XCTest
+import Localize_Swift
+
+@testable
+import Explog
 
 class UITests: XCTestCase {
-
     let app = XCUIApplication()
+    
     override func setUp() {
         super.setUp()
+        app.launchArguments += ["-AppleLanguages", "\(Localize.resetCurrentLanguageToDefault())"]
+//        app.launchArguments += ["-AppleLocale", "en_US"]
         setupSnapshot(app)
         app.launch()
     }
@@ -23,24 +29,23 @@ class UITests: XCTestCase {
     }
     
     func test_for_MainScreen() {
-        XCUIApplication().scrollViews.otherElements.scrollViews.otherElements.buttons["Europe"].tap()
         // main screen
+        XCUIApplication().scrollViews.otherElements.scrollViews.otherElements.buttons["Europe".localized()].tap()
         snapshot("0_Main_Screen")
     }
     
     func test_for_PostingScreen() {
         let elementsQuery = XCUIApplication().scrollViews.otherElements.scrollViews.otherElements
-        elementsQuery.buttons["Europe"].tap()
-        elementsQuery.tables/*@START_MENU_TOKEN@*/.staticTexts["2018-10-07 ~ 2018-11-07"]/*[[".cells.staticTexts[\"2018-10-07 ~ 2018-11-07\"]",".staticTexts[\"2018-10-07 ~ 2018-11-07\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        elementsQuery.buttons["Europe".localized()].tap()
+        elementsQuery.tables/*@START_MENU_TOKEN@*/.staticTexts["2018-11-01 ~ 2018-11-03"]/*[[".cells.staticTexts[\"2018-11-01 ~ 2018-11-03\"]",".staticTexts[\"2018-11-01 ~ 2018-11-03\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         snapshot("1_Posting_Scrren")
-
     }
 
     func test_for_ReplyScrren() {
-        let elementsQuery = XCUIApplication().scrollViews.otherElements.scrollViews.otherElements
-        elementsQuery.buttons["Europe"].tap()
-        elementsQuery.tables/*@START_MENU_TOKEN@*/.staticTexts["아름다운 스위스 여행기✨"]/*[[".cells.staticTexts[\"아름다운 스위스 여행기✨\"]",".staticTexts[\"아름다운 스위스 여행기✨\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        app.navigationBars["Feed"].children(matching: .button).element(boundBy: 1).tap()
+        let elementsQuery = app.scrollViews.otherElements.scrollViews.otherElements
+        elementsQuery.buttons["Europe".localized()].tap()
+        elementsQuery.tables/*@START_MENU_TOKEN@*/.staticTexts["2018-11-01 ~ 2018-11-03"]/*[[".cells.staticTexts[\"2018-11-01 ~ 2018-11-03\"]",".staticTexts[\"2018-11-01 ~ 2018-11-03\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.navigationBars["Feed".localized()].children(matching: .button).element(boundBy: 1).tap()
         snapshot("2_Reply_Sceen")
     }
 
@@ -51,8 +56,7 @@ class UITests: XCTestCase {
         app.collectionViews.children(matching: .cell).element(boundBy: 1).children(matching: .other).element.tap()
         app.navigationBars["Camera Roll"].buttons["Done"].tap()
         elementsQuery.buttons["checkBox"].tap()
-        
+        app.staticTexts["+"].tap()
         snapshot("3_Creating_Post_Screen")
-
     }
 }

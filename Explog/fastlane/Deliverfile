@@ -7,7 +7,7 @@ app_review_information(
   last_name: "Minjun",
   phone_number: "+82 010-8966-4111",
   email_address: "dev.mjun@gmail.com",
-  demo_user: "traveler@gmail.com",
+  demo_user: "traveler1@gmail.com",
   demo_password: "1234567890",
   notes: "To be needed Account when login in"
 )
@@ -21,12 +21,11 @@ submission_information({
 })
 
 release_notes(
-	{"ko-KR" => "검색 부분 최적화 및, UI 변경"}
+	{"ko-KR" => "국제화, 복원 및 보존 기능 추가"},
+  {"en-US" => "Support for Internationalization, Preservation and Restoration"}
 	)
-automatic_release false
-
+automatic_release true
 
 app_icon './fastlane/metadata/app_icon.jpg'
-
 
 app_rating_config_path "./fastlane/metadata/itunes_rating_config.json"

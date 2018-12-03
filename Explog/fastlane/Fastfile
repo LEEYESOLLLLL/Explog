@@ -67,13 +67,13 @@ platform :ios do
     deliver(
       skip_screenshots: false,
       skip_binary_upload: false, 
-      skip_metadata: true, 
+      skip_metadata: false, 
       submit_for_review: true
     )
   end 
 
   desc "Match Action for development"
-  lane :explog_developerment do 
+  lane :explog_development do 
   	match(git_url: "https://github.com/devmjun/Provisioning/",
   		type: "development",
   		app_identifier: "kr.mjun.explog",
@@ -98,7 +98,7 @@ platform :ios do
   	# 2. build 
   	# 3. upload for beta test 
   	# 4. check that to upload external link 
-  	explog_developerment
+  	explog_development
   	explog_appstore
   	build 
   	pilot(
@@ -116,7 +116,7 @@ platform :ios do
   desc "Provisining & Building & Upload to AppStroe"
   lane :upload_appstore do 
     # provision 
-    explog_developerment
+    explog_development
   	explog_appstore
     screenshot 
     build 

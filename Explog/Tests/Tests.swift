@@ -9,8 +9,6 @@
 import XCTest
 @testable import Explog
 
-
-
 class Tests: XCTestCase {
 
     override func setUp() {
@@ -33,5 +31,4 @@ class Tests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
-
 }

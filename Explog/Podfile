@@ -2,6 +2,9 @@
 platform :ios, '11.0'
 
 target 'Explog' do
+
+
+
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
@@ -40,8 +43,56 @@ target 'Explog' do
 
   # Internationalization vs Localization
   pod 'Localize-Swift', '~> 2.0'
-  # Pods for Explog
+
+  # fail to compile for Firebase
+  # https://stackoverflow.com/questions/38216090/xcode-unit-testing-with-cocoapods
+  # https://github.com/firebase/firebase-ios-sdk/issues/16
+  # https://github.com/firebase/firebase-ios-sdk/issues/16
+  target 'Tests' do
+        inherit! :search_paths
+        pod 'Firebase'
+    end
+
+  target 'UITests' do
+        inherit! :search_paths
+        pod 'Firebase'
+        pod 'Firebase/Core'
+        pod 'Firebase/Database'
+
+        pod 'Moya', '~> 12.0.0'
+        pod 'Kingfisher', '~> 4.10.0'
+
+        ## Container Viewcontroller 
+        pod 'CaseContainer', '~> 0.9.3'
+
+        ## KeyChain
+        pod 'KeychainAccess', '~> 3.1.2'
+
+        ## about chaining task in the asynchronous
+        pod 'Bolts-Swift', '~> 1.4.0'
+
+        ## UI
+        pod 'SkyFloatingLabelTextField', '~> 3.6.0'
+        pod 'ParallaxHeader', '~> 2.0.0'
+        pod 'M13Checkbox'
+
+        ## Abstract
+        pod 'Then', '~> 2.4.0'
+        pod 'SimpleCell', '~> 0.6.0'
+        pod 'Square'
+
+        ## generating Open-source information
+        pod 'AcknowList', '~> 1.7.0'
+
+        # Logging Service 
+        pod 'SwiftyBeaver', '~> 1.6.1'
+
+        # Internationalization vs Localization
+        pod 'Localize-Swift', '~> 2.0'
+    end
 end
+
+
 
 ## ParallaxHeader didn't support to compile on Swift 4.2 in CLI
 ## just temporary action  
