@@ -32,9 +32,10 @@ extension AppDelegate {
         }
     }
     
+    /// used both in AppDelegate and Change Language in Setting
     static func setTabBarViewControllers() -> UITabBarController {
         // initilize ViewControllers
-        let mainFeedVC = FeedContainerViewController.create()
+        let mainFeedVC = BaseNavigiationController(rootViewController: FeedContainerViewController.create())
         let searchVC   = BaseNavigiationController(rootViewController: SearchViewController.create())
         let postVC     = PostViewController.create()
         let likeVC     = NotiViewController.create()
@@ -136,10 +137,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate { }
 // MARK: Available to do Preservation & Restoration feature
 extension AppDelegate {
     func application(_ application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
+        #if DEBUG
         let libraryDir = FileManager.default.urls(
             for: .libraryDirectory,
             in: .userDomainMask).first?.appendingPathComponent("Saved Application State")
         SwiftyBeaver.verbose("Restoration files: \(String(describing: libraryDir?.path))")
+        #endif
         return true
     }
     
@@ -147,30 +150,3 @@ extension AppDelegate {
         return true
     }
 }
-
-
-/*
- Preservation & Restoration
- 1. AppDelegate의 Preservation & Restoration을 지원하기 위해 active
- 2. 각 뷰 컨트롤러에
- encodeRestorableState(coder:)
- decodeRestorableState(coder:)
- applicationFinishedRestoringState()
- 
- code의 경우.. UIViewControllerRestoration 채택해야함..
- viewControllerWithRestorationIdentifierPath(identifierComponents: [AnyObject], coder: NSCoder) -> UIViewController?
- view Controller의 Identifier & restoration Class 할당해주어함..
- 
- 설정해야하는것..
- ViewController's
-    속성 -
-        RestorationIdentifier,
-        RestorationClass
- 메소드
-    - encodeRestorableState(with coder: NSCoder)
-    - decodeRestorableState(with coder: NSCoder)
-    - applicationFinishedRestoringState()
-    - UIViewControllerRestoration
-        - static func viewController(withRestorationIdentifierPath identifierComponents: [String], coder: NSCoder) -> UIViewController?
-    -
- */

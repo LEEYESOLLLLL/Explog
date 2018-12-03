@@ -12,7 +12,7 @@ import Square
 import SwiftyBeaver
 import Localize_Swift
 
-final class PostViewController: BaseViewController {
+@objc final class PostViewController: BaseViewController {
     static func create() -> BaseNavigiationController {
         let `self` = self.init()
         self.title = "Post".localized()

@@ -83,7 +83,8 @@ class PostDetailViewController: BaseViewController {
 extension PostDetailViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.barStyle = .black
+        navigationController?.navigationBar.barStyle = .black
+        navigationController?.transparentNaviBar(true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -184,26 +185,25 @@ extension PostDetailViewController {
     }
     
     @objc func moreButtonAction(_ sender: UIBarButtonItem) {
-        Square.display(nil, message: nil,
-                       alertActions: [.cancel(message: "Cancel".localized()),
-                                      .destructive(message: "Flag as inappropriate".localized())],
-                       preferredStyle: .actionSheet) { [weak self] (_, index) in
-                        guard let type = MoreButtonType(rawValue: index),
-                            let self = self else {
-                                return
-                        }
-                        switch type {
-                        case .cancel:
-                            break
-                        case .report:
-                            let vc = UINavigationController(rootViewController: ReportViewController(postPK: self.postPK))
-                            self.present(vc, animated: true, completion: nil)
-                        }
-                        
-                        
-                        
+        Square.display(
+            nil, message: nil,
+            alertActions: [
+                .cancel(message: "Cancel".localized()),
+                .destructive(message: "Flag as inappropriate".localized())
+            ],
+            preferredStyle: .actionSheet) { [weak self] (_, index) in
+                guard let type = MoreButtonType(rawValue: index),
+                    let self = self else {
+                        return
+                }
+                switch type {
+                case .cancel:
+                    break
+                case .report:
+                    let vc = UINavigationController(rootViewController: ReportViewController(postPK: self.postPK))
+                    self.present(vc, animated: true, completion: nil)
+                }
         }
-        
     }
 }
 

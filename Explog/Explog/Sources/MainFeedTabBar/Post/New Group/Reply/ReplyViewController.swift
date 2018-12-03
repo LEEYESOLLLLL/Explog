@@ -265,16 +265,10 @@ extension ReplyViewController: UIViewControllerRestoration {
         guard isViewLoaded else {
             return
         }
-        
         coder.encode(postPK, forKey: PreservationKeys.postPK.rawValue)
-        
     }
     
     public static func viewController(withRestorationIdentifierPath identifierComponents: [String], coder: NSCoder) -> UIViewController? {
-        
-//        guard let postPK = coder.decodeInteger(forKey: PreservationKeys.postPK.rawValue) else {
-//            return nil
-//        }
         return self.create(postPK: coder.decodeInteger(forKey: PreservationKeys.postPK.rawValue))
     }
 }

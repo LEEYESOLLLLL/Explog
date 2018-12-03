@@ -84,6 +84,7 @@
 		047FE5DF216CF69C009B56BB /* UIScreen+Sugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FE5DE216CF69C009B56BB /* UIScreen+Sugar.swift */; };
 		0491EBDA21B2CCA2000181D1 /* UnuniqueNameType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0491EBD921B2CCA2000181D1 /* UnuniqueNameType.swift */; };
 		0491EBE021B3DEA7000181D1 /* Data+Decode_Encode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0491EBDF21B3DEA7000181D1 /* Data+Decode_Encode.swift */; };
+		0491EBE421B43CE6000181D1 /* NSKeyedArchiver+NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0491EBE321B43CE6000181D1 /* NSKeyedArchiver+NSObject.swift */; };
 		049F7BF121A800D8000B0602 /* ViewControllerStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049F7BF021A800D8000B0602 /* ViewControllerStateView.swift */; };
 		04B38AC821787CAF00E17908 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AC721787CAF00E17908 /* KeychainService.swift */; };
 		04B38AE82178820400E17908 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B38AE72178820400E17908 /* AuthViewController.swift */; };
@@ -256,6 +257,7 @@
 		047FE5DE216CF69C009B56BB /* UIScreen+Sugar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Sugar.swift"; sourceTree = "<group>"; };
 		0491EBD921B2CCA2000181D1 /* UnuniqueNameType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnuniqueNameType.swift; sourceTree = "<group>"; };
 		0491EBDF21B3DEA7000181D1 /* Data+Decode_Encode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Decode_Encode.swift"; sourceTree = "<group>"; };
+		0491EBE321B43CE6000181D1 /* NSKeyedArchiver+NSObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSKeyedArchiver+NSObject.swift"; sourceTree = "<group>"; };
 		049F7BF021A800D8000B0602 /* ViewControllerStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerStateView.swift; sourceTree = "<group>"; };
 		04B38AC721787CAF00E17908 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		04B38AE72178820400E17908 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
@@ -523,6 +525,7 @@
 				041D0033218CAFDD009430FE /* UIImage+Resize.swift */,
 				04B8FBE921940C6A0090938E /* UIApplication+SettingURL.swift */,
 				04D92A8721A69C90000ED295 /* SwiftyBeaver+AddDestination.swift */,
+				0491EBE321B43CE6000181D1 /* NSKeyedArchiver+NSObject.swift */,
 			);
 			path = Utiles;
 			sourceTree = "<group>";
@@ -1137,6 +1140,7 @@
 				047FE5DF216CF69C009B56BB /* UIScreen+Sugar.swift in Sources */,
 				04B8FC38219452D10090938E /* PhotoAccessProvider.swift in Sources */,
 				046A8CA72189761700C12390 /* ProfileState.swift in Sources */,
+				0491EBE421B43CE6000181D1 /* NSKeyedArchiver+NSObject.swift in Sources */,
 				04266A67218ED09900B18C8E /* ReplyCell.swift in Sources */,
 				04C8F370218B0A3B00CA296F /* File.swift in Sources */,
 				0423A616212B756D00DD9747 /* BaseViewController.swift in Sources */,

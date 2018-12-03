@@ -14,7 +14,7 @@ import SwiftyBeaver
  
  - warning: This class is not used yet
  */
-public class BaseNavigiationController: UINavigationController, ViewControllerType, UnuniqueNameType {
+@objc public class BaseNavigiationController: UINavigationController, ViewControllerType, UnuniqueNameType {
     init(rootViewController: UIViewController, needRestorationClass: Bool = false) {
         super.init(rootViewController: rootViewController)
         commonInit()

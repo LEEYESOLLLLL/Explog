@@ -42,6 +42,7 @@ final class SearchViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // MARK: Bug
         navigationController?.transparentNaviBar(false)
         tabBarController?.tabBar.isHidden = false
         view.layoutIfNeeded()
@@ -173,7 +174,7 @@ extension SearchViewController {
 extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard state.currentPosts.count > indexPath.row else {
-                return
+            return
         }
         tableView.deselectRow(at: indexPath, animated: true)
         let postCover = state.currentPosts[indexPath.row]
@@ -264,7 +265,7 @@ extension SearchViewController {
         super.encodeRestorableState(with: coder)
         guard let searchWord = v.searchController.searchBar.text,
             searchWord.count > 0, isViewLoaded else {
-            return
+                return
         }
         coder.encode(searchWord, forKey: PreservationKeys.searchWord.rawValue)
     }
@@ -274,14 +275,6 @@ extension SearchViewController {
         guard let searchWord = coder.decodeObject(forKey: PreservationKeys.searchWord.rawValue) as? String else {
             return
         }
-        
         v.retrieve(word: searchWord)
-        
     }
-    
-    override func applicationFinishedRestoringState() {
-        // first
-        
-    }
-    
 }
