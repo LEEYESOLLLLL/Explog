@@ -65,7 +65,7 @@ Provisining & Building & Upload to AppStroe
 ```
 fastlane ios upload_appstore_connect
 ```
-Temporary Upload
+Uplado to appstroe connect Without creating screenshot
 
 ----
 
