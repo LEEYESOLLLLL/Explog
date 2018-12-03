@@ -104,8 +104,8 @@ platform :ios do
   	pilot(
   		username: "dev.mjun@gmail.com",
   		app_identifier: "kr.mjun.explog",
-  		changelog: "Added to support multi-lingual",
-  		beta_app_description: "Added to support multi-lingual",
+  		changelog: "Added to support Preservation & Restoration",
+  		beta_app_description: "add to Preservation & Restoration for UX",
   		distribute_external: true,
   		groups: "beta-Group",
   		ipa: "./build/Explog.ipa"
