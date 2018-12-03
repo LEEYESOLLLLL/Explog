@@ -9,12 +9,20 @@
 
 import UIKit
 import CaseContainer
+import Localize_Swift
 
 
-final class FeedContainerViewController: CaseContainerViewController {
+final class FeedContainerViewController: CaseContainerViewController, UnuniqueNameType {
     required init() {
         super.init()
-        let titles: [String] = ["Asia", "Europe", "North America", "South America", "Africa", "Oceania"]
+        let titles: [String] = [
+            "Asia".localized(),
+            "Europe".localized(),
+            "North America".localized(),
+            "South America".localized(),
+            "Africa".localized(),
+            "Oceania".localized()
+        ]
         viewContorllers = titles
             .enumerated()
             .compactMap { [weak self] (tag: Int, title: String) -> ParallaxTableViewController? in
@@ -33,13 +41,19 @@ final class FeedContainerViewController: CaseContainerViewController {
             tabButtonColor: (normal: .gray, highLight: .black))
     }
     
-    static func create() -> UINavigationController {
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    required init(maintain: [UIViewController], appearence: Appearance) {
+        fatalError("init(maintain:appearence:) has not been implemented")
+    }
+    
+    static func create() -> Self {
         let `self` = self.init()
-        self.title = "Feed"
+        self.title = "Feed".localized()
         self.tabBarItem.image = #imageLiteral(resourceName: "globe")
-        let naviController = UINavigationController(rootViewController: self)
-        naviController.setNavigationBarHidden(true, animated: false)
-        return naviController
+        return self
     }
     
     let images: [UIImage] = [#imageLiteral(resourceName: "torii-gate-512px"), #imageLiteral(resourceName: "eiffel-tower-512px"), #imageLiteral(resourceName: "new-york"), #imageLiteral(resourceName: "andes"), #imageLiteral(resourceName: "giraffe"), #imageLiteral(resourceName: "sydney-opera-house")]
@@ -62,7 +76,7 @@ final class FeedContainerViewController: CaseContainerViewController {
     }
     
     func setupUI() {
-        navigationController?.navigationBar.isHidden = true
+        navigationController?.setNavigationBarHidden(true, animated: false)
         navigationItem.title = nil
         headerView.addSubview(headerImageView)
         headerImageView
@@ -75,16 +89,6 @@ final class FeedContainerViewController: CaseContainerViewController {
     
     func setupBinding() {
         delegate = self
-    }
-    
-    
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }   
-    
-    required init(maintain: [UIViewController], appearence: Appearance) {
-        fatalError("init(maintain:appearence:) has not been implemented")
     }
 }
 
@@ -114,9 +118,25 @@ extension FeedContainerViewController: CaseContainerDelegate {
         headerImageView.layer.opacity = 1
     }
     
-    
     func caseContainer(parallaxHeader progress: CGFloat) {
         headerImageView.layer.opacity = Float( 1 - progress )
-        
+    }
+}
+
+extension FeedContainerViewController {
+    enum PreservationKeys: String {
+        case currentIndex
+    }
+    override func encodeRestorableState(with coder: NSCoder) {
+        super.encodeRestorableState(with: coder)
+        coder.encode(currentIndex, forKey: PreservationKeys.currentIndex.rawValue)
+    }
+    
+    override func decodeRestorableState(with coder: NSCoder) {
+        super.decodeRestorableState(with: coder)
+        let index = coder.decodeInteger(forKey: PreservationKeys.currentIndex.rawValue)
+        DispatchQueue.main.async {
+            self.tabButtonAction(self.tabScrollView.buttons[index])
+        }
     }
 }

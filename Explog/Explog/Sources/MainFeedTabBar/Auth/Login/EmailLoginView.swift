@@ -8,6 +8,7 @@
 
 import UIKit
 import SkyFloatingLabelTextField
+import Localize_Swift
 
 final class EmailLoginView: BaseView<EmailLoginViewController> {
     
@@ -49,7 +50,7 @@ final class EmailLoginView: BaseView<EmailLoginViewController> {
     }
     
     var loginButton = ActivityIndicatorButton().then {
-        $0.setTitle("Log in", for: [.normal, .highlighted])
+        $0.setTitle("Log in".localized(), for: [.normal, .highlighted])
         $0.setTitleColor(.gray, highlightedStateColor: .blue)
         $0.isUserInteractionEnabled = false
         $0.layer.borderColor = UIColor.gray.cgColor
@@ -57,7 +58,7 @@ final class EmailLoginView: BaseView<EmailLoginViewController> {
     }
     
     var signUpButton = UIButton().then {
-        $0.setTitle("Sign Up", for: [.normal, .highlighted])
+        $0.setTitle("Sign Up".localized(), for: [.normal, .highlighted])
         $0.setTitleColor(.white, highlightedStateColor: .gray)
     }
     

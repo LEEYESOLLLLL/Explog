@@ -1,0 +1,113 @@
+/* 
+  Localizable.strings
+  Explog
+
+  Created by Minjun Ju on 26/11/2018.
+  Copyright © 2018 com.dev.minjun. All rights reserved.
+*/
+
+/* Auth */
+"Login in with Email" = "Login in with Email";
+"Sign Up" = "Sign Up";
+"Log in" = "Log in";
+
+/* TabBar Title */
+"Feed" = "Feed";
+"Search" = "Search";
+"Post" = "Post";
+"Noti" = "Noti";
+"Profile" = "Profile";
+
+/* done button in navigation Bar Button */
+"done" = "done";
+"Cancel" = "Cancel";
+"OK" = "OK";
+"Delete" = "Delete";
+"Warning" = "Warning";
+
+/* Categories */
+"Asia" = "Asia";
+"Europe" = "Europe";
+"North America" = "North America";
+"South America" = "South America";
+"Africa" = "Africa";
+"Oceania" = "Oceania";
+
+/* Main Feed */
+"Require Login" = "Require Login";
+"Do you want to go to the login screen?" = "Do you want to go to the login screen?";
+
+/* Alert & Report */
+"Flag as inappropriate" = "Flag as inappropriate";
+"Pornography" = "Pornography";
+"Expletives" = "Expletives";
+"Content that defames someone" = "Content that defames someone";
+"content that is unpleasant" = "content that is unpleasant";
+"Etc." = "Etc.";
+
+/* NavigationBar Title */
+"Comments" = "Comments";
+
+/* Reply */
+"Input your comments🐳" = "Input your comments🐳";
+"Entry" = "Entry";
+
+/* Search */
+"Search trip in the world" = "Search trip in the world";
+
+/* ViewController State */
+"Something wrong.\n\n Check out your internet connecting or try again" = "Something wrong.\n\Check out your internet connecting or try again";
+"No Trips match your search word" = "No Trips match your search word";
+
+/* Post */
+"Let's go on a trip!" = "Let's go on a trip!";
+"  Cover" = "  Cover";
+"Start Date can't be later than End Date or End Date can't be earlier than Start Date" = "Start Date can't be later than End Date or End Date can't be earlier than Start Date";
+
+/* CautionView */
+"Find traveler who similar to me and share my trip. Inappropriate contents will be removed without notice or reported as spam\n\n- Inappropriate contents\n    - Content that defames someone\n    - Expletives\n    - Pornography\n    - Etc, Content that is offending someone" = "Find traveler who similar to me and share my trip. Inappropriate contents will be removed without notice or reported as spam\n\n- Inappropriate contents\n    - Content that defames someone\n    - Expletives\n    - Pornography\n    - Etc, Content that is offending someone";
+"Confirm" = "Confirm"; 
+
+/* Camera & Photos Access Control */
+"Please Allow Camera Access\n\n This allows you to share taking your photos" = "Please Allow Camera Access\n\n This allows you to share taking your photos";
+"Please Allow Photo Access\n\n This allows you to share photos from your library to your camera roll" = "Please Allow Photo Access\n\n This allows you to share photos from your library to your camera roll";
+"Continue" = "Continue";
+
+/* Setting */
+"Setting" = "Setting";
+"Account" = "Account";
+"Feature" = "Feature";
+"Information" = "Information";
+"Support" = "Support";
+"Logout" = "Logout";
+
+// Section 1
+"Profile Settings" = "Profile Settings";
+"Change Password" = "Change Password";
+"Change Profile Photo" = "Change Profile Photo";
+
+// Section 2
+"Remove Cashed Data" = "Remove Cashed Data";
+"Language" = "Language";
+
+// Section 3
+"App Version" = "App Version";
+"Open-Source License" = "Open-Source License";
+
+// Section 4
+"FeedBack" = "FeedBack";
+
+// Section 5
+"Logout" = "Logout";
+
+"Delete Cache" = "Delete Cache";
+"Do you want to delete stored cache?" = "Do you want to delete stored cache?";
+"Unable to send an email. if you didn't configure Email Account,  need to configure Email Account." = "Unable to send an email. if you didn't configure Email Account,  need to configure Email Account.";
+"Are you sure you want to log out?" = "Are you sure you want to log out?";
+
+/* Profile */
+"Your post has deleted successfully" = "Your post has deleted successfully";
+"Request Error" = "Request Error";
+
+
+

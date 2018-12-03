@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  Explog
+
+  Created by Minjun Ju on 27/11/2018.
+  Copyright © 2018 com.dev.minjun. All rights reserved.
+*/
+
+NSCameraUsageDescription = "Explog是需要​​相機訪問才能拍攝旅行發布上傳的照片。";
+NSPhotoLibraryUsageDescription = "要為旅行帖上傳照片，Explog需要訪問照片庫";

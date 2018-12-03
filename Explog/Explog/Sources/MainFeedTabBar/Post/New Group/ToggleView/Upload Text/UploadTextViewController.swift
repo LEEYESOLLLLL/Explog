@@ -33,7 +33,7 @@ final class UploadTextViewController: BaseViewController {
     required public init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     required init() { fatalError("init() has not been implemented") }
     
-    let provider = MoyaProvider<Post>(plugins: [NetworkLoggerPlugin()])
+    let provider = MoyaProvider<Post>()//(plugins: [NetworkLoggerPlugin()])
     private var text: String {
         return v.textView.text
     }

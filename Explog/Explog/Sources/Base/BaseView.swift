@@ -7,18 +7,19 @@
 //
 
 import UIKit
+import SwiftyBeaver
 
 
 protocol ViewType {
     associatedtype ViewController: ViewControllerType
-//    weak var vc: ViewController! { get }
-//    https://github.com/apple/swift-evolution/blob/master/proposals/0186-remove-ownership-keyword-support-in-protocols.md
+    //    weak var vc: ViewController! { get }
+    //    https://github.com/apple/swift-evolution/blob/master/proposals/0186-remove-ownership-keyword-support-in-protocols.md
     init(controlBy viewController: ViewController)
 }
 /**
  Base View is used as foundation of UIView
  */
-class BaseView<ViewController: ViewControllerType>: UIView, ViewType {
+class BaseView<ViewController: ViewControllerType>: UIView, ViewType, UnuniqueNameType {
     weak var vc: ViewController!
     
     required init(controlBy viewController: ViewController) {
@@ -26,17 +27,18 @@ class BaseView<ViewController: ViewControllerType>: UIView, ViewType {
         super.init(frame: UIScreen.main.bounds)
         setupUI()
         setupBinding()
+        restorationIdentifier = unUniqueIdentifier
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
+        restorationIdentifier = unUniqueIdentifier
     }
     
     /**
      Use Override when set Frame, Autolaout, Delegate and etc
      */
     func setupUI(){
-        
         
     }
     
@@ -47,5 +49,7 @@ class BaseView<ViewController: ViewControllerType>: UIView, ViewType {
         
     }
     
-    
+    deinit {
+        SwiftyBeaver.info("BaseView: \(self) have deinited ")
+    }
 }

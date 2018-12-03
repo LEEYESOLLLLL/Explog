@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import Localize_Swift
 
 final class SearchView: BaseView<SearchViewController> {
     var searchTableView = UITableView().then {
         $0.backgroundColor = .white
         $0.register(cell: SearchCell.self)
         $0.separatorStyle = .none
+        $0.contentInsetAdjustmentBehavior = .automatic
+        $0.insetsContentViewsToSafeArea = true
     }
     
     lazy var searchController = UISearchController(searchResultsController: nil).then {
@@ -32,7 +35,7 @@ final class SearchView: BaseView<SearchViewController> {
         addSubviews([searchTableView])
         
         searchTableView
-            .topAnchor(to: safeAreaLayoutGuide.topAnchor)
+            .topAnchor(to: topAnchor)
             .leadingAnchor(to: leadingAnchor)
             .trailingAnchor(to: trailingAnchor)
             .bottomAnchor(to: bottomAnchor)
@@ -58,7 +61,10 @@ final class SearchView: BaseView<SearchViewController> {
     
     // placeHolder Color, text Color black
     func setupSearchBarUI() {
-        searchController.searchBar.placeholder = "Search trip in the world"
+        searchController.searchBar.placeholder = "Search trip in the world".localized()
+        if let cancelButton = searchController.searchBar.value(forKey: "cancelButton") as? UIButton {
+            cancelButton.setTitle("Cancel".localized(), for: .normal)
+        }
     }
     
     func setup(footerView: ViewControllerStateView?) {
@@ -67,5 +73,10 @@ final class SearchView: BaseView<SearchViewController> {
         default:                searchTableView.isScrollEnabled = true
         }
         searchTableView.tableFooterView = footerView
+    }
+    
+    func retrieve(word: String) {
+        searchController.searchBar.text = word
+        endEditing(true)
     }
 }

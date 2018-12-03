@@ -1,0 +1,110 @@
+/* 
+  Localizable.strings
+  Explog
+
+  Created by Minjun Ju on 26/11/2018.
+  Copyright © 2018 com.dev.minjun. All rights reserved.
+*/
+
+/* Auth */
+"Login in with Email" = "이메일로 로그인";
+"Sign Up" = "회원가입";
+"Log in" = "로그인";
+
+/* TabBar Title */
+"Feed" = "피드";
+"Search" = "검색";
+"Post" = "여행기";
+"Noti" = "알람";
+"Profile" = "프로필";
+
+/* done button in navigation Bar Button */
+"done" = "확인";
+"Cancel" = "취소";
+"OK" = "확인";
+"Delete" = "삭제";
+"Warning" = "경고";
+
+/* Categories */
+"Asia" = "아시아";
+"Europe" = "유럽";
+"North America" = "북 아메리카";
+"South America" = "남 아메리카";
+"Africa" = "아프리카";
+"Oceania" = "오세아니아";
+
+/* Main Feed */
+"Require Login" = "로그인이 필요합니다";
+"Do you want to go to the login screen?" = "로그인 화면으로 이동 하시겠습니까?";
+
+/* Alert & Report */
+"Flag as inappropriate" = "부적절한 글";
+"Pornography" = "포르노, 성적인내용";
+"Expletives" = "욕설";
+"Content that defames someone" = "남을 비방하는 내용";
+"content that is unpleasant" = "불편하고 불쾌한 내용";
+"Etc." = "기타";
+
+/* NavigationBar Title */
+"Comments" = "댓글";
+
+/* Reply */
+"Input your comments🐳" = "댓글을 입력하세요🐳";
+"Entry" = "작성";
+
+/* Search */
+"Search trip in the world" = "여행기를 검색하세요";
+
+/* ViewController State */
+"Something wrong.\n\n Check out your internet connecting or try again" = "잘못된 접근입니다.\n\n인터넷 연결을 확인하거나 앱을 다시 시작 해주세요.";
+"No Trips match your search word" = "검색어와 일치하는 여행이 없습니다";
+
+/* Post */
+"Let's go on a trip!" = "여행 가즈아~~💖";
+"  Cover" = "  표시이미지";
+"Start Date can't be later than End Date or End Date can't be earlier than Start Date" = "여행 시작 날짜가 여행 종료 날짜보다 뒤로 설정되었거나, 여행 종료날짜가 여행 시작 날짜보다 이전으로 설정되었습니다.";
+
+/* CautionView */
+"Find traveler who similar to me and share my trip. Inappropriate contents will be removed without notice or reported as spam\n\n- Inappropriate contents\n    - Content that defames someone\n    - Expletives\n    - Pornography\n    - Etc, Content that is offending someone" = "나와 비슷한 여행자를 찾고 나의 여행기를 공유합니다. 적절하지 않은 콘텐츠는 통지 없이 삭제되거나, 스펨으로 신고될수 있습니다.\n\n- 적절하지 않은 콘텐츠 목록\n    - 남을 비방하는 내용\n    - 욕설\n    - 포르노, 성적인 내용\n    - 누군가를 불쾌하게 하는 내용";
+"Confirm" = "승인";
+
+/* Camera & Photos Access Control */
+"Please Allow Camera Access\n\n This allows you to share taking your photos" = "카메라 접근 접근 권한이 필요합니다.\n\n 사진을 찍고, 찍은 사진을 공유하기 위해 카메라에 접근 해야 합니다.";
+"Please Allow Photo Access\n\n This allows you to share photos from your library to your camera roll" = "사진첩 접근 권한이 필요합니다.\n\n 사진첩에 접근하여 여행기에 사진을 추가하기 위해 사용되어 집니다.";
+"Continue" = "승인하기";
+
+/* Setting */
+"Setting" = "설정";
+"Account" = "계정";
+"Feature" = "기능";
+"Information" = "정보";
+"Support" = "지원";
+"Logout" = "로그아웃";
+
+// Section 1
+"Profile Settings" = "프로필 설정";
+"Change Password" = "비밀번호 변경";
+"Change Profile Photo" = "프로필 이미지 변경";
+
+// Section 2
+"Remove Cashed Data" = "캐쉬 데이터 삭제";
+"Language" = "언어";
+
+// Section 3
+"App Version" = "앱 버전";
+"Open-Source License" = "오픈소스 라이센스";
+
+// Section 4
+"FeedBack" = "이메일 문의";
+
+// Section 5
+"Logout" = "로그아웃";
+
+"Delete Cache" = "캐쉬 데이터 삭제";
+"Do you want to delete stored cache?" = "캐쉬된 데이터를 삭제 하시겠습니까?";
+"Unable to send an email. if you didn't configure Email Account,  need to configure Email Account." = "이메일 계정이 설정되어 있지 않아서 이메일을 보낼수 없습니다. 이메일 계정을 설정한후 다시 시도해주세요.";
+"Are you sure you want to log out?" = "로그아웃 하시겠습니까?";
+
+/* Profile */
+"Your post has deleted successfully" = "여행기가 성공적으로 삭제 되었습니다.";
+"Request Error" = "서버 요청 오류입니다";

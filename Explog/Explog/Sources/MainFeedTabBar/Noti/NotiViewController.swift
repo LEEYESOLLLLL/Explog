@@ -11,6 +11,7 @@ import Moya
 import Square
 import BoltsSwift
 import SwiftyBeaver
+import Localize_Swift
 
 extension NotiViewController {
     // loading, paging, empty, error
@@ -37,12 +38,12 @@ extension NotiViewController {
 final class NotiViewController: BaseViewController {
     static func create() -> Self {
         let `self` = self.init()
-        self.title = "Noti"
+        self.title = "Noti".localized()
         self.tabBarItem.image = #imageLiteral(resourceName: "noti-1")
-        
+        self.restorationIdentifier = self.unUniqueIdentifier
         return self
     }
-    let provider = MoyaProvider<Noti>(plugins: [NetworkLoggerPlugin()])
+    let provider = MoyaProvider<Noti>()//(plugins: [NetworkLoggerPlugin()])
     var state: State = .loading {
         didSet {
             managingState()
@@ -168,7 +169,7 @@ extension NotiViewController {
                     guard let model = try? response.map(NotiListModel.self),
                         let combindedModel = currentNotifications + model else {
                             SwiftyBeaver.debug("No combind NotiListModel")
-                        return
+                            return
                     }
                     if let nextPage = model.next {
                         self.state = .paging(notifications: combindedModel, nextPage: nextPage)
@@ -193,7 +194,7 @@ extension NotiViewController: UITableViewDelegate {
     }
 }
 
-// MARK: TableView DataSource 
+// MARK: TableView DataSource
 extension NotiViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -226,4 +227,3 @@ extension NotiViewController: UITableViewDataSource {
         }
     }
 }
-

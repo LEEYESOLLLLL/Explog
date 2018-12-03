@@ -1,8 +1,8 @@
 PODS:
   - AcknowList (1.7)
-  - Alamofire (4.7.3)
+  - Alamofire (4.8.0)
   - Bolts-Swift (1.4.0)
-  - CaseContainer (0.9.1)
+  - CaseContainer (0.9.3)
   - Firebase/Core (5.13.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 5.3.0)
@@ -56,7 +56,8 @@ PODS:
   - KeychainAccess (3.1.2)
   - Kingfisher (4.10.1)
   - leveldb-library (1.20)
-  - M13Checkbox (3.2.2)
+  - Localize-Swift (2.0.0)
+  - M13Checkbox (3.3.2)
   - Moya (12.0.1):
     - Moya/Core (= 12.0.1)
   - Moya/Core (12.0.1):
@@ -78,11 +79,12 @@ PODS:
 DEPENDENCIES:
   - AcknowList (~> 1.7.0)
   - Bolts-Swift (~> 1.4.0)
-  - CaseContainer (~> 0.9.1)
+  - CaseContainer (~> 0.9.3)
   - Firebase/Core
   - Firebase/Database
   - KeychainAccess (~> 3.1.2)
   - Kingfisher (~> 4.10.0)
+  - Localize-Swift (~> 2.0)
   - M13Checkbox
   - Moya (~> 12.0.0)
   - ParallaxHeader (~> 2.0.0)
@@ -108,6 +110,7 @@ SPEC REPOS:
     - KeychainAccess
     - Kingfisher
     - leveldb-library
+    - Localize-Swift
     - M13Checkbox
     - Moya
     - nanopb
@@ -121,9 +124,9 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AcknowList: 286185b24c2c2df63a2bb4137f853e4384b4358b
-  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
   Bolts-Swift: 650d72e8017721b1a6bbe43d542c4578f8e5ba6f
-  CaseContainer: 86c14da9097f9899abca0d7daed10ed6a0ef77e4
+  CaseContainer: 753c3349ddafac204255620943fe3654639d27b9
   Firebase: 6df9a6114bc9f106a98fe83d5438d4d9833c2019
   FirebaseAnalytics: 63202d2665de4e6adcbdce189135255d8b5962ba
   FirebaseCore: fba2bfaa691c49028309b92e4dd37cc4b5512fbe
@@ -134,7 +137,8 @@ SPEC CHECKSUMS:
   KeychainAccess: b3816fddcf28aa29d94b10ec305cd52be14c472b
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
-  M13Checkbox: a8c2491cfbbca10797925fd0b9154a782bf40d89
+  Localize-Swift: c798ec9286494866f7068f85f7c71283ac5bdab4
+  M13Checkbox: d75dca81d61c9903e7f091f32b35a3254bc97dce
   Moya: cf730b3cd9e005401ef37a85143aa141a12fd38f
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   ParallaxHeader: fb6ee97915626454f3c029a97b424f79a777c642
@@ -145,6 +149,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: ccfcdf85a04d429f1633f668650b0ce8020bda3a
   Then: 71866660c7af35a7343831f7668e7cd2b62ee0f2
 
-PODFILE CHECKSUM: 651efe3c3b1849ae96fa784683a2cbd02b9e6816
+PODFILE CHECKSUM: 298f57976c2ef642130040289332b900b7afad3d
 
 COCOAPODS: 1.6.0.beta.2

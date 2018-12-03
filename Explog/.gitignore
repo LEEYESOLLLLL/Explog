@@ -90,3 +90,6 @@ fastlane/test_output
 Cert/
 *.p12
 *.mobileprovision
+
+## log 
+culprits.txt

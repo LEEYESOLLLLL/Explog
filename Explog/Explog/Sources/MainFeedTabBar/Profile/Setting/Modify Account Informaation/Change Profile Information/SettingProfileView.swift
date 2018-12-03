@@ -8,11 +8,8 @@
 
 import UIKit
 import SkyFloatingLabelTextField
+import Localize_Swift
 
-// 보여줄 정보, ProfileImage && 같이 있는 Change Profile Photo -> 변경 가능
-// Email
-// UserName -> 변경 가능
-// 비밀번호 변경창 -> 변경 가능
 final class SettingProfileView: BaseView<SettingProfileViewController> {
     var scrollView = UIScrollView().then {
         $0.backgroundColor = .white
@@ -31,7 +28,8 @@ final class SettingProfileView: BaseView<SettingProfileViewController> {
     }
     
     lazy var doneButton = UIBarButtonItem(
-        barButtonSystemItem: .done,
+        title: "done".localized(),
+        style: .done,
         target: vc,
         action: #selector(vc.doneButtonAction(_:))).then {
             $0.tintColor = .black
@@ -44,7 +42,7 @@ final class SettingProfileView: BaseView<SettingProfileViewController> {
     }
     
     var changeProfileButton = UIButton().then {
-        $0.setTitle("Change Profile Photo", for: [.normal, .highlighted])
+        $0.setTitle("Change Profile Photo".localized(), for: [.normal, .highlighted])
         $0.setTitleColor(.appStyle, highlightedStateColor: .white)
         $0.titleLabel?.textAlignment = .center
     }
@@ -136,7 +134,7 @@ final class SettingProfileView: BaseView<SettingProfileViewController> {
         vc.navigationController?.transparentNaviBar(false, navigationBarHidden: false)
         vc.navigationItem.leftBarButtonItem = backButton
         vc.navigationItem.rightBarButtonItem = doneButton
-        vc.navigationItem.title = "Profile Settings"
+        vc.navigationItem.title = "Profile Settings".localized()
         profileImageButton.addTarget(vc, action: #selector(vc.profileButtonAction(_:)), for: .touchUpInside)
         changeProfileButton.addTarget(vc, action: #selector(vc.profileButtonAction(_:)), for: .touchUpInside)
         userNameTextField.addTarget(vc, action: #selector(vc.textFieldDidChange(_:)), for: .editingChanged)

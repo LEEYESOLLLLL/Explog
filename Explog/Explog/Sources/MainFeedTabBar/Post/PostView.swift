@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Localize_Swift
 
 final class PostView: BaseView<PostViewController> {
     var containerScrollView = UIScrollView().then {
@@ -58,7 +59,7 @@ final class PostView: BaseView<PostViewController> {
     }
     
     var changeCoverImageButton = UIButton().then {
-        $0.setTitle("  Cover", for: [.normal, .highlighted])
+        $0.setTitle("  Cover".localized(), for: [.normal, .highlighted])
         $0.setTitleColor(.gray, highlightedStateColor: .darkGray)
         $0.setImage(#imageLiteral(resourceName: "Library"), for: .normal)
     }
@@ -69,7 +70,7 @@ final class PostView: BaseView<PostViewController> {
         $0.textAlignment = .center
         $0.isEditable = true
         $0.font = UIFont(name: .defaultFontName, size: 30)?.bold()
-        $0.text = "Let's go on a trip!"
+        $0.text = "Let's go on a trip!".localized()
         $0.enablesReturnKeyAutomatically = false
     }
     
@@ -104,13 +105,11 @@ final class PostView: BaseView<PostViewController> {
     }
     
     var continentButton = UIButton().then {
-        $0.setTitle("Asia", for: .normal)
+        $0.setTitle("Asia".localized(), for: .normal)
         $0.setTitleColor(.white, highlightedStateColor: .gray)
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.white.cgColor
     }
-    
-    
     
     struct UI {
         static var titleImageViewHeight: CGFloat = UIScreen.mainHeight/2
@@ -189,6 +188,7 @@ final class PostView: BaseView<PostViewController> {
     }
     
     override func setupBinding() {
+        vc.navigationController?.setNavigationBarHidden(true, animated: false)
         dismissButton            .addTarget(vc, action: #selector(vc.dismissButtonAction(_:)), for: .touchUpInside)
         createPostButton         .addTarget(vc, action: #selector(vc.createPostButtonAction(_:)), for: .touchUpInside)
         changeCoverImageButton   .addTarget(vc, action: #selector(vc.changeCoverImageButtonAction(_:)), for: .touchUpInside)

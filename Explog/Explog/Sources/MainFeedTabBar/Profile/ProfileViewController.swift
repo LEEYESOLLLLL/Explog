@@ -10,6 +10,7 @@ import Moya
 import BoltsSwift
 import Square
 import SwiftyBeaver
+import Localize_Swift
 
 final class ProfileViewController: BaseViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -17,7 +18,7 @@ final class ProfileViewController: BaseViewController {
     }
     static func create(editMode: EditMode, otherUserPK: Int? = nil) -> Self {
         let `self` = self.init(editMode: editMode)
-        self.title = "Profile"
+        self.title = "Profile".localized()
         self.tabBarItem.image = #imageLiteral(resourceName: "three-24px-black")
         self.otherUserPK = otherUserPK
         return self
@@ -46,8 +47,8 @@ final class ProfileViewController: BaseViewController {
         }
     }
     
-    var provider = MoyaProvider<User>(plugins: [NetworkLoggerPlugin()])
-    var postProvider = MoyaProvider<Post>(plugins: [NetworkLoggerPlugin()])
+    var provider = MoyaProvider<User>()//(plugins: [NetworkLoggerPlugin()])
+    var postProvider = MoyaProvider<Post>()//(plugins: [NetworkLoggerPlugin()])
     var otherUserPK: Int?
     lazy var v = ProfileView(controlBy: self)
     override func loadView() {
@@ -134,7 +135,7 @@ extension ProfileViewController {
 extension ProfileViewController {
     @objc func settingBarButtonAction(_ sender: UIBarButtonItem) {
         let settingViewController = SettingViewController()
-        let naviVC = UINavigationController(rootViewController: settingViewController)
+        let naviVC = BaseNavigiationController(rootViewController: settingViewController, needRestorationClass: true)
         present(naviVC, animated: true, completion: nil)
     }
     
@@ -188,10 +189,10 @@ extension ProfileViewController {
                     var copy = item
                     copy.posts.remove(at: index)
                     self.state = .populated(userModel: copy)
-                    Square.display("Your post has deleted successfully")
+                    Square.display("Your post has deleted successfully".localized())
                 case false:
                     SwiftyBeaver.debug("Request Error")
-                    Square.display("Request Error")
+                    Square.display("Request Error".localized())
                 }
                 
             case .failure(let error):
@@ -227,7 +228,7 @@ extension ProfileViewController {
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { [weak self] (rowAction, indexPath) in
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete".localized()) { [weak self] (rowAction, indexPath) in
             guard let self = self,
                 case .populated(let item) = self.state else {
                     return

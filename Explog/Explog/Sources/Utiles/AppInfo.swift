@@ -8,9 +8,11 @@
 
 import UIKit
 import AVFoundation
+import Moya
+import SwiftyBeaver
 
 class AppInfo {
-    
+    static let provider = MoyaProvider<AppVersion>()//(plugins:[NetworkLoggerPlugin()])
     /// Returns DEBUG or RELEASE info with version and build number
     static func buildInfo() -> String {
         #if DEBUG
@@ -66,5 +68,23 @@ extension AppInfo {
     static var current_device_version: String {
         return UIDevice.current.systemVersion
     }
-    
 }
+
+extension AppInfo {
+    static func latest(version: @escaping (String) -> Void)   {
+        provider.request(.latest) { (result) in
+            switch result {
+            case .success(let response):
+                guard let appInfoModel = try? response.map(AppInfoModel.self),
+                    let model = appInfoModel.results.first else {
+                        SwiftyBeaver.error("fail to convert model(AppInfoModel)")
+                    return
+                }
+                version(model.version)
+            case .failure(let error):
+                SwiftyBeaver.error(error)
+            }
+        }
+    }
+}
+

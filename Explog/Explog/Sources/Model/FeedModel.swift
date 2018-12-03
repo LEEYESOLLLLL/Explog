@@ -49,6 +49,14 @@ extension FeedModel {
             self.liked = liked
             self.numLiked = numLiked
         }
+        
+//        func encode() -> Data? {
+//            let copy = self
+//            guard let encoded = try? JSONEncoder().encode(copy) else {
+//                return nil
+//            }
+//            return encoded
+//        }
     }
 }
 

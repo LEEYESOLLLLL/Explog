@@ -13,11 +13,12 @@ import BoltsSwift
 import Kingfisher
 import Square
 import SwiftyBeaver
+import Localize_Swift
 
 
 final class FeedTableViewController: ParallaxTableViewController {
-    let provider = MoyaProvider<Feed>(plugins: [NetworkLoggerPlugin()])
-    let postProvider = MoyaProvider<Post>(plugins: [NetworkLoggerPlugin()])
+    let provider = MoyaProvider<Feed>()//(plugins: [NetworkLoggerPlugin()])
+    let postProvider = MoyaProvider<Post>()//(plugins: [NetworkLoggerPlugin()])
     
     var state: State = .initial {
         didSet {
@@ -49,6 +50,11 @@ final class FeedTableViewController: ParallaxTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         state = .initial
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
     }
     
     func setupUI() {
@@ -123,7 +129,7 @@ extension FeedTableViewController {
         }
         provider.request(.next(continent: continent, query: NextPageQuery)) { [weak self] result in
             guard let self = self, case .paging(let item, _) = self.state else {
-                    return
+                return
             }
             switch result {
             case .success(let response):
@@ -192,13 +198,20 @@ extension FeedTableViewController {
             let postDetailViewController = PostDetailViewController.create(editMode: .off, coverData: postCover)
             show(postDetailViewController, sender: nil)
         }else {
-            Square.display("Require Login", message: "Do you want to go to the login screen?",
-                           alertActions: [.cancel(message: "Cancel"), .default(message: "OK")]) { [weak self] (alertAction, index) in
-                            guard let self = self else { return }
-                            if index == 1 {
-                                let authController = AuthViewController()
-                                self.present(authController, animated: true, completion: nil)
-                            }
+            Square.display(
+                "Require Login".localized(),
+                message: "Do you want to go to the login screen?".localized(),
+                alertActions: [
+                    .cancel(message: "Cancel".localized()),
+                    .default(message: "OK".localized())
+            ]) { [weak self] (alertAction, index) in
+                guard let self = self else {
+                    return
+                }
+                if index == 1 {
+                    let authController = AuthViewController()
+                    self.present(authController, animated: true, completion: nil)
+                }
             }
         }
     }
@@ -230,7 +243,7 @@ extension FeedTableViewController {
     // MARK: Call sequence - 2
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let cell = cell as? FeedTableViewCell, state.currentFeedModel.count > indexPath.row else {
-                return
+            return
         }
         let post = state.currentFeedModel[indexPath.row]
         cell.configure(model: post) { [weak self] (postPK: Int) -> BoltsSwift.Task<LikeModel> in

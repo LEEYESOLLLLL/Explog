@@ -7,17 +7,7 @@
 //
 
 import UIKit
-
-extension ViewControllerStateView {
-    enum State  {
-        
-        case loading
-        case error
-        case empty
-        case initial
-        case retryOnError(owner: UIViewController, selector: Selector)
-    }
-}
+import Localize_Swift
 
 class ViewControllerStateView: UIView {
     private var loadingIndicator = UIActivityIndicatorView(style: .gray)
@@ -55,13 +45,13 @@ class ViewControllerStateView: UIView {
         case .loading:
             setupLoadingState()
         case .error:
-            setupState(#imageLiteral(resourceName: "error"), description: "Something worng.\n\nCheckout your internect connecting or try agian")
+            setupState(#imageLiteral(resourceName: "error"), description: "Something wrong.\n\n Check out your internet connecting or try again".localized())
         case .empty:
-            setupState(#imageLiteral(resourceName: "empty-folder-512px"), description: "No Trips match your search word")
+            setupState(#imageLiteral(resourceName: "empty-folder-512px"), description: "No Trips match your search word".localized())
         case .retryOnError(let owner, let selector):
             descriptionButton.isUserInteractionEnabled = true
             descriptionButton.addTarget(owner, action: selector, for: .touchUpInside)
-            setupState(#imageLiteral(resourceName: "return-512px"), description: "Something worng.\n\nCheckout your internect connecting or try agian")
+            setupState(#imageLiteral(resourceName: "return-512px"), description: "Something wrong.\n\n Check out your internet connecting or try again".localized())
         case .initial: break 
         }
     }

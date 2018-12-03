@@ -9,6 +9,7 @@
 import UIKit
 import Photos
 import AVFoundation
+import Localize_Swift
 
 final class ImagePickerViewController: UIImagePickerController {
     var deviceAuthorizationAction = PrivateDataAccessActions(for: .camera)
@@ -25,7 +26,7 @@ final class ImagePickerViewController: UIImagePickerController {
         $0.setup(textColor: .white, fontStyle: .body, textAlignment: .center, numberOfLines: 0)
         $0.lineBreakMode = .byWordWrapping
         let mutatingString = NSMutableAttributedString(
-            string: "Please Allow Camera Access\n\n This allows you to share taking your photos")
+            string: "Please Allow Camera Access\n\n This allows you to share taking your photos".localized())
         if let font = UIFont(name: .defaultFontName, size: 21) {
             mutatingString.addAttributes([.font: font.bold()],
                                          range: NSRange(location: 0, length: 26))
@@ -34,7 +35,7 @@ final class ImagePickerViewController: UIImagePickerController {
     }
     
     var permissionButton = UIButton().then {
-        $0.setTitle("Continue", for: .normal)
+        $0.setTitle("Continue".localized(), for: .normal)
         $0.setTitleColor(.white , for: .normal)
         $0.titleLabel?.font = UIFont(name: .defaultFontName, size: 20)?.bold()
         $0.layer.borderColor = UIColor.gray.cgColor

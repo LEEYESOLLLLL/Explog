@@ -12,6 +12,7 @@ import Square
 import Kingfisher
 import BoltsSwift
 import SwiftyBeaver
+import Localize_Swift
 
 
 final class SearchViewController: BaseViewController {
@@ -20,13 +21,13 @@ final class SearchViewController: BaseViewController {
     }
     static func create() -> Self {
         let `self` = self.init()
-        self.title = "Search"
+        self.title = "Search".localized()
         self.tabBarItem.image = #imageLiteral(resourceName: "search")
         return self
     }
     
-    let provider = MoyaProvider<Search>(plugins:[NetworkLoggerPlugin()])
-    let postProvider = MoyaProvider<Post>(plugins:[NetworkLoggerPlugin()])
+    let provider = MoyaProvider<Search>()//(plugins:[NetworkLoggerPlugin()])
+    let postProvider = MoyaProvider<Post>()//(plugins:[NetworkLoggerPlugin()])
     private var pendingWorkItem: DispatchWorkItem?
     var state: State = .loading {
         didSet {
@@ -41,6 +42,7 @@ final class SearchViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // MARK: Bug
         navigationController?.transparentNaviBar(false)
         tabBarController?.tabBar.isHidden = false
         view.layoutIfNeeded()
@@ -172,7 +174,7 @@ extension SearchViewController {
 extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard state.currentPosts.count > indexPath.row else {
-                return
+            return
         }
         tableView.deselectRow(at: indexPath, animated: true)
         let postCover = state.currentPosts[indexPath.row]
@@ -249,5 +251,30 @@ extension SearchViewController: UISearchResultsUpdating {
         DispatchQueue.main.asyncAfter(
             deadline: .now() + .milliseconds(250),
             execute: newWorkItem)
+    }
+}
+
+// MARK: Preservation & Restoration
+extension SearchViewController {
+    // 검색어 복원
+    enum PreservationKeys: String {
+        case searchWord
+    }
+    
+    override func encodeRestorableState(with coder: NSCoder) {
+        super.encodeRestorableState(with: coder)
+        guard let searchWord = v.searchController.searchBar.text,
+            searchWord.count > 0, isViewLoaded else {
+                return
+        }
+        coder.encode(searchWord, forKey: PreservationKeys.searchWord.rawValue)
+    }
+    
+    override func decodeRestorableState(with coder: NSCoder) {
+        super.decodeRestorableState(with: coder)
+        guard let searchWord = coder.decodeObject(forKey: PreservationKeys.searchWord.rawValue) as? String else {
+            return
+        }
+        v.retrieve(word: searchWord)
     }
 }

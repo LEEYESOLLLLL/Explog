@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 
 final class SettingCell: UITableViewCell {
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    override init(style: CellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
         textLabel?.font = UIFont(name: .defaultFontName, size: 16)
     }
@@ -30,24 +30,44 @@ extension SettingCell {
 
 extension SettingCell {
     func feature(_ text: String) {
+        guard let type = SettingViewController.Feature(byLocalizedString: text) else {
+            return
+        }
+        
         textLabel?.text = text
-        ImageCache.default.calculateDiskCacheSize {[weak self] (n: UInt) in
-            guard let self = self else { return }
-            self.detailTextLabel?.text = ByteCountFormatter.string(fromByteCount: Int64(n), countStyle: .file)
+        switch type {
+        case .cashed:
+            ImageCache.default.calculateDiskCacheSize {[weak self] (n: UInt) in
+                guard let self = self else { return }
+                self.detailTextLabel?.text = ByteCountFormatter.string(fromByteCount: Int64(n), countStyle: .file)
+            }
+        case .language:
+            accessoryType = .disclosureIndicator
         }
     }
 }
 
 extension SettingCell {
-    func openSource(_ text: String) {
-        guard let type = SettingViewController.Information(rawValue: text) else {
+    func information(_ text: String) {
+        guard let type = SettingViewController.Information(byLocalizedString: text) else {
             return
         }
         
         textLabel?.text = text
         switch type {
         case .app_version:
-            detailTextLabel?.text = AppInfo.versionString()
+            textLabel?
+                .topAnchor(to: contentView.layoutMarginsGuide.topAnchor)
+                .centerYAnchor(to: contentView.centerYAnchor)
+                .leadingAnchor(to: contentView.layoutMarginsGuide.leadingAnchor)
+                .bottomAnchor(to: contentView.layoutMarginsGuide.bottomAnchor)
+                .activateAnchors()
+            
+            AppInfo.latest { [weak self] (version) in
+                guard let self = self  else { return }
+                self.detailTextLabel?.numberOfLines = 2
+                self.detailTextLabel?.text = "Installed: " + version + "\nLatest: " + AppInfo.versionString()
+            }
         case .opensource_license:
             accessoryType = .disclosureIndicator
         }

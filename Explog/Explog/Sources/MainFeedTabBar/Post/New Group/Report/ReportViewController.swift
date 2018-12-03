@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import Square
+import Localize_Swift
 
 final class ReportViewController: BaseViewController  {
     var postPK: Int
@@ -60,7 +61,7 @@ extension ReportViewController {
         let item = ReportModel(postPK, selectedType).dictionary()
         reportRef.setValue(item)
         dismiss(animated: true) {
-            Square.display("Successfully flagged")
+            Square.display("Successfully Flagged")
         }
     }
 }
@@ -115,6 +116,6 @@ extension ReportViewController {
                 return
         }
         
-        cell.configure(ReportList.allCases[indexPath.row].rawValue)
+        cell.configure(ReportList.allCases[indexPath.row].rawValue.localized())
     }
 }

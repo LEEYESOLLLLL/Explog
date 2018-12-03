@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import Localize_Swift
 
 final class CautionView: BaseView<CautionViewController> {
     var darkBlurView = UIVisualEffectView().then {
         $0.effect = UIBlurEffect(style: .dark)
-        $0.layer.opacity = 0.65
+        $0.layer.opacity = 0.5
         $0.backgroundColor = .darkText
     }
     
@@ -33,7 +34,7 @@ final class CautionView: BaseView<CautionViewController> {
     }
     
     var agreementButton = UIButton().then {
-        $0.setTitle("Confirm", for: [.normal, .highlighted])
+        $0.setTitle("Confirm".localized(), for: [.normal, .highlighted])
         $0.setTitleColor(.white, highlightedStateColor: .clear)
         $0.layer.borderColor = UIColor.white.cgColor
         $0.layer.borderWidth = 1
