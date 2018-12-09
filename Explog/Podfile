@@ -43,6 +43,9 @@ target 'Explog' do
 
   # Internationalization vs Localization
   pod 'Localize-Swift', '~> 2.0'
+   
+  # Check Perforamnce for Device  
+  pod 'GDPerformanceView-Swift', '~> 2.0.0'
 
   # fail to compile for Firebase
   # https://stackoverflow.com/questions/38216090/xcode-unit-testing-with-cocoapods
