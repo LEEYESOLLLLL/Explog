@@ -11,6 +11,7 @@ import KeychainAccess
 import UserNotifications
 import Firebase
 import SwiftyBeaver
+import GDPerformanceView_Swift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,6 +25,12 @@ extension AppDelegate {
     }
     
     private func setKeyWindow() {
+        #if DEBUG
+        PerformanceMonitor.shared().start()
+        PerformanceMonitor.shared().performanceViewConfigurator.options = [.all]
+        PerformanceMonitor.shared().show()
+        #endif
+        
         window = UIWindow(frame: UIScreen.mainbounds)
         if let keyWindow = window {
             keyWindow.restorationIdentifier = "MainWindow"

@@ -31,6 +31,7 @@ PODS:
     - FirebaseCore (~> 5.1)
     - GoogleUtilities/Environment (~> 5.3)
     - GoogleUtilities/UserDefaults (~> 5.3)
+  - GDPerformanceView-Swift (2.0.2)
   - GoogleAppMeasurement (5.3.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
     - GoogleUtilities/MethodSwizzler (~> 5.2)
@@ -85,6 +86,7 @@ DEPENDENCIES:
   - Firebase
   - Firebase/Core
   - Firebase/Database
+  - GDPerformanceView-Swift (~> 2.0.0)
   - KeychainAccess (~> 3.1.2)
   - Kingfisher (~> 4.10.0)
   - Localize-Swift (~> 2.0)
@@ -108,6 +110,7 @@ SPEC REPOS:
     - FirebaseCore
     - FirebaseDatabase
     - FirebaseInstanceID
+    - GDPerformanceView-Swift
     - GoogleAppMeasurement
     - GoogleUtilities
     - KeychainAccess
@@ -135,6 +138,7 @@ SPEC CHECKSUMS:
   FirebaseCore: fba2bfaa691c49028309b92e4dd37cc4b5512fbe
   FirebaseDatabase: e2bcbc106adc4b11a2da3ec2eb63c0c4a44f2f54
   FirebaseInstanceID: e2fa4cb35ef5558c200f7f0ad8a53e212215f93e
+  GDPerformanceView-Swift: a40b2f675589449f5b5082f3178f01bfdb7882ce
   GoogleAppMeasurement: 5029d78f2b438bd30ffb44e6c558b57c21622727
   GoogleUtilities: 95996bea7c7d9b8fb811b7507669a4a8762f80c7
   KeychainAccess: b3816fddcf28aa29d94b10ec305cd52be14c472b
@@ -152,6 +156,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: ccfcdf85a04d429f1633f668650b0ce8020bda3a
   Then: 71866660c7af35a7343831f7668e7cd2b62ee0f2
 
-PODFILE CHECKSUM: 7b61867d50d88d73f26f6400baba7affab6f74a9
+PODFILE CHECKSUM: ca65193b1ca35cca1b4b791023cb39c9bc0cb2a6
 
 COCOAPODS: 1.6.0.beta.2
