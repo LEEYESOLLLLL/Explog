@@ -1168,7 +1168,7 @@
 		};
 		04A911D42192E77A008432A9 /* Set up version and build number via git */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
